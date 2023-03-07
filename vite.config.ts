@@ -14,6 +14,6 @@ export default defineConfig({
         assetFileNames: 'assets/[name].[ext]'
       }
     },
-    // outDir : '../routine-build/build'
+    outDir : '../routine-build/build'
   }
 })
