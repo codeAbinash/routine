@@ -7,8 +7,8 @@
     "dev": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview --host",
-    "deploy": "cd build && git add -A && git commit -m \"@echo T : %date% %time%\" && git push origin main",
-    "publish": "npm run build && npm run deploy",
+    "deploy": "cd build && git add -A && git commit -m \"Time : %date% %time%\" && git push origin main",
+    "publish": "git pull && npm run build && npm run deploy",
     "cpyBuild": "git clone https://github.com/codeAbinash/routine-build.git build"
   },
   "dependencies": {
