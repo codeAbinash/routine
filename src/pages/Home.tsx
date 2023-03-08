@@ -53,10 +53,10 @@ function Home() {
 	return (
 		<div className="home-screen screen-navbar select-none dark:bg-black dark:text-darkText">
 			<Header title={getCurrentDate()} notiIcon={true} placeholder="Search Routine" />
-			<section className='p-[1.2rem] pt-[125px] pb-[100px]'>
-			<p className='text-[#777]/50 text-center mt-2 mb-5 text-sm font-medium'>Today's routines</p>
-				<div className="routines flex flex-col gap-3">
-					{GetRoutines(screenRoutines ,navigate)}
+			<section className='p-[1.2rem] pb-[100px]'>
+				<p className='text-[#777]/50 text-center mt-2 mb-5 text-sm font-medium'>Today's routines</p>
+				<div className="routines flex flex-col gap-[0.9rem]">
+					{GetRoutines(screenRoutines, navigate)}
 				</div>
 				<NewRoutinesLoader />
 			</section>

@@ -7,7 +7,7 @@ import { applyTheme } from '../lib/theme'
 import Header from '../components/Header'
 import TextEmoji from '../components/TextEmoji'
 import details from '../info'
-import delay from '../lib/delay'
+import delay, { df } from '../lib/delay'
 function changeTheme(theme: any) {
     ls.set('theme', theme)
     applyTheme(theme)
@@ -60,17 +60,17 @@ function More() {
     ]
     return (
         <div className='screen dark:text-darkText'>
-            <Header title="More options" notiIcon={true} placeholder="Search Routine" />
+            <Header title="More options" notiIcon={true} placeholder="Search more options" />
 
-            <section className='p-[1.2rem] pt-[125px] pb-[100px]'>
+            <section className='p-[1.2rem] pb-[100px]'>
 
-                <div className="w-full p-6 bg-dark rounded-3xl text-white tap99">
+                <div className="w-full p-6 bg-dark rounded-3xl text-white tap99" onClick={df(() => navigate('/changelog'))}>
                     <div className=" flex justify-between w-full items-center">
                         <div className="left">
                             <p className='text-xl font-semibold'>Routine</p>
                         </div>
                         <div className="rig">
-                            <p className='text-sm text-white/70'>v{details.version} Beta</p>
+                            <p className='text-sm text-white/70'>v{details.version}</p>
                         </div>
                     </div>
                     <p className='text-xl mt-2'> <TextEmoji emoji="😎" /> <TextEmoji emoji="📕" /> <TextEmoji emoji="🧑🏻‍💻" /> <TextEmoji emoji="🎓" /> <TextEmoji emoji="🏠" /> <TextEmoji emoji="😋" /> <TextEmoji emoji="😜" /></p>

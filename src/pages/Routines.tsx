@@ -22,10 +22,10 @@ function Routines() {
     }, [])
     return (
         <div className="routines-screen screen-navbar select-none dark:bg-black dark:text-darkText">
-            <Header title="All routines" notiIcon={true} placeholder="Search Routine" />
-            <section className='p-[1.2rem] pt-[125px] pb-[100px]'>
+            <Header title="All routines" notiIcon={true} placeholder="Search All Routines" />
+            <section className='p-[1.2rem] pb-[100px]'>
                 <p className='text-[#777]/50 text-center mt-2 mb-5 text-sm font-medium'>All routines</p>
-                <div className="routines flex flex-col gap-3">
+                <div className="routines flex flex-col gap-[0.9rem]">
                     {AllRoutines(screenRoutines)}
                 </div>
             </section>
@@ -49,11 +49,11 @@ function AllRoutines(routines: Array<Routine>) {
                 <div className="top flex flex-row gap-3">
                     <div className="left">
                         <div className="emoji bg-main aspect-square flex-center rounded-xl p-2 flex-1 dark:bg-black/40">
-                            <img src={Emoji.get(routine.emoji || '⏰')} className='w-[26px] aspect-square' />
+                            <img src={Emoji.get(routine.emoji || '⏰')} className='w-[25px] aspect-square' />
                         </div>
                     </div>
                     <div className="right flex-1 flex flex-row justify-between flex-center gap-3">
-                        <div className="name"><p className={`font-semibold text-base ${false ? 'text-white' : ''}`}>{routine.name}</p></div>
+                        <div className="name"><p className={`font-semibold text-[0.95rem] ${false ? 'text-white' : ''}`}>{routine.name}</p></div>
                         <div className="time"><p className={`text-[0.6rem]  font-medium ${false ? 'text-white/80' : 'text-secondary'} text-right`}>{capitalize(routine.type)}</p></div>
                     </div>
                 </div>

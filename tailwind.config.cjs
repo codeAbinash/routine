@@ -9,7 +9,7 @@ module.exports = {
 
     },
     colors: {
-      // accent: '#FB536A',
+      pink: '#FB536A',
       accent: '#9c79fd',
       dark: '#2F2E41',
       darkText: '#eee',

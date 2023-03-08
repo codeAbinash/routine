@@ -1,0 +1,41 @@
+[
+    {
+        "version": "1.6.0",
+        "name": "New UI 🎨",
+        "date": "2021-03-08",
+        "description": [
+            "Added a new UI to the app.",
+            "Added a new icon to the app.",
+            "Changed main color of the app.",
+            "Added changelog screen to the app.",
+            "Search bar is sticky now.",
+            [
+                "You can see it by clicking on 'See full changelog' from More options."
+            ],
+            "Added loading screen to the app.",
+            "Fixed 'System Default' dark mode bug."
+        ]
+    },
+    {
+        "version": "1.5.0",
+        "name": "Dark 😎",
+        "date": "2023-02-21",
+        "description": [
+            "Added a dark theme to the app."
+        ]
+    },
+    {
+        "version" : "x-x-x",
+        "name" : "A lot of changes",
+        "date" : "In the interval of 1.0.0 and 1.5.0",
+        "description" : [
+            "A lot of changes were made to the app."
+        ]
+    },
+    {
+        "version": "1.0.0",
+        "name": "First Release 🎉",
+        "date": "2023-02-15",
+        "description": "First release of the app."
+    }
+]

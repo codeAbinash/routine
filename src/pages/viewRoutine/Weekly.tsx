@@ -8,6 +8,7 @@ function Weekly({ routine }: { routine: Routine }) {
 
   return (
     <div className='mt-4'>
+      <p className='text-xs text-gray mb-3'>Routine Days </p>
       <div className='flex items-center justify-between gap-2'>
         {routineDays.map((day, index) => {
           // if (routineTime[index])
@@ -15,11 +16,11 @@ function Weekly({ routine }: { routine: Routine }) {
             <div className={`tap97 relative flex items-center justify-center box h-40 w-[100%] rounded-2xl ${routineTime[index] ? 'bg-accent shadow-accent/40 shadow-xl' : 'bg-inputBg dark:bg-darkInputBg'}`}>
               {
                 routineTime[index] &&
-                <p className='rotate-90 absolute text-xs whitespace-nowrap text-white/90'>{getSingleOrDoubleTime(routineTime[index])}</p>
+                <p className='rotate-90 absolute text-[0.7rem] whitespace-nowrap text-white/90'>{getSingleOrDoubleTime(routineTime[index])}</p>
               }
             </div>
-            <div className="day">
-              <p className='text-gray text-sm text-center'>{routineDaysName[index]}</p>
+            <div className="day mt-3">
+              <p className='text-gray text-xs text-center'>{routineDaysName[index]}</p>
             </div>
           </div>
         }

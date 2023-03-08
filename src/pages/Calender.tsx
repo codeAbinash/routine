@@ -28,21 +28,29 @@ function Calender() {
   routines.forEach((routine: Routine, index: number) => { routine.index = index })
   const topElement = useRef<HTMLDivElement>(null)
 
+  function scrollToTop() {
+    if (topElement.current)
+      topElement.current.scrollIntoView({ behavior: 'smooth' })
+  }
 
   searchActiveRoutine(routinesOfTheDay)
 
   useEffect(() => {
-    // Scroll to top
-    if (topElement.current)
-      topElement.current.scrollIntoView({ behavior: 'smooth' })
+    scrollToTop()
   }, [])
-
+  function getMonthYear(date: Date) {
+    const year = date.getFullYear()
+    const month = date.toLocaleString('default', { month: 'short' })
+    return <>
+      {month} <small>{year}</small>
+    </>
+  }
 
   return (
     <div className='screen dark:text-darkText screen pb-[150px]'>
       <div className="scrollToTop" ref={topElement}></div>
       <div className="topArea">
-        <header className='p-4 flex justify-between items-center flex-row'>
+        <header className='shadow-sm p-4 pt-2 pb-2 flex justify-between items-center flex-row fixed top-0 w-full bg-white dark:bg-black z-50'>
           <div
             onClick={() => {
               let date = new Date(currentYear, currentMonth - 1, currentDate)
@@ -59,6 +67,7 @@ function Calender() {
                 onClick={() => delay(() => {
                   handleDateClick(now)
                   setRoutineDate(now)
+                  scrollToTop()
                 }, 60)}
               >Now</div>
             }
@@ -72,14 +81,14 @@ function Calender() {
             <img src={icons.left_arrow} className='tap opacity-80 dark:invert w-[2.6rem] aspect-square p-2 rounded-xl rotate-180 active:bg-inputBg' />
           </div>
         </header >
-        <div className="calender p-4">
+        <div className="calender p-5 pt-20 pb-0">
           <div className="calenderDayHeadings flex w-full">
             {
               days.map((day, index) => {
                 let isWeekEnd = index % 6 === 0
                 return (
                   <div className="day w-[calc(100%/7)]" key={index}>
-                    <p className={`text-center text-xs text-gray font-medium ${isWeekEnd ? 'opacity-60' : ''}`}>{day}</p>
+                    <p className={`text-center text-[0.7rem] text-gray font-medium ${isWeekEnd ? 'opacity-60' : ''}`}>{day}</p>
                   </div>
                 )
               })
@@ -97,9 +106,9 @@ function Calender() {
                         if (day !== 0) {
                           date.setDate(day)
                           return (
-                            <div className={`day flex-1 rounded-xl aspect-square flex justify-center items-center tap97 calenderDate`} key={j}>
+                            <div className={`day flex-1 aspect-square flex justify-center items-center tap97 calenderDate`} key={j}>
                               <div className={
-                                `flex justify-center items-center contain rounded-xl w-[80%] aspect-square transition border-transparent
+                                `flex justify-center items-center rounded-xl contain w-[75%] aspect-square transition border-transparent
                               ${checkIfSameDate(now, date) ? 'active bg-accent shadow-xl shadow-accent/50 text-white' : ''}
                               hover:border-accent hover:border-2`
                               }
@@ -109,7 +118,7 @@ function Calender() {
                                 }}
                               >
                                 <p className={
-                                  `text-center text-xs font-medium p-2  aspect-square ${isWeekEnd ? 'opacity-60' : ''}  
+                                  `text-center text-xs font-medium p-2 aspect-square ${isWeekEnd ? 'opacity-60' : ''}  
                                   ${checkIfSameDate(now, date) ? 'text-white' : ''}`
                                 }>{day}</p>
                               </div>

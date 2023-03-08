@@ -20,7 +20,7 @@ export default function NewRoutinesLoader() {
     lsRoutines.forEach((routine: Routine, index: number) => { routine.index = index })
 
     return <div className=''>
-        <div className="routines flex flex-col gap-3 mt-3">
+        <div className="routines flex flex-col gap-[0.9rem] mt-3">
             {routines.length === 0 ? <></> : GetRoutines(routines, navigate)}
         </div>
         <button className='no-highlight m-auto block mt-10 bg-dark text-white py-4 px-10 text-xs rounded-full tap97' onClick={() => delay(loadMoreRoutines)}>
@@ -74,11 +74,11 @@ export function GetRoutines(routines: Array<Routine>, navigate: Function) {
                 <div className="top flex flex-row gap-3">
                     <div className="left">
                         <div className={`emoji aspect-square flex-center rounded-xl p-2 flex-1 ${isActiveRoutine ? 'dark:bg-white/20 bg-white/20' : 'dark:bg-black/40 bg-white'}`}>
-                            <img src={Emoji.get(routine.emoji || '⏰')} className='w-[26px] aspect-square' />
+                            <img src={Emoji.get(routine.emoji || '⏰')} className='w-[25px] aspect-square' />
                         </div>
                     </div>
                     <div className={`right flex-1 flex flex-row justify-between flex-center gap-3 `}>
-                        <div className="name"><p className={`font-semibold text-base ${isActiveRoutine ? 'text-white' : ''}`}>{routine.name}</p></div>
+                        <div className="name"><p className={`font-semibold text-[0.95rem] ${isActiveRoutine ? 'text-white' : ''}`}>{routine.name}</p></div>
                         <div className="time"><p className={`text-[0.6rem]  font-medium ${isActiveRoutine ? 'text-white/80' : 'text-secondary'} text-right`}>{GetDisplayTime(routine)}</p></div>
                     </div>
                 </div>

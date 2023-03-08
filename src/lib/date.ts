@@ -9,6 +9,10 @@ export const day = [
     'Friday',
     'Saturday',
 ]
+export function shortMonth(month: number) {
+    return months[month]
+}
+
 export function getDay(date: Date) {
     return day[date.getDay()]
 }
@@ -56,7 +60,7 @@ export function getISODateWithTime(dateString: string) {
 }
 
 export function getMonthYear(date: Date) {
-    return date.toLocaleString('default', { month: 'long' }) + ' ' + date.getFullYear()
+    return date.toLocaleString('default', { month: 'short' }) + ' ' + date.getFullYear()
 }
 
 export default currentDate

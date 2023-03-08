@@ -7,6 +7,7 @@ import Routines from './pages/Routines'
 import Calender from './pages/Calender'
 import More from './pages/More'
 import { loadTheme } from './lib/theme'
+import Loading from './components/Loading'
 // import ViewRoutine from './pages/ViewRoutine'
 
 const LazyAbout = React.lazy(() => import('./pages/About'))
@@ -14,11 +15,12 @@ const LazyAbout = React.lazy(() => import('./pages/About'))
 const LazyApplyRoutine = React.lazy(() => import('./pages/ApplyRoutine'))
 const LazyNewRoutine = React.lazy(() => import('./pages/NewRoutine'))
 const LazyStart = React.lazy(() => import('./pages/Start'))
-const LazyConstruction = React.lazy(() => import('./pages/Construction'))
+const LazyNotifications = React.lazy(() => import('./pages/Notifications'))
 const LazyViewRoutine = React.lazy(() => import('./pages/ViewRoutine'))
 const BuyMeCoffee = React.lazy(() => import('./pages/author/BuyMeCoffee'))
-const Backup = React.lazy(() => import('./pages/backup-restore/Backup'))
-const Restore = React.lazy(() => import('./pages/backup-restore/Restore'))
+const LazyBackup = React.lazy(() => import('./pages/backup-restore/Backup'))
+const LazyRestore = React.lazy(() => import('./pages/backup-restore/Restore'))
+const LazyChangelog = React.lazy(() => import('./pages/changelog/Changelog'))
 
 // const LazyMore = React.lazy(() => import('./pages/More'))
 
@@ -28,7 +30,7 @@ const Restore = React.lazy(() => import('./pages/backup-restore/Restore'))
 function LoadingScreen() {
   return (
     <div className="loading h-[100vh] w-full flex items-center justify-center">
-      <p>Please Wait...</p>
+      <Loading />
     </div>
   )
 }
@@ -52,11 +54,12 @@ export default function App() {
           <Route path='/applyRoutine' element={< LazyApplyRoutine />} />
           <Route path='/more' element={<More />} />
           <Route path='/calender' element={< Calender />} />
-          <Route path='/notifications' element={< LazyConstruction />} />
+          <Route path='/notifications' element={< LazyNotifications />} />
           <Route path='/viewRoutine/:routineId' element={< LazyViewRoutine />} />
           <Route path='/author/buyMeCoffee' element={< BuyMeCoffee />} />
-          <Route path='/backup' element={< Backup />} />
-          <Route path='/restore' element={< Restore />} />
+          <Route path='/backup' element={< LazyBackup />} />
+          <Route path='/restore' element={< LazyRestore />} />
+          <Route path='/changelog' element={< LazyChangelog />} />
         </Routes>
       </React.Suspense>
     </Router>

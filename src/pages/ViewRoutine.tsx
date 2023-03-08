@@ -15,16 +15,19 @@ function ViewRoutine() {
             <div className="top">
 
                 <BackHeader title={`${routine.name} (${routine.type})`} />
-                <section className='px-5'>
+                <section className='px-5 pt-16'>
                     {/* <h1 className='font-medium text-center'>{routine.type}</h1> */}
                     {/* <p>{routine.description}</p> */}
                     {viewRoutineTyped(routine)}
-                    <p className='mt-5'>{routine.description}</p>
+                    <div className="description mt-6">
+                        <p className='text-xs text-gray'>Description </p>
+                        <p className='text-sm p-4 bg-inputBg dark:bg-darkInputBg rounded-xl mt-2 tap99'>{routine.description}</p>
+                    </div>
                 </section>
             </div>
-            <div className="bottom w-full flex flex-col p-5">
-                <button className='btn-full text-sm no-highlight tap99'>Edit this routine</button>
-                <button className='btn-full bg-accent text-sm no-highlight tap99' onClick={() => deleteRoutine(routineId as string)}>Delete this routine</button>
+            <div className="bottom w-full flex flex-row justify-between p-5 gap-4">
+                <button className='btn-full bg-pink text-[0.8rem] no-highlight tap97 flex-1' onClick={() => deleteRoutine(routineId as string)}>Delete</button>
+                <button className='btn-full bg-accent text-[0.8rem] no-highlight tap97 flex-1'>Edit</button>
             </div>
         </div>
     )

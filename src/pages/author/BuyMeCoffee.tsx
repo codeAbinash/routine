@@ -6,7 +6,7 @@ function BuyMeCoffee() {
     return (
         <div className='screen pb-32 dark:text-darkText'>
             <BackHeader title="Buy Me Coffee" />
-            <section className='px-5 text-sm'>
+            <section className='px-5 text-sm pt-20'>
                 <p className='indent-5'>Thank you for using my application. As an independent developer, creating and maintaining apps is my passion. Your support and encouragement mean a lot to me, and I'm grateful for your trust in my work.</p>
                 <div className="coffee">
                     <img src={Emoji.get('☕')} className='w-[25%] block m-auto my-10 ' />
