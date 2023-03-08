@@ -3,6 +3,8 @@ export function applyTheme(theme: 'dark' | 'light' | 'default') {
     localStorage.theme = theme
     if (theme === 'dark')
         document.documentElement.classList.add(theme)
+    else if (theme === 'default')
+        localStorage.removeItem('theme')
     else
         document.documentElement.classList.remove('dark')
     loadTheme()
@@ -14,9 +16,4 @@ export function loadTheme() {
     } else {
         document.documentElement.classList.remove('dark')
     }
-}
-
-export function defaultTheme(){
-    localStorage.removeItem('theme')
-    loadTheme()
 }
