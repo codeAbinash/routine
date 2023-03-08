@@ -1,5 +1,11 @@
 [
     {
+        "version" : "1.6.1",
+        "name" : "Bug Fixes 🐛",
+        "date" : "2023-03-09",
+        "description" : "Fixed changelog not showing up bug."
+    },
+    {
         "version": "1.6.0",
         "name": "New UI 🎨",
         "date": "2021-03-08",
@@ -25,10 +31,10 @@
         ]
     },
     {
-        "version" : "x-x-x",
-        "name" : "A lot of changes",
-        "date" : "In the interval of 1.0.0 and 1.5.0",
-        "description" : [
+        "version": "x-x-x",
+        "name": "A lot of changes",
+        "date": "In the interval of 1.0.0 and 1.5.0",
+        "description": [
             "A lot of changes were made to the app."
         ]
     },

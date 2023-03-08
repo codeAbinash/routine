@@ -75,7 +75,7 @@ function singleLog(log: any) {
 async function loadChangelog() {
    try {
 
-      const res = await fetch('/changelog/changelog.json')
+      const res = await fetch('/routine-build/build/changelog/changelog.json')
       const data = await res.json()
       return data
    } catch (err) {
