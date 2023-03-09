@@ -1,4 +1,15 @@
-[
+[   
+    {
+        "version" : "1.6.2",
+        "name" : "Smooth UI 🎨",
+        "date" : "2023-03-10",
+        "description" : [
+            "Added header shadow to headers when scrolled with the help of IntersectionObserver.",
+            "Added smooth scroll to the app.",
+            "Added a back button in header in 'New Routine' screen.",
+            "Now confirm dialog is shown when you try to discard a routine from 'New Routine' screen."
+        ]
+    },
     {
         "version" : "1.6.1",
         "name" : "Bug Fixes 🐛",

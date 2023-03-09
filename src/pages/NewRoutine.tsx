@@ -2,6 +2,7 @@ import Emoji from 'emoji-store';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import icons from '../assets/icons/icons';
+import BackHeader from '../components/BackHeader';
 import { day } from '../lib/date';
 import ls from '../lib/storage';
 import Daily from './makeRoutine/Daily';
@@ -19,9 +20,7 @@ function NewRoutine() {
 	const navigate = useNavigate()
 
 	function goBack() {
-		setTimeout(() => {
-			navigate(-1)
-		}, 50);
+		navigate(-1)
 	}
 	useEffect(() => {
 		console.log(routine)
@@ -29,15 +28,20 @@ function NewRoutine() {
 
 	return (
 		<div className='new-routine-screen screen dark:text-darkText select-none'>
-			<header className='flex p-2 w-full justify-between select-none items-center px-4'>
+			{/* <header className='flex p-2 w-full justify-between select-none items-center px-4'>
 				<div className="left tap" onClick={goBack}>
 					<img src={icons.xmark_solid} className='w-10 p-3 dark:invert dark:grayscale' />
 				</div>
-				<div className="center font-medium text-base">New Routine {/*<TextEmoji emoji='😯'/>*/}</div>
+				<div className="center font-medium text-base">New Routine </div>
 				<div className="right tap" onClick={addRoutine}>
 					<img src={icons.check_solid} className='w-11 p-3 dark:invert dark:grayscale' />
 				</div>
-			</header>
+			</header> */}
+			<BackHeader title="New Routine" backCb={() => {
+				const confirmBack = confirm('Discard this routine?')
+				confirmBack && goBack()
+			}} />
+
 			<section className='basic-details w-full p-4 pt-2'>
 				<div className='min-h-[calc(100vh-100px)] flex flex-col justify-between items-center w-full'>
 					<div className="top flex flex-col gap-3 w-full">

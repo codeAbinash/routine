@@ -10,6 +10,7 @@ import ls from '../lib/storage'
 import { GetRoutines } from './NewRoutinesLoader'
 import { Routine } from '../lib/dateMethods'
 import { getFormattedDate, getDay } from '../lib/date'
+import headerIntersect from '../lib/headerIntersect'
 
 
 
@@ -17,6 +18,7 @@ function Calender() {
   const navigate = useNavigate()
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   const now = new Date()
+  const [isIntersecting, setIsIntersecting] = React.useState(true)
   const [calenderDays, setCalendarDays] = useState([...getCalendarArray(now)])
   const [currentDate, setCurrentDate] = React.useState(now.getDate())
   const [currentMonth, setCurrentMonth] = React.useState(now.getMonth())
@@ -37,6 +39,7 @@ function Calender() {
 
   useEffect(() => {
     scrollToTop()
+    headerIntersect(topElement.current as Element, setIsIntersecting)
   }, [])
   function getMonthYear(date: Date) {
     const year = date.getFullYear()
@@ -50,7 +53,7 @@ function Calender() {
     <div className='screen dark:text-darkText screen pb-[150px]'>
       <div className="scrollToTop" ref={topElement}></div>
       <div className="topArea">
-        <header className='shadow-sm p-4 pt-2 pb-2 flex justify-between items-center flex-row fixed top-0 w-full bg-white dark:bg-black z-50'>
+        <header className={`${isIntersecting ? '' : 'shadow-sm'} transition p-4 pt-2 pb-2 flex justify-between items-center flex-row fixed top-0 w-full bg-white dark:bg-black z-50`}>
           <div
             onClick={() => {
               let date = new Date(currentYear, currentMonth - 1, currentDate)

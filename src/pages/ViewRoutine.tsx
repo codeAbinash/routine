@@ -15,7 +15,7 @@ function ViewRoutine() {
             <div className="top">
 
                 <BackHeader title={`${routine.name} (${routine.type})`} />
-                <section className='px-5 pt-16'>
+                <section className='px-5'>
                     {/* <h1 className='font-medium text-center'>{routine.type}</h1> */}
                     {/* <p>{routine.description}</p> */}
                     {viewRoutineTyped(routine)}
