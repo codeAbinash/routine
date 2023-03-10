@@ -23,6 +23,7 @@ import theme from './src/theme.svg'
 import left_arrow from './src/left_arrow.svg'
 import backup from './src/backup.svg'
 import restore from './src/restore.svg'
+import shield_cross from './src/shield_cross.svg'
 
 const icons = {
     Lock, delete_left_solid, home,
@@ -32,7 +33,7 @@ const icons = {
     home_black_48dp, routines, calender,
     check_solid, xmark_solid, notification,
     right_arrow_next, shield, theme, left_arrow,
-    backup, restore
+    backup, restore, shield_cross
 }
 
 

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import BackHeader from '../../components/BackHeader'
 import Loading from '../../components/Loading'
+import TextEmoji from '../../components/TextEmoji'
+import Watermark from '../../components/Watermark'
 
 function Changelog() {
    const [isLoaded, setIsLoaded] = useState(false)
@@ -16,7 +18,7 @@ function Changelog() {
    return (
       <div className='dark:text-darkText'>
          <BackHeader title="Changelog" />
-         <div className='p-5 pt-0'>
+         <div className='p-8 pt-0'>
             {
                isLoaded ?
                   <div className=''>{showChangelog(changelog)}</div>
@@ -25,28 +27,60 @@ function Changelog() {
                   </div>
             }
          </div>
+         <Watermark />
       </div>
    )
 }
 
 function showChangelog(data: any) {
+   // console.log(data)
    return (
-      <div>
-         {data.map((log: any, index: number) => (
-            <div key={index}>
+      <div className='flex flex-col gap-8 mt-2'>
+         {data.map((log: any, index: number) => {
+            console.log(log.emoji)
+            return <div key={index}>
                <>
-                  <h1 className='text-3xl font-semibold pt-8'>{log.version}</h1>
+                  {headingVersionName(log.version, log.emoji)}
                   <p className='text-sm font-medium pt-1 pb-2'>{log.name}<span className='text-gray font-normal'> •  {log.date}</span></p>
                   <div className='text-[0.8rem]'>
-                  {singleLog(log.description)}
-
+                     {singleLog(log.description)}
                   </div>
                </>
             </div>
-         ))}
+         })}
       </div>
    )
 }
+
+function headingVersionName(version: string, emoji: string | [string]) {
+   return (
+      <div className='flex flex-row gap-3 items-center'>
+         <h1 className='text-3xl font-semibold'>{version}</h1>
+         {emoji && makeEmoji(emoji as any)}
+      </div>
+   )
+}
+
+
+function makeEmoji(emoji: [string]) {
+   return <div className='flex gap-3 flex-row text-[1.3rem]'>
+      {
+         Array.isArray(emoji) ?
+            emoji.map((emoji: string, index: number) => <TextEmoji key={index} emoji={emoji} />)
+            : <TextEmoji emoji={emoji} />
+      }
+
+   </div>
+   // </div >
+   // if (Array.isArray(emoji))
+   //    return emoji.map((emoji: string, index: number) => <div className='flex gap-3 flex-row'>
+   //       <TextEmoji key={index} emoji={emoji} />
+   //    </div>
+   //    )
+   // else
+   //    return <TextEmoji emoji={emoji} />
+}
+
 
 function singleLog(log: any) {
    if (Array.isArray(log)) {

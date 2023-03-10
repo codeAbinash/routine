@@ -4,6 +4,7 @@ import '../assets/scss/index.scss'
 import FloatingButton from '../components/FloatingButton'
 import Header from '../components/Header'
 import NavBar from '../components/NavBar'
+import Watermark from '../components/Watermark'
 import getCurrentDate from '../lib/date'
 import searchByDate, { Routine, searchActiveRoutine } from '../lib/dateMethods'
 import ls from '../lib/storage'
@@ -19,6 +20,7 @@ function Home() {
 	const navigate = useNavigate()
 	const timer1 = useRef<any>(null);
 	const timer2 = useRef<any>(null);
+
 
 	useEffect(() => {
 		// Check if started using
@@ -53,7 +55,7 @@ function Home() {
 	return (
 		<div className="home-screen screen-navbar select-none dark:bg-black dark:text-darkText">
 			<Header title={getCurrentDate()} notiIcon={true} placeholder="Search Routine" />
-			<section className='p-[1.2rem] pb-[100px]'>
+			<section className='p-[1.2rem]'>
 				<p className='text-[#777]/50 text-center mt-2 mb-5 text-sm font-medium'>Today's routines</p>
 				<div className="routines flex flex-col gap-[0.9rem]">
 					{GetRoutines(screenRoutines, navigate)}
@@ -61,6 +63,7 @@ function Home() {
 				<NewRoutinesLoader />
 			</section>
 			<FloatingButton />
+			<Watermark />
 			<NavBar active={0} />
 		</div>
 	)

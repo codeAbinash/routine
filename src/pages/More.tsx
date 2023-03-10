@@ -8,6 +8,7 @@ import Header from '../components/Header'
 import TextEmoji from '../components/TextEmoji'
 import details from '../info'
 import delay, { df } from '../lib/delay'
+import Watermark from '../components/Watermark'
 function changeTheme(theme: any) {
     ls.set('theme', theme)
     applyTheme(theme)
@@ -44,6 +45,22 @@ function More() {
             rightArrow: true
         },
         {
+            name: 'Hide or Show Watermark',
+            icon: icons.shield_cross,
+            callback: () => {
+                const watermark = ls.get('watermark')
+                if (watermark === 'false') {
+                    ls.set('watermark', 'true')
+                    alert('Watermark is now visible')
+                    return
+                }
+                ls.set('watermark', 'false')
+                alert('Watermark is now hidden')
+            },
+            rightArrow: true
+        },
+
+        {
             name: 'Reset everything',
             icon: icons.shield,
             callback: () => {
@@ -62,7 +79,7 @@ function More() {
         <div className='screen dark:text-darkText'>
             <Header title="More options" notiIcon={true} placeholder="Search more options" />
 
-            <section className='p-[1.2rem] pb-[100px]'>
+            <section className='p-[1.2rem]'>
 
                 <div className="w-full p-6 bg-dark rounded-3xl text-white tap99" onClick={df(() => navigate('/changelog'))}>
                     <div className=" flex justify-between w-full items-center">
@@ -110,6 +127,9 @@ function More() {
                     </div>
                 </div>
             </section>
+            <div className='pb-20'>
+                <Watermark />
+            </div>
             <NavBar active={3} />
         </div>
     )

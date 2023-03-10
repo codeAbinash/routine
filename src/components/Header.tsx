@@ -18,7 +18,7 @@ function Header({ title, notiIcon, placeholder }: { title: string, notiIcon: boo
                 <div className="px-5 pt-2 heading flex flex-row justify-between items-center gap-2">
                     <p className='text-xl font-bold' ref={headerTitle}>{title}</p>
                     <div className={`notification tap ${notiIcon ? 'opacity-100' : 'opacity-0'}`} onClick={() => navigate('/notifications')}>
-                        <div className="dot absolute h-2 w-2 bg-accent mt-2 ml-7 rounded-full"></div>
+                        <div className="dot absolute h-2 w-2 bg-accent mt-2 ml-7 rounded-full opacity-20"></div>
                         <img src={icons.notification} className='w-10 p-3 rounded-md opacity-80 dark:invert dark:grayscale dark:opacity-70' />
                     </div>
                 </div>

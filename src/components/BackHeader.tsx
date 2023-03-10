@@ -11,7 +11,6 @@ function BackHeader({ title, backCb }: { title: string, backCb?: Function }) {
 	const [isIntersecting, setIsIntersecting] = useState(true)
 	useEffect(() => {
 		headerIntersect(topElement.current as Element, setIsIntersecting)
-		console.log(isIntersecting)
 	}, [])
 
 	return (

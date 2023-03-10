@@ -1,5 +1,5 @@
 import Emoji from 'emoji-store';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import icons from '../assets/icons/icons';
 import BackHeader from '../components/BackHeader';
@@ -18,13 +18,15 @@ function NewRoutine() {
 	const [routineType, setRoutineType] = useState('weekly')
 	const [routine, setRoutine] = useState<any>({})
 	const navigate = useNavigate()
+	const topElement:any = useRef<HTMLDivElement>()
 
 	function goBack() {
 		navigate(-1)
 	}
+
 	useEffect(() => {
-		console.log(routine)
-	})
+		topElement.current.scrollIntoView({ behavior: 'smooth' })
+	}, [])
 
 	return (
 		<div className='new-routine-screen screen dark:text-darkText select-none'>
@@ -37,6 +39,7 @@ function NewRoutine() {
 					<img src={icons.check_solid} className='w-11 p-3 dark:invert dark:grayscale' />
 				</div>
 			</header> */}
+			<div className='topElement' ref={topElement}></div>
 			<BackHeader title="New Routine" backCb={() => {
 				const confirmBack = confirm('Discard this routine?')
 				confirmBack && goBack()
@@ -48,7 +51,7 @@ function NewRoutine() {
 						<div className="">
 							<p className='text-xs text-secondary pl-1 pb-1'>Routine name</p>
 							<div className="inputText flex flex-row gap-3">
-								<img src={Emoji.get(parseEmoji(routineEmoji)[0])} className='tap h-[3.6rem] p-[0.8rem] bg-inputBg dark:bg-darkInputBg rounded-2xl' />
+								<img src={Emoji.get(parseEmoji(routineEmoji)[0])} className='tap h-[3.5rem] p-[0.8rem] bg-inputBg dark:bg-darkInputBg rounded-2xl' />
 								<input
 									value={routineName}
 									onInput={(e: any) => { setRoutineName(e.target.value) }}
@@ -75,16 +78,16 @@ function NewRoutine() {
 							<div className="inputSelect flex justify-between items-center gap-3">
 								<input type="text"
 									value={routineEmoji}
-									placeholder='Custom Emoji'
-									className='name input-text bg-inputBg dark:bg-darkInputBg'
+									placeholder='Emoji'
+									className='name input-text bg-inputBg dark:bg-darkInputBg flex-1'
 									onInput={(e: any) => { setRoutineEmoji(e.target.value) }}
 								/>
-								<select defaultValue={routineType} onInput={(e: any) => setRoutineType(e.target.value)} className='appearance-none p-[1rem] px-7 rounded-2xl trans-outline outline-none focus:outline-accent border-none bg-inputBg dark:bg-darkInputBg text-center'>
-									<option value="once">Repeat : Once</option>
-									<option value="daily">Repeat : Daily</option>
-									<option value="weekly">Repeat : Weekly</option>
-									<option value="monthly">Repeat : Monthly</option>
-									<option value="yearly">Repeat : Yearly</option>
+								<select defaultValue={routineType} onInput={(e: any) => setRoutineType(e.target.value)} className='flex-[4] appearance-none p-[1rem] px-7 rounded-2xl trans-outline outline-none focus:outline-accent border-none bg-inputBg dark:bg-darkInputBg text-center'>
+									<option value="once">Routine : Once</option>
+									<option value="daily">Routine : Daily</option>
+									<option value="weekly">Routine : Weekly</option>
+									<option value="monthly">Routine : Monthly</option>
+									<option value="yearly">Routine : Yearly</option>
 									<option value="calendar">Calendar Event</option>
 								</select>
 								{/* <img src={e.get('➕')} className='tap bg-inputBg dark:bg-darkInputBg h-[3.5rem] p-[0.8rem] rounded-2xl' /> */}

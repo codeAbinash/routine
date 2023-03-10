@@ -11,6 +11,7 @@ import { GetRoutines } from './NewRoutinesLoader'
 import { Routine } from '../lib/dateMethods'
 import { getFormattedDate, getDay } from '../lib/date'
 import headerIntersect from '../lib/headerIntersect'
+import Watermark from '../components/Watermark'
 
 
 
@@ -50,10 +51,10 @@ function Calender() {
   }
 
   return (
-    <div className='screen dark:text-darkText screen pb-[150px]'>
+    <div className='screen dark:text-darkText screen'>
       <div className="scrollToTop" ref={topElement}></div>
       <div className="topArea">
-        <header className={`${isIntersecting ? '' : 'shadow-sm'} transition p-4 pt-2 pb-2 flex justify-between items-center flex-row fixed top-0 w-full bg-white dark:bg-black z-50`}>
+        <header className={`${isIntersecting ? '' : 'shadow-sm dark:shadow-white/10'} transition p-4 pt-2 pb-2 flex justify-between items-center flex-row fixed top-0 w-full bg-white dark:bg-black z-50`}>
           <div
             onClick={() => {
               let date = new Date(currentYear, currentMonth - 1, currentDate)
@@ -148,6 +149,9 @@ function Calender() {
         <div className="routines flex flex-col gap-3 p-4">
           {GetRoutines(routinesOfTheDay, navigate)}
         </div>
+      </div>
+      <div className='pb-20'>
+        <Watermark />
       </div>
       <FloatingButton />
       <NavBar active={2} />

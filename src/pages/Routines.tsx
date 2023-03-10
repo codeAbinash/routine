@@ -10,6 +10,7 @@ import { capitalize } from '../lib/lib'
 import Header from '../components/Header'
 import { useNavigate } from 'react-router-dom'
 import delay from '../lib/delay'
+import Watermark from '../components/Watermark'
 
 function Routines() {
     const [screenRoutines, uScreenRoutines] = useState<any>([])
@@ -23,13 +24,14 @@ function Routines() {
     return (
         <div className="routines-screen screen-navbar select-none dark:bg-black dark:text-darkText">
             <Header title="All routines" notiIcon={true} placeholder="Search All Routines" />
-            <section className='p-[1.2rem] pb-[100px]'>
+            <section className='p-[1.2rem]'>
                 <p className='text-[#777]/50 text-center mt-2 mb-5 text-sm font-medium'>All routines</p>
                 <div className="routines flex flex-col gap-[0.9rem]">
                     {AllRoutines(screenRoutines)}
                 </div>
             </section>
             <FloatingButton />
+            <Watermark />
             <NavBar active={1} />
         </div>
     )

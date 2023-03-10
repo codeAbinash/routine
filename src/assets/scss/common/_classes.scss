@@ -255,15 +255,10 @@ button.btn-full-width.gray {
     border: none;
     outline: none;
     width: 100%;
-    padding: 1.1rem;
+    padding: 1rem;
     border-radius: 0.8rem;
     padding-left: 1.5rem;
     outline: 2px solid transparent;
-    // background-repeat: no-repeat;
-    // background-size: 1.1em;
-    // background-position: 1.2em center;
-    // padding-left: 3rem;
-    // background-blend-mode: color-burn;
     transition: 100ms linear outline, 100ms linear scale;
 
     &:focus,
