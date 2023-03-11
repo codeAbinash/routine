@@ -1,8 +1,24 @@
 [
     {
+        "version": "1.7.2",
+        "name": "UI Improvements 🎨",
+        "emoji": [
+            "🎨"
+        ],
+        "date": "2023-03-10",
+        "description":[
+            "Changed the button of seeing more routines in the home screen",
+            "Made Better Ui for the app",
+            "Added text ellipses to longer title and description in routines"
+        ]
+    },
+    {
         "version": "1.7.1",
         "name": "Smoother 😯",
-        "emoji": ["😯","🚀"],
+        "emoji": [
+            "😯",
+            "🚀"
+        ],
         "date": "2023-03-10",
         "description": [
             "Fixed scroll to top in new routine screen when you open it.",
@@ -70,9 +86,15 @@
         ]
     },
     {
-        "version": "Mid 1.0.0 - 1.5.0",
+        "version": "1.0.0 - 1.5.0",
         "name": "A lot of changes",
-        "date": "In the interval of 1.0.0 and 1.5.0",
+        "emoji": [
+            "🎉",
+            "🎨",
+            "🚀",
+            "🐛"
+        ],
+        "date": "2023-02-15 - 2023-02-21",
         "description": [
             "A lot of changes were made to the app."
         ]

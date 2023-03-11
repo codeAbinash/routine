@@ -16,12 +16,12 @@ function BackHeader({ title, backCb }: { title: string, backCb?: Function }) {
 	return (
 		<>
 			<div ref={topElement}></div>
-			<div className={`transition ${isIntersecting ? '' : 'shadow-sm dark:shadow-white/10'}  sticky top-0 w-full bg-white dark:bg-black z-50 flex h-16`}>
-				<header className='flex w-full justify-start select-none items-center px-4 mt-[-1px]'>
+			<div className={`transition ${isIntersecting ? '' : 'shadow-sm dark:shadow-white/10'}  sticky top-0 w-full bg-white dark:bg-black z-50 flex`}>
+				<header className='flex w-full justify-start select-none items-center px-3 py-[0.6rem] mt-[-1px]'>
 					<div className="left tap" onClick={handelBackClick}>
 						<img src={icons.left_arrow_solid} className='w-10 p-3 dark:invert dark:grayscale' />
 					</div>
-					<div className="center font-medium text-base pl-3 dark:text-darkText">{title}</div>
+					<div className="center font-medium text-base pl-3 dark:text-darkText line-clamp-1">{title}</div>
 				</header>
 			</div>
 		</>

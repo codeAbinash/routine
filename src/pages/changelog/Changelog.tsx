@@ -63,13 +63,12 @@ function headingVersionName(version: string, emoji: string | [string]) {
 
 
 function makeEmoji(emoji: [string]) {
-   return <div className='flex gap-3 flex-row text-[1.3rem]'>
+   return <div className='flex gap-2 flex-row text-[1.3rem]'>
       {
          Array.isArray(emoji) ?
             emoji.map((emoji: string, index: number) => <TextEmoji key={index} emoji={emoji} />)
             : <TextEmoji emoji={emoji} />
       }
-
    </div>
    // </div >
    // if (Array.isArray(emoji))

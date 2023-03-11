@@ -12,6 +12,7 @@
     "cpyBuild": "git clone https://github.com/codeAbinash/routine-build.git build"
   },
   "dependencies": {
+    "@tailwindcss/line-clamp": "^0.4.2",
     "emoji-store": "^1.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

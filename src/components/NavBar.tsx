@@ -1,6 +1,6 @@
 import icons from "../assets/icons/icons"
 import { useNavigate } from "react-router-dom"
-import delay from "../lib/delay"
+import delay, { df } from "../lib/delay"
 const tabIcons = [icons.home, icons.routines, icons.calender, icons.more]
 const tabs = ['Home', 'Routines', 'Calender', 'More']
 const links = ['/', '/routines', '/calender', '/more']
@@ -17,7 +17,10 @@ function NavBar({ active }: any) {
                 return (
                     <div
                         className={`select-none tap tab flex-center flex-col gap-1 px-3 ${active == index ? "" : " opacity-50"} dark:invert dark:grayscale`}
-                        key={index} onClick={() => delay(() => navigate(links[index], { replace: true }))}>
+                        key={index} onClick={df(() => {
+                            if(active == index) return
+                            navigate(links[index], { replace: true })
+                        })}>
                         <img src={icon} className='h-[21px]' />
                         <p className="title text-xs dark:invert">{tabs[index]}</p>
                     </div>

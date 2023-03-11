@@ -55,7 +55,7 @@ function AllRoutines(routines: Array<Routine>) {
                         </div>
                     </div>
                     <div className="right flex-1 flex flex-row justify-between flex-center gap-3">
-                        <div className="name"><p className={`font-semibold text-[0.95rem] ${false ? 'text-white' : ''}`}>{routine.name}</p></div>
+                        <div className="name"><p className={`font-semibold text-[0.95rem] ${false ? 'text-white' : ''} line-clamp-2`}>{routine.name}</p></div>
                         <div className="time"><p className={`text-[0.6rem]  font-medium ${false ? 'text-white/80' : 'text-secondary'} text-right`}>{capitalize(routine.type)}</p></div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ function AllRoutines(routines: Array<Routine>) {
                     <div className="bottom flex flex-row gap-3">
                         <BlankEmojiLeft />
                         <div className="right flex-1 flex flex-row justify-between flex-center">
-                            <div className={`description font-medium text-[0.75rem] ${false ? 'text-white/80' : 'text-secondary'}`}><p>{routine.description}</p></div>
+                            <div className={`description font-medium text-[0.75rem] ${false ? 'text-white/80' : 'text-secondary'} line-clamp-2`}><p>{routine.description}</p></div>
                         </div>
                     </div>
                 }

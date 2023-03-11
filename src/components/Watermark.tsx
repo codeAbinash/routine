@@ -8,11 +8,11 @@ function Watermark({ visible }: any) {
 
     console.log(isWatermark)
     return (
-        <div className={`${isWatermark ? 'opacity-[0.15]' : 'opacity-0'} pb-10 pt-10 flex justify-center items-center`}>
+        <div className={`${isWatermark ? 'opacity-[0.15]' : 'opacity-0'} pb-10 pt-10 flex justify-center items-center -z-10`}>
             <p className={
                 `font-bold tap97 text-sm`
             }>
-                Made by codeAbinash <TextEmoji emoji='🧑🏻‍💻' />
+                Made by Abinash
             </p>
         </div>
     )

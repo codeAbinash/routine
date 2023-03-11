@@ -22,6 +22,8 @@ module.exports = {
       transparent: 'transparent',
     }
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
   darkMode: 'class'
 }

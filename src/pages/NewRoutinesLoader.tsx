@@ -23,8 +23,8 @@ export default function NewRoutinesLoader() {
         <div className="routines flex flex-col gap-[0.9rem] mt-3">
             {routines.length === 0 ? <></> : GetRoutines(routines, navigate)}
         </div>
-        <button className='no-highlight m-auto block mt-10 bg-dark text-white py-4 px-10 text-xs rounded-full tap97' onClick={() => delay(loadMoreRoutines)}>
-            See routines for {getFormattedDate(tomorrow)}
+        <button className='no-highlight m-auto block mt-10 bg-accent/10 text-accent py-3 px-7 text-[0.7rem] font-medium rounded-xl tap97' onClick={() => delay(loadMoreRoutines)}>
+            Show routines for {getFormattedDate(tomorrow)}
         </button>
     </div>
 
@@ -78,8 +78,8 @@ export function GetRoutines(routines: Array<Routine>, navigate: Function) {
                         </div>
                     </div>
                     <div className={`right flex-1 flex flex-row justify-between flex-center gap-3 `}>
-                        <div className="name"><p className={`font-semibold text-[0.95rem] ${isActiveRoutine ? 'text-white' : ''}`}>{routine.name}</p></div>
-                        <div className="time"><p className={`text-[0.6rem]  font-medium ${isActiveRoutine ? 'text-white/80' : 'text-secondary'} text-right`}>{GetDisplayTime(routine)}</p></div>
+                        <div className="name"><p className={`font-semibold text-[0.95rem] line-clamp-2 ${isActiveRoutine ? 'text-white' : ''}`}>{routine.name}</p></div>
+                        <div className="time"><p className={`text-[0.6rem] whitespace-nowrap font-medium ${isActiveRoutine ? 'text-white/80' : 'text-secondary'} text-right`}>{GetDisplayTime(routine)}</p></div>
                     </div>
                 </div>
                 {
@@ -87,7 +87,7 @@ export function GetRoutines(routines: Array<Routine>, navigate: Function) {
                     <div className="bottom flex flex-row gap-3">
                         <BlankEmojiLeft />
                         <div className="right flex-1 flex flex-row justify-between flex-center">
-                            <div className={`description font-medium text-[0.75rem] ${isActiveRoutine ? 'text-white/80' : 'text-secondary'}`}><p>{routine.description}</p></div>
+                            <div className={`description font-medium text-[0.75rem] ${isActiveRoutine ? 'text-white/80' : 'text-secondary'} line-clamp-2`}><p>{routine.description}</p></div>
                         </div>
                     </div>
                 }
@@ -124,10 +124,10 @@ function GetDisplayTime(routine: Routine) {
     else {
         // const hour = 
         if (routine.endTime) {
-            return <>{getTime(routine.startTime)} <br /> {getTime(routine.endTime)}</>
+            return <><span className='whitespace-nowrap'>{getTime(routine.startTime)}</span> <br /><span className='whitespace-nowrap'>{getTime(routine.endTime)}</span></>
         }
         else {
-            return <>{getTime(routine.startTime)}</>
+            return <span className='whitespace-nowrap'>{getTime(routine.startTime)}</span>
         }
     }
 }

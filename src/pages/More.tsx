@@ -9,6 +9,7 @@ import TextEmoji from '../components/TextEmoji'
 import details from '../info'
 import delay, { df } from '../lib/delay'
 import Watermark from '../components/Watermark'
+import { useEffect, useRef } from 'react'
 function changeTheme(theme: any) {
     ls.set('theme', theme)
     applyTheme(theme)
@@ -25,6 +26,11 @@ function getCurrentTheme() {
 
 function More() {
     const navigate = useNavigate()
+    const topElement = useRef<HTMLDivElement>(null)
+    useEffect(()=>{
+        // Scroll to top
+        topElement.current?.scrollIntoView({ behavior: 'smooth' })
+    }, [])
     const settingsInfo = [
         {
             name: 'Apply Default Routines',
@@ -77,6 +83,7 @@ function More() {
     ]
     return (
         <div className='screen dark:text-darkText'>
+            <div className="topElement" ref={topElement}></div>
             <Header title="More options" notiIcon={true} placeholder="Search more options" />
 
             <section className='p-[1.2rem]'>
