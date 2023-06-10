@@ -1,0 +1,40 @@
+@forward './font';
+@use "./index" as main;
+@use "./classes";
+*,
+*::after,
+*::before {
+    font-family: 'Rubik', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// Font Awesome Style
+i,
+i::before,
+i::after {
+    font-family: "Font Awesome Kit";
+}
+
+body {
+    min-height: 100vh;
+    color: var(--text);
+    overscroll-behavior: contain;
+}
+
+// a {
+//     text-decoration: none;
+//     // -webkit-tap-highlight-color: mix(color.$accent,#00000000);
+//     -webkit-tap-highlight-color: transparent;
+//     color: main.$accent-text;
+
+//     &:active {
+//         text-decoration: underline;
+//     }
+// }
+
+::selection {
+    background-color: main.$accent;
+    color:white;
+}

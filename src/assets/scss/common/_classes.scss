@@ -1,0 +1,319 @@
+@use "index" as m;
+
+.text-center {
+    text-align: center;
+}
+
+.no-highlight {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.small {
+    font-size: 0.7rem;
+}
+
+.lg {
+    /* Welcome to Money */
+    background: -webkit-linear-gradient(0deg, #D79CFF, #78CAF9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    // text-fill-color: transparent;
+}
+
+button.btn-full-width {
+    outline: none;
+    border: none;
+    background-color: #111;
+    color: white;
+    padding: 1.4em;
+    font-size: 0.9em;
+    border-radius: m.$bdrs;
+    @include m.press(100, 98);
+    // font-weight: 500;
+    letter-spacing: 0.05em;
+    width: 100%;
+}
+
+button.btn-full-width.white {
+    background-color: white;
+    color: black;
+}
+
+button.btn-full-width.gray {
+    background-color: #222;
+}
+
+// .end-text {
+//     font-size: 0.7em;
+//     color: #888;
+// }
+
+// .btn100,
+
+// .btn60 {
+//     border: none;
+//     outline: none;
+//     min-width: 60%;
+//     margin-inline: auto;
+//     display: block;
+//     padding: 1.4em;
+//     border-radius: m.$bdrs;
+//     color: #fff;
+//     background-color: #000;
+//     font-size: 0.9em;
+//     @include m.press(150, 97);
+//     box-shadow: 5px 5px 15px 0px #00000044;
+
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     gap: 0.5em;
+
+//     >img {
+//         height: 1.1em;
+//     }
+// }
+
+// .btn100 {
+//     width: 100%;
+// }
+
+// Width
+.w100 {
+    width: 100%;
+}
+
+.w90 {
+    width: 90%;
+    display: block;
+    margin-inline: auto;
+}
+
+
+
+
+.search-full {
+    // background-color: #f1f1f1;
+    // background-color: #333;
+    background-color: var(--input-bg);
+    width: 100%;
+    border-radius: var(--border-radius);
+    padding: 1.05em 0.5em 1.05em 3em;
+    outline: none;
+    // outline: 1px solid var(--input-bg);
+    background-image: url('../icons/src/search_black_48dp.svg');
+    background-repeat: no-repeat;
+    background-position: 1em center;
+    // color: #777777;
+    // font-weight: 500 ;
+    background-size: 1.55em;
+    font-size: 0.85em;
+    font-weight: 500;
+
+    // font-weight: normal;
+    &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        height: 2em;
+        width: 2em;
+        background-size: 1.6em;
+        // opacity: 0.9;
+        // outline: 1px solid red;
+        background-image: url('../icons/src/clear_black_48dp.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    &::placeholder {
+        color: var(--placeholder-color);
+    }
+}
+
+.btn-full {
+    background-color: var(--dark);
+    color: white;
+    padding: 1.2rem;
+    border-radius: var(--border-radius);
+    margin-top: 0.5rem;
+    user-select: none;
+}
+
+
+.bg-main {
+    background-color: var(--bg);
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen {
+    min-height: 100dvh;
+    user-select: none;
+
+}
+
+.screen-navbar {
+    padding-bottom: 80px;
+}
+
+.tap,
+.tap99,
+.tap97,
+.tap95 {
+    transition-duration: 100ms;
+}
+
+.tap {
+    &:active {
+        scale: 0.95;
+    }
+}
+
+.tap99 {
+    &:active {
+        scale: 0.99;
+    }
+}
+
+.tap97 {
+    &:active {
+        scale: 0.97;
+    }
+}
+
+.tap95 {
+    transition-duration: 150ms;
+    &:active {
+        scale: 0.95;
+    }
+}
+
+.input-bg {
+    background-color: var(--input-bg);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.bg-secondary {
+    background-color: var(--placeholder-color);
+}
+
+.bg-slider {
+    background-color: var(--bg-slider);
+}
+
+.bg-backdrop {
+    background-color: var(--bg-backdrop);
+    backdrop-filter: blur(10px);
+}
+
+.glowing {
+    border: 2px solid transparent;
+    animation: glow 1.5s infinite;
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        border-color: var(--accent);
+    }
+
+    50% {
+        border-color: transparent;
+    }
+}
+
+.debug {
+    outline: 1px solid red;
+
+    * {
+        outline: 1px solid red;
+
+    }
+}
+
+.d {
+    outline: 1px solid red;
+
+}
+
+.dark {
+    background-color: black;
+    color: white;
+}
+
+.colorTrans {
+    transition: 100ms color ease-in-out, 100ms background-color ease-in-out;
+}
+
+.trans-outline {
+    transition: 100ms linear outline;
+
+}
+
+.input-text,
+.input-date,
+.input-time {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.8rem;
+    padding-left: 1.5rem;
+    outline: 2px solid transparent;
+    transition: 100ms linear outline, 100ms linear scale;
+
+    &:focus,
+    &:active {
+        outline: 2px solid var(--accent);
+    }
+}
+
+.input-date {
+    padding: 1.2rem;
+}
+
+.checkDiv {
+    transition: 100ms background-color ease-in-out,
+        100ms color ease-in-out, 100ms scale,
+        100ms box-shadow ease-in-out;
+}
+
+.checkDiv.active {
+    background-color: var(--accent);
+    color: white;
+}
+
+.input-time-small {
+    outline: none;
+    border: none;
+    flex: 1;
+    width: 50%;
+    appearance: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    &:focus,
+    &:active {
+        outline: 2px solid var(--accent);
+    }
+}
+
+.trans-opacity {
+    transition: 100ms opacity ease-in-out;
+}
+
+.calenderDate {}
+
+// .calenderDate.active{
+//     background-color: var(--accent);
+//     color: white;
+// }

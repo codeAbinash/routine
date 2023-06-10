@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    // src: url("/fonts/Rubik-VariableFont_wght.ttf");
+    font-family: 'Rubik';
+    src: url('/fonts/Rubik-VariableFont_wght.woff2') format('woff2-variations'),
+        url('/fonts/Rubik-VariableFont_wght.woff2') format('woff2');
+    font-weight: 1 1000;
+    font-display: swap;
+}

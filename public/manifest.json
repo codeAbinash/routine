@@ -1,0 +1,89 @@
+{
+    "short_name": "Routine",
+    "name": "Routine",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "description": "Manages your Routine",
+    "theme_color": "#ffffff",
+    "icons": [
+        {
+            "src": "icons/icon192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "icons/icon512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "icons/icon196.png",
+            "sizes": "196x196",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "icons/favicon.ico", 
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "images/screen/screen 1.png",
+            "type": "image/png",
+            "sizes": "604x1280"
+        },
+        {
+            "src": "images/screen/screen 2.png",
+            "type": "image/png",
+            "sizes": "601x1280"
+        },
+        {
+            "src": "images/screen/screen 3.png",
+            "type": "image/png",
+            "sizes": "604x1280"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Home",
+            "short_name": "Home",
+            "description": "Home",
+            "url": "./?file=index/dataTypes/Arrays",
+            "icons": [
+                {
+                    "src": "icons/icon96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Charts",
+            "short_name": "Charts",
+            "description": "Charts",
+            "url": "./?file=index/dataTypes/Arrays",
+            "icons": [
+                {
+                    "src": "icons/icon96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Settings",
+            "short_name": "Settings",
+            "description": "Settings",
+            "url": "./?file=index/dataTypes/Arrays",
+            "icons": [
+                {
+                    "src": "icons/icon96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ]
+}
