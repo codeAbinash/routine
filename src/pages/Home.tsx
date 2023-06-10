@@ -134,9 +134,9 @@ function RoutineStoreBottomModal({ isRoutineEmpty }: { isRoutineEmpty: boolean }
 			<p className='text-center text-gray text-xs mt-5 font-[450]'>Go to Routine <TextEmoji emoji='📃' /> Store <TextEmoji emoji='👜' /> <br />to add new Routines !</p>
 
 			{/*Show cancel and store button*/}
-			<div className='flex gap-3 mt-12 justify-between items-center text-[0.8rem] font-semibold no-highlight'>
-				<button className='bg-[#77777722] rounded-full py-[1.1rem] flex-1 tap95' onClick={() => setIsShow(false)}>Cancel</button>
-				<button className='flex-1 bg-accent rounded-full text-white py-[1.1rem] tap95'
+			<div className='flex gap-3 mt-12 justify-between items-center text-[0.8rem] font-[500] no-highlight'>
+				<button className='bg-[#77777722] rounded-full py-4 flex-1 tap95' onClick={() => setIsShow(false)}>Cancel</button>
+				<button className='flex-1 bg-accent rounded-full text-white py-4 tap95'
 					onClick={() => {
 						delay(() => { navigate('/applyRoutine') })
 					}}>
