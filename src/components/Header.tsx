@@ -13,9 +13,11 @@ function Header(props: any) {
     const notiIcon = props.notiIcon || false
     const placeholder = props.placeholder || 'Search'
     const oninput = props.oninput || function (e: any) {
-
     }
     const onSearch = props.onSearch || function (e: any) { }
+    const rightIcon = props.rightIcon || Emoji.get('🔔')
+
+    const rightIconClick = props.rightIconClick || function () { navigate('/notifications') }
 
     // onsearch 
     useEffect(() => {
@@ -27,10 +29,10 @@ function Header(props: any) {
             <header className='d bg-main overflow-hidden w-full z-20 dark:bg-black dark:text-darkText'>
                 <div className="px-5 pt-2 heading flex flex-row justify-between items-center gap-2">
                     <p className='text-xl font-bold' ref={headerTitle}>{title}</p>
-                    <div className={`notification tap ${notiIcon ? 'opacity-100' : 'opacity-0'}`} onClick={() => navigate('/notifications')}>
-                        <div className="dot absolute h-2 w-2 bg-accent mt-2 ml-7 rounded-full opacity-10"></div>
+                    <div className={`notification tap ${notiIcon ? 'opacity-100' : 'opacity-0'}`} onClick={rightIconClick}>
+                        <div className="dot absolute h-2 w-2 bg-accent mt-2 ml-7 rounded-full opacity-0"></div>
                         {/* <img src={icons.notification} className='w-10 p-3 rounded-md opacity-80 dark:invert dark:grayscale dark:opacity-70' /> */}
-                        <img src={Emoji.get('🔔')} className='w-12 p-3 rounded-md' />
+                        <img src={rightIcon} className='w-12 p-3 rounded-md' />
                     </div>
                 </div>
             </header>

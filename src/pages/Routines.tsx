@@ -29,6 +29,7 @@ export function searchRoutine(routines: Array<Routine>, query: string) {
 function Routines() {
     const [screenRoutines, uScreenRoutines] = useState<any>([])
     const allRoutines = JSON.parse(ls.get('routines') || '[]')
+    const navigate = useNavigate()
     useEffect(() => {
         // const todayRoutines: Routine[] = searchByDate(new Date(), routines)
         // searchActiveRoutine(todayRoutines)
@@ -41,7 +42,10 @@ function Routines() {
             <Header title={<span>All Routines <TextEmoji emoji="📃" /></span>} notiIcon={true} placeholder="Search All Routines" oninput={(e: any) => {
                 const query = e.target.value
                 uScreenRoutines(searchRoutine(allRoutines, query))
-            }} />
+            }}
+            rightIcon = {Emoji.get('👜')}
+            rightIconClick = {() => delay(() => navigate('/applyRoutine'))}
+            />
             <section className='p-[1.2rem] pt-2'>
                 {/* <p className='text-[#777]/50 text-center mt-2 mb-5 text-sm font-medium'>All routines</p> */}
                 <div className="routines flex flex-col gap-[0.9rem]">
@@ -64,7 +68,7 @@ function AllRoutines(routines: Array<Routine>) {
     if (routines.length === 0) return (
         <div className="flex flex-col gap-10 mt-10 min-h-[50vh] justify-center items-center">
             <div className='flex flex-col gap-4 px-5'>
-                <p className='text-center text-[#777]/50 text-base font-medium'>No Routine <TextEmoji emoji='😕'/></p>
+                <p className='text-center text-[#777]/50 text-base font-medium'>No Routine <TextEmoji emoji='😕' /></p>
                 <p className='text-center text-[#777]/50 text-xs font-[450]'>You can create a new routine or apply a <br /> routine from the routine store <TextEmoji emoji='👜' /></p>
             </div>
             <button className='no-highlight block bg-dark shadow-lg shadow-dark/50 text-white py-3 px-7 text-[0.7rem] font-medium rounded-full tap97'
