@@ -125,7 +125,7 @@ function RoutineStoreBottomModal({ isRoutineEmpty }: { isRoutineEmpty: boolean }
 		setIsShow(isRoutineEmpty)
 	}, [isRoutineEmpty])
 
-	return <div className={`h-[100dvh] w-full  fixed ${!isShow ? 'top-[100dvh]  bg-transparent' : 'top-0'} transition-all duration-[500ms] left-0 z-[100] items-end flex text-dark dark:text-darkText backdrop-blur-sm`}>
+	return <div className={`h-[100dvh] w-full  fixed ${!isShow ? 'top-[150vh]  bg-transparent' : 'top-0'} transition-all duration-[500ms] left-0 z-[100] items-end flex text-dark dark:text-darkText`}>
 		<div className='p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full shadow-modal'>
 			<div className='bar w-12 h-[0.3rem] bg-[#77777755] rounded-full mx-auto mb-12'></div>
 			<p className='text-center text-xl font-semibold'>You have no Routine <TextEmoji emoji='😕' /> !</p>
