@@ -28,3 +28,7 @@
 .shadow-modal {
    box-shadow: 0 0 100px 30px rgba(0, 0, 0, 0.1);
 }
+
+.modal-bg-linear-grad {
+   background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+}

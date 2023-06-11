@@ -11,6 +11,7 @@ import delay, { df } from '../lib/delay'
 import Watermark from '../components/Watermark'
 import { useEffect, useRef, useState } from 'react'
 import Emoji from 'emoji-store'
+import BottomModal from '../components/BottomModal'
 
 
 function changeTheme(theme: any) {
@@ -95,13 +96,13 @@ function More() {
             name: 'Reset everything',
             icon: icons.shield,
             callback: () => {
-                const confirm1 = window.confirm('Resetting everything will delete all your routines, subscriptions, and settings. Are you sure you want to continue?')
-                let confirm2
-                confirm1 && (confirm2 = window.confirm('Are you sure you want to reset everything?'))
-                if (confirm2 && confirm1) {
+                setIsShow(true)
+                setModalButtons(['Cancel', 'Reset'])
+                setModalCallbacks([() => { setIsShow(false) },
+                () => {
                     ls.clear()
                     navigate('/', { replace: true })
-                }
+                }])
             },
             rightArrow: true
         },
@@ -126,17 +127,19 @@ function More() {
     const navigate = useNavigate()
     const topElement = useRef<HTMLDivElement>(null)
     const [settingsInfoState, updateSettingsInfo] = useState<Setting[]>(settingsInfo)
+    const [isShow, setIsShow] = useState(false)
+    let ModalUI = ResetEverythingUI
+    let [modalButtons, setModalButtons] = useState(['Cancel', 'Reset'])
+    let [modalCallbacks, setModalCallbacks] = useState([() => { }, () => { }])
 
     useEffect(() => {
         // Scroll to top
         topElement.current?.scrollIntoView({ behavior: 'smooth' })
     }, [])
 
-
-
-
     return (
         <div className='screen dark:text-darkText'>
+            <BottomModal show={isShow} ui={ModalUI} btnTxt={modalButtons} cb={modalCallbacks} />
             <div className="topElement" ref={topElement}></div>
             <Header title={<span>More options <TextEmoji emoji="😯" /></span>} notiIcon={true} placeholder="Search more options" oninput={(e: any) => {
                 const query = e.target.value
@@ -203,4 +206,15 @@ function More() {
     )
 }
 
+
 export default More
+
+
+function ResetEverythingUI() {
+    return <>
+        <p className='text-center text-xl font-semibold'>Are you sure you want to reset everything?</p>
+        {/* Give some animation to the bag*/}
+        <div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('🗑️')} alt="bag" className={`mx-auto mt-5 w-28 h-28`} /></div>
+        <p className='text-center text-gray text-xs mt-5 font-[450]'>This will delete all your routines, subscriptions, and settings. <br />This action cannot be undone.</p>
+    </>
+} 

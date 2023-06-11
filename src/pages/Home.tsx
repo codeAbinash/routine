@@ -12,6 +12,7 @@ import NewRoutinesLoader, { GetRoutines } from './NewRoutinesLoader'
 import TextEmoji from '../components/TextEmoji'
 import Emoji from 'emoji-store'
 import delay, { df } from '../lib/delay'
+import BottomModal from '../components/BottomModal'
 
 
 // Delete the subscription if the subscription is expired
@@ -113,39 +114,21 @@ function Home() {
 			<FloatingButton />
 			<Watermark />
 			<NavBar active={0} />
-			<RoutineStoreBottomModal isRoutineEmpty={isRoutineEmpty} />
+			<BottomModal show={isRoutineEmpty} ui={NoRoutineUi} btnTxt={[, 'Go to Store']} cb={[, () => { navigate('/applyRoutine') }]} />
 		</div>
 	)
 }
 
-function RoutineStoreBottomModal({ isRoutineEmpty }: { isRoutineEmpty: boolean }) {
-	const [isShow, setIsShow] = useState(false)
-	const navigate = useNavigate()
-	useEffect(() => {
-		setIsShow(isRoutineEmpty)
-	}, [isRoutineEmpty])
-
-	return <div className={`h-[100dvh] w-full  fixed ${!isShow ? 'top-[150vh]  bg-transparent' : 'top-0'} transition-all duration-[500ms] left-0 z-[100] items-end flex text-dark dark:text-darkText`}>
-		<div className='p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full shadow-modal'>
-			<div className='bar w-12 h-[0.3rem] bg-[#77777755] rounded-full mx-auto mb-12'></div>
-			<p className='text-center text-xl font-semibold'>You have no Routine <TextEmoji emoji='😕' /> !</p>
-			{/* Give some animation to the bag*/}
-			<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('👜')} alt="bag" className={`mx-auto mt-5 w-28 h-28`} /></div>
-			<p className='text-center text-gray text-xs mt-5 font-[450]'>Go to Routine <TextEmoji emoji='📃' /> Store <TextEmoji emoji='👜' /> <br />to add new Routines !</p>
-
-			{/*Show cancel and store button*/}
-			<div className='flex gap-3 mt-12 justify-between items-center text-[0.8rem] font-[500] no-highlight'>
-				<button className='bg-[#77777722] rounded-full py-4 flex-1 tap95' onClick={() => setIsShow(false)}>Cancel</button>
-				<button className='flex-1 bg-accent rounded-full text-white py-4 tap95'
-					onClick={() => {
-						delay(() => { navigate('/applyRoutine') })
-					}}>
-					Routine Store
-				</button>
-			</div>
-		</div>
-	</div>
+function NoRoutineUi() {
+	return <>
+		<p className='text-center text-xl font-semibold'>You have no Routine <TextEmoji emoji='😕' /> !</p>
+		{/* Give some animation to the bag*/}
+		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('👜')} alt="bag" className={`mx-auto mt-5 w-28 h-28`} /></div>
+		<p className='text-center text-gray text-xs mt-5 font-[450]'>Go to Routine <TextEmoji emoji='📃' /> Store <TextEmoji emoji='👜' /> <br />to add new Routines !</p>
+	</>
 }
+
+
 
 
 function backgroundRoutineUpdate() {
