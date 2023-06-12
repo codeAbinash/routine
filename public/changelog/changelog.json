@@ -1,27 +1,37 @@
-[   
+[
     {
-        "version" : "2.1.1",
-        "name" : "UI UX Improvements 🎨",
-        "emoji" : "🎨",
-        "description" : [
+        "version": "2.2.0",
+        "name": "UI Improvements 🎨",
+        "emoji": "🎨",
+        "date" : "2023-06-12",
+        "description": [
+            "Added stylish modal alert to the app."
+        ]
+    },
+    {
+        "version": "2.1.1",
+        "name": "UI UX Improvements 🎨",
+        "emoji": "🎨",
+        "date" : "2023-06-11",
+        "description": [
             "Added popup alert if there is no routine."
         ]
     },
     {
         "version": "2.1.0",
-        "name" : "Deleted expired routines 🗑️",
-        "emoji" : "🗑️",
-        "date" : "2023-06-10",
-        "description" : [
+        "name": "Deleted expired routines 🗑️",
+        "emoji": "🗑️",
+        "date": "2023-06-10",
+        "description": [
             "Now expired routines will be deleted automatically."
         ]
     },
     {
-        "version" : "2.0.2",
-        "name" : "UI Improvements 🎨",
-        "emoji" : "🎨",
-        "date" : "2023-05-31",
-        "description" : [
+        "version": "2.0.2",
+        "name": "UI Improvements 🎨",
+        "emoji": "🎨",
+        "date": "2023-05-31",
+        "description": [
             "Added stylish loading spinner to the app."
         ]
     },

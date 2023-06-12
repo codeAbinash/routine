@@ -3,9 +3,11 @@ import images from "../assets/images/images";
 import TextEmoji from "../components/TextEmoji";
 // import routines from "../lib/sampleTypes";
 import ls from '../lib/storage'
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Header from "../components/Header";
 import Loading from "../components/Loading";
+import BottomModal from "../components/BottomModal";
+import Emoji from "emoji-store";
 
 
 function deleteRoutineById(routineID: string) {
@@ -19,107 +21,75 @@ function deleteRoutineById(routineID: string) {
 	ls.set('routines', JSON.stringify(newRoutines))
 }
 
-// export default function ApplyRoutine() {
-//     const navigate = useNavigate()
-//     const [routineID, setRoutineID] = useState<string>('none')
-//     const [applyButtonText, setApplyButtonText] = useState<string>('Apply Routine')
-//     const [isApplyingRoutine, setIsApplyingRoutine] = useState<boolean>(false)
-//     return (
-//         <div className="screen applyRoutine-screen justify-between start-screen p-5 flex select-none flex-col gap-5 min-h-[100dvh] dark:text-darkText">
-//             <h1 className="text-dark dark:text-darkText text-[1.7rem] font-bold text-center mt-[3vh] p-5">
-//                 Select your college or school <span>Routine</span> <br />
-//                 <TextEmoji emoji="🏫" /> <TextEmoji emoji="📚" /> <TextEmoji emoji="🎒" />
-//             </h1>
+function EnterValidRoutineIdUI() {
+	return <>
+		<p className='text-center text-xl font-semibold'>Enter a valid routine ID <TextEmoji emoji="🤨" /></p>
+		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('🤔')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
+		<p className='text-center text-gray text-xs mt-5 font-[450]'>If you cannot find your routine ID, please contact <a className="text-accent" href="mailto:codeAbinash@gmail.com">me</a>.</p>
+	</>
+}
 
-//             <img src={images.undraw_city_girl_ccpd} className="w-[90%] block mx-auto" />
+function RoutineAppliedUI({ routineId }: { routineId: string }) {
+	return <>
+		<p className='text-center text-xl font-semibold'>Routine Applied <TextEmoji emoji="✅" /></p>
+		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('🤩')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
+		<p className='text-center text-gray text-xs mt-5 font-[450]'>
+			Routine id : <span className="text-accent">{routineId}</span>. Go back now?
+		</p>
+	</>
+}
 
-//             <div className="w-full flex flex-col gap-2">
-//                 <p className="text-center text-base font-medium text-secondary pb-3">Select Preferred Routine</p>
+function AlreadySubscribedUI({ routineId }: { routineId: string }) {
+	return <>
+		<p className='text-center text-xl font-semibold'>Already Subscribed <TextEmoji emoji="😁" /></p>
+		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('😉')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
+		<p className='text-center text-gray text-xs mt-5 font-[450]'>
+			You are already subscribed to this routine! <br />
+			Routine id : <span className="text-accent">{routineId}</span>
+		</p>
+	</>
+}
 
-//                 <select onInput={(e) => { setRoutineID((e.target as HTMLSelectElement).value) }} defaultValue='none'
-//                     id="routines" name="routines" className="dark:bg-white/20 tap97 border-none outline-none p-3 py-5 appearance-none outline-accent rounded-xl input-bg font-medium text-center text-sm">
-//                     <option value="none" disabled={true}>Select Your Routine</option>
-//                     <option value="BUIE-CSE-2">BUIE-CSE 2nd Semester 2023</option>
-//                 </select>
-//                 <p className="text-secondary text-xs text-center pt-1">Cannot find your college in the list? To enter routine code manually <span className="text-accent font-semibold underline">click here</span></p>
-//             </div>
+function SkipUI() {
+	return <>
+		<p className='text-center text-xl font-semibold'>Skip for now ?</p>
+		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('👉🏻')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
+		<p className='text-center text-gray text-xs mt-5 font-[450] px-[7%]'>
+			You can skip this step for now. You can add routines later from settings.
+		</p>
+	</>
+}
 
-//             <div className="btnWrapper flex justify-between items-center w-full gap-3">
-//                 <button onClick={() => { ls.set('startedUsing', 'yes'); navigate('/', { replace: true }); }} className="flex-[1.5] no-highlight select-none rounded-2xl bg-dark text-white  mx-auto block p-[1.3em] duration-150 active:scale-[0.98] text-sm">
-//                     Skip
-//                 </button>
-//                 <button onClick={() => applyRoutine(routineID)} className="flex-[2.5] no-highlight select-none rounded-2xl bg-accent text-white  mx-auto block p-[1.3em] duration-150 active:scale-[0.98] text-sm">
-//                     {applyButtonText}
-//                 </button>
-//             </div>
-//         </div>
-//     )
+function RoutineNotFoundUI({ routineId }: { routineId: string }) {
+	return <>
+		<p className='text-center text-xl font-semibold'>Routine Not Found <TextEmoji emoji="😢" /></p>
+		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('😢')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
+		<p className='text-center text-gray text-xs mt-5 font-[450] px-[7%]'>
+			Cannot find routine <span className="text-accent">{routineId}</span> Maybe the routine you are looking
+			for is not available. Please check the routine id again. <br /><br />
+			Or Report this problem to <a className="text-accent" href="mailto:codeAbinash@gmail.com">me</a>.
+		</p>
+	</>
+}
 
-//     function applyRoutine(routineID: string) {
-//         if (routineID === 'none')
-//             return alert('Please select a routine.')
+function ConfirmApplyUI({ routineId }: { routineId: string }) {
+	return <>
+		<p className='text-center text-xl font-semibold'>Confirm Apply Routine? <TextEmoji emoji="🤔" /></p>
+		<div className='animate-bounce-slow mt-10 mb-10 flex gap-[10%] justify-center items-center'>
+			<img src={Emoji.get('✅')} alt="emoji" className={`mt-5 w-16 h-16`} />
+			<img src={Emoji.get('🤔')} alt="emoji" className={`mt-5 w-20 h-20`} />
+		</div>
+		<p className='text-center text-gray text-xs mt-5 font-[450] px-[7%]'>
+			Are you sure you want to apply this routine? <br />
+			Routine id : <span className="text-accent">{routineId}</span>
+		</p>
+	</>
+}
 
-//         const confirm = window.confirm("Warning! Are you sure you want to apply this routine? Routine subscription ID is " + routineID + ". If it is not your college or school routine, click 'cancel' and then click 'skip'.")
-//         if (!confirm) return;
-//         if (routineID === '') return;
-//         let fetchedRoutines: any = null
-//         let fetchedSubscriptions: any = null
-//         if (isApplyingRoutine) return;
-//         setApplyButtonText('Applying Routine...')
-//         setIsApplyingRoutine(true)
-//         console.log('Downloading Routine...')
 
-//         const subscriptionDetailsFetch = fetch(`https://dataabinash.github.io/routine/${routineID}/info.json`)
-//             .then(res => res.json())
-//             .then(data => { fetchedSubscriptions = data })
+function blank() { }
 
-//         const routineFetch = fetch(`https://dataabinash.github.io/routine/${routineID}/routine.json`)
-//             .then(res => res.json())
-//             .then(data => { fetchedRoutines = data })
-
-//         Promise.all([subscriptionDetailsFetch, routineFetch]).then(() => {
-//             if (fetchedRoutines && fetchedSubscriptions) {
-//                 console.log(fetchedRoutines, fetchedSubscriptions)
-//                 const subscriptions = JSON.parse(ls.get('subscriptions') || '{}')
-//                 if (subscriptions[routineID]) {
-//                     alert('You are already subscribed to this routine.')
-//                     return;
-//                 } else {
-//                     subscriptions[routineID] = fetchedSubscriptions
-//                     ls.set('subscriptions', JSON.stringify(subscriptions))
-
-//                     // Add or update routines to the routine array
-//                     let routines = JSON.parse(ls.get('routines') || '[]')
-//                     // let newRoutines: any = []
-//                     // Delete old routine
-//                     // routines.forEach((routine: any) => {
-//                     //     if (routine.sub !== routineID) {
-//                     //         newRoutines.push(routine)
-//                     //     }
-//                     // })
-//                     // // Add new routines to the routine array
-//                     routines.push(...fetchedRoutines)
-//                     ls.set('routines', JSON.stringify(routines))
-//                     console.log('Routine Applied Successfully.')
-//                     ls.set('startedUsing', 'yes')
-//                     setApplyButtonText('Routine applied!')
-//                     setIsApplyingRoutine(false)
-//                     console.log('Navigate to /')
-//                     navigate('/', { replace: true })
-//                 }
-//             } else {
-//                 alert('Cannot find routine. Please check your internet connection and try again.')
-//                 setApplyButtonText('Apply Routine')
-//                 setIsApplyingRoutine(false)
-//             }
-//         })
-//     }
-
-//     function storeSubscriptionDetails(routineID: string) {
-//         console.log('Downloading Subscription Details...')
-
-//     }
-// }
+const MODAL_BUTTON_TEXT = ['Cancel', 'Ok']
 
 export default function ApplyRoutine() {
 	const navigate = useNavigate()
@@ -127,10 +97,16 @@ export default function ApplyRoutine() {
 	const [routineIdByInput, setRoutineIdByInput] = useState('')
 	const [applyRoutineStatus, setApplyRoutineStatus] = useState('Click to apply routine')
 	const subscription = JSON.parse(ls.get('subscriptions') || '{}')
+	const [modalShow, setModalShow] = useState(false)
+	const [modalBtnText, setModalBtnText] = useState(MODAL_BUTTON_TEXT)
+	const [modalUi, setModalUi] = useState(<></>)
+	const BLANK_MODAL_CB = useMemo(() => [() => setModalShow(false), () => setModalShow(false)], [])
+	const [modalCallback, setModalCallback] = useState(BLANK_MODAL_CB)
 
 	const startedUsing = ls.get('startedUsing')
 	return (
 		<div className="screen dark:text-white">
+			<BottomModal show={modalShow} btnTxt={modalBtnText} cb={modalCallback}>{modalUi}</BottomModal>
 			<Header title="Select Routine" notiIcon={false} placeholder="Search Routine" onInput={() => { }} />
 			<div className="px-5 py-1 flex flex-col gap-4">
 				{!startedUsing ? <div className="bg-accent/20 flex flex-row justify-between text-sm p-[0.85rem] px-4 rounded-[14px]">
@@ -146,67 +122,115 @@ export default function ApplyRoutine() {
 				</div>
 
 				<p className="text-center text-xs text-gray">{applyRoutineStatus}</p>
-				<Routines addRoutine={addRoutine} subscription={subscription}/>
+				<Routines addRoutine={addRoutine} subscription={subscription} />
 
 			</div>
 		</div>
 	)
 
+	function setBlankAndShowModal() {
+		setModalBtnText(MODAL_BUTTON_TEXT)
+		setModalCallback(BLANK_MODAL_CB)
+		setModalShow(true)
+	}
+
 
 	function addRoutine(id: string) {
 		// console.log('Add Routine ' + id)
-		if (!id || id === '') return alert('Please enter a valid routine ID.')
+		if (!id || id === '') {
+			setModalUi(EnterValidRoutineIdUI)
+			setBlankAndShowModal()
+			return
+		}
 
 		// Check if already subscribed
 		const subscriptions = JSON.parse(ls.get('subscriptions') || '{}')
 		if (subscriptions[id]) {
-			alert('You are already subscribed to this routine. ' + 'Routine id : ' + id)
+			setModalUi(<AlreadySubscribedUI routineId={id} />)
+			setBlankAndShowModal()
 			return
 		}
 
-		const confirm = window.confirm("Warning! Are you sure you want to apply this routine? Routine subscription ID is " + id + ".")
-		if (!confirm) return;
 
-		if (isApplyingRoutine) return;
-		setIsApplyingRoutine(true)
-		setApplyRoutineStatus('Downloading Routine...')
+		// Confirm Apply Routine
+		setModalUi(<ConfirmApplyUI routineId={id} />)
+		setModalCallback([() => { setModalShow(false) }, () => {
+			setModalShow(false)
+			applyRoutine()
+		}])
+		setModalBtnText(['Cancel', 'Apply'])
+		setModalShow(true)
+
+
+		// const confirm = window.confirm("Warning! Are you sure you want to apply this routine? Routine subscription ID is " + id + ".")
+		// if (!confirm) return;
 
 
 
-		let fetchedRoutines: any = null
-		let fetchedSubscriptions: any = null
+		function applyRoutine() {
 
-		const subscriptionDetailsFetch = fetch(`https://dataabinash.github.io/routine/${id}/info.json`)
-			.then(res => res.json())
-			.then(data => { fetchedSubscriptions = data })
+			if (isApplyingRoutine) return;
+			setIsApplyingRoutine(true)
+			setApplyRoutineStatus('Downloading Routine...')
 
-		const routineFetch = fetch(`https://dataabinash.github.io/routine/${id}/routine.json`)
-			.then(res => res.json())
-			.then(data => { fetchedRoutines = data })
 
-		Promise.allSettled([subscriptionDetailsFetch, routineFetch]).then(() => {
-			if (fetchedRoutines && fetchedSubscriptions) {
-				console.log(fetchedRoutines, fetchedSubscriptions)
+			let fetchedRoutines: any = null
+			let fetchedSubscriptions: any = null
 
-				subscriptions[id] = fetchedSubscriptions
-				ls.set('subscriptions', JSON.stringify(subscriptions))
-				// Add or update routines to the routine array
-				let routines = JSON.parse(ls.get('routines') || '[]')
-				routines.push(...fetchedRoutines)
-				ls.set('routines', JSON.stringify(routines))
-				alert('Routine Applied Successfully.')
-				ls.set('startedUsing', 'yes')
-				setIsApplyingRoutine(false)
-				if (startedUsing)
-					navigate(-1)
-				else
-					navigate('/', { replace: true })
-			} else {
-				alert('Cannot find routine "' + id + '". Maybe the routine you are looking for is not available. Please check the routine id again. Or you have no internet connection. Please check your internet connection and try again.')
-				setApplyRoutineStatus('Click to apply routine')
-				setIsApplyingRoutine(false)
-			}
-		})
+			const subscriptionDetailsFetch = fetch(`https://dataabinash.github.io/routine/${id}/info.json`)
+				.then(res => res.json())
+				.then(data => { fetchedSubscriptions = data })
+
+			const routineFetch = fetch(`https://dataabinash.github.io/routine/${id}/routine.json`)
+				.then(res => res.json())
+				.then(data => { fetchedRoutines = data })
+
+			Promise.allSettled([subscriptionDetailsFetch, routineFetch]).then(() => {
+				if (fetchedRoutines && fetchedSubscriptions) {
+					console.log(fetchedRoutines, fetchedSubscriptions)
+
+					subscriptions[id] = fetchedSubscriptions
+					ls.set('subscriptions', JSON.stringify(subscriptions))
+					// Add or update routines to the routine array
+					let routines = JSON.parse(ls.get('routines') || '[]')
+					routines.push(...fetchedRoutines)
+					ls.set('routines', JSON.stringify(routines))
+					ls.set('startedUsing', 'yes')
+					setIsApplyingRoutine(false)
+
+					setTimeout(() => {
+						const doneFunction = () => {
+							setModalShow(false)
+							if (startedUsing)
+								navigate(-1)
+							else
+								navigate('/', { replace: true })
+						}
+						// Set Modal Alert
+						setModalCallback([doneFunction, doneFunction])
+						setModalUi(<RoutineAppliedUI routineId={id} />)
+						setModalBtnText(MODAL_BUTTON_TEXT)
+						setModalShow(true)
+					}, 300);
+				} else {
+					setModalUi(<RoutineNotFoundUI routineId={id} />)
+					setBlankAndShowModal()
+
+					setApplyRoutineStatus('Click to apply routine')
+					setIsApplyingRoutine(false)
+				}
+			})
+		}
+	}
+
+	function skip(navigate: any) {
+		setModalUi(<SkipUI />)
+		setModalCallback([() => { setModalShow(false) }, () => {
+			setModalShow(false)
+			navigate('/', { replace: true });
+		}])
+		setModalBtnText(['Cancel', 'Skip'])
+		setModalShow(true)
 	}
 }
 
@@ -247,7 +271,7 @@ function Routines({ addRoutine, subscription }: any) {
 					</div>
 					<div className="right flex flex-col gap-1">
 						<p className="font-semibold text-[0.9rem]">{routine.name}</p>
-						<p className={`${isSubscribed ? 'text-white' : 'text-gray' } text-[0.73rem] font-medium`}>{routine.description} <br />#{routine.id}</p>
+						<p className={`${isSubscribed ? 'text-white' : 'text-gray'} text-[0.73rem] font-medium`}>{routine.description} <br />#{routine.id}</p>
 					</div>
 				</div>
 			})
@@ -255,10 +279,3 @@ function Routines({ addRoutine, subscription }: any) {
 }
 
 
-function skip(navigate: any) {
-	const confirm1 = confirm('Are you sure you want to skip? You can set this routines from settings again')
-	if (confirm1) {
-		ls.set('startedUsing', 'yes')
-		navigate('/', { replace: true });
-	}
-}

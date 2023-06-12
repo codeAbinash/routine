@@ -96,6 +96,7 @@ function More() {
             name: 'Reset everything',
             icon: icons.shield,
             callback: () => {
+                setModalUi(ResetEverythingUI)
                 setIsShow(true)
                 setModalButtons(['Cancel', 'Reset'])
                 setModalCallbacks([() => { setIsShow(false) },
@@ -128,7 +129,7 @@ function More() {
     const topElement = useRef<HTMLDivElement>(null)
     const [settingsInfoState, updateSettingsInfo] = useState<Setting[]>(settingsInfo)
     const [isShow, setIsShow] = useState(false)
-    let ModalUI = ResetEverythingUI
+    let [ModalUI, setModalUi] = useState(<></>)
     let [modalButtons, setModalButtons] = useState(['Cancel', 'Reset'])
     let [modalCallbacks, setModalCallbacks] = useState([() => { }, () => { }])
 
@@ -139,7 +140,9 @@ function More() {
 
     return (
         <div className='screen dark:text-darkText'>
-            <BottomModal show={isShow} ui={ModalUI} btnTxt={modalButtons} cb={modalCallbacks} />
+            <BottomModal show={isShow} btnTxt={modalButtons} cb={modalCallbacks} >
+                {ModalUI}
+            </BottomModal>
             <div className="topElement" ref={topElement}></div>
             <Header title={<span>More options <TextEmoji emoji="😯" /></span>} notiIcon={true} placeholder="Search more options" oninput={(e: any) => {
                 const query = e.target.value
@@ -213,8 +216,7 @@ export default More
 function ResetEverythingUI() {
     return <>
         <p className='text-center text-xl font-semibold'>Are you sure you want to reset everything?</p>
-        {/* Give some animation to the bag*/}
-        <div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('🗑️')} alt="bag" className={`mx-auto mt-5 w-28 h-28`} /></div>
+        <div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('⚠️')} alt="bag" className={`mx-auto mt-5 w-24 h-24`} /></div>
         <p className='text-center text-gray text-xs mt-5 font-[450]'>This will delete all your routines, subscriptions, and settings. <br />This action cannot be undone.</p>
     </>
 } 

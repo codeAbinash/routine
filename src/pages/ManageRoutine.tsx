@@ -3,10 +3,11 @@ import images from "../assets/images/images";
 import TextEmoji from "../components/TextEmoji";
 // import routines from "../lib/sampleTypes";
 import ls from '../lib/storage'
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Header from "../components/Header";
 import Loading from "../components/Loading";
-
+import { MODAL_BUTTON_TEXT } from "../lib/lib";
+import BottomModal, { BasicModal } from "../components/BottomModal";
 
 function deleteRoutineById(routineID: string) {
 	let routines = JSON.parse(ls.get('routines') || '[]')
@@ -17,10 +18,7 @@ function deleteRoutineById(routineID: string) {
 		}
 	})
 	ls.set('routines', JSON.stringify(newRoutines))
-	alert('Routine deleted Successfully.')
 }
-
-
 
 export default function ApplyRoutine() {
 	const navigate = useNavigate()
@@ -28,8 +26,25 @@ export default function ApplyRoutine() {
 	const [routineIdByInput, setRoutineIdByInput] = useState('')
 	const [applyRoutineStatus, setApplyRoutineStatus] = useState('Click to remove subscription')
 	const startedUsing = ls.get('startedUsing')
+
+
+	const [modalShow, setModalShow] = useState(false)
+	const [modalBtnText, setModalBtnText] = useState(MODAL_BUTTON_TEXT)
+	const [modalUi, setModalUi] = useState(<></>)
+	const BLANK_MODAL_CB = useMemo(() => [() => setModalShow(false), () => setModalShow(false)], [])
+	const [modalCallback, setModalCallback] = useState(BLANK_MODAL_CB)
+
+	function setBlankAndShowModal() {
+		setModalBtnText(MODAL_BUTTON_TEXT)
+		setModalCallback(BLANK_MODAL_CB)
+		setModalShow(true)
+	}
+
 	return (
 		<div className="screen dark:text-white">
+			<BottomModal show={modalShow} btnTxt={modalBtnText} cb={modalCallback} >
+				{modalUi}
+			</BottomModal>
 			<Header title="Manage Routine" notiIcon={false} placeholder="Search Routine" onInput={() => { }} />
 			<div className="px-5 py-1 flex flex-col gap-4">
 				<p className="text-center text-xs text-gray px-4 py-2">You have subscribed to the following routine(s). {applyRoutineStatus}</p>
@@ -39,13 +54,27 @@ export default function ApplyRoutine() {
 	)
 
 	function deleteRoutine(id: string) {
-		let sure = confirm(`Are you sure you want to unsubscribe this routine (${id}) ? This will delete all the data associated with this routine.`)
-		if (!sure) return
-		const subscriptions = JSON.parse(ls.get('subscriptions') || '{}')
-		delete subscriptions[id]
-		ls.set('subscriptions', JSON.stringify(subscriptions))
-		deleteRoutineById(id)
-		navigate(-1)
+
+		setModalUi(<BasicModal text='Are you sure?' desc={<span>Are you sure you want to unsubscribe this routine : <span className="text-accent">{id}</span> ? This will delete all the data associated with this routine.</span>} emoji='😕' />)
+
+		setModalCallback([() => { setModalShow(false) }, () => {
+			applyThisRoutine()
+			setModalShow(false)
+		}])
+		setModalShow(true)
+
+		function applyThisRoutine() {
+			const subscriptions = JSON.parse(ls.get('subscriptions') || '{}')
+			delete subscriptions[id]
+			ls.set('subscriptions', JSON.stringify(subscriptions))
+			deleteRoutineById(id)
+			setTimeout(() => {
+				setModalUi(<BasicModal text='Routine deleted Successfully.' desc='You can always add this routine again from the Routine Store.' emoji='😊' />)
+				setModalCallback([() => { setModalShow(false) }, () => { navigate(-1) }])
+				setModalBtnText(['Ok', 'Go Back'])
+				setModalShow(true)
+			}, 300);
+		}
 	}
 }
 

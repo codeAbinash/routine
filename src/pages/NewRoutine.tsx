@@ -1,5 +1,5 @@
 import Emoji from 'emoji-store';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import icons from '../assets/icons/icons';
 import BackHeader from '../components/BackHeader';
@@ -8,6 +8,9 @@ import ls from '../lib/storage';
 import Daily from './makeRoutine/Daily';
 import Once from './makeRoutine/Once';
 import Weekly from './makeRoutine/Weekly';
+import TextEmoji from '../components/TextEmoji';
+import BottomModal, { BasicModal } from '../components/BottomModal';
+import { MODAL_BUTTON_TEXT } from '../lib/lib';
 
 function NewRoutine() {
 	const e = new Emoji();
@@ -19,6 +22,19 @@ function NewRoutine() {
 	const [routine, setRoutine] = useState<any>({})
 	const navigate = useNavigate()
 	const topElement: any = useRef<HTMLDivElement>()
+
+	const [modalShow, setModalShow] = useState(false)
+	const [modalBtnText, setModalBtnText] = useState(MODAL_BUTTON_TEXT)
+	const [modalUi, setModalUi] = useState(<BasicModal text="THis is a sample error" />)
+	const BLANK_MODAL_CB = useMemo(() => [() => setModalShow(false), () => setModalShow(false)], [])
+	const [modalCallback, setModalCallback] = useState(BLANK_MODAL_CB)
+
+	function setBlankAndShowModal() {
+		setModalBtnText(MODAL_BUTTON_TEXT)
+		setModalCallback(BLANK_MODAL_CB)
+		setModalShow(true)
+	}
+
 
 	function goBack() {
 		navigate(-1)
@@ -33,19 +49,16 @@ function NewRoutine() {
 
 	return (
 		<div className='new-routine-screen screen dark:text-darkText select-none'>
-			{/* <header className='flex p-2 w-full justify-between select-none items-center px-4'>
-				<div className="left tap" onClick={goBack}>
-					<img src={icons.xmark_solid} className='w-10 p-3 dark:invert dark:grayscale' />
-				</div>
-				<div className="center font-medium text-base">New Routine </div>
-				<div className="right tap" onClick={addRoutine}>
-					<img src={icons.check_solid} className='w-11 p-3 dark:invert dark:grayscale' />
-				</div>
-			</header> */}
+			<BottomModal show={modalShow} btnTxt={modalBtnText} cb={modalCallback} >
+				{modalUi}
+			</BottomModal>
+
 			<div className='topElement' ref={topElement}></div>
 			<BackHeader title="New Routine" backCb={() => {
-				const confirmBack = confirm('Discard this routine?')
-				confirmBack && goBack()
+				setModalUi(<BasicModal text="Discard this routine?" desc="Are you sure you want to discard this routine?" />)
+				setModalCallback([() => setModalShow(false), () => goBack()])
+				setModalBtnText(['No', 'Discard'])
+				setModalShow(true)	
 			}} />
 
 			<section className='basic-details w-full p-4 pt-2'>
@@ -105,9 +118,6 @@ function NewRoutine() {
 						</div>
 						{RoutineMaker(routineType)}
 					</div>
-
-					{/* <p className="warning mt-3 text-xs px-5 text-[red] text-center">Warning <TextEmoji emoji="⚠️" /> This Screen under development <TextEmoji emoji="🧑🏻‍💻" />. If you add routine from here, you would not be able to delete or edit the routine <TextEmoji emoji="🤣" />. Because the options for deleting routine is not made yet <TextEmoji emoji="😝" />. So it's better not try to add routines <TextEmoji emoji="😆" />.</p> */}
-
 					<div className="btn w-full">
 						<button className="btn-full no-highlight tap99 w-full text-sm" onClick={addRoutine}>Add this Routine</button>
 					</div>
@@ -120,32 +130,58 @@ function NewRoutine() {
 		// validate routine
 		setRoutineName(routineName.trim())
 		setRoutineDescription(routineDescription.trim())
-		if (!routineName) return alert('Routine name is required')
+		if (!routineName) {
+			setModalUi(<BasicModal text="Routine name is required" desc="Please provide a name for your routine" />)
+			setBlankAndShowModal()
+			return
+		}
 
 		if (routineType === 'once') {
-			if (!routine.time[0]) return alert('Routine time is required')
+			if (!routine.time[0]) {
+				setModalUi(<BasicModal text="Routine time is required" desc="Please provide a time for your routine" />)
+				setBlankAndShowModal()
+				return
+			}
 			let startDate = new Date(routine.time[0])
 			let endDate = new Date(routine.time[1])
 			// If start time is greater than end time then return error
-			if (startDate > endDate)
-				return alert('Start time should be less than end time')
+			if (startDate > endDate) {
+				setModalUi(<BasicModal text="Start time should be less than end time" desc="Make sure that the start time is less than end time" />)
+				setBlankAndShowModal()
+				return
+			}
 			// If start and end time are same then remove the end time
 			else if (startDate.getTime() === endDate.getTime())
 				routine.time[1] = ''
 		}
 
 		if (routineType === 'daily') {
-			if (!routine.time[0]) return alert('Routine time is required')
-			if (isStartTimeGreater(routine.time[0], routine.time[1]))
-				return alert('Start time should be less than end time')
+			if (!routine.time[0]) {
+				<BasicModal text="Routine time is required" desc="Please provide a time for your routine" />
+				setBlankAndShowModal()
+				return
+			}
+			if (isStartTimeGreater(routine.time[0], routine.time[1])) {
+				setModalUi(<BasicModal text="Start time should be less than end time" desc="Make sure that the start time is less than end time" />)
+				setBlankAndShowModal()
+				return
+			}
 			// else
-				// routine.time[1] = ''
+			// routine.time[1] = ''
 		}
 
 		if (routineType === 'weekly') {
 			let timeObj = routine.time
-			if (!timeObj) return alert('At least one Routine time is required')
-			if (timeObj && Object.keys(timeObj).length === 0) return alert('At least one Routine time is required')
+			if (!timeObj) {
+				setModalUi(<BasicModal text="At least one Routine time is required" desc="Please provide at least one time for your routine" />)
+				setBlankAndShowModal()
+				return
+			}
+			if (timeObj && Object.keys(timeObj).length === 0) {
+				setModalUi(<BasicModal text="At least one time should be selected" desc="Select the day clicking on the boxes written days on it." />)
+				setBlankAndShowModal()
+				return
+			}
 
 			// If there is a valid time then set the time to routine and if there is same time for start and end then remove the end time and if there is start time greater than end time return error
 			const latestTimes: any = {}
@@ -162,19 +198,28 @@ function NewRoutine() {
 						if (time[1]) {
 							if (time[0] !== time[1]) {
 								// Check if start time is greater than end time 
-								if (isStartTimeGreater(time[0], time[1]))
-									return alert(`There is wrong data in the time of ${day[i]}. The start time should be less than end time`)
+								if (isStartTimeGreater(time[0], time[1])) {
+									setModalUi(<BasicModal text={`Something wrong in the time of ${day[i]}`} desc="Make sure that the start time is less than end time" />)
+									setBlankAndShowModal()
+									return
+								}
 								else latestTimes[i][1] = time[1]
 							}
 						} else {
 
 						}
 					} else if (time[1]) {
-						return alert(`There is wrong data in the time of ${day[i]}. The start time must be provided if end time is provided`)
+						setModalUi(<BasicModal text={`Something wrong in the time of ${day[i]}`} desc="The start time must be provided if end time is provided" />)
+						setBlankAndShowModal()
+						return
 					}
 				}
 			}
-			if (!atLeastOneExist) return alert('At least one day should be selected')
+			if (!atLeastOneExist) {
+				setModalUi(<BasicModal text="At least one Routine time is required" desc="Please provide at least one time for your routine" />)
+				setBlankAndShowModal()
+				return
+			}
 			routine.time = latestTimes
 		}
 

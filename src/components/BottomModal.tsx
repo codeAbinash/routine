@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import delay from '../lib/delay'
+import Emoji from 'emoji-store'
 
-export default function BottomModal({ show, ui, btnTxt, cb }: { show: boolean, ui?: any, btnTxt?: Array<any>, cb?: Array<Function | any> }) {
+export default function BottomModal({ show, children, btnTxt, cb }: { show: boolean, children: any, btnTxt?: Array<any>, cb?: Array<Function | any> }) {
    const [isShow, setIsShow] = useState(false)
    const [backDisplay, setBackDisplay] = useState(false)
    const navigate = useNavigate()
@@ -13,6 +14,12 @@ export default function BottomModal({ show, ui, btnTxt, cb }: { show: boolean, u
       const timer = setTimeout(() => { setIsShow(show) }, 0);
       return () => { clearTimeout(timer) }
    }, [show])
+
+
+   useEffect(() => {
+      if (isShow) document.body.style.overflow = 'hidden'
+      return () => { document.body.style.overflow = 'scroll' }
+   }, [isShow])
 
    function hideModal() {
       delay(() => { setIsShow(false) })
@@ -25,7 +32,10 @@ export default function BottomModal({ show, ui, btnTxt, cb }: { show: boolean, u
 
       <div className={`fixed z-[101] ${isShow ? 'bottom-0' : 'bottom-[-80vh]'} p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full transition-all ease-in-out duration-[400ms]`}>
          <div className='bar w-12 h-[0.3rem] bg-[#77777755] rounded-full mx-auto mb-12'></div>
-         {ui ? ui() : <></>}
+         
+         {/*Show children*/}
+         {children}
+
          {/*Show cancel and store button*/}
          <div className='flex gap-3 mt-12 justify-between items-center text-[0.8rem] font-[500] no-highlight'>
             <button className='bg-[#77777722] rounded-full py-4 flex-1 tap95' onClick={() => { hideModal(); delay(() => { cb && cb[0] && cb[0]() }) }}>
@@ -37,4 +47,15 @@ export default function BottomModal({ show, ui, btnTxt, cb }: { show: boolean, u
          </div>
       </div>
    </>
+}
+
+
+export function BasicModal({ text, desc, emoji }: { text: any, desc?: any, emoji?: any }) {
+	return <>
+		<p className='text-center text-xl font-semibold px-[7%]'>{text}</p>
+		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get(emoji || '🤔')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
+		<p className='text-center text-gray text-xs mt-5 font-[450] px-[7%]'>
+			{desc}
+		</p>
+	</>
 }

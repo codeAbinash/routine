@@ -114,7 +114,9 @@ function Home() {
 			<FloatingButton />
 			<Watermark />
 			<NavBar active={0} />
-			<BottomModal show={isRoutineEmpty} ui={NoRoutineUi} btnTxt={[, 'Go to Store']} cb={[, () => { navigate('/applyRoutine') }]} />
+			<BottomModal show={isRoutineEmpty} btnTxt={[, 'Go to Store']} cb={[, () => { navigate('/applyRoutine') }]} >
+				<NoRoutineUi />
+			</BottomModal>
 		</div>
 	)
 }
@@ -122,7 +124,6 @@ function Home() {
 function NoRoutineUi() {
 	return <>
 		<p className='text-center text-xl font-semibold'>You have no Routine <TextEmoji emoji='😕' /> !</p>
-		{/* Give some animation to the bag*/}
 		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('👜')} alt="bag" className={`mx-auto mt-5 w-28 h-28`} /></div>
 		<p className='text-center text-gray text-xs mt-5 font-[450]'>Go to Routine <TextEmoji emoji='📃' /> Store <TextEmoji emoji='👜' /> <br />to add new Routines !</p>
 	</>
