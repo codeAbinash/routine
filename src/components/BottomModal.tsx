@@ -41,7 +41,7 @@ export default function BottomModal({ show, children, btnTxt, cb }: { show: bool
             <button className='bg-[#77777722] rounded-full py-4 flex-1 tap95' onClick={() => { hideModal(); delay(() => { cb && cb[0] && cb[0]() }) }}>
                {(btnTxt && btnTxt[0]) ? btnTxt[0] : 'Cancel'}
             </button>
-            <button className='flex-1 bg-accent rounded-full text-white py-4 tap95' onClick={() => { hideModal(); delay(() => { cb && cb[1] && cb[1]() }) }}>
+            <button className='flex-1 bg-accent rounded-full text-white py-4 tap95' onClick={() => { delay(() => { cb && cb[1] && cb[1]() }) }}>
                {(btnTxt && btnTxt[1]) ? btnTxt[1] : 'Ok'}
             </button>
          </div>

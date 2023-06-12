@@ -213,8 +213,10 @@ export default function ApplyRoutine() {
 						setModalShow(true)
 					}, 300);
 				} else {
-					setModalUi(<RoutineNotFoundUI routineId={id} />)
-					setBlankAndShowModal()
+					setTimeout(() => {
+						setModalUi(<RoutineNotFoundUI routineId={id} />)
+						setBlankAndShowModal()
+					}, 300);
 
 					setApplyRoutineStatus('Click to apply routine')
 					setIsApplyingRoutine(false)
