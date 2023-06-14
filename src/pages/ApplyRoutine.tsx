@@ -229,6 +229,7 @@ export default function ApplyRoutine() {
 		setModalUi(<SkipUI />)
 		setModalCallback([() => { setModalShow(false) }, () => {
 			setModalShow(false)
+			ls.set('startedUsing', 'yes')
 			navigate('/', { replace: true });
 		}])
 		setModalBtnText(['Cancel', 'Skip'])
