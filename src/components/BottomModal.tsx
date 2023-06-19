@@ -18,7 +18,7 @@ export default function BottomModal({ show, children, btnTxt, cb }: { show: bool
 
    useEffect(() => {
       if (isShow) document.body.style.overflowY = 'hidden'
-      return () => { document.body.style.overflowY = 'scroll' }
+      return () => { document.body.style.overflowY = 'auto' }
    }, [isShow])
 
    function hideModal() {
