@@ -12,7 +12,7 @@ import left_arrow_solid from './src/arrow-left-solid.svg'
 import left_arrow_long_solid from './src/arrow-left-long-solid.svg'
 import home_black_48dp from './src/home_black_48dp.svg'
 import routines from './src/routines.svg'
-import calender from './src/calender.svg'
+import calendar from './src/calendar.svg'
 import check_solid from './src/check-solid.svg'
 // import x_solid from './src/x-solid.svg'
 import xmark_solid from './src/xmark-solid.svg'
@@ -27,17 +27,18 @@ import shield_cross from './src/shield_cross.svg'
 import team from './src/team.svg'
 import telegram_black from './src/telegram_black.svg'
 import spinner from './src/spinner.svg'
+import chat from './src/chat.svg'
 
 const icons = {
     Lock, delete_left_solid, home,
     home_broken, charts, charts_broken,
     more, more_broken, team,
     person, person_broken, left_arrow_solid, left_arrow_long_solid,
-    home_black_48dp, routines, calender,
+    home_black_48dp, routines, calendar,
     check_solid, xmark_solid, notification,
     right_arrow_next, shield, theme, left_arrow,
     backup, restore, shield_cross, telegram_black,
-    spinner,
+    spinner, chat
 }
 
 

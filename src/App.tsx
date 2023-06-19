@@ -4,14 +4,15 @@ import './assets/scss/index.scss'
 // import Construction from './pages/Construction'
 import Home from './pages/Home'
 import Routines from './pages/Routines'
-import Calender from './pages/Calender'
-import More from './pages/More'
+import Calendar from './pages/Calendar'
+// import More from './pages/More'
 import { loadTheme } from './lib/theme'
 import Loading from './components/Loading'
 // import ViewRoutine from './pages/ViewRoutine'
 
 const LazyAbout = React.lazy(() => import('./pages/About'))
 // const LazyStart = React.lazy(() => import('./pages/Start'))
+const LazyMore = React.lazy(() => import('./pages/More'))
 const LazyApplyRoutine = React.lazy(() => import('./pages/ApplyRoutine'))
 const LazyManageRoutine = React.lazy(() => import('./pages/ManageRoutine'))
 const LazyNewRoutine = React.lazy(() => import('./pages/NewRoutine'))
@@ -56,8 +57,8 @@ export default function App() {
           <Route path='/newRoutine' element={< LazyNewRoutine />} />
           <Route path='/applyRoutine' element={< LazyApplyRoutine />} />
           <Route path='/manageRoutines' element={< LazyManageRoutine />} />
-          <Route path='/more' element={<More />} />
-          <Route path='/calender' element={< Calender />} />
+          <Route path='/more' element={<LazyMore />} />
+          <Route path='/calendar' element={< Calendar />} />
           <Route path='/notifications' element={< LazyNotifications />} />
           <Route path='/viewRoutine/:routineId' element={< LazyViewRoutine />} />
           <Route path='/author/buyMeCoffee' element={< BuyMeCoffee />} />

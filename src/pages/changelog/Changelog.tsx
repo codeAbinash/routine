@@ -41,7 +41,7 @@ function showChangelog(data: any) {
             return <div key={index}>
                <>
                   {headingVersionName(log.version, log.emoji)}
-                  <p className='text-sm font-medium pt-1 pb-2'>{log.name}<span className='text-gray font-normal'> •  {log.date}</span></p>
+                  <p className='text-sm font-medium pt-1 pb-2'>{log.name}<span className='text-grey font-normal'> •  {log.date}</span></p>
                   <div className='text-[0.8rem]'>
                      {singleLog(log.description)}
                   </div>

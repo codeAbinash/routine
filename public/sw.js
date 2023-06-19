@@ -1,6 +1,6 @@
 const cacheData = {
 	showCacheThenFetch: {
-		name: 'routine-show-cache-then-fetch-v22',
+		name: 'routine-show-cache-then-fetch-v23',
 		valid: 'routine-show-cache-then-fetch',
 	},
 	emojiCache: {
@@ -74,7 +74,7 @@ self.addEventListener('fetch', event => {
 		// Never load fonts again
 		event.respondWith(
 			caches.match(event.request).then(cacheResponse => {
-				if(cacheResponse) return cacheResponse
+				if (cacheResponse) return cacheResponse
 				const fetchUrl = fetch(event.request).then(fetchResponse => {
 					return caches.open(cacheData.fontCache.name).then(cache => {
 						cache.put(event.request, fetchResponse.clone())

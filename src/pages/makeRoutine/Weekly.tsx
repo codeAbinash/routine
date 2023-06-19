@@ -2,6 +2,7 @@ import delay from '../../lib/delay'
 
 import React, { useEffect, useRef, useState } from 'react'
 import { Routine } from '../../lib/dateMethods'
+import { vibrantColors7 } from '../../lib/lib'
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 function getAITime(isActiveRoutine: any, timeArr: any) {
@@ -55,7 +56,11 @@ function Weekly({ routine, updateRoutine }: { updateRoutine: Function, routine: 
 						return (
 							<div className='flex flex-row gap-3' key={i}>
 								<div
-									className={`tap97 dayName check ${isActiveRoutine[i] ? 'checkDiv active shadow-lg shadow-accent/50' : 'bg-inputBg dark:bg-darkInputBg'} px-4 py-3 rounded-xl flex-1 items-center justify-center`}
+									className={`tap97 dayName check ${isActiveRoutine[i] ? 'checkDiv active' : 'bg-inputBg dark:bg-darkInputBg'} px-4 py-3 rounded-xl flex-1 items-center justify-center`}
+									style={isActiveRoutine[i] ? {
+										backgroundColor: vibrantColors7[i],
+										boxShadow: "1px 6px 10px 2px" + vibrantColors7[i] + "66"
+									} : {}}
 									onClick={() => {
 										delay(() => {
 											isActiveRoutine[i] = !isActiveRoutine[i]

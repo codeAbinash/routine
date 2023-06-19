@@ -1,11 +1,19 @@
 import details from "../info"
 
+let reqCount = 0
+
 const ls = {
-    get: (item: string) => localStorage.getItem(details.name + item),
-    set: (item: string, data: string) => localStorage.setItem(details.name + item, data),
+    get: (item: string) => {
+        console.log(reqCount++ + ". LocalStorage Getting... " + item)
+        return localStorage.getItem(details.name + item)
+    },
+    set: (item: string, data: string) => {
+        console.log(reqCount++ + ". LocalStorage Setting... " + item)
+        return localStorage.setItem(details.name + item, data)
+    },
     clear: () => {
         for (let elem in localStorage) {
-            if(elem.startsWith(details.name)) localStorage.removeItem(elem)
+            if (elem.startsWith(details.name)) localStorage.removeItem(elem)
         }
     }
 }

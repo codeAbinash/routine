@@ -9,6 +9,9 @@ export const day = [
     'Friday',
     'Saturday',
 ]
+
+export const MS_IN_DAY = 86400000
+
 export function shortMonth(month: number) {
     return months[month]
 }
@@ -33,13 +36,18 @@ function addZero(n: number) {
     return n < 10 ? '0' + n : n
 }
 
-export function getFormattedDate(date: Date) {
+export function getFormattedDate(date: Date,
+    monthType: Intl.DateTimeFormatOptions["month"] = 'short',
+    // yearType: "numeric" | "2-digit" | undefined = undefined,
+    yearType: Intl.DateTimeFormatOptions["year"] = undefined,
+
+) {
     const dt = date.getDate()
     let suffix = 'th'
     if (dt === 1 || dt === 21 || dt === 31) { suffix = 'st' }
     else if (dt === 2 || dt === 22) { suffix = 'nd' }
     else if (dt === 3 || dt === 23) { suffix = 'rd' }
-    return dt + suffix + ' ' + date.toLocaleString('default', { month: 'short' })
+    return dt + suffix + ' ' + date.toLocaleString('default', { month: monthType, year: yearType })
 }
 export function incrementDate(date: Date) {
     let nextDate = new Date(date)
@@ -80,16 +88,16 @@ export function getEmojiOfDayByTime() {
     if (hour >= 22 && hour < 24) return '🌔'
     return '🌞'
 }
-export function getEmojiByDay(date : Date){
+export function getEmojiByDay(date: Date) {
     // Return different meaningful depending on the day, like monday is workday, friday is weekend
     const day = date.getDay()
-    if(day == 0 ) return '🥳'
-    if(day == 1 ) return '📚'
-    if(day == 2 ) return '🤓'
-    if(day == 3 ) return '📝'
-    if(day == 4 ) return '🚀'
-    if(day == 5 ) return '🌺'
-    if(day == 6 ) return '🤩'
+    if (day == 0) return '🥳'
+    if (day == 1) return '📚'
+    if (day == 2) return '🤓'
+    if (day == 3) return '📝'
+    if (day == 4) return '🚀'
+    if (day == 5) return '🌺'
+    if (day == 6) return '🤩'
     return '🤔'
 }
 

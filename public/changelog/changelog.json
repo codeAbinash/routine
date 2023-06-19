@@ -1,9 +1,32 @@
 [
     {
+        "version": "3.0.0",
+        "name": "UI & Performance 🔥🎨",
+        "emoji": [
+            "🎨",
+            "🔥",
+            "🚀",
+            "🤩"
+        ],
+        "date": "2023-0623",
+        "description": [
+            "Performance improvements in the main core.",
+            "Newly added routines shows on the top of the list.",
+            "New UI of Routines list",
+            "Shows Routines days with colors in weekly routines.",
+            "Added more colors for each day in a week.",
+            "Added dots in the calendar for holidays or events",
+            "Added support for Holiday type and Event type routines.",
+            "Added more Routines in routines store.",
+            "Added send feedback option.",
+            "Fixed Search Routine Bug"
+        ]
+    },
+    {
         "version": "2.2.0",
         "name": "UI Improvements 🎨",
         "emoji": "🎨",
-        "date" : "2023-06-12",
+        "date": "2023-06-12",
         "description": [
             "Added stylish modal alert to the app."
         ]
@@ -12,7 +35,7 @@
         "version": "2.1.1",
         "name": "UI UX Improvements 🎨",
         "emoji": "🎨",
-        "date" : "2023-06-11",
+        "date": "2023-06-11",
         "description": [
             "Added popup alert if there is no routine."
         ]
@@ -193,7 +216,7 @@
         "version": "1.6.0",
         "name": "New UI 🎨",
         "emoji": "🎨",
-        "date": "2021-03-08",
+        "date": "2023-03-08",
         "description": [
             "Added a new UI to the app.",
             "Added a new icon to the app.",

@@ -3,18 +3,19 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import icons from '../assets/icons/icons';
 import BackHeader from '../components/BackHeader';
-import { day } from '../lib/date';
+import { MS_IN_DAY, day } from '../lib/date';
 import ls from '../lib/storage';
 import Daily from './makeRoutine/Daily';
+import Calendar from './makeRoutine/Calendar';
 import Once from './makeRoutine/Once';
 import Weekly from './makeRoutine/Weekly';
 import TextEmoji from '../components/TextEmoji';
 import BottomModal, { BasicModal } from '../components/BottomModal';
 import { MODAL_BUTTON_TEXT } from '../lib/lib';
+let emojiList = ['📕', '🧑🏻‍💻', '🏃🏻‍♂️', '🎨', '👻']
 
 function NewRoutine() {
 	const e = new Emoji();
-	let emojiList = ['📕', '🧑🏻‍💻', '🏃🏻‍♂️', '🎨', '👻']
 	const [routineName, setRoutineName] = useState('')
 	const [routineDescription, setRoutineDescription] = useState('')
 	const [routineEmoji, setRoutineEmoji] = useState('')
@@ -58,7 +59,7 @@ function NewRoutine() {
 				setModalUi(<BasicModal text="Discard this routine?" desc="Are you sure you want to discard this routine?" />)
 				setModalCallback([() => setModalShow(false), () => goBack()])
 				setModalBtnText(['No', 'Discard'])
-				setModalShow(true)	
+				setModalShow(true)
 			}} />
 
 			<section className='basic-details w-full p-4 pt-2'>
@@ -105,6 +106,7 @@ function NewRoutine() {
 									<option value="monthly">Routine : Monthly</option>
 									<option value="yearly">Routine : Yearly</option>
 									<option value="calendar">Calendar Event</option>
+									<option value="holiday">Holiday</option>
 								</select>
 								{/* <img src={e.get('➕')} className='tap bg-inputBg dark:bg-darkInputBg h-[3.5rem] p-[0.8rem] rounded-2xl' /> */}
 							</div></div>
@@ -153,9 +155,7 @@ function NewRoutine() {
 			// If start and end time are same then remove the end time
 			else if (startDate.getTime() === endDate.getTime())
 				routine.time[1] = ''
-		}
-
-		if (routineType === 'daily') {
+		} else if (routineType === 'daily') {
 			if (!routine.time[0]) {
 				<BasicModal text="Routine time is required" desc="Please provide a time for your routine" />
 				setBlankAndShowModal()
@@ -166,11 +166,7 @@ function NewRoutine() {
 				setBlankAndShowModal()
 				return
 			}
-			// else
-			// routine.time[1] = ''
-		}
-
-		if (routineType === 'weekly') {
+		} else if (routineType === 'weekly') {
 			let timeObj = routine.time
 			if (!timeObj) {
 				setModalUi(<BasicModal text="At least one Routine time is required" desc="Please provide at least one time for your routine" />)
@@ -222,18 +218,38 @@ function NewRoutine() {
 			}
 			routine.time = latestTimes
 		}
+		else if (routineType === 'holiday' || routineType === 'calendar') {
+			// Show warning it is the past time
+			let routineTime = routine.time[0]
+			if (!routineTime) {
+				setModalUi(<BasicModal text="Please Select a date" desc="You have to select a date to continue" />)
+				setBlankAndShowModal()
+				return
+			}
+
+			routineTime = new Date(routineTime).getTime()
+			const now = Math.floor(Date.now() / MS_IN_DAY)
+			routineTime = Math.floor(routineTime / MS_IN_DAY)
+
+			if (now > routineTime) {
+				setModalUi(<BasicModal text="Past Time!" desc="The time you provide is in past, Select a time that is in future" />)
+				setBlankAndShowModal()
+				return
+			}
+		}
 
 		let newRoutine = {
 			name: routineName,
 			description: routineDescription,
 			emoji: routineEmoji || '🧑🏻',
 			type: routineType,
+			sub: 'LOCAL',
 			...routine
 		}
 		console.log(newRoutine)
 		// Save routine to local storage
 		let routines = JSON.parse(ls.get('routines') || '[]')
-		routines.push(newRoutine)
+		routines.unshift(newRoutine)
 		ls.set('routines', JSON.stringify(routines))
 		navigate(-1)
 	}
@@ -242,6 +258,7 @@ function NewRoutine() {
 		if (type === 'once') return <Once updateRoutine={setRoutine} />
 		if (type === 'weekly') return <Weekly updateRoutine={setRoutine} routine={routine} />
 		else if (type === 'daily') return <Daily updateRoutine={setRoutine} />
+		else if (type === 'calendar' || type === 'holiday') return <Calendar type={type} updateRoutine={setRoutine} />
 		else return <div className="mt-16 text-center">
 			<p>This screen is under development</p>
 		</div>

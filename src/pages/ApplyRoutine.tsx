@@ -25,7 +25,7 @@ function EnterValidRoutineIdUI() {
 	return <>
 		<p className='text-center text-xl font-semibold'>Enter a valid routine ID <TextEmoji emoji="🤨" /></p>
 		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('🤔')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
-		<p className='text-center text-gray text-xs mt-5 font-[450]'>If you cannot find your routine ID, please contact <a className="text-accent" href="mailto:codeAbinash@gmail.com">me</a>.</p>
+		<p className='text-center text-grey text-xs mt-5 font-[450]'>If you cannot find your routine ID, please contact <a className="text-accent" href="mailto:codeAbinash@gmail.com">me</a>.</p>
 	</>
 }
 
@@ -33,7 +33,7 @@ function RoutineAppliedUI({ routineId }: { routineId: string }) {
 	return <>
 		<p className='text-center text-xl font-semibold'>Routine Applied <TextEmoji emoji="✅" /></p>
 		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('🤩')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
-		<p className='text-center text-gray text-xs mt-5 font-[450]'>
+		<p className='text-center text-grey text-xs mt-5 font-[450]'>
 			Routine id : <span className="text-accent">{routineId}</span>. Go back now?
 		</p>
 	</>
@@ -43,7 +43,7 @@ function AlreadySubscribedUI({ routineId }: { routineId: string }) {
 	return <>
 		<p className='text-center text-xl font-semibold'>Already Subscribed <TextEmoji emoji="😁" /></p>
 		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('😉')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
-		<p className='text-center text-gray text-xs mt-5 font-[450]'>
+		<p className='text-center text-grey text-xs mt-5 font-[450]'>
 			You are already subscribed to this routine! <br />
 			Routine id : <span className="text-accent">{routineId}</span>
 		</p>
@@ -54,7 +54,7 @@ function SkipUI() {
 	return <>
 		<p className='text-center text-xl font-semibold'>Skip for now ?</p>
 		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('👉🏻')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
-		<p className='text-center text-gray text-xs mt-5 font-[450] px-[7%]'>
+		<p className='text-center text-grey text-xs mt-5 font-[450] px-[7%]'>
 			You can skip this step for now. You can add routines later from settings.
 		</p>
 	</>
@@ -64,7 +64,7 @@ function RoutineNotFoundUI({ routineId }: { routineId: string }) {
 	return <>
 		<p className='text-center text-xl font-semibold'>Routine Not Found <TextEmoji emoji="😢" /></p>
 		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('😢')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
-		<p className='text-center text-gray text-xs mt-5 font-[450] px-[7%]'>
+		<p className='text-center text-grey text-xs mt-5 font-[450] px-[7%]'>
 			Cannot find routine <span className="text-accent">{routineId}</span> Maybe the routine you are looking
 			for is not available. Please check the routine id again. <br /><br />
 			Or Report this problem to <a className="text-accent" href="mailto:codeAbinash@gmail.com">me</a>.
@@ -79,7 +79,7 @@ function ConfirmApplyUI({ routineId }: { routineId: string }) {
 			<img src={Emoji.get('✅')} alt="emoji" className={`mt-5 w-16 h-16`} />
 			<img src={Emoji.get('🤔')} alt="emoji" className={`mt-5 w-20 h-20`} />
 		</div>
-		<p className='text-center text-gray text-xs mt-5 font-[450] px-[7%]'>
+		<p className='text-center text-grey text-xs mt-5 font-[450] px-[7%]'>
 			Are you sure you want to apply this routine? <br />
 			Routine id : <span className="text-accent">{routineId}</span>
 		</p>
@@ -103,11 +103,11 @@ export default function ApplyRoutine() {
 	const BLANK_MODAL_CB = useMemo(() => [() => setModalShow(false), () => setModalShow(false)], [])
 	const [modalCallback, setModalCallback] = useState(BLANK_MODAL_CB)
 
-	const startedUsing = ls.get('startedUsing')
+	const startedUsing = useMemo(() => ls.get('startedUsing'), [])
 	return (
 		<div className="screen dark:text-white">
 			<BottomModal show={modalShow} btnTxt={modalBtnText} cb={modalCallback}>{modalUi}</BottomModal>
-			<Header title="Select Routine" notiIcon={false} placeholder="Search Routine" onInput={() => { }} />
+			<Header title={startedUsing ? "Routine Store" : "Select Routine"} notiIcon={false} placeholder="Search Routine" onInput={() => { }} />
 			<div className="px-5 py-1 flex flex-col gap-4">
 				{!startedUsing ? <div className="bg-accent/20 flex flex-row justify-between text-sm p-[0.85rem] px-4 rounded-[14px]">
 					<p>You can skip it for now.</p>
@@ -121,7 +121,7 @@ export default function ApplyRoutine() {
 					<button className="bg-accent text-white px-7 tap97 rounded-xl border-none text-sm" onClick={() => addRoutine(routineIdByInput)}>Add</button>
 				</div>
 
-				<p className="text-center text-xs text-gray">{applyRoutineStatus}</p>
+				<p className="text-center text-xs text-grey">{applyRoutineStatus}</p>
 				<Routines addRoutine={addRoutine} subscription={subscription} />
 
 			</div>
@@ -193,7 +193,7 @@ export default function ApplyRoutine() {
 					ls.set('subscriptions', JSON.stringify(subscriptions))
 					// Add or update routines to the routine array
 					let routines = JSON.parse(ls.get('routines') || '[]')
-					routines.push(...fetchedRoutines)
+					routines.unshift(...fetchedRoutines)
 					ls.set('routines', JSON.stringify(routines))
 					ls.set('startedUsing', 'yes')
 					setIsApplyingRoutine(false)
@@ -274,7 +274,7 @@ function Routines({ addRoutine, subscription }: any) {
 					</div>
 					<div className="right flex flex-col gap-1">
 						<p className="font-semibold text-[0.9rem]">{routine.name}</p>
-						<p className={`${isSubscribed ? 'text-white' : 'text-gray'} text-[0.73rem] font-medium`}>{routine.description} <br />#{routine.id}</p>
+						<p className={`${isSubscribed ? 'text-white' : 'text-grey'} text-[0.73rem] font-medium`}>{routine.description} <br />#{routine.id}</p>
 					</div>
 				</div>
 			})

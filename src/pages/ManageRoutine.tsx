@@ -47,7 +47,7 @@ export default function ApplyRoutine() {
 			</BottomModal>
 			<Header title="Manage Routine" notiIcon={false} placeholder="Search Routine" onInput={() => { }} />
 			<div className="px-5 py-1 flex flex-col gap-4">
-				<p className="text-center text-xs text-gray px-4 py-2">You have subscribed to the following routine(s). {applyRoutineStatus}</p>
+				<p className="text-center text-xs text-grey px-4 py-2">You have subscribed to the following routine(s). {applyRoutineStatus}</p>
 				<Routines deleteRoutine={deleteRoutine} />
 			</div>
 		</div>
@@ -87,7 +87,7 @@ function Routines({ deleteRoutine }: any) {
 			{
 				routines.length === 0
 					? <div className="min-h-[50dvh] justify-center items-center flex">
-						<p className="font-medium text-sm text-gray">No Routine</p>
+						<p className="font-medium text-sm text-grey">No Routine</p>
 					</div>
 					:
 					routines.map((id: any, index: number) => {

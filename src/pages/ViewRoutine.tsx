@@ -21,7 +21,7 @@ function ViewRoutine() {
                     {/* <p>{routine.description}</p> */}
                     {viewRoutineTyped(routine)}
                     <div className="description mt-6">
-                        <p className='text-xs text-gray'>Description </p>
+                        <p className='text-xs text-grey'>Description </p>
                         <p className='text-sm p-4 bg-inputBg dark:bg-darkInputBg rounded-xl mt-2 tap99'>{routine.description}</p>
                     </div>
                 </section>
@@ -36,7 +36,8 @@ function ViewRoutine() {
     function deleteRoutine(routineId: string) {
         let confirm
         let confirm2
-        if (routine.sub) {
+        console.log("Ok")
+        if (routine.sub !== 'LOCAL') {
             const subscription = JSON.parse(ls.get('subscriptions') || '{}')[routine.sub]
             confirm = window.confirm(`Warning! This routine belongs to your subscription of ${subscription.name}. If you delete this routine, this will be restored in the next update of that subscription. Are you sure?`)
             confirm && (confirm2 = window.confirm(`Really? Are you sure you want to delete this routine?`))
@@ -56,7 +57,7 @@ function viewRoutineTyped(routine: Routine) {
     if (routine.type === 'weekly') {
         return <Weekly routine={routine} />
     }
-    if(routine.type === 'daily'){
+    if (routine.type === 'daily') {
         return <Daily routine={routine} />
     }
     else

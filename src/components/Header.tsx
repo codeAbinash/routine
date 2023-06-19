@@ -26,7 +26,7 @@ function Header(props: any) {
 
     return (
         <>
-            <header className='d bg-main overflow-hidden w-full z-20 dark:bg-black dark:text-darkText'>
+            <header className='bg-main overflow-hidden w-full z-20 dark:bg-black dark:text-darkText'>
                 <div className="px-5 pt-2 heading flex flex-row justify-between items-center gap-2">
                     <p className='text-xl font-bold' ref={headerTitle}>{title}</p>
                     <div className={`notification tap ${notiIcon ? 'opacity-100' : 'opacity-0'}`} onClick={rightIconClick}>

@@ -13,7 +13,7 @@ module.exports = {
         darkText: '#eee',
         white: '#fff',
         link: '#9c79fd',
-        gray: 'gray',
+        grey: 'grey',
         black: 'black',
         darkInputBg: '#1a1a1a',
         inputBg: '#f2f2f4',

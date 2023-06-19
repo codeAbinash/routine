@@ -17,8 +17,8 @@ export default function BottomModal({ show, children, btnTxt, cb }: { show: bool
 
 
    useEffect(() => {
-      if (isShow) document.body.style.overflow = 'hidden'
-      return () => { document.body.style.overflow = 'scroll' }
+      if (isShow) document.body.style.overflowY = 'hidden'
+      return () => { document.body.style.overflowY = 'scroll' }
    }, [isShow])
 
    function hideModal() {
@@ -30,9 +30,9 @@ export default function BottomModal({ show, children, btnTxt, cb }: { show: bool
       <div className={`duration-[400ms] h-[100dvh] w-full ${backDisplay ? 'flex' : 'hidden'} fixed bg-transparent top-0 transition-all ease-linear left-0 z-[100] items-end flex text-dark dark:text-darkText modal-bg-linear-grad ${isShow ? ' backdrop-blur-sm opacity-100' : 'backdrop-blur-0 opacity-0'}`}>
       </div>
 
-      <div className={`fixed z-[101] ${isShow ? 'bottom-0' : 'bottom-[-80vh]'} p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full transition-all ease-in-out duration-[400ms]`}>
+      <div className={`fixed max-h-[100vh] overflow-scroll z-[101] ${isShow ? 'bottom-0' : 'bottom-[-150vh]'} p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full transition-all ease-in-out duration-[400ms]`}>
          <div className='bar w-12 h-[0.3rem] bg-[#77777755] rounded-full mx-auto mb-12'></div>
-         
+
          {/*Show children*/}
          {children}
 
@@ -51,11 +51,11 @@ export default function BottomModal({ show, children, btnTxt, cb }: { show: bool
 
 
 export function BasicModal({ text, desc, emoji }: { text: any, desc?: any, emoji?: any }) {
-	return <>
-		<p className='text-center text-xl font-semibold px-[7%]'>{text}</p>
-		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get(emoji || '🤔')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
-		<p className='text-center text-gray text-xs mt-5 font-[450] px-[7%]'>
-			{desc}
-		</p>
-	</>
+   return <>
+      <p className='text-center text-xl font-semibold px-[7%] text-balance'>{text}</p>
+      <div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get(emoji || '🤔')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
+      <p className='text-center text-grey text-xs mt-5 font-[450] px-[7%] text-balance'>
+         {desc}
+      </p>
+   </>
 }

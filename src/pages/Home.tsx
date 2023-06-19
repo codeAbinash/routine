@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../assets/scss/index.scss'
 import FloatingButton from '../components/FloatingButton'
@@ -125,7 +125,7 @@ function NoRoutineUi() {
 	return <>
 		<p className='text-center text-xl font-semibold'>You have no Routine <TextEmoji emoji='😕' /> !</p>
 		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('👜')} alt="bag" className={`mx-auto mt-5 w-28 h-28`} /></div>
-		<p className='text-center text-gray text-xs mt-5 font-[450]'>Go to Routine <TextEmoji emoji='📃' /> Store <TextEmoji emoji='👜' /> <br />to add new Routines !</p>
+		<p className='text-center text-grey text-xs mt-5 font-[450]'>Go to Routine <TextEmoji emoji='📃' /> Store <TextEmoji emoji='👜' /> <br />to add new Routines !</p>
 	</>
 }
 

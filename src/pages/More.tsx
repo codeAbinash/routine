@@ -54,13 +54,13 @@ function More() {
         },
         {
             name: 'Routine Store',
-            icon: icons.calender,
+            icon: icons.calendar,
             callback: () => navigate('/applyRoutine'),
             rightArrow: true
         },
         {
             name: 'Manage Routines',
-            icon: icons.calender,
+            icon: icons.calendar,
             callback: () => navigate('/manageRoutines'),
             rightArrow: true
         },
@@ -122,6 +122,14 @@ function More() {
             },
             rightArrow: true,
             // iconOriginal : true
+        },
+        {
+            name: 'Send Feedback',
+            icon: icons.chat,
+            callback: () => {
+                window.open('mailto:codeAbinash@gmail.com?subject=Feedback of Routine Application', '_blank')
+            },
+            rightArrow: true
         }
     ]
 
@@ -195,7 +203,7 @@ function More() {
                     })}
                 </div>
                 {/* <div className='myself'>
-                    <p className='text-sm text-center mt-20 text-gray'> Made with <TextEmoji emoji="☕" /> and <TextEmoji emoji="🧑🏻‍💻" /> by <a href="https://github.com/codeAbinash" target="_blank" className='text-link'>Abinash</a> <TextEmoji emoji="😊" /></p>
+                    <p className='text-sm text-center mt-20 text-grey'> Made with <TextEmoji emoji="☕" /> and <TextEmoji emoji="🧑🏻‍💻" /> by <a href="https://github.com/codeAbinash" target="_blank" className='text-link'>Abinash</a> <TextEmoji emoji="😊" /></p>
                     <div className='flex justify-center items-center' onClick={() => delay(() => navigate('/author/buyMeCoffee'))}>
                         <p className='tap97 mt-5 bg-accent p-4 px-9 text-xs text-white font-medium rounded-full'>Buy me a coffee?</p>
                     </div>
@@ -216,7 +224,7 @@ export default More
 function ResetEverythingUI() {
     return <>
         <p className='text-center text-xl font-semibold'>Are you sure you want to reset everything?</p>
-        <div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('⚠️')} alt="bag" className={`mx-auto mt-5 w-24 h-24`} /></div>
-        <p className='text-center text-gray text-xs mt-5 font-[450]'>This will delete all your routines, subscriptions, and settings. <br />This action cannot be undone.</p>
+        <div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('🤯')} alt="bag" className={`mx-auto mt-5 w-24 h-24`} /></div>
+        <p className='text-center text-grey text-xs mt-5 font-[450]'>This will delete all your routines, subscriptions, and settings. <br />This action cannot be undone.</p>
     </>
 } 

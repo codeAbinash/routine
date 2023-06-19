@@ -1,5 +1,5 @@
 import Emoji from 'emoji-store'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import '../assets/scss/index.scss'
 import TextEmoji from '../components/TextEmoji'
 import { getDay, getEmojiByDay, getFormattedDate, getTime, incrementDate } from '../lib/date'
@@ -7,6 +7,8 @@ import searchByDate, { Routine } from '../lib/dateMethods'
 import delay from '../lib/delay'
 import ls from '../lib/storage'
 import { useNavigate } from 'react-router-dom'
+import { capitalize } from '../lib/lib'
+import Loading from '../components/Loading'
 
 
 export default function NewRoutinesLoader() {
@@ -14,7 +16,7 @@ export default function NewRoutinesLoader() {
     today.setDate(today.getDate() + 1)
     const [routines, setRoutines] = useState<any>([])
     const [tomorrow, setTomorrow] = useState(today)
-    const lsRoutines = JSON.parse(ls.get('routines') || '[]')
+    const lsRoutines = useMemo(() => JSON.parse(ls.get('routines') || '[]'), [])
     const navigate = useNavigate()
     // Add index property to routines
     lsRoutines.forEach((routine: Routine, index: number) => { routine.index = index })
@@ -52,6 +54,10 @@ export default function NewRoutinesLoader() {
 
 export function GetRoutines(routines: Array<Routine>, navigate: Function) {
     // console.log(routines)
+
+    if (!routines)
+        return <Loading />
+
     if (routines.length === 0)
         return <div className='h-[40dvh] flex flex-col items-center justify-center'>
             <p className='text-[#777]/50 text-center my-5 text-lg font-medium flex flex-col gap-4'>
@@ -75,7 +81,10 @@ export function GetRoutines(routines: Array<Routine>, navigate: Function) {
         return (
             <div className={
                 `routine flex flex-col p-[1.2rem] rounded-[1.6rem] ${isActiveRoutine ? 'bg-accent shadow-accent/40 shadow-lg dark:bg-accent/90' : 'border-[1px] bg-routine_bg dark:bg-routine_bg_dark border-routine_border dark:border-routine_border_dark  '}
-				tap99 ${isCompleted ? 'opacity-60' : ''}`}
+				tap99 ${isCompleted ? 'opacity-60' : ''}
+                ${routine.type === 'holiday' ? 'glow-holiday' : ''}
+                ${routine.type === 'calendar' ? 'glow-calendar' : ''}
+                `}
                 key={index}
                 onClick={() => delay(() => navigate(`/viewRoutine/${routine.index}`))}
             >
@@ -126,8 +135,11 @@ function BlankEmojiLeft() {
     </div>)
 }
 function GetDisplayTime(routine: Routine) {
-    if (routine.type === 'calender') {
-        return <>Event <br /> <TextEmoji emoji="🔔"></TextEmoji></>
+    if (routine.type === 'calendar') {
+        return <>{capitalize(routine.type)} <br /> <span className='text-lg'><TextEmoji emoji="🎉"></TextEmoji></span></>
+    }
+    else if (routine.type === 'holiday') {
+        return <>{capitalize(routine.type)} <br /> <span className='text-lg'><TextEmoji emoji="🥳"></TextEmoji></span></>
     }
     else {
         // const hour = 

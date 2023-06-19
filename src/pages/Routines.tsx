@@ -1,55 +1,113 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import NavBar from '../components/NavBar'
 import icons from '../assets/icons/icons'
 import { useEffect, useState } from 'react'
 import Emoji from 'emoji-store'
 import ls from '../lib/storage'
-import { Routine } from '../lib/dateMethods'
+import { Routine, TypedList, TypedTypes } from '../lib/dateMethods'
 import FloatingButton from '../components/FloatingButton'
-import { capitalize } from '../lib/lib'
+import { capitalize, debounce, randomString, throttle, vibrantColors7 } from '../lib/lib'
 import Header from '../components/Header'
 import { useNavigate } from 'react-router-dom'
-import delay from '../lib/delay'
+import delay, { df } from '../lib/delay'
 import Watermark from '../components/Watermark'
 import TextEmoji from '../components/TextEmoji'
+import { getFormattedDate, getISODateWithTime } from '../lib/date'
+import Loading from '../components/Loading'
 
-export function searchRoutine(routines: Array<Routine>, query: string) {
-    // Return filtered routines
-    query = query.trim().toLowerCase()
+export function searchRoutine(routines: Routine[], query: string) {
+    // Return filtered routines 
     if (!query) return routines
     return routines.filter((routine: Routine) => {
         return routine.name.toLowerCase().includes(query)
             || routine.description?.toLowerCase().includes(query)
-            || routine.sub?.toLowerCase().includes(query)
-            || routine.type.toLowerCase().includes(query)
-            || routine.emoji.toLowerCase().includes(query)
+        // || routine.sub?.toLowerCase().includes(query)
+        // || routine.type.toLowerCase().includes(query)
+        // || routine.emoji.toLowerCase().includes(query)
     })
+    // return typedList
+}
+
+
+function getTypedRoutines(routines: Array<Routine>) {
+    // Routines 0,
+    // Holiday 1
+    // Calendar 2
+    console.log("Typed List")
+    const routineList: TypedList = {
+        routines: [],
+        holiday: [],
+        calendar: [],
+        all: routines
+    };
+    let i, len = routines.length
+
+    for (i = 0; i < len; i++) {
+        routines[i].index = i
+        if (routines[i].type === 'calendar')
+            routineList.calendar.push(routines[i])
+        else if (routines[i].type === 'holiday')
+            routineList.holiday.push(routines[i])
+        else
+            routineList.routines.push(routines[i])
+    }
+    return routineList
 }
 
 function Routines() {
-    const [screenRoutines, uScreenRoutines] = useState<any>([])
-    const allRoutines = JSON.parse(ls.get('routines') || '[]')
+    const allRoutines = useMemo(() => JSON.parse(ls.get('routines') || '[]'), [])
+    const typedList = useMemo(() => getTypedRoutines(allRoutines), [allRoutines])
+    const [currentSelectedType, setCurrentSelectedType] = useState<TypedTypes>('routines')
+    const [screenRoutines, uScreenRoutines] = useState<Routine[] | null>(null)
     const navigate = useNavigate()
     useEffect(() => {
-        // const todayRoutines: Routine[] = searchByDate(new Date(), routines)
-        // searchActiveRoutine(todayRoutines)
-        uScreenRoutines(allRoutines)
-        // console.clear()
+        setTimeout(() => {
+            uScreenRoutines(typedList[currentSelectedType])
+        }, 500);
     }, [])
+    useEffect(() => {
+        if (currentSelectedType === 'all' || currentSelectedType === 'holiday') {
+            uScreenRoutines(null)
+            setTimeout(() => {
+                uScreenRoutines(typedList[currentSelectedType])
+            }, 300);
+        }
+        else
+            uScreenRoutines(typedList[currentSelectedType])
+    }, [currentSelectedType])
+
+    function searchFunction(e: any) {
+        const query = e.target.value.trim().toLowerCase()
+        if (!e.target.value.trim())
+            setTimeout(() => { uScreenRoutines(typedList[currentSelectedType]) }, 100)
+        else
+            debounce(() => {
+                uScreenRoutines(
+                    searchRoutine(typedList[currentSelectedType] as Routine[], query)
+                )
+            })()
+    }
 
     return (
         <div className="routines-screen screen-navbar select-none dark:bg-black dark:text-darkText">
-            <Header title={<span>All Routines <TextEmoji emoji="📃" /></span>} notiIcon={true} placeholder="Search All Routines" oninput={(e: any) => {
-                const query = e.target.value
-                uScreenRoutines(searchRoutine(allRoutines, query))
-            }}
-            rightIcon = {Emoji.get('👜')}
-            rightIconClick = {() => delay(() => navigate('/applyRoutine'))}
+            <Header title={<span>All Routines <TextEmoji emoji="📃" /></span>} notiIcon={true} placeholder="Search All Routines"
+                oninput={searchFunction}
+                rightIcon={Emoji.get('👜')}
+                rightIconClick={() => delay(() => navigate('/applyRoutine'))}
             />
             <section className='p-[1.2rem] pt-2'>
                 {/* <p className='text-[#777]/50 text-center mt-2 mb-5 text-sm font-medium'>All routines</p> */}
-                <div className="routines flex flex-col gap-[0.9rem]">
-                    {AllRoutines(screenRoutines)}
+                <div>
+                    <div className='flex flex-wrap gap-3 pb-6'>
+                        <div onClick={df(() => setCurrentSelectedType('routines'))} className={`tap95 ${currentSelectedType === 'routines' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-inputBg dark:bg-darkInputBg text-gray-400'} rounded-full text-xs font-medium p-2 px-4`}>Routines</div>
+                        <div onClick={df(() => setCurrentSelectedType('calendar'))} className={`tap95 ${currentSelectedType === 'calendar' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-inputBg dark:bg-darkInputBg text-gray-400'} rounded-full text-xs font-medium p-2 px-4`}>Events</div>
+                        <div onClick={df(() => setCurrentSelectedType('holiday'))} className={`tap95 ${currentSelectedType === 'holiday' ? 'bg-accent shadow-lg shadow-accent/50  text-white' : 'bg-inputBg dark:bg-darkInputBg text-gray-400'} rounded-full text-xs font-medium p-2 px-4`}>Holidays</div>
+                        <div onClick={df(() => setCurrentSelectedType('all'))} className={`tap95 ${currentSelectedType === 'all' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-inputBg dark:bg-darkInputBg text-gray-400'} rounded-full text-xs font-medium p-2 px-4`}>All</div>
+                    </div>
+                    <div className="routines flex flex-wrap gap-[0.9rem] justify-center">
+                        {/* {GetTypedRoutines(currentSelectedType, screenRoutines)} */}
+                        {AllRoutines(screenRoutines as Routine[])}
+                    </div>
                 </div>
             </section>
             <FloatingButton />
@@ -59,11 +117,28 @@ function Routines() {
     )
 }
 
+// function GetTypedRoutines(type: TypedTypes, routines: Routine[]) {
+//     if (!routines)
+//         return AllRoutines(null)
+//     if (type === 'routines')
+//         return AllRoutines(routines)
+//     else if (type === 'calendar')
+//         return AllRoutines(routines.calendar)
+//     else
+//         if (type === 'holiday')
+//             return AllRoutines(routines.holiday)
+// }
 
-function AllRoutines(routines: Array<Routine>) {
+
+function AllRoutines(routines: Array<Routine> | null) {
     // console.log(routines)
     const navigate = useNavigate()
 
+    if (!routines) {
+        return <div className='min-h-[60vh] flex justify-center items-center'>
+            <Loading />
+        </div>
+    }
 
     if (routines.length === 0) return (
         <div className="flex flex-col gap-10 mt-10 min-h-[50vh] justify-center items-center">
@@ -81,9 +156,9 @@ function AllRoutines(routines: Array<Routine>) {
     return routines.map((routine: Routine, index) => {
         return (
             <div
-                className='routine flex flex-col p-[1.2rem] rounded-[1.6rem] tap99 bg-routine_bg dark:bg-darkInputBg border-[1px] border-routine_border dark:border-routine_border_dark'
-                key={index}
-                onClick={() => delay(() => navigate(`/viewRoutine/${index}`))}
+                className='lg:w-[32.5%] md:w-[49.5%] w-full flex-wrap routine flex flex-col p-[1.2rem] rounded-[1.6rem] tap99 bg-routine_bg dark:bg-darkInputBg border-[1px] border-routine_border dark:border-routine_border_dark'
+                key={randomString(5)}
+                onClick={() => delay(() => navigate(`/viewRoutine/${routine.index}`))}
             >
                 <div className="top flex flex-row gap-3">
                     <div className="left">
@@ -96,25 +171,61 @@ function AllRoutines(routines: Array<Routine>) {
                         <div className="time"><p className={`text-[0.6rem]  font-[450] ${false ? 'text-white/80' : 'text-secondary'} text-right`}>{capitalize(routine.type)}</p></div>
                     </div>
                 </div>
-                {
-                    routine.description &&
-                    <div className="bottom flex flex-row gap-3">
-                        <BlankEmojiLeft />
-                        <div className="right flex-1 flex flex-row justify-between flex-center">
-                            <div className={`description font-medium text-[0.75rem] ${false ? 'text-white/80' : 'text-secondary'} line-clamp-2`}><p>{routine.description} <small className='opacity-40'>{routine.sub ? '#' + routine.sub : ''}</small></p></div>
-                        </div>
-                    </div>
-                }
+                <RoutineDescription routine={routine} />
+                <ShowRoutineTime routine={routine} />
             </div>
         )
     })
 }
 
+const weekArr = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 
-function BlankEmojiLeft() {
+
+function ShowRoutineTime({ routine }: { routine: Routine }) {
+    if (routine.type === 'weekly') {
+        return <div className="bottom flex flex-row gap-3 mt-1">
+            <LeftBlank />
+            <WeeklyRoutineTime time={routine.time} />
+        </div>
+    }
+    if (routine.type === 'calendar' || routine.type === 'holiday')
+        return <div className="bottom flex flex-row gap-3">
+            <LeftBlank />
+            <div className="right flex-1 flex flex-row justify-between flex-center">
+                <div className={`description font-medium text-[0.75rem] ${false ? 'text-white/80' : 'text-secondary'} line-clamp-2`}><p>On {getFormattedDate(new Date(routine.time[0]), 'long', 'numeric')}</p></div>
+            </div>
+        </div>
+    return null
+}
+
+function WeeklyRoutineTime({ time }: { time: Routine["time"] }) {
+    return <div className='flex'>
+        {
+            weekArr.map((day, index) => {
+                if (time[index])
+                    return <div key={index} style={{ backgroundColor: vibrantColors7[index] }} className={`text-[0.6rem] text-white rounded-full h-5 border border-spacing-1 border-routine_bg dark:border-darkInputBg pt-0.5 font-medium w-5 ml-[-4px] flex justify-center items-center`}>{day}</div>
+                return null
+            })
+        }
+    </div>
+}
+
+function RoutineDescription({ routine }: { routine: Routine }) {
+    if (!routine.description)
+        return null
+    return <div className="bottom flex flex-row gap-3">
+        <LeftBlank />
+        <div className="right flex-1 flex flex-row justify-between flex-center">
+            <div className={`description font-medium text-[0.75rem] ${false ? 'text-white/80' : 'text-secondary'} line-clamp-2`}><p>{routine.description} <small className='opacity-40'>{routine.sub ? '#' + routine.sub : ''}</small></p></div>
+        </div>
+    </div>
+}
+
+
+function LeftBlank() {
     return (<div className="left opacity-0 select-none">
         <div className="emoji bg-main flex-center rounded-xl px-2 py-0 flex-1 ">
-            <img src='' className='w-[26px] h-0' />
+            <div className='w-[26px] h-0' />
         </div>
     </div>)
 }

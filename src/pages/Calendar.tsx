@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import icons from '../assets/icons/icons'
 import FloatingButton from '../components/FloatingButton'
@@ -15,11 +15,37 @@ import Watermark from '../components/Watermark'
 import TextEmoji from '../components/TextEmoji'
 
 
+function willShowDot(routines: Array<Routine>) {
+  const dotStatus = [false, false]
+  for (let i = 0; i < routines.length; i++) {
+    if (routines[i].type === 'holiday')
+      dotStatus[0] = true
+    else if (routines[i].type === 'calendar')
+      dotStatus[1] = true
+  }
+  return dotStatus
+}
 
-function Calender() {
+function ActiveDots({ isSameDate, date, routines }: { isSameDate: boolean, date: Date, routines: Array<Routine> }) {
+  // console.log(date.getDate())
+  const routinesF = useMemo(() => searchByDate(date, routines), [date])
+  const dotStatus = useMemo(() => willShowDot(routinesF), [routinesF])
+  return <>
+    {
+      dotStatus[0] &&
+      <div className={`w-[0.3em] aspect-square ${isSameDate ? 'bg-white' : 'bg-red-500'} rounded-full`}></div>
+    }
+    {
+      dotStatus[1] &&
+      <div className={`w-[0.3em] aspect-square ${isSameDate ? 'bg-white' : 'bg-accent'} rounded-full`}></div>
+    }
+  </>
+}
+
+function Calendar() {
   const navigate = useNavigate()
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   const now = new Date()
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   const [isIntersecting, setIsIntersecting] = React.useState(true)
   const [calenderDays, setCalendarDays] = useState([...getCalendarArray(now)])
   const [currentDate, setCurrentDate] = React.useState(now.getDate())
@@ -27,7 +53,7 @@ function Calender() {
   const [currentYear, setCurrentYear] = React.useState(now.getFullYear())
   const [date, setDate] = React.useState(new Date(currentYear, currentMonth, currentDate))
   const [routineDate, setRoutineDate] = useState(now)
-  const routines = JSON.parse(ls.get('routines') || '[]')
+  const routines = useMemo(() => JSON.parse(ls.get('routines') || '[]'), [])
   const routinesOfTheDay = searchByDate(routineDate, routines)
   routines.forEach((routine: Routine, index: number) => { routine.index = index })
   const topElement = useRef<HTMLDivElement>(null)
@@ -88,14 +114,14 @@ function Calender() {
             <img src={icons.left_arrow} className='tap opacity-80 dark:invert w-[2.25rem] aspect-square p-2 rounded-xl rotate-180 active:bg-inputBg' />
           </div>
         </header >
-        <div className="calender p-5 pt-20 pb-0">
+        <div className="calendar p-5 pt-20 pb-0">
           <div className="calenderDayHeadings flex w-full">
             {
               days.map((day, index) => {
                 let isWeekEnd = index % 6 === 0
                 return (
                   <div className="day w-[calc(100%/7)]" key={index}>
-                    <p className={`text-center text-[0.7rem] text-gray font-medium ${isWeekEnd ? 'opacity-60' : ''}`}>{day}</p>
+                    <p className={`text-center text-[0.7rem] text-grey font-medium ${isWeekEnd ? 'opacity-60' : ''}`}>{day}</p>
                   </div>
                 )
               })
@@ -104,7 +130,7 @@ function Calender() {
           <div className="calenderDays mt-4">
             {
               calenderDays.map((week: [number], i: number) => {
-                const date = new Date(currentYear, currentMonth, 1)
+                const date = new Date(currentYear, currentMonth, i)
                 return (
                   <div className="week flex w-full" key={i}>
                     {
@@ -112,11 +138,12 @@ function Calender() {
                         let isWeekEnd = j % 6 === 0
                         if (day !== 0) {
                           date.setDate(day)
+                          const isSameDate = checkIfSameDate(now, date)
                           return (
                             <div className={`day flex-1 aspect-square flex justify-center items-center tap97 calenderDate`} key={j}>
                               <div className={
                                 `flex justify-center items-center rounded-xl contain w-[75%] aspect-square transition border-transparent
-                              ${checkIfSameDate(now, date) ? 'active bg-accent shadow-xl shadow-accent/50 text-white' : ''}
+                              ${isSameDate ? 'active bg-accent shadow-xl shadow-accent/50 text-white' : ''}
                               hover:border-accent hover:border-2`
                               }
                                 onClick={() => {
@@ -125,9 +152,13 @@ function Calender() {
                                 }}
                               >
                                 <p className={
-                                  `text-center text-xs font-medium p-2 aspect-square ${isWeekEnd ? 'opacity-60' : ''}  
-                                  ${checkIfSameDate(now, date) ? 'text-white' : ''}`
+                                  `text-center text-xs font-medium p-2 pb-2.5 aspect-square ${isWeekEnd ? 'opacity-60' : ''}  
+                                  ${isSameDate ? 'text-white' : ''}`
                                 }>{day}</p>
+
+                                <div className="dots absolute mt-[1.2rem] flex gap-1">
+                                  <ActiveDots routines={routines} isSameDate={isSameDate} date={new Date(currentYear, currentMonth, day)} />
+                                </div>
                               </div>
                             </div>
                           )
@@ -203,4 +234,4 @@ function isSameMonth(date1: Date, date2: Date) {
 }
 
 
-export default Calender
+export default Calendar

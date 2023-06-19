@@ -1,7 +1,7 @@
 // Filter by date
 export type Routine = {
     name: string,
-    type: string,
+    type: 'calendar' | 'holiday' | 'once' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'routines',
     time: [string, string] | {
         date: number,
         month: number,
@@ -18,6 +18,15 @@ export type Routine = {
     passed: string,
     left: string,
 }
+
+export type TypedList = {
+    routines: Array<Routine>,
+    calendar: Array<Routine>,
+    holiday: Array<Routine>,
+    all : Routine[]
+}
+
+export type TypedTypes = 'routines' | 'calendar' | 'holiday' | 'all'
 
 function getPassedTimeString(time: number) {
     const passedHour = Math.floor(time / (1000 * 60 * 60))
@@ -50,7 +59,17 @@ export function searchActiveRoutine(routines: Array<Routine | any>) {
             routine.percentage = percentage
         }
     })
-    if (routines.length > 0 && routines[0].status == 'done') {
+
+    routines.sort((a, b) => {
+        if (a.status === 'done')
+            return -1
+        else
+            return a.endTime - a.startTime
+    })
+
+    // Move the done routines to the end
+    if (routines.length > 0 && routines[0].status === 'done') {
+        // Make completed routines at the end of the list 
         routines.push({
             name: 'Completed',
             type: 'notification',
@@ -63,7 +82,9 @@ export function searchActiveRoutine(routines: Array<Routine | any>) {
         routines.push(...doneRoutines)
     }
 }
-export function searchByDate(date: Date, routines: Array<any>): Routine[] {
+let n = 0
+export function searchByDate(date: Date, routines: Array<Routine>): Array<Routine> {
+    // console.log("Searching by Date...", n++)
     const dayRoutines = []
     for (const id in routines) {
         const routine = routines[id]
@@ -84,21 +105,27 @@ export function searchByDate(date: Date, routines: Array<any>): Routine[] {
             case 'yearly':
                 if (dayFilterYearly(routine, date)) dayRoutines.push(routine)
                 break
-            case 'calender':
-                if (dayCalendarFilter(routine, date)) dayRoutines.push(routine)
+            case 'calendar':
+                if (dayCalendarFilter(routine, date)) dayRoutines.unshift(routine)
+                break
+            case 'holiday':
+                if (dayHolidayFilter(routine, date)) dayRoutines.unshift(routine)
                 break
             default:
                 break
         }
     }
-    dayRoutines.sort((a, b) => a.startTime - b.startTime)
+    // dayRoutines.sort((a, b) => {
+    //     // Keep holidays at the top
+    //     if (a.type === 'holiday') return -1
+    //     return a.startTime - b.startTime
+    // })
     return dayRoutines
 }
 
 function dayCalendarFilter(routine: Routine, date: Date) {
     // Compare month, date and year
-    let routineDate = new Date(routine.time)
-
+    let routineDate = new Date(routine.time[0] + 'T00:00')
     let y1 = date.getFullYear()
     let y2 = routineDate.getFullYear()
 
@@ -108,10 +135,14 @@ function dayCalendarFilter(routine: Routine, date: Date) {
     let d1 = date.getDate()
     let d2 = routineDate.getDate()
     if ((y1 === y2) && (m1 === m2) && (d1 === d2)) {
-        routine.time = routineDate
+        routine.startTime = routineDate
         return true
     }
     return false
+}
+
+function dayHolidayFilter(routine: Routine, date: Date) {
+    return dayCalendarFilter(routine, date)
 }
 
 function dayFilterMonthly(routine: Routine, date: Date) {

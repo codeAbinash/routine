@@ -1,5 +1,7 @@
 @use "index" as m;
 
+$accent : #9c79fd;
+
 .text-center {
     text-align: center;
 }
@@ -40,7 +42,7 @@ button.btn-full-width.white {
     color: black;
 }
 
-button.btn-full-width.gray {
+button.btn-full-width.grey {
     background-color: #222;
 }
 
@@ -310,9 +312,38 @@ button.btn-full-width.gray {
     transition: 100ms opacity ease-in-out;
 }
 
-.calenderDate {}
+.glow-holiday {
+    outline: 5px solid #3b82f6;
+    animation: pulse-holiday 2s linear infinite;
+}
+.glow-calendar {
+    outline: 3px solid #3b82f6;
+    animation: pulse-calendar 1.5s linear infinite alternate;
+}
 
-// .calenderDate.active{
-//     background-color: var(--accent);
-//     color: white;
-// }
+@keyframes pulse-holiday {
+    0% {
+        outline-color: mix($accent, #00000000, 40%);
+        outline-offset: 0;
+        outline-width: 2px;
+    }
+    70%,
+    100% {
+        outline-color: transparent;
+        outline-offset: 0.3em;
+        outline-width: 7px;
+    }
+}
+@keyframes pulse-calendar {
+    0% {
+        outline-color: mix($accent, #00000000, 30%);
+        // outline-offset: 0;
+        // outline-width: 2px;
+    }
+    70%,
+    100% {
+        outline-color: transparent;
+        // outline-offset: 0.1em;
+        // outline-width: 4px;
+    }
+}
