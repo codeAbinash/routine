@@ -47,7 +47,7 @@ export default function Team() {
                         }
                      >
                         <div className="pic">
-                           <img src={user.pic} className="w-[4.52rem] rounded-full" />
+                           <img src={user.pic} className="w-[4.52rem] aspect-square rounded-full" />
                         </div>
                         <div className="content">
                            <div className="name font-medium text-sm">
