@@ -1,7 +1,7 @@
 // Filter by date
 export type Routine = {
     name: string,
-    type: 'calendar' | 'holiday' | 'once' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'routines',
+    type: 'calendar' | 'holiday' | 'once' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'routines' | 'notification',
     time: [string, string] | {
         date: number,
         month: number,
