@@ -66,7 +66,7 @@ function Routines() {
         }, 500);
     }, [])
     useEffect(() => {
-        if (currentSelectedType === 'all' || currentSelectedType === 'holiday') {
+        if (currentSelectedType === 'all' || currentSelectedType === 'holiday' || currentSelectedType === 'routines') {
             uScreenRoutines(null)
             setTimeout(() => {
                 uScreenRoutines(typedList[currentSelectedType])
@@ -99,10 +99,10 @@ function Routines() {
                 {/* <p className='text-[#777]/50 text-center mt-2 mb-5 text-sm font-medium'>All routines</p> */}
                 <div>
                     <div className='flex flex-wrap gap-3 pb-6'>
-                        <div onClick={df(() => setCurrentSelectedType('routines'))} className={`tap95 ${currentSelectedType === 'routines' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-inputBg dark:bg-darkInputBg text-gray-400'} rounded-full text-xs font-medium p-2 px-4`}>Routines</div>
-                        <div onClick={df(() => setCurrentSelectedType('calendar'))} className={`tap95 ${currentSelectedType === 'calendar' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-inputBg dark:bg-darkInputBg text-gray-400'} rounded-full text-xs font-medium p-2 px-4`}>Events</div>
-                        <div onClick={df(() => setCurrentSelectedType('holiday'))} className={`tap95 ${currentSelectedType === 'holiday' ? 'bg-accent shadow-lg shadow-accent/50  text-white' : 'bg-inputBg dark:bg-darkInputBg text-gray-400'} rounded-full text-xs font-medium p-2 px-4`}>Holidays</div>
-                        <div onClick={df(() => setCurrentSelectedType('all'))} className={`tap95 ${currentSelectedType === 'all' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-inputBg dark:bg-darkInputBg text-gray-400'} rounded-full text-xs font-medium p-2 px-4`}>All</div>
+                        <div onClick={df(() => setCurrentSelectedType('routines'))} className={`tap95 ${currentSelectedType === 'routines' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4`}>Routines</div>
+                        <div onClick={df(() => setCurrentSelectedType('calendar'))} className={`tap95 ${currentSelectedType === 'calendar' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4`}>Events</div>
+                        <div onClick={df(() => setCurrentSelectedType('holiday'))} className={`tap95 ${currentSelectedType === 'holiday' ? 'bg-accent shadow-lg shadow-accent/50  text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4`}>Holidays</div>
+                        <div onClick={df(() => setCurrentSelectedType('all'))} className={`tap95 ${currentSelectedType === 'all' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4`}>All</div>
                     </div>
                     <div className="routines flex flex-wrap gap-[0.9rem] justify-center">
                         {/* {GetTypedRoutines(currentSelectedType, screenRoutines)} */}
@@ -192,7 +192,9 @@ function ShowRoutineTime({ routine }: { routine: Routine }) {
         return <div className="bottom flex flex-row gap-3">
             <LeftBlank />
             <div className="right flex-1 flex flex-row justify-between flex-center">
-                <div className={`description font-medium text-[0.75rem] ${false ? 'text-white/80' : 'text-secondary'} line-clamp-2`}><p>On {getFormattedDate(new Date(routine.time[0]), 'long', 'numeric')}</p></div>
+                <div className={`description font-medium text-[0.75rem] ${false ? 'text-white/80' : 'text-secondary'} line-clamp-2`}>
+                    <p className='text-dark/40 dark:text-white/40'>On {getFormattedDate(new Date(routine.time[0]), 'long', 'numeric')}</p>
+                </div>
             </div>
         </div>
     return null
@@ -210,13 +212,11 @@ function WeeklyRoutineTime({ time }: { time: Routine["time"] }) {
     </div>
 }
 
-function RoutineDescription({ routine }: { routine: Routine }) {
-    if (!routine.description)
-        return null
+export function RoutineDescription({ routine, active = false }: { routine: Routine, active?: boolean }) {
     return <div className="bottom flex flex-row gap-3">
         <LeftBlank />
         <div className="right flex-1 flex flex-row justify-between flex-center">
-            <div className={`description font-medium text-[0.75rem] ${false ? 'text-white/80' : 'text-secondary'} line-clamp-2`}><p>{routine.description} <small className='opacity-40'>{routine.sub ? '#' + routine.sub : ''}</small></p></div>
+            <div className={`description font-medium text-[0.75rem] ${active ? 'text-white/80' : 'text-dark/60 dark:text-white/60'}  text-secondary line-clamp-2`}><p>{routine.description} <small className='opacity-50'>{routine.sub ? '#' + routine.sub : ''}</small></p></div>
         </div>
     </div>
 }

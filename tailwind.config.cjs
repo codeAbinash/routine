@@ -18,15 +18,15 @@ module.exports = {
         darkInputBg: '#1a1a1a',
         inputBg: '#f2f2f4',
         transparent: 'transparent',
-        routine_bg : '#f5f5f5',
-        routine_border : '#ededed',
-        routine_bg_dark : '#1a1a1a',
-        routine_border_dark : '#282828',
+        routine_bg: '#f5f5f5',
+        routine_border: '#ededed',
+        routine_bg_dark: '#1a1a1a',
+        routine_border_dark: '#282828',
       }
     },
   },
   plugins: [
-    
+
   ],
   darkMode: 'class'
 }

@@ -59,7 +59,7 @@ function Weekly({ routine, updateRoutine }: { updateRoutine: Function, routine: 
 									className={`tap97 dayName check ${isActiveRoutine[i] ? 'checkDiv active' : 'bg-inputBg dark:bg-darkInputBg'} px-4 py-3 rounded-xl flex-1 items-center justify-center`}
 									style={isActiveRoutine[i] ? {
 										backgroundColor: vibrantColors7[i],
-										boxShadow: "1px 6px 10px 2px" + vibrantColors7[i] + "66"
+										boxShadow: "1px 6px 10px 0" + vibrantColors7[i] + "66"
 									} : {}}
 									onClick={() => {
 										delay(() => {

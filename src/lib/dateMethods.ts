@@ -23,7 +23,7 @@ export type TypedList = {
     routines: Array<Routine>,
     calendar: Array<Routine>,
     holiday: Array<Routine>,
-    all : Routine[]
+    all: Routine[]
 }
 
 export type TypedTypes = 'routines' | 'calendar' | 'holiday' | 'all'
@@ -64,7 +64,8 @@ export function searchActiveRoutine(routines: Array<Routine | any>) {
         if (a.status === 'done')
             return -1
         else
-            return a.endTime - a.startTime
+            return 1
+        // return a.endTime - b.startTime
     })
 
     // Move the done routines to the end
@@ -115,11 +116,11 @@ export function searchByDate(date: Date, routines: Array<Routine>): Array<Routin
                 break
         }
     }
-    // dayRoutines.sort((a, b) => {
-    //     // Keep holidays at the top
-    //     if (a.type === 'holiday') return -1
-    //     return a.startTime - b.startTime
-    // })
+    dayRoutines.sort((a: Routine, b: Routine) => {
+        // Keep holidays at the top
+        if (a.type === 'holiday') return -1
+        return a.startTime.getTime() - b.startTime.getTime()
+    })
     return dayRoutines
 }
 

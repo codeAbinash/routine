@@ -1,5 +1,18 @@
 [
     {
+        "version": "3.0.1",
+        "name": "UI & Performance 🔥🎨",
+        "emoji": [
+            "🎨",
+            "🚀"
+        ],
+        "date": "2023-06-23",
+        "description": [
+            "Bug Fix",
+            "UI Improvements"
+        ]
+    },
+    {
         "version": "3.0.0",
         "name": "UI & Performance 🔥🎨",
         "emoji": [
@@ -8,7 +21,7 @@
             "🚀",
             "🤩"
         ],
-        "date": "2023-0623",
+        "date": "2023-06-22",
         "description": [
             "Performance improvements in the main core.",
             "Newly added routines shows on the top of the list.",

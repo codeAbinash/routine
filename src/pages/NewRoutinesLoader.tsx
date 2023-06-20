@@ -9,6 +9,7 @@ import ls from '../lib/storage'
 import { useNavigate } from 'react-router-dom'
 import { capitalize } from '../lib/lib'
 import Loading from '../components/Loading'
+import { RoutineDescription } from './Routines'
 
 
 export default function NewRoutinesLoader() {
@@ -101,12 +102,7 @@ export function GetRoutines(routines: Array<Routine>, navigate: Function) {
                 </div>
                 {
                     routine.description &&
-                    <div className="bottom flex flex-row gap-3">
-                        <BlankEmojiLeft />
-                        <div className="right flex-1 flex flex-row justify-between flex-center">
-                            <div className={`description font-medium text-[0.75rem] ${isActiveRoutine ? 'text-white/80' : 'text-secondary'} line-clamp-2`}><p>{routine.description}<small className='opacity-40 pl-1'> {routine.sub ? '#' + routine.sub : ''}</small></p></div>
-                        </div>
-                    </div>
+                    <RoutineDescription routine={routine} active={isActiveRoutine} />
                 }
                 {
                     isActiveRoutine &&

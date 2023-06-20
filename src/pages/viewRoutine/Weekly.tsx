@@ -17,7 +17,7 @@ function Weekly({ routine }: { routine: Routine }) {
             <div className={`tap97 relative flex items-center justify-center box h-40 w-[100%] rounded-2xl ${routineTime[index] ? 'opacity-1' : 'bg-inputBg dark:bg-darkInputBg'}`}
               style={routineTime[index] ? {
                  backgroundColor: vibrantColors7[index],
-                 boxShadow : "1px 6px 10px 2px" + vibrantColors7[index] + "66"
+                 boxShadow : "1px 6px 10px 0" + vibrantColors7[index] + "66"
               } : {}}>
               {
                 routineTime[index] &&

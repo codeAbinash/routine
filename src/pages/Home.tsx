@@ -62,6 +62,7 @@ function Home() {
 	// const timer1 = useRef<any>(null);
 	const timer2 = useRef<any>(null);
 	const [isRoutineEmpty, setIsRoutineEmpty] = useState(false)
+	let routines = useMemo(() => JSON.parse(ls.get('routines') || '[]'), [])
 
 	useEffect(() => {
 		// Check if started using
@@ -70,7 +71,6 @@ function Home() {
 		let startedUsing = ls.get('startedUsing')
 		if (!startedUsing) { navigate('/start', { replace: true }) }
 
-		let routines = JSON.parse(ls.get('routines') || '[]')
 		// Add index property to routines
 
 		// If there is no routine show an alert message to go to routine store
