@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef } from 'react'
 import NavBar from '../components/NavBar'
 import icons from '../assets/icons/icons'
 import { useEffect, useState } from 'react'
@@ -59,8 +59,11 @@ function Routines() {
     const typedList = useMemo(() => getTypedRoutines(allRoutines), [allRoutines])
     const [currentSelectedType, setCurrentSelectedType] = useState<TypedTypes>('routines')
     const [screenRoutines, uScreenRoutines] = useState<Routine[] | null>(null)
+    const topElement = useRef<HTMLDivElement>(null)
+
     const navigate = useNavigate()
     useEffect(() => {
+        topElement.current?.scrollIntoView({ behavior: 'smooth' })
         setTimeout(() => {
             uScreenRoutines(typedList[currentSelectedType])
         }, 500);
@@ -90,6 +93,7 @@ function Routines() {
 
     return (
         <div className="routines-screen screen-navbar select-none dark:bg-black dark:text-darkText">
+            <div className="scrollToTop" ref={topElement}></div>
             <Header title={<span>All Routines <TextEmoji emoji="📃" /></span>} notiIcon={true} placeholder="Search All Routines"
                 oninput={searchFunction}
                 rightIcon={Emoji.get('👜')}

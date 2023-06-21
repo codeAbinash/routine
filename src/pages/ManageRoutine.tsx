@@ -45,7 +45,8 @@ export default function ApplyRoutine() {
 			<BottomModal show={modalShow} btnTxt={modalBtnText} cb={modalCallback} >
 				{modalUi}
 			</BottomModal>
-			<Header title="Manage Routine" notiIcon={false} placeholder="Search Routine" onInput={() => { }} />
+			<Header title={<>Manage Routines <TextEmoji emoji="⚙️"></TextEmoji></>}
+				notiIcon={false} placeholder="Search Routine" onInput={() => { }} />
 			<div className="px-5 py-1 flex flex-col gap-4">
 				<p className="text-center text-xs text-grey px-4 py-2">You have subscribed to the following routine(s). {applyRoutineStatus}</p>
 				<Routines deleteRoutine={deleteRoutine} />

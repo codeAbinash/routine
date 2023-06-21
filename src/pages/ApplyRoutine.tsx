@@ -107,7 +107,9 @@ export default function ApplyRoutine() {
 	return (
 		<div className="screen dark:text-white">
 			<BottomModal show={modalShow} btnTxt={modalBtnText} cb={modalCallback}>{modalUi}</BottomModal>
-			<Header title={startedUsing ? "Routine Store" : "Select Routine"} notiIcon={false} placeholder="Search Routine" onInput={() => { }} />
+			<Header title={startedUsing ? <>Routine Store <TextEmoji emoji="👜" /></> : <>Select Routine <TextEmoji emoji="🧐"/></>}
+				notiIcon={false} placeholder="Search Routine" onInput={() => { }}
+			/>
 			<div className="px-5 py-1 flex flex-col gap-4">
 				{!startedUsing ? <div className="bg-accent/20 flex flex-row justify-between text-sm p-[0.85rem] px-4 rounded-[14px]">
 					<p>You can skip it for now.</p>

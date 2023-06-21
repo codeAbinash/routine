@@ -7,7 +7,6 @@ import Emoji from 'emoji-store'
 export default function BottomModal({ show, children, btnTxt, cb }: { show: boolean, children: any, btnTxt?: Array<any>, cb?: Array<Function | any> }) {
    const [isShow, setIsShow] = useState(false)
    const [backDisplay, setBackDisplay] = useState(false)
-   const navigate = useNavigate()
 
    useEffect(() => {
       setBackDisplay(show)
@@ -30,7 +29,7 @@ export default function BottomModal({ show, children, btnTxt, cb }: { show: bool
       <div className={`duration-[400ms] h-[100dvh] w-full ${backDisplay ? 'flex' : 'hidden'} fixed bg-transparent top-0 transition-all ease-linear left-0 z-[100] items-end flex text-dark dark:text-darkText modal-bg-linear-grad ${isShow ? ' backdrop-blur-sm opacity-100' : 'backdrop-blur-0 opacity-0'}`}>
       </div>
 
-      <div className={`fixed max-h-[100vh] overflow-scroll z-[101] ${isShow ? 'bottom-0' : 'bottom-[-150vh]'} p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full transition-all ease-in-out duration-[400ms]`}>
+      <div className={`fixed max-h-[95vh] overflow-scroll z-[101] ${isShow ? 'bottom-0' : 'bottom-[-150vh]'} p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full transition-all ease-in-out duration-[400ms]`}>
          <div className='bar w-12 h-[0.3rem] bg-[#77777755] rounded-full mx-auto mb-12'></div>
 
          {/*Show children*/}

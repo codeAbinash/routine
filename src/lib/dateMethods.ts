@@ -64,8 +64,7 @@ export function searchActiveRoutine(routines: Array<Routine | any>) {
         if (a.status === 'done')
             return -1
         else
-            return 1
-        // return a.endTime - b.startTime
+            return a.endTime - b.startTime
     })
 
     // Move the done routines to the end

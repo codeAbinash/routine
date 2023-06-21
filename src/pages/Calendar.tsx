@@ -42,6 +42,18 @@ function ActiveDots({ isSameDate, date, routines }: { isSameDate: boolean, date:
   </>
 }
 
+function getRoutinesFromLsWithIndex() {
+  const lsRoutines = JSON.parse(ls.get('routines') || '[]')
+  lsRoutines.forEach((routine: Routine, index: number) => { routine.index = index })
+  return lsRoutines
+}
+
+function getRoutinesWithActiveStatus(routineDate: Date, routines: Routine[]) {
+  const routinesOfTheDay = searchByDate(routineDate, routines)
+  searchActiveRoutine(routinesOfTheDay)
+  return routinesOfTheDay
+}
+
 function Calendar() {
   const navigate = useNavigate()
   const now = new Date()
@@ -53,9 +65,8 @@ function Calendar() {
   const [currentYear, setCurrentYear] = React.useState(now.getFullYear())
   const [date, setDate] = React.useState(new Date(currentYear, currentMonth, currentDate))
   const [routineDate, setRoutineDate] = useState(now)
-  const routines = useMemo(() => JSON.parse(ls.get('routines') || '[]'), [])
-  const routinesOfTheDay = searchByDate(routineDate, routines)
-  routines.forEach((routine: Routine, index: number) => { routine.index = index })
+  const routines = useMemo(() => getRoutinesFromLsWithIndex(), [routineDate])
+  const routinesOfTheDay = useMemo(() => getRoutinesWithActiveStatus(routineDate, routines), [routineDate])
   const topElement = useRef<HTMLDivElement>(null)
 
   function scrollToTop() {
@@ -63,12 +74,12 @@ function Calendar() {
       topElement.current.scrollIntoView({ behavior: 'smooth' })
   }
 
-  searchActiveRoutine(routinesOfTheDay)
-
   useEffect(() => {
     scrollToTop()
     headerIntersect(topElement.current as Element, setIsIntersecting)
   }, [])
+
+
   function getMonthYear(date: Date) {
     const year = date.getFullYear()
     const month = date.toLocaleString('default', { month: 'short' })
@@ -181,7 +192,7 @@ function Calendar() {
       <div className='events'>
         <p className='text-[#777]/50 text-center my-5 text-xs font-medium'>Routines for {getFormattedDate(routineDate)}, {getDay(routineDate)} <TextEmoji emoji={getEmojiByDay(routineDate)} /></p>
         <div className="routines flex flex-col gap-3 p-4">
-          {GetRoutines(routinesOfTheDay, navigate)}
+          <GetRoutines routines={routinesOfTheDay} />
         </div>
       </div>
       <div className='pb-20'>

@@ -9,7 +9,7 @@ function Weekly({ routine }: { routine: Routine }) {
 
   return (
     <div className='mt-4'>
-      <p className='text-xs text-grey mb-3'>Routine Days </p>
+      {/* <p className='text-xs text-grey mb-3'>Routine Days </p> */}
       <div className='flex items-center justify-between gap-2'>
         {routineDays.map((day, index) => {
           // if (routineTime[index])

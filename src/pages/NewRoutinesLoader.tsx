@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { capitalize } from '../lib/lib'
 import Loading from '../components/Loading'
 import { RoutineDescription } from './Routines'
+import RoutineView from './viewRoutine/RoutineView'
 
 
 export default function NewRoutinesLoader() {
@@ -24,7 +25,7 @@ export default function NewRoutinesLoader() {
 
     return <div className=''>
         <div className="routines flex flex-col gap-[0.9rem] mt-3">
-            {routines.length === 0 ? <></> : GetRoutines(routines, navigate)}
+            {routines.length === 0 ? <></> : <GetRoutines routines={routines}/>}
         </div>
         <button className='no-highlight m-auto block mt-10 bg-dark shadow-lg shadow-dark/50 text-white py-3 px-7 text-[0.7rem] font-medium rounded-full tap97' onClick={() => delay(loadMoreRoutines)}>
             {/* Show routines for {getFormattedDate(tomorrow)} */}
@@ -53,8 +54,9 @@ export default function NewRoutinesLoader() {
     }
 }
 
-export function GetRoutines(routines: Array<Routine>, navigate: Function) {
-    // console.log(routines)
+export function GetRoutines({ routines }: { routines: Array<Routine> }) {
+    const [currentClickedRoutine, setCurrentClickedRoutine] = useState<Routine | null>(null)
+    const [showRoutineModal, setRoutineModal] = useState(false)
 
     if (!routines)
         return <Loading />
@@ -69,59 +71,71 @@ export function GetRoutines(routines: Array<Routine>, navigate: Function) {
             <p className='text-xs text-center text-[#777]/50 font-medium'>Go to Routines tab to see all routines <TextEmoji emoji="💫" /></p>
         </div>
 
-    return routines.map((routine: Routine, index) => {
-        if (routine.type === 'notification') {
-            if (routine.name === 'Completed') {
-                return <p className='text-[#777]/50 text-center my-3 mt-10 text-sm font-medium' key={index}>Completed <TextEmoji emoji="🤩" /></p>
-            }
-            return <p className='text-[#777]/50 text-center my-3 mt-10 text-sm font-medium' key={index}>{routine.name}</p>
-        }
-        const isActiveRoutine = routine.status === 'active'
-        const isCompleted = routine.status === 'done'
+    return <>
+        <RoutineView routine={currentClickedRoutine} show={showRoutineModal} cb={[() => { setRoutineModal(false) }, () => { setRoutineModal(false) }]} />
+        {
+            routines.map((routine: Routine, index) => {
+                if (routine.type === 'notification') {
+                    if (routine.name === 'Completed') {
+                        return <p className='text-[#777]/50 text-center my-3 mt-10 text-sm font-medium' key={index}>Completed <TextEmoji emoji="🤩" /></p>
+                    }
+                    return <p className='text-[#777]/50 text-center my-3 mt-10 text-sm font-medium' key={index}>{routine.name}</p>
+                }
+                const isActiveRoutine = routine.status === 'active'
+                const isCompleted = routine.status === 'done'
 
-        return (
-            <div className={
-                `routine flex flex-col p-[1.2rem] rounded-[1.6rem] ${isActiveRoutine ? 'bg-accent shadow-accent/40 shadow-lg dark:bg-accent/90' : 'border-[1px] bg-routine_bg dark:bg-routine_bg_dark border-routine_border dark:border-routine_border_dark  '}
+                return (
+                    <div className={
+                        `routine flex flex-col p-[1.2rem] rounded-[1.6rem] ${isActiveRoutine ? 'bg-accent shadow-accent/40 shadow-lg dark:bg-accent/90' : 'border-[1px] bg-routine_bg dark:bg-routine_bg_dark border-routine_border dark:border-routine_border_dark  '}
 				tap99 ${isCompleted ? 'opacity-60' : ''}
                 ${routine.type === 'holiday' ? 'glow-holiday' : ''}
                 ${routine.type === 'calendar' ? 'glow-calendar' : ''}
                 `}
-                key={index}
-                onClick={() => delay(() => navigate(`/viewRoutine/${routine.index}`))}
-            >
-                <div className="top flex flex-row gap-3">
-                    <div className="left">
-                        <div className={`emoji aspect-square flex-center rounded-xl p-2 flex-1 ${isActiveRoutine ? 'dark:bg-white/20 bg-white/20' : 'dark:bg-black/40 bg-white'}`}>
-                            <img src={Emoji.get(routine.emoji || '⏰')} className='w-[25px] aspect-square' />
-                        </div>
-                    </div>
-                    <div className={`right flex-1 flex flex-row justify-between flex-center gap-3 `}>
-                        <div className="name"><p className={`font-[550] text-[0.95rem] line-clamp-2 ${isActiveRoutine ? 'text-white' : ''}`}>{routine.name}</p></div>
-                        <div className="time"><p className={`text-[0.6rem] whitespace-nowrap font-[450] ${isActiveRoutine ? 'text-white/80' : 'text-secondary'} text-right`}>{GetDisplayTime(routine)}</p></div>
-                    </div>
-                </div>
-                {
-                    routine.description &&
-                    <RoutineDescription routine={routine} active={isActiveRoutine} />
-                }
-                {
-                    isActiveRoutine &&
-                    <div className="bottom flex flex-row gap-3">
-                        <BlankEmojiLeft />
-                        <div className="right w-full flex-1 mt-2">
-                            <div className="sliderContainer flex-row flex gap-[0.35rem] justify-center items-center flex-1">
-                                <p className='text-[0.6rem] font-medium whitespace-nowrap text-white/80'>{routine.passed}</p>
-                                <div className="slider w-full h-1 bg-[#ffffff55] rounded-xl">
-                                    <div className="slide bg-white w-[50%] h-1 rounded-xl" style={{ width: `${routine.percentage}%` }}></div>
+                        key={index}
+                        onClick={
+                            // () => delay(() => navigate(`/viewRoutine/${routine.index}`))
+                            () => {
+                                setCurrentClickedRoutine(routine)
+                                setRoutineModal(true)
+                            }
+                        }
+                    >
+                        <div className="top flex flex-row gap-3">
+                            <div className="left">
+                                <div className={`emoji aspect-square flex-center rounded-xl p-2 flex-1 ${isActiveRoutine ? 'dark:bg-white/20 bg-white/20' : 'dark:bg-black/40 bg-white'}`}>
+                                    <img src={Emoji.get(routine.emoji || '⏰')} className='w-[25px] aspect-square' />
                                 </div>
-                                <p className='text-[0.6rem] font-medium text-white/80 whitespace-nowrap'>{routine.left}</p>
+                            </div>
+                            <div className={`right flex-1 flex flex-row justify-between flex-center gap-3 `}>
+                                <div className="name"><p className={`font-[550] text-[0.95rem] line-clamp-2 ${isActiveRoutine ? 'text-white' : ''}`}>{routine.name}</p></div>
+                                <div className="time"><p className={`text-[0.6rem] whitespace-nowrap font-[450] ${isActiveRoutine ? 'text-white/80' : 'text-secondary'} text-right`}>{GetDisplayTime(routine)}</p></div>
                             </div>
                         </div>
+                        {
+                            routine.description &&
+                            <RoutineDescription routine={routine} active={isActiveRoutine} />
+                        }
+                        {
+                            isActiveRoutine &&
+                            <div className="bottom flex flex-row gap-3">
+                                <BlankEmojiLeft />
+                                <div className="right w-full flex-1 mt-2">
+                                    <div className="sliderContainer flex-row flex gap-[0.35rem] justify-center items-center flex-1">
+                                        <p className='text-[0.6rem] font-medium whitespace-nowrap text-white/80'>{routine.passed}</p>
+                                        <div className="slider w-full h-1 bg-[#ffffff55] rounded-xl">
+                                            <div className="slide bg-white w-[50%] h-1 rounded-xl" style={{ width: `${routine.percentage}%` }}></div>
+                                        </div>
+                                        <p className='text-[0.6rem] font-medium text-white/80 whitespace-nowrap'>{routine.left}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
-                }
-            </div>
-        )
-    })
+                )
+            })
+        }
+    </>
+
 }
 function BlankEmojiLeft() {
     return (<div className="left opacity-0 select-none">
