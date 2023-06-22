@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import delay from '../lib/delay'
+import delay, { df } from '../lib/delay'
 import Emoji from 'emoji-store'
 
 export default function BottomModal({ show, children, btnTxt, cb }: { show: boolean, children: any, btnTxt?: Array<any>, cb?: Array<Function | any> }) {
@@ -31,7 +31,16 @@ export default function BottomModal({ show, children, btnTxt, cb }: { show: bool
    }
 
    return <>
-      <div className={`duration-[400ms] h-[100dvh] w-full ${backDisplay ? 'flex' : 'hidden'} fixed bg-transparent top-0 transition-all ease-linear left-0 z-[100] items-end flex text-dark dark:text-darkText modal-bg-linear-grad ${isShow ? ' backdrop-blur-sm opacity-100' : 'backdrop-blur-0 opacity-0'}`}>
+      <div
+         className={`duration-[300ms] h-[100dvh] w-full ${backDisplay ? 'flex' : 'hidden'}
+          fixed bg-transparent top-0 transition-all ease-linear left-0 z-[100] modal-bg-linear-grad
+          ${isShow ? 'opacity-100' : 'opacity-0'}`}>
+      </div>
+      <div
+         onClick={() => { cb && cb[0] && cb[0]() }}
+         className={`duration-[300ms] h-[100dvh] w-full ${backDisplay ? 'flex' : 'hidden'}
+       fixed bg-transparent top-0 transition-all ease-linear left-0 z-[100] items-end flex text-dark dark:text-darkText
+       ${isShow ? ' backdrop-blur-sm' : 'backdrop-blur-0'}`}>
       </div>
 
       <div className={`fixed max-h-[95vh] overflow-auto z-[101] ${isShow ? 'bottom-0' : 'bottom-[-150vh]'} p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full transition-all ease-in-out duration-[400ms]`}>
@@ -45,7 +54,9 @@ export default function BottomModal({ show, children, btnTxt, cb }: { show: bool
             <button className='bg-[#77777722] rounded-full py-4 flex-1 tap95' onClick={() => { hideModal(); delay(() => { cb && cb[0] && cb[0]() }) }}>
                {(btnTxt && btnTxt[0]) ? btnTxt[0] : 'Cancel'}
             </button>
-            <button className='flex-1 bg-accent rounded-full text-white py-4 tap95' onClick={() => { delay(() => { cb && cb[1] && cb[1]() }) }}>
+            <button className='flex-1 bg-accent rounded-full text-white py-4 tap95'
+               onClick={df(() => { cb && cb[1] && cb[1]() }, 80)}
+            >
                {(btnTxt && btnTxt[1]) ? btnTxt[1] : 'Ok'}
             </button>
          </div>

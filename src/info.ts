@@ -1,5 +1,5 @@
 const details = {
     name: 'routine',
-    version: '3.1.1'
+    version: '3.5.0'
 }
 export default details

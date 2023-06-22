@@ -1,6 +1,6 @@
 const cacheData = {
 	showCacheThenFetch: {
-		name: 'routine-show-cache-then-fetch-v23',
+		name: 'routine-show-cache-then-fetch-v24',
 		valid: 'routine-show-cache-then-fetch',
 	},
 	emojiCache: {

@@ -355,5 +355,82 @@ button.btn-full-width.grey {
 
 
 .day-gradient {
-    background: linear-gradient(to right, #00003F 0%, #2B2B2B 8%, #FDC830 20%, #FDB813 25%, #FFD700 30%, #FFFFC0 40%, #E0FFFF 50%, #87CEEB 60%, #4B0082 70%, #191970 80%, #191970 92%, #00003F 100%);
+    // background: linear-gradient(to right, #00003F 0%, #2B2B2B 8%, #FDC830 20%, #FDB813 25%, #FFD700 30%, #FFFFC0 40%, #E0FFFF 50%, #87CEEB 60%, #4B0082 70%, #191970 80%, #191970 92%, #00003F 100%);
+    // background: linear-gradient(to right, #00022e 0%, #001a4d 4.17%, #004080 8.33%, #336699 12.5%, #6699cc 16.67%, #80b3ff 20.83%, #b3d9ff 25%, #e6f2ff 29.17%, #ffffff 33.33%, #ffffcc 37.5%, #ffff00 41.67%, #ffcc00 45.83%, #ff9933 50%, #ff6600 54.17%, #ff3300 58.33%, #e60000 62.5%, #990000 66.67%, #660033 70.83%, #400080 75%, #1a0066 79.17%, #000033 83.33%, #000022 87.5%, #000011 91.67%, #000004 95.83%, #000000 100%);
+    // background: linear-gradient(to right, #000000 0%, #000000 10%, #003366 20%, #6699CC 35%, #66CCFF 50%, #FFFFCC 65%, #FFCC99 75%, #FF6600 80%, #000000 90%, #000000 100%);
+    background: linear-gradient(to right,
+            #000000,
+            #000000,
+            #003366,
+            #6699CC,
+            #66CCFF,
+            #FFFFCC,
+            #FFFFFF,
+            #FFB220,
+            #FF8933,
+            #FF5500,
+            #802200,
+            #000000,
+            #000000,
+        );
 }
+
+.calendar-shadow {
+    box-shadow: 3px 2px 20px 0px #00000015;
+}
+
+.shine-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.shine-effect::before {
+    position: absolute;
+    top: 0;
+    left: -75%;
+    z-index: 2;
+    display: block;
+    content: '';
+    width: 50%;
+    height: 100%;
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .3) 100%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .3) 100%);
+    -webkit-transform: skewX(-25deg);
+    transform: skewX(-25deg);
+    filter: blur(10px);
+    // transition-duration: 700ms all;
+    // animation: shine 1000ms linear alternate infinite;
+}
+
+.shine-effect:active:before {
+    -webkit-animation: shine .75s;
+    animation: shine .75s;
+    // left: 125%;
+}
+
+@-webkit-keyframes shine {
+    100% {
+        left: 125%;
+    }
+}
+
+@keyframes shine {
+    100% {
+        left: 125%;
+    }
+}
+
+// .skew-transition {
+//     transition: 100ms transform ease-in-out;
+//     animation: skew 3000ms linear alternate infinite;
+// }
+
+// @keyframes skew {
+//     0% {
+//         transform: skewX(0deg) scale(1.01) skewY(0deg);
+//     }
+
+//     100% {
+//         transform: skewX(-3deg) scale(0.9) skewY(-5deg);
+//     }
+// }

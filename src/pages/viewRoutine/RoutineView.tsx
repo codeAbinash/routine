@@ -2,11 +2,13 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import icons from "../../assets/icons/icons"
 import { Routine } from "../../lib/dateMethods"
-import delay from "../../lib/delay"
+import delay, { df } from "../../lib/delay"
 import ls from "../../lib/storage"
 import Daily from "./Daily"
 import Weekly from "./Weekly"
 import TextEmoji from "../../components/TextEmoji"
+import Calendar from "./Calendar"
+import Once from "./Once"
 
 function viewRoutineTyped(routine: Routine) {
    if (routine.type === 'weekly') {
@@ -15,6 +17,11 @@ function viewRoutineTyped(routine: Routine) {
    if (routine.type === 'daily') {
       return <Daily routine={routine} />
    }
+   if (routine.type === 'calendar' || routine.type === 'holiday') {
+      return <Calendar routine={routine} />
+   }
+   if(routine.type === 'once')
+      return <Once routine={routine} />
    else
       return (
          <div>
@@ -57,26 +64,31 @@ export default function RoutineView({ show, routines, cb, index }: { index: numb
 
    return <>
       <div
+         className={`duration-[300ms] h-[100dvh] w-full ${backDisplay ? 'flex' : 'hidden'}
+          fixed bg-transparent top-0 transition-all ease-linear left-0 z-[50] modal-bg-linear-grad
+          ${isShow ? 'opacity-100' : 'opacity-0'}`}>
+      </div>
+      <div
          onClick={() => { cb && cb[0] && cb[0]() }}
-         className={`duration-[400ms] h-[100dvh] w-full ${backDisplay ? 'flex' : 'hidden'}
-       fixed bg-transparent top-0 transition-all ease-linear left-0 z-[50] items-end flex text-dark dark:text-darkText modal-bg-linear-grad
-       ${isShow ? ' backdrop-blur-sm opacity-100' : 'backdrop-blur-0 opacity-0'}`}>
+         className={`duration-[350ms] h-[100dvh] w-full ${backDisplay ? 'flex' : 'hidden'}
+       fixed bg-transparent top-0 transition-all ease-linear left-0 z-[50] items-end flex text-dark dark:text-darkText
+       ${isShow ? ' backdrop-blur-sm' : 'backdrop-blur-0'}`}>
       </div>
 
-      <div className={`fixed max-h-[95vh] overflow-auto z-[101] ${isShow ? 'bottom-0' : 'bottom-[-150vh]'} left-0 p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full transition-all ease-in-out duration-[400ms]`}>
+      <div className={`fixed max-h-[95vh] overflow-auto z-[51] ${isShow ? 'bottom-0' : 'bottom-[-150vh]'} left-0 p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full transition-all ease-in-out duration-[400ms]`}>
          <div className='bar w-12 h-[0.3rem] bg-[#77777744] rounded-full mx-auto'></div>
          <div className="mb-5">
-            <p className="text-center text-lg font-medium mb-5 mt-4 text-balance line-clamp-2 px-[10%]">{routines[index].name}</p>
+            <p className="text-center text-lg font-medium mb-6 mt-5 text-balance line-clamp-2 px-[10%]">{routines[index].name}</p>
             {viewRoutineTyped(routines[index])}
             {RoutineDescription(routines[index])}
          </div>
 
-         <div className="flex gap-3 mt-6 mb-5 text-sm">
-            <div className="p-2 px-4 bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2">
+         <div className="flex gap-3 mt-6 mb-5 text-[0.8rem]">
+            <div className="p-2.5 px-[1.3rem] bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2">
                <img src={icons.edit} className="dark:invert h-4 w-4 opacity-70" />
                <span className="font-[430]">Edit</span>
             </div>
-            <div className="p-2 px-4 bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2"
+            <div className="p-2.5 px-[1.3rem] bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2"
                onClick={() => { deleteRoutine(index, setIsShow, navigate) }}
             >
                <img src={icons.del} className="dark:invert h-4 w-4 opacity-70" />
@@ -84,9 +96,9 @@ export default function RoutineView({ show, routines, cb, index }: { index: numb
             </div>
          </div>
 
-         <div className="mb-1 mt-7">
-            <button className="no-highlight text-sm tap99 w-full bg-accent text-white font-[450] p-4 rounded-[0.85rem]"
-               onClick={() => { delay(() => { cb && cb[1] && cb[1]() }) }}
+         <div className="mt-7">
+            <button className="no-highlight text-sm tap99 w-full bg-accent text-white font-medium p-[1.1rem] rounded-[0.85rem]"
+               onClick={df(() => { cb && cb[1] && cb[1]() }, 80)}
             >OK</button>
          </div>
       </div>
