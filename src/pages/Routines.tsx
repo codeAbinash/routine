@@ -1,19 +1,18 @@
-import React, { useMemo, useRef } from 'react'
-import NavBar from '../components/NavBar'
-import icons from '../assets/icons/icons'
-import { useEffect, useState } from 'react'
 import Emoji from 'emoji-store'
-import ls from '../lib/storage'
-import { Routine, TypedList, TypedTypes } from '../lib/dateMethods'
-import FloatingButton from '../components/FloatingButton'
-import { capitalize, debounce, randomString, throttle, vibrantColors7 } from '../lib/lib'
-import Header from '../components/Header'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import delay, { df } from '../lib/delay'
-import Watermark from '../components/Watermark'
-import TextEmoji from '../components/TextEmoji'
-import { getFormattedDate, getISODateWithTime } from '../lib/date'
+import FloatingButton from '../components/FloatingButton'
+import Header from '../components/Header'
 import Loading from '../components/Loading'
+import NavBar from '../components/NavBar'
+import TextEmoji from '../components/TextEmoji'
+import Watermark from '../components/Watermark'
+import { getFormattedDate } from '../lib/date'
+import { Routine, TypedList, TypedTypes } from '../lib/dateMethods'
+import delay, { df } from '../lib/delay'
+import { capitalize, debounce, randomString, vibrantColors7 } from '../lib/lib'
+import ls from '../lib/storage'
+import RoutineView from './viewRoutine/RoutineView'
 
 export function searchRoutine(routines: Routine[], query: string) {
     // Return filtered routines 
@@ -109,8 +108,7 @@ function Routines() {
                         <div onClick={df(() => setCurrentSelectedType('all'))} className={`tap95 ${currentSelectedType === 'all' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4`}>All</div>
                     </div>
                     <div className="routines flex flex-wrap gap-[0.9rem] justify-center">
-                        {/* {GetTypedRoutines(currentSelectedType, screenRoutines)} */}
-                        {AllRoutines(screenRoutines as Routine[])}
+                        <AllRoutines allRoutines={allRoutines} screenRoutines={screenRoutines} />
                     </div>
                 </div>
             </section>
@@ -134,17 +132,19 @@ function Routines() {
 // }
 
 
-function AllRoutines(routines: Array<Routine> | null) {
+function AllRoutines({ screenRoutines, allRoutines }: { screenRoutines: Routine[] | null, allRoutines: Routine[] | null }) {
     // console.log(routines)
     const navigate = useNavigate()
+    const [currentRoutineViewIndex, setCurrentRoutineViewIndex] = useState(0)
+    const [showRoutineModal, setRoutineModal] = useState(false)
 
-    if (!routines) {
+    if (!screenRoutines || !allRoutines) {
         return <div className='min-h-[60vh] flex justify-center items-center'>
             <Loading />
         </div>
     }
 
-    if (routines.length === 0) return (
+    if (screenRoutines.length === 0) return (
         <div className="flex flex-col gap-10 mt-10 min-h-[50vh] justify-center items-center">
             <div className='flex flex-col gap-4 px-5'>
                 <p className='text-center text-[#777]/50 text-base font-medium'>No Routine <TextEmoji emoji='😕' /></p>
@@ -157,29 +157,41 @@ function AllRoutines(routines: Array<Routine> | null) {
         </div>
     )
 
-    return routines.map((routine: Routine, index) => {
-        return (
-            <div
-                className='lg:w-[32.5%] md:w-[49.5%] w-full flex-wrap routine flex flex-col p-[1.2rem] rounded-[1.6rem] tap99 bg-routine_bg dark:bg-darkInputBg border-[1px] border-routine_border dark:border-routine_border_dark'
-                key={randomString(5)}
-                onClick={() => delay(() => navigate(`/viewRoutine/${routine.index}`))}
-            >
-                <div className="top flex flex-row gap-3">
-                    <div className="left">
-                        <div className="emoji bg-main aspect-square flex-center rounded-xl p-2 flex-1 dark:bg-black/40">
-                            <img src={Emoji.get(routine.emoji || '⏰')} className='w-[25px] aspect-square' />
+    return <>
+        <RoutineView
+            show={showRoutineModal}
+            routines={allRoutines}
+            index={currentRoutineViewIndex}
+            cb={[() => { setRoutineModal(false) }, () => { setRoutineModal(false) }]}
+        />
+        {
+            screenRoutines.map((routine: Routine, index) => {
+                return (
+                    <div
+                        className='lg:w-[32.5%] md:w-[49.5%] w-full flex-wrap routine flex flex-col p-[1.2rem] rounded-[1.6rem] tap99 bg-routine_bg dark:bg-darkInputBg border-[1px] border-routine_border dark:border-routine_border_dark'
+                        key={randomString(5)}
+                        onClick={() => {
+                            setCurrentRoutineViewIndex(routine.index)
+                            setRoutineModal(true)
+                        }}
+                    >
+                        <div className="top flex flex-row gap-3">
+                            <div className="left">
+                                <div className="emoji bg-main aspect-square flex-center rounded-xl p-2 flex-1 dark:bg-black/40">
+                                    <img src={Emoji.get(routine.emoji || '⏰')} className='w-[25px] aspect-square' />
+                                </div>
+                            </div>
+                            <div className="right flex-1 flex flex-row justify-between flex-center gap-3">
+                                <div className="name"><p className={`font-[550] text-[0.95rem] ${false ? 'text-white' : ''} line-clamp-2`}>{routine.name}</p></div>
+                                <div className="time"><p className={`text-[0.6rem]  font-[450] ${false ? 'text-white/80' : 'text-secondary'} text-right`}>{capitalize(routine.type)}</p></div>
+                            </div>
                         </div>
+                        <RoutineDescription routine={routine} />
+                        <ShowRoutineTime routine={routine} />
                     </div>
-                    <div className="right flex-1 flex flex-row justify-between flex-center gap-3">
-                        <div className="name"><p className={`font-[550] text-[0.95rem] ${false ? 'text-white' : ''} line-clamp-2`}>{routine.name}</p></div>
-                        <div className="time"><p className={`text-[0.6rem]  font-[450] ${false ? 'text-white/80' : 'text-secondary'} text-right`}>{capitalize(routine.type)}</p></div>
-                    </div>
-                </div>
-                <RoutineDescription routine={routine} />
-                <ShowRoutineTime routine={routine} />
-            </div>
-        )
-    })
+                )
+            })}
+    </>
 }
 
 const weekArr = ['S', 'M', 'T', 'W', 'T', 'F', 'S']

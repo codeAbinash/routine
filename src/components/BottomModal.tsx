@@ -9,9 +9,14 @@ export default function BottomModal({ show, children, btnTxt, cb }: { show: bool
    const [backDisplay, setBackDisplay] = useState(false)
 
    useEffect(() => {
-      setBackDisplay(show)
-      const timer = setTimeout(() => { setIsShow(show) }, 0);
-      return () => { clearTimeout(timer) }
+      let t1: any;
+      if (show) {
+         setBackDisplay(true)
+         t1 = setTimeout(() => { setIsShow(true) }, 10);
+      } else
+         setIsShow(false)
+      const timer = setTimeout(() => { setBackDisplay(show) }, 400);
+      return () => { clearTimeout(timer), clearTimeout(t1) }
    }, [show])
 
 

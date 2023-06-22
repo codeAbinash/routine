@@ -55,7 +55,7 @@ export default function ApplyRoutine() {
 	)
 
 	function deleteRoutine(id: string) {
-
+		setModalBtnText(['Cancel', 'Unsubscribe'])
 		setModalUi(<BasicModal text='Are you sure?' desc={<span>Are you sure you want to unsubscribe this routine : <span className="text-accent">{id}</span> ? This will delete all the data associated with this routine.</span>} emoji='😕' />)
 
 		setModalCallback([() => { setModalShow(false) }, () => {

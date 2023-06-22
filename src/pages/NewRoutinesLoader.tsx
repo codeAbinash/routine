@@ -25,7 +25,7 @@ export default function NewRoutinesLoader() {
 
     return <div className=''>
         <div className="routines flex flex-col gap-[0.9rem] mt-3">
-            {routines.length === 0 ? <></> : <GetRoutines routines={routines}/>}
+            {routines.length === 0 ? <></> : <GetRoutines screenRoutines={routines} allRoutines={lsRoutines} />}
         </div>
         <button className='no-highlight m-auto block mt-10 bg-dark shadow-lg shadow-dark/50 text-white py-3 px-7 text-[0.7rem] font-medium rounded-full tap97' onClick={() => delay(loadMoreRoutines)}>
             {/* Show routines for {getFormattedDate(tomorrow)} */}
@@ -54,14 +54,14 @@ export default function NewRoutinesLoader() {
     }
 }
 
-export function GetRoutines({ routines }: { routines: Array<Routine> }) {
-    const [currentClickedRoutine, setCurrentClickedRoutine] = useState<Routine | null>(null)
+export function GetRoutines({ screenRoutines, allRoutines }: { screenRoutines: Routine[], allRoutines: Routine[] }) {
+    const [currentRoutineViewIndex, setCurrentRoutineViewIndex] = useState(0)
     const [showRoutineModal, setRoutineModal] = useState(false)
 
-    if (!routines)
+    if (!screenRoutines)
         return <Loading />
 
-    if (routines.length === 0)
+    if (screenRoutines.length === 0)
         return <div className='h-[40dvh] flex flex-col items-center justify-center'>
             <p className='text-[#777]/50 text-center my-5 text-lg font-medium flex flex-col gap-4'>
                 <span>No Routine <TextEmoji emoji='😕' /></span>
@@ -72,9 +72,14 @@ export function GetRoutines({ routines }: { routines: Array<Routine> }) {
         </div>
 
     return <>
-        <RoutineView routine={currentClickedRoutine} show={showRoutineModal} cb={[() => { setRoutineModal(false) }, () => { setRoutineModal(false) }]} />
+        <RoutineView
+            show={showRoutineModal}
+            routines={allRoutines}
+            index={currentRoutineViewIndex}
+            cb={[() => { setRoutineModal(false) }, () => { setRoutineModal(false) }]}
+        />
         {
-            routines.map((routine: Routine, index) => {
+            screenRoutines.map((routine: Routine, index) => {
                 if (routine.type === 'notification') {
                     if (routine.name === 'Completed') {
                         return <p className='text-[#777]/50 text-center my-3 mt-10 text-sm font-medium' key={index}>Completed <TextEmoji emoji="🤩" /></p>
@@ -92,13 +97,10 @@ export function GetRoutines({ routines }: { routines: Array<Routine> }) {
                 ${routine.type === 'calendar' ? 'glow-calendar' : ''}
                 `}
                         key={index}
-                        onClick={
-                            // () => delay(() => navigate(`/viewRoutine/${routine.index}`))
-                            () => {
-                                setCurrentClickedRoutine(routine)
-                                setRoutineModal(true)
-                            }
-                        }
+                        onClick={() => {
+                            setCurrentRoutineViewIndex(routine.index)
+                            setRoutineModal(true)
+                        }}
                     >
                         <div className="top flex flex-row gap-3">
                             <div className="left">

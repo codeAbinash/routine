@@ -1,10 +1,22 @@
 [
     {
+        "version": "3.1.1",
+        "name": "Performance 🔥",
+        "emoji": [
+            "🔥",
+            "🚀"
+        ],
+        "date": "2023-06-22",
+        "description": [
+            "Performance improvements of the Routine popup view"
+        ]
+    },
+    {
         "version": "3.1.0",
         "name": "UI & Bug Fix 🎨🐛",
         "emoji": [
             "🎨",
-            "🐛"  
+            "🐛"
         ],
         "date": "2023-06-21",
         "description": [

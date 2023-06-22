@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import './assets/scss/index.scss'
 // import Construction from './pages/Construction'
+import Calendar from './pages/Calendar'
 import Home from './pages/Home'
 import Routines from './pages/Routines'
-import Calendar from './pages/Calendar'
 // import More from './pages/More'
-import { loadTheme } from './lib/theme'
 import Loading from './components/Loading'
+import { loadTheme } from './lib/theme'
 // import ViewRoutine from './pages/ViewRoutine'
 
 const LazyAbout = React.lazy(() => import('./pages/About'))
@@ -18,7 +18,6 @@ const LazyManageRoutine = React.lazy(() => import('./pages/ManageRoutine'))
 const LazyNewRoutine = React.lazy(() => import('./pages/NewRoutine'))
 const LazyStart = React.lazy(() => import('./pages/Start'))
 const LazyNotifications = React.lazy(() => import('./pages/Notifications'))
-const LazyViewRoutine = React.lazy(() => import('./pages/ViewRoutine'))
 const BuyMeCoffee = React.lazy(() => import('./pages/author/BuyMeCoffee'))
 const LazyBackup = React.lazy(() => import('./pages/backup-restore/Backup'))
 const LazyRestore = React.lazy(() => import('./pages/backup-restore/Restore'))
@@ -60,7 +59,6 @@ export default function App() {
           <Route path='/more' element={<LazyMore />} />
           <Route path='/calendar' element={< Calendar />} />
           <Route path='/notifications' element={< LazyNotifications />} />
-          <Route path='/viewRoutine/:routineId' element={< LazyViewRoutine />} />
           <Route path='/author/buyMeCoffee' element={< BuyMeCoffee />} />
           <Route path='/backup' element={< LazyBackup />} />
           <Route path='/restore' element={< LazyRestore />} />

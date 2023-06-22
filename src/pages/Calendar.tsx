@@ -192,7 +192,7 @@ function Calendar() {
       <div className='events'>
         <p className='text-[#777]/50 text-center my-5 text-xs font-medium'>Routines for {getFormattedDate(routineDate)}, {getDay(routineDate)} <TextEmoji emoji={getEmojiByDay(routineDate)} /></p>
         <div className="routines flex flex-col gap-3 p-4">
-          <GetRoutines routines={routinesOfTheDay} />
+          <GetRoutines screenRoutines={routinesOfTheDay} allRoutines={routines} />
         </div>
       </div>
       <div className='pb-20'>

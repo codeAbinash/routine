@@ -107,7 +107,7 @@ function Home() {
 			<section className='p-[1.2rem] pt-3'>
 				{/* <p className='text-[#777]/50 text-center mt-2 mb-5 text-sm font-medium'>Today's routines</p> */}
 				<div className="routines flex flex-col gap-[0.9rem]">
-					<GetRoutines routines={screenRoutines} />
+					<GetRoutines screenRoutines={screenRoutines} allRoutines={routines}/>
 				</div>
 				<NewRoutinesLoader />
 			</section>

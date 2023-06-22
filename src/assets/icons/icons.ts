@@ -28,6 +28,8 @@ import team from './src/team.svg'
 import telegram_black from './src/telegram_black.svg'
 import spinner from './src/spinner.svg'
 import chat from './src/chat.svg'
+import del from './src/delete.svg'
+import edit from './src/edit.svg'
 
 const icons = {
     Lock, delete_left_solid, home,
@@ -38,7 +40,7 @@ const icons = {
     check_solid, xmark_solid, notification,
     right_arrow_next, shield, theme, left_arrow,
     backup, restore, shield_cross, telegram_black,
-    spinner, chat
+    spinner, chat, del, edit
 }
 
 
