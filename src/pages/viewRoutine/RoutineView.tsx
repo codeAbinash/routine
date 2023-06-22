@@ -84,7 +84,7 @@ export default function RoutineView({ show, routines, cb, index }: { index: numb
             </div>
          </div>
 
-         <div className="mb-2 mt-7">
+         <div className="mb-1 mt-7">
             <button className="no-highlight text-sm tap99 w-full bg-accent text-white font-[450] p-4 rounded-[0.85rem]"
                onClick={() => { delay(() => { cb && cb[1] && cb[1]() }) }}
             >OK</button>

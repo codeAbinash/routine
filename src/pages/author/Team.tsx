@@ -46,8 +46,8 @@ export default function Team() {
                            }
                         }
                      >
-                        <div className="pic">
-                           <img src={user.pic} className="w-[4.52rem] aspect-square rounded-full" />
+                        <div className="pic flex-none">
+                           <img src={user.pic} className="w-14 aspect-square rounded-full object-cover" />
                         </div>
                         <div className="content">
                            <div className="name font-medium text-sm">
