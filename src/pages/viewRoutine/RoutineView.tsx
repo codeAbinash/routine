@@ -63,7 +63,7 @@ export default function RoutineView({ show, routines, cb, index }: { index: numb
        ${isShow ? ' backdrop-blur-sm opacity-100' : 'backdrop-blur-0 opacity-0'}`}>
       </div>
 
-      <div className={`fixed max-h-[95vh] overflow-scroll z-[101] ${isShow ? 'bottom-0' : 'bottom-[-150vh]'} left-0 p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full transition-all ease-in-out duration-[400ms]`}>
+      <div className={`fixed max-h-[95vh] overflow-auto z-[101] ${isShow ? 'bottom-0' : 'bottom-[-150vh]'} left-0 p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full transition-all ease-in-out duration-[400ms]`}>
          <div className='bar w-12 h-[0.3rem] bg-[#77777744] rounded-full mx-auto'></div>
          <div className="mb-5">
             <p className="text-center text-lg font-medium mb-5 mt-4 text-balance line-clamp-2 px-[10%]">{routines[index].name}</p>
