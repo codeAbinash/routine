@@ -12,7 +12,7 @@ export default function BottomModal({ show, children, btnTxt, cb }: { show: bool
       let t1: any;
       if (show) {
          setBackDisplay(true)
-         t1 = setTimeout(() => { setIsShow(true) }, 10);
+         t1 = setTimeout(() => { setIsShow(true) }, 50);
       } else
          setIsShow(false)
       const timer = setTimeout(() => { setBackDisplay(show) }, 400);
@@ -35,7 +35,7 @@ export default function BottomModal({ show, children, btnTxt, cb }: { show: bool
       </div>
 
       <div className={`fixed max-h-[95vh] overflow-scroll z-[101] ${isShow ? 'bottom-0' : 'bottom-[-150vh]'} p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full transition-all ease-in-out duration-[400ms]`}>
-         <div className='bar w-12 h-[0.3rem] bg-[#77777755] rounded-full mx-auto mb-12'></div>
+         <div className='bar w-12 h-[0.3rem] bg-[#77777744] rounded-full mx-auto mb-12'></div>
 
          {/*Show children*/}
          {children}

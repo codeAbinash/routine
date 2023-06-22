@@ -6,7 +6,25 @@ import delay from "../../lib/delay"
 import ls from "../../lib/storage"
 import Daily from "./Daily"
 import Weekly from "./Weekly"
+import TextEmoji from "../../components/TextEmoji"
 
+function viewRoutineTyped(routine: Routine) {
+   if (routine.type === 'weekly') {
+      return <Weekly routine={routine} />
+   }
+   if (routine.type === 'daily') {
+      return <Daily routine={routine} />
+   }
+   else
+      return (
+         <div>
+            <p>Not implemented yet</p>
+            <div className='p-4 bg-black text-white rounded-2xl mt-4'>
+               <code className='text-sm'>{JSON.stringify(routine, null, 4)}</code>
+            </div>
+         </div>
+      )
+}
 
 export default function RoutineView({ show, routines, cb, index }: { index: number, show: boolean, routines: Routine[], cb?: Array<Function | any> }) {
    const [isShow, setIsShow] = useState(false)
@@ -46,19 +64,19 @@ export default function RoutineView({ show, routines, cb, index }: { index: numb
       </div>
 
       <div className={`fixed max-h-[95vh] overflow-scroll z-[101] ${isShow ? 'bottom-0' : 'bottom-[-150vh]'} left-0 p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full transition-all ease-in-out duration-[400ms]`}>
-         <div className='bar w-12 h-[0.3rem] bg-[#77777755] rounded-full mx-auto mb-5'></div>
+         <div className='bar w-12 h-[0.3rem] bg-[#77777744] rounded-full mx-auto'></div>
          <div className="mb-5">
-            <p className="text-center text-lg font-medium my-8 mt-6 text-balance line-clamp-2 px-[10%]">{routines[index].name}</p>
+            <p className="text-center text-lg font-medium mb-5 mt-4 text-balance line-clamp-2 px-[10%]">{routines[index].name}</p>
             {viewRoutineTyped(routines[index])}
             {RoutineDescription(routines[index])}
          </div>
 
-         <div className="flex gap-3 mb-5 text-sm">
-            <div className="p-2 px-4 bg-inputBg tap95 dark:bg-darkInputBg rounded-full flex justify-center items-center gap-2">
+         <div className="flex gap-3 mt-6 mb-5 text-sm">
+            <div className="p-2 px-4 bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2">
                <img src={icons.edit} className="dark:invert h-4 w-4 opacity-70" />
                <span className="font-[430]">Edit</span>
             </div>
-            <div className="p-2 px-4 bg-inputBg tap95 dark:bg-darkInputBg rounded-full flex justify-center items-center gap-2"
+            <div className="p-2 px-4 bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2"
                onClick={() => { deleteRoutine(index, setIsShow, navigate) }}
             >
                <img src={icons.del} className="dark:invert h-4 w-4 opacity-70" />
@@ -66,8 +84,8 @@ export default function RoutineView({ show, routines, cb, index }: { index: numb
             </div>
          </div>
 
-         <div className="">
-            <button className="no-highlight tap99 w-full bg-accent text-white font-[450] p-3.5 rounded-xl"
+         <div className="mb-2 mt-7">
+            <button className="no-highlight text-sm tap99 w-full bg-accent text-white font-[450] p-4 rounded-[0.85rem]"
                onClick={() => { delay(() => { cb && cb[1] && cb[1]() }) }}
             >OK</button>
          </div>
@@ -105,30 +123,10 @@ function deleteRoutine(index: number, setIsShow: Function, navigate: Function) {
 function RoutineDescription(routine: Routine) {
    if (!routine.description)
       return
-   return <div className="description mt-6">
+   return <div className="description">
       {/* <p className='text-xs text-grey'>Description </p> */}
-      <p className='text-sm p-4 bg-inputBg dark:bg-darkInputBg rounded-xl mt-2 tap99'>{routine.description}</p>
+      <p className='text-sm p-4 bg-inputBg dark:bg-[#222] font-[430] rounded-xl mt-2 tap99'>{routine.description}
+         <span className="opacity-40 text-xs font-medium"> #{routine.sub}</span>
+      </p>
    </div>
 }
-
-
-
-
-function viewRoutineTyped(routine: Routine) {
-   if (routine.type === 'weekly') {
-      return <Weekly routine={routine} />
-   }
-   if (routine.type === 'daily') {
-      return <Daily routine={routine} />
-   }
-   else
-      return (
-         <div>
-            <p>Not implemented yet</p>
-            <div className='p-4 bg-black text-white rounded-2xl mt-4'>
-               <code className='text-sm'>{JSON.stringify(routine, null, 4)}</code>
-            </div>
-         </div>
-      )
-}
-

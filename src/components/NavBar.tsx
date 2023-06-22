@@ -11,7 +11,7 @@ function NavBar({ active }: any) {
 		<div
 			className={
 				`navBar fixed bottom-0 h-[70px] pt-2 bg-white/70 dark:bg-black/60
-               backdrop-blur dark:backdrop-blur-md w-full border-t-[0.5px] border-t-[#77777755] flex flex-row justify-evenly align-middle`
+               backdrop-blur dark:backdrop-blur-md w-full border-t-[0.5px] border-t-[#77777744] flex flex-row justify-evenly align-middle`
 			}>
 			{tabIcons.map((icon, index) => {
 				return (

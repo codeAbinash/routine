@@ -8,7 +8,7 @@ function Weekly({ routine }: { routine: Routine }) {
   const routineTime = routine.time
 
   return (
-    <div className='mt-4'>
+    <div className='mt-4 mb-8'>
       {/* <p className='text-xs text-grey mb-3'>Routine Days </p> */}
       <div className='flex items-center justify-between gap-2'>
         {routineDays.map((day, index) => {

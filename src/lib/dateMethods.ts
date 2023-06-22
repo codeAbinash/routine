@@ -215,8 +215,8 @@ function dayFilterOnce(routine: Routine, now: Date) {
 }
 
 
-type SplittedTime = { hour: number, minute: number } | null
-function timeSplitter(time: string): SplittedTime {
+export type SplittedTime = { hour: number, minute: number } | null
+export function timeSplitter(time: string): SplittedTime {
     if (!time) return null
     const splitted = time.split(':')
     return {

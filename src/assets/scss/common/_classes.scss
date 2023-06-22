@@ -316,6 +316,7 @@ button.btn-full-width.grey {
     outline: 5px solid #3b82f6;
     animation: pulse-holiday 2s linear infinite;
 }
+
 .glow-calendar {
     outline: 3px solid #3b82f6;
     animation: pulse-calendar 1.5s linear infinite alternate;
@@ -327,6 +328,7 @@ button.btn-full-width.grey {
         outline-offset: 0;
         outline-width: 2px;
     }
+
     70%,
     100% {
         outline-color: transparent;
@@ -334,16 +336,24 @@ button.btn-full-width.grey {
         outline-width: 7px;
     }
 }
+
 @keyframes pulse-calendar {
     0% {
         outline-color: mix($accent, #00000000, 30%);
         // outline-offset: 0;
         // outline-width: 2px;
     }
+
     70%,
     100% {
         outline-color: transparent;
         // outline-offset: 0.1em;
         // outline-width: 4px;
     }
+}
+
+
+
+.day-gradient {
+    background: linear-gradient(to right, #00003F 0%, #2B2B2B 8%, #FDC830 20%, #FDB813 25%, #FFD700 30%, #FFFFC0 40%, #E0FFFF 50%, #87CEEB 60%, #4B0082 70%, #191970 80%, #191970 92%, #00003F 100%);
 }
