@@ -1,50 +1,70 @@
 import { useState } from 'react'
 import images from '../../assets/images/images'
 import BackHeader from '../../components/BackHeader'
+import icons from '../../assets/icons/icons'
+import ls from '../../lib/storage'
+import TextEmoji from '../../components/TextEmoji'
 
 function Backup() {
-    const [isBackedUp, setBackedUp] = useState(false)
-    const [backupBtnText, setBackupBtnText] = useState('Backup Now')
-
-
     return (
         <div className='backup screen dark:text-darkText'>
             <BackHeader title='Backup your data' />
-            <section className='p-5 flex flex-col justify-center items-center pt-16'>
-                <img src={images.undraw_add_notes_re_ln36} className='w-[70%] m-auto mt-10' />
-                <p className='mt-8 text-xs px-3 pt-2 text-center'>Back up your data by downloading the file. Keep it safe and use it when you next use this application or switch devices.  </p>
-                {!isBackedUp && <button onClick={() => backup()} className='no-highlight tap97 mt-5 bg-accent p-4 px-9 text-xs text-white font-medium rounded-full'>{backupBtnText}</button>}
-            </section>
-            {
-                isBackedUp && <BackUpSection />
-            }
-        </div>
-    )
-    function backup() {
-        setBackupBtnText('Backing up...')
-        // Write Backup Code Here
-        setTimeout(() => {
-            setBackedUp(true)
-            setBackupBtnText('Backup Again')
-        }, 1000);
-        setTimeout(() => {
-            setBackedUp(false)
-        }, 5000);
-    }
-}
+            <div className='min-h-[80dvh] p-5 flex flex-col justify-center items-center gap-7'>
+                <p className='text-center text-xl font-semibold text-balance'>Backup your data <TextEmoji emoji='📂' /> </p>
 
-function BackUpSection() {
-    return (
-        <div className="p-5">
-            <p className='text-xs text-center'>Your data has been backed up successfully.</p>
-            <div className='flex flex-col gap-2 mt-5'>
-                <button className='btn-full text-sm no-highlight tap99'>Download 2281416.json</button>
+                <img src={icons.backup_folder} className='w-[45%] mx-auto drop-shadow-2xl' />
+                <p className='text-balance text-[0.65rem] text-center text-secondary'>
+                    You can backup your data by downloading a file. This file can be used to restore your data on another device. Or you can use it to restore your data if you reinstall the app.
+                </p>
+                <BackupUi />
             </div>
         </div>
     )
 }
+export function BackupUi() {
+    const [isBackingUp, setIsBackingUp] = useState(false)
+    const [isBackedUp, setIsBackedUp] = useState(false)
 
+    function backupBtnClick() {
+        setIsBackingUp(true)
+        setTimeout(() => {
+            createBackup()
+            setIsBackingUp(false)
+            setIsBackedUp(true)
+        }, 500);
+    }
 
+    return <>
+        {/* <div className='animate-bounce-slow mt-10 mb-10 '><img src={icons.backup} alt="bag" className={`mx-auto mt-5 w-24 h-24`} /></div> */}
+        <div className='flex justify-center items-center pt-10'>
+            <button className="no-highlight tap99 bg-dark text-white p-4 px-14 font-medium rounded-[0.65rem] text-xs"
+                disabled={isBackingUp}
+                onClick={backupBtnClick}
+            >
+                {
+                    isBackingUp ? 'Preparing Backup...' : isBackedUp ? 'Backup Again' : 'Download Backup'
+                }
+            </button>
+        </div>
+        <p className='text-center text-grey text-[0.65rem] mt-5 text-balance'>This will download a backup file containing all your data. </p>
+    </>
+}
 
+function createBackup() {
+    const routines = JSON.parse(ls.get('routines') || '[]')
+    const subscriptions = JSON.parse(ls.get('subscriptions') || '[]')
+
+    const backup = { routines, subscriptions }
+
+    const dataStr = JSON.stringify(backup)
+    const blob = new Blob([dataStr], { type: "text/plain;charset=utf-8" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'routine_backup.json';
+    a.click();
+    a.remove()
+    window.URL.revokeObjectURL(url);
+}
 
 export default Backup

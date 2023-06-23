@@ -67,7 +67,7 @@ function More() {
         {
             name: 'Backup your data',
             icon: icons.backup,
-            callback: () => navigate('/backup'),
+            callback: () => { navigate('/backup') },
             rightArrow: true
         },
         {
@@ -110,9 +110,31 @@ function More() {
         {
             name: 'Join Telegram Channel',
             icon: icons.telegram_black,
-            callback: () => window.open('https://t.me/routine_application', '_blank'),
+            callback: () => {
+                setModalUi(JoinTelegramUi)
+                setIsShow(true)
+                setModalButtons(['Cancel', 'Join'])
+                setModalCallbacks([() => { setIsShow(false) },
+                () => window.open('https://t.me/routine_application', '_blank')
+                ])
+            },
             rightArrow: true,
             newDot: true
+        },
+        {
+            name: 'Send Feedback',
+            icon: icons.chat,
+
+            callback: () => {
+                setModalUi(FeedBackUi)
+                setIsShow(true)
+                setModalButtons(['Cancel', 'Send Feedback'])
+                setModalCallbacks([() => { setIsShow(false) },
+                () =>
+                    window.open('mailto:codeAbinash@gmail.com?subject=Feedback of Routine Application', '_blank')
+                ])
+            },
+            rightArrow: true
         },
         {
             name: 'Contributors',
@@ -123,14 +145,6 @@ function More() {
             rightArrow: true,
             // iconOriginal : true
         },
-        {
-            name: 'Send Feedback',
-            icon: icons.chat,
-            callback: () => {
-                window.open('mailto:codeAbinash@gmail.com?subject=Feedback of Routine Application', '_blank')
-            },
-            rightArrow: true
-        }
     ]
 
     const navigate = useNavigate()
@@ -223,8 +237,28 @@ export default More
 
 function ResetEverythingUI() {
     return <>
-        <p className='text-center text-xl font-semibold'>Are you sure you want to reset everything?</p>
-        <div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('🤯')} alt="bag" className={`mx-auto mt-5 w-24 h-24`} /></div>
-        <p className='text-center text-grey text-xs mt-5 font-[450]'>This will delete all your routines, subscriptions, and settings. <br />This action cannot be undone.</p>
+        <p className='text-center text-xl font-semibold text-balance'>Are you sure you want  to reset everything?</p>
+        <div className='animate-bounce-slow mt-10 mb-10 '><img src={Emoji.get('🤯')} alt="bag" className={`mx-auto mt-5 w-24 h-24`} /></div>
+        <p className='text-center text-grey text-xs mt-5 font-[450] text-balance'>It is advised to keep a backup before resetting everything. This will delete all your routines, subscriptions, and settings. This action cannot be undone. Are you sure?</p>
     </>
-} 
+}
+
+function JoinTelegramUi() {
+    return <>
+        <p className='text-center text-xl font-semibold text-balance'>Join Telegram channel to get latest updates <TextEmoji emoji='🤩' /> </p>
+        <div className='animate-bounce-slow mt-10 mb-10 '><img src={icons.telegram} alt="bag" className={`mx-auto mt-5 w-28 h-28`} /></div>
+        <p className='text-center text-grey text-xs mt-5 font-[450] text-balance'>
+            Join Telegram Channel <a href="https://t.me/routine_application" target='_blank' className='text-accent'>routine_application</a> to get latest updates about this application.
+        </p>
+    </>
+}
+function FeedBackUi() {
+    return <>
+        <p className='text-center text-xl font-semibold text-balance'>Send Feedback <TextEmoji emoji='🤩' /> </p>
+        <div className='animate-bounce-slow mt-10 mb-10 '><img src={icons.chat} alt="bag" className={`mx-auto mt-5 w-24 h-24`} /></div>
+        <p className='text-center text-grey text-xs mt-5 font-[450] text-balance'>
+            Your feedback is valuable. Please send your feedback to <a href="mailto:codeAbinash@gmail.com?subject=Feedback of Routine Application" target='_blank' className='text-accent'>
+                codeAbinash@gmail.com</a>
+        </p>
+    </>
+}

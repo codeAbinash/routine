@@ -14,7 +14,10 @@ const cacheData = {
 	static: {
 		name: 'routine-static-files-routine-v1',
 		valid: 'routine-static-files-routine',
-		urls: [],
+		urls: [
+			// While loading don't load the spinner 😆🤣
+			'https://codeabinash.github.io/routine/assets/spinner.svg'
+		],
 	},
 }
 

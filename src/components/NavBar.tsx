@@ -1,9 +1,12 @@
 import icons from "../assets/icons/icons"
 import { useNavigate } from "react-router-dom"
 import delay, { df } from "../lib/delay"
-const tabIcons = [icons.home, icons.routines, icons.calendar, icons.chat, icons.more]
-const tabs = ['Home', 'Routines', 'Calendar', 'Messages', 'More']
-const links = ['/', '/routines', '/calendar', '/messages', '/more']
+const tabIcons = [icons.home, icons.routines, icons.calendar, icons.more]
+const tabs = ['Home', 'Routines', 'Calendar', 'More']
+const links = ['/', '/routines', '/calendar', '/more']
+// const tabIcons = [icons.home, icons.routines, icons.calendar, icons.chat, icons.more]
+// const tabs = ['Home', 'Routines', 'Calendar', 'Messages', 'More']
+// const links = ['/', '/routines', '/calendar', '/messages', '/more']
 
 function NavBar({ active }: { active: 'Home' | 'Routines' | 'Messages' | 'Calendar' | 'More' }) {
 	const navigate = useNavigate()

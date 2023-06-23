@@ -25,14 +25,13 @@ function timeAmPm(time: SplittedTime) {
     return `${hour12(time.hour)}:${addZero(time.minute)} ${time.hour < 12 ? 'AM' : 'PM'}`
 }
 
-function getVisibleColor(left: number) {
-    if (left < 25)
+function getVisibleColor(midpoint: number) {
+    if (midpoint < 25)
         return '#ffffff88'
-    if (left < 65)
+    else if (midpoint < 65)
         return '#00000055'
     else
         return '#ffffff88'
-    // else return '#88888855'
 }
 
 
@@ -42,12 +41,13 @@ export default function Daily({ routine }: { routine: Routine }) {
     const duration = totalMins(endTime) - totalMins(startTime)
     const left = totalMins(startTime) / TOTAL_MIN_IN_DAY * 100
     const percentage = duration / TOTAL_MIN_IN_DAY * 100
+
     return (
         <div className="daily">
             <h1 className="text-7xl text-center mb-5"><TextEmoji emoji={routine.emoji} /></h1>
             <div className=" mt-8 mb-4">
                 <div className="w-full mb-3 day-gradient h-7 p-1 rounded-lg">
-                    <div className="tap95h-5 pt-2 h-5 rounded-md" style={{
+                    <div className="tap95 pt-2 h-5 rounded-md" style={{
                         width: percentage + '%',
                         marginLeft: left + "%",
                         backgroundColor: getVisibleColor(left)

@@ -5,7 +5,6 @@ function Daily({ updateRoutine }: { updateRoutine: Function }) {
     const [endTime, setEndTime] = React.useState('')
     useEffect(() => {
         const routine = { time: [startTime, endTime] }
-        console.log(routine)
         updateRoutine(routine)
     }, [startTime, endTime])
 

@@ -12,7 +12,7 @@ import Weekly from './makeRoutine/Weekly';
 import TextEmoji from '../components/TextEmoji';
 import BottomModal, { BasicModal } from '../components/BottomModal';
 import { MODAL_BUTTON_TEXT } from '../lib/lib';
-let emojiList = ['📕', '🧑🏻‍💻', '🏃🏻‍♂️', '🎨', '👻']
+let emojiList = ['📕', '🧑🏻‍💻', '🏃🏻‍♂️', '🍽️', '🏫', '🧪', '🎂', '📖', '👩🏻‍🔬', '🎶']
 
 function NewRoutine() {
 	const e = new Emoji();
@@ -23,6 +23,7 @@ function NewRoutine() {
 	const [routine, setRoutine] = useState<any>({})
 	const navigate = useNavigate()
 	const topElement: any = useRef<HTMLDivElement>()
+	const emojiInput = useRef<any>(null)
 
 	const [modalShow, setModalShow] = useState(false)
 	const [modalBtnText, setModalBtnText] = useState(MODAL_BUTTON_TEXT)
@@ -98,6 +99,7 @@ function NewRoutine() {
 									placeholder='Emoji'
 									className='name input-text bg-inputBg dark:bg-darkInputBg flex-1'
 									onInput={(e: any) => { setRoutineEmoji(e.target.value) }}
+									ref={emojiInput}
 								/>
 								<select defaultValue={routineType} onInput={(e: any) => setRoutineType(e.target.value)} className='flex-[4] appearance-none p-[1rem] px-7 rounded-2xl trans-outline outline-none focus:outline-accent border-none bg-inputBg dark:bg-darkInputBg text-center'>
 									<option value="once">Routine : Once</option>
@@ -110,13 +112,18 @@ function NewRoutine() {
 								</select>
 								{/* <img src={e.get('➕')} className='tap bg-inputBg dark:bg-darkInputBg h-[3.5rem] p-[0.8rem] rounded-2xl' /> */}
 							</div></div>
-						<div className="emojis flex gap-3 rounded-2xl flex-wrap justify-between items-center">
+						<div className="emojis flex gap-3 scrollbar-hidden flex-nowrap overflow-auto justify-between items-center">
 							{emojiList.map((emoji, index) =>
 								<img src={e.get(emoji)}
 									onClick={() => setRoutineEmoji(emoji)}
 									className='tap bg-inputBg dark:bg-darkInputBg h-[3.2rem] p-[0.8rem] rounded-2xl' key={index}
 								/>
 							)}
+							<p className='tap bg-inputBg dark:bg-darkInputBg h-[3.2rem] p-[0.8rem] rounded-2xl aspect-square  flex justify-center items-center text-2xl'
+								onClick={() => {
+									emojiInput && emojiInput.current.focus()
+								}}
+							>+</p>
 						</div>
 						{RoutineMaker(routineType)}
 					</div>

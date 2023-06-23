@@ -30,6 +30,9 @@ import spinner from './src/spinner.svg'
 import chat from './src/chat.svg'
 import del from './src/delete.svg'
 import edit from './src/edit.svg'
+import telegram from './src/telegram.svg'
+import backup_folder from  './src/backup_folder.webp'
+
 
 const icons = {
     Lock, delete_left_solid, home,
@@ -40,7 +43,7 @@ const icons = {
     check_solid, xmark_solid, notification,
     right_arrow_next, shield, theme, left_arrow,
     backup, restore, shield_cross, telegram_black,
-    spinner, chat, del, edit
+    spinner, chat, del, edit, telegram, backup_folder
 }
 
 

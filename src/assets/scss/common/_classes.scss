@@ -434,3 +434,13 @@ button.btn-full-width.grey {
 //         transform: skewX(-3deg) scale(0.9) skewY(-5deg);
 //     }
 // }
+
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
