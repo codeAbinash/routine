@@ -1,5 +1,5 @@
 import React from 'react'
-import { BackupUi } from './More'
+// import { BackupUi } from './More'
 
 export default function TestPage() {
   const modalRef = React.useRef<HTMLDialogElement>(null)
@@ -10,7 +10,7 @@ export default function TestPage() {
     // }
   }, [])
 
-  return <BackupUi />
+  // return <BackupUi />
 
   return (
     <>

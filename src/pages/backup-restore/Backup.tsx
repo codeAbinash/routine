@@ -21,7 +21,7 @@ function Backup() {
         </div>
     )
 }
-export function BackupUi() {
+function BackupUi() {
     const [isBackingUp, setIsBackingUp] = useState(false)
     const [isBackedUp, setIsBackedUp] = useState(false)
 

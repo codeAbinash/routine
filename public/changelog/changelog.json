@@ -1,5 +1,16 @@
 [
     {
+        "version" : "3.5.2",
+        "name" : "Added Backup option",
+        "emoji" : [
+            "📁", "📂"
+        ],
+        "date" : "2023-06-23",
+        "description" : [
+            "You can now backup all of your routines data to your device."
+        ]
+    },
+    {
         "version": "3.5.1",
         "name": "🎨🚀",
         "emoji": [
