@@ -212,7 +212,7 @@ function More() {
             <div className='pb-20'>
                 <Watermark />
             </div>
-            <NavBar active={3} />
+            <NavBar active='More' />
         </div>
     )
 }

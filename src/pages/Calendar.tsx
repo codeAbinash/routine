@@ -199,7 +199,7 @@ function Calendar() {
         <Watermark />
       </div>
       <FloatingButton />
-      <NavBar active={2} />
+      <NavBar active='Calendar' />
     </div >
   )
   function handleDateClick(date: Date) {

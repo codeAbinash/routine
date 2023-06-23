@@ -1,11 +1,11 @@
 import icons from "../assets/icons/icons"
 import { useNavigate } from "react-router-dom"
 import delay, { df } from "../lib/delay"
-const tabIcons = [icons.home, icons.routines, icons.calendar, icons.more]
-const tabs = ['Home', 'Routines', 'Calendar', 'More']
-const links = ['/', '/routines', '/calendar', '/more']
+const tabIcons = [icons.home, icons.routines, icons.calendar, icons.chat, icons.more]
+const tabs = ['Home', 'Routines', 'Calendar', 'Messages', 'More']
+const links = ['/', '/routines', '/calendar', '/messages', '/more']
 
-function NavBar({ active }: any) {
+function NavBar({ active }: { active: 'Home' | 'Routines' | 'Messages' | 'Calendar' | 'More' }) {
 	const navigate = useNavigate()
 	return (
 		<div
@@ -16,9 +16,9 @@ function NavBar({ active }: any) {
 			{tabIcons.map((icon, index) => {
 				return (
 					<div
-						className={`select-none tap tab flex-center flex-col gap-1 px-3 ${active == index ? "" : " opacity-50"} dark:invert dark:grayscale`}
+						className={`select-none tap tab flex-center flex-col gap-1 px-3 ${active == tabs[index] ? "" : " opacity-50"} dark:invert dark:grayscale`}
 						key={index} onClick={df(() => {
-							if (active == index) return
+							if (active === tabs[index]) return
 							navigate(links[index], { replace: true })
 						})}>
 						<img src={icon} className='h-[21px]' />

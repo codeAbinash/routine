@@ -65,14 +65,14 @@ function Routines() {
         topElement.current?.scrollIntoView({ behavior: 'smooth' })
         setTimeout(() => {
             uScreenRoutines(typedList[currentSelectedType])
-        }, 500);
+        }, 200);
     }, [])
     useEffect(() => {
         if (currentSelectedType === 'all' || currentSelectedType === 'holiday' || currentSelectedType === 'routines') {
             uScreenRoutines(null)
             setTimeout(() => {
                 uScreenRoutines(typedList[currentSelectedType])
-            }, 300);
+            }, 200);
         }
         else
             uScreenRoutines(typedList[currentSelectedType])
@@ -114,7 +114,7 @@ function Routines() {
             </section>
             <FloatingButton />
             <Watermark />
-            <NavBar active={1} />
+            <NavBar active='Routines' />
         </div>
     )
 }
