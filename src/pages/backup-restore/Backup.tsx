@@ -7,14 +7,14 @@ import TextEmoji from '../../components/TextEmoji'
 import Loading from '../../components/Loading'
 import Emoji from 'emoji-store'
 import { df } from '../../lib/delay'
+import { Backup } from './file'
 
 function Backup() {
 	return (
 		<div className='backup screen dark:text-darkText'>
 			<BackHeader title='Backup your data' />
 			<div className='min-h-[80dvh] p-5 flex flex-col justify-center items-center gap-7'>
-				<p className='text-center text-xl font-semibold text-balance'>Backup your data <TextEmoji emoji='📂' /> </p>
-
+				<p className='text-center text-xl font-semibold text-balance whitespace-pre'>Backup your data   <TextEmoji emoji='📂' /> </p>
 				<img src={icons.backup_folder} className='w-[45%] mx-auto drop-shadow-2xl' />
 				<p className='text-balance text-xs text-center text-secondary'>
 					You can backup your data by downloading a file. This file can be used to restore your data on another device. Or you can use it to restore your data if you reinstall the app.
@@ -43,17 +43,17 @@ function BackupUi() {
 			{
 				isBackingUp ? <div className='flex justify-center font-medium items-center text-accent'>
 					<img src={icons.spinner} className='h-10 w-10' />
-					<p className='text-center text-balance text-md pr-5'>Preparing Backup <TextEmoji emoji='📂' /></p>
+					<p className='text-center text-balance text-md pr-5 whitespace-pre'> Preparing Backup   <TextEmoji emoji='📂' /></p>
 				</div> :
 					isBackedUp ?
 						<div className='flex gap-2 justify-center items-center'>
-							<p className='text-center text-balance text-md pr-5'>
-								<TextEmoji emoji='✅' /> Backup Complete <TextEmoji emoji='📂' /> </p>
+							<p className='text-center text-balance font-medium text-md pr-5 whitespace-pre'>
+								Backup Complete  <TextEmoji emoji='📂' />  <span className='text-sm'><TextEmoji emoji='✅' /></span> </p>
 						</div> :
 						<button
-							className="no-highlight tap99 bg-dark text-white p-4 px-14 font-medium rounded-[0.65rem] text-xs"
+							className="no-highlight tap99 bg-dark text-white p-4 px-14 font-medium rounded-xl text-xs"
 							onClick={df(backupBtnClick)}
-						>   Backup Now
+						><span className='whitespace-pre'>Backup Now    <TextEmoji emoji='📂' /></span>
 						</button>
 			}
 		</div>
@@ -65,7 +65,10 @@ function createBackup() {
 	const routines = JSON.parse(ls.get('routines') || '[]')
 	const subscriptions = JSON.parse(ls.get('subscriptions') || '[]')
 
-	const backup = { routines, subscriptions }
+	const backup: Backup = {
+		routines,
+		subscriptions
+	}
 
 	const dataStr = JSON.stringify(backup)
 	const blob = new Blob([dataStr], { type: "text/plain;charset=utf-8" });

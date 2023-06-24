@@ -32,6 +32,7 @@ import del from './src/delete.svg'
 import edit from './src/edit.svg'
 import telegram from './src/telegram.svg'
 import backup_folder from  './src/backup_folder.webp'
+import restore_file from './src/restore_file.webp'
 
 
 const icons = {
@@ -43,7 +44,8 @@ const icons = {
     check_solid, xmark_solid, notification,
     right_arrow_next, shield, theme, left_arrow,
     backup, restore, shield_cross, telegram_black,
-    spinner, chat, del, edit, telegram, backup_folder
+    spinner, chat, del, edit, telegram, backup_folder,
+    restore_file
 }
 
 

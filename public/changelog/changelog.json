@@ -1,5 +1,17 @@
 [
     {
+        "version" : "3.6.0",
+        "name" : "Added Restore option",
+        "emoji" : [
+            "📁", "📂"
+        ],
+        "date" : "2023-06-24",
+        "description" : [
+            "Changed the icon of the app.",
+            "You can now restore all of your routines data from backup file."
+        ]
+    },
+    {
         "version" : "3.5.2",
         "name" : "Added Backup option",
         "emoji" : [

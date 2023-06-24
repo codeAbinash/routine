@@ -69,7 +69,7 @@ export function BasicModal({ text, desc, emoji }: { text: any, desc?: any, emoji
    return <>
       <p className='text-center text-xl font-semibold px-[7%] text-balance'>{text}</p>
       <div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get(emoji || '🤔')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
-      <p className='text-center text-grey text-xs mt-5 font-[450] px-[7%] text-balance'>
+      <p className='text-center text-grey text-xs mt-5 font-[450] px-[5%] text-balance'>
          {desc}
       </p>
    </>

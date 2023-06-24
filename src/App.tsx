@@ -25,6 +25,7 @@ const LazyChangelog = React.lazy(() => import('./pages/changelog/Changelog'))
 const LazyTeam = React.lazy(() => import('./pages/author/Team'))
 const LazyTest = React.lazy(() => import('./pages/TestPage'))
 const LazyMessages = React.lazy(() => import('./pages/Messages/Messages'))
+const LazyRestoreStartup = React.lazy(() => import('./pages/backup-restore/RestoreStartup'))
 
 
 // const LazyMore = React.lazy(() => import('./pages/More'))
@@ -69,6 +70,7 @@ export default function App() {
           <Route path='/loading' element={< LoadingScreen />} />
           <Route path='/test' element={< LazyTest />} />
           <Route path='messages' element={<LazyMessages />} />
+          <Route path='/restoreStartup' element={<LazyRestoreStartup />} />
         </Routes>
       </React.Suspense>
     </Router>

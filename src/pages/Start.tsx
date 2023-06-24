@@ -12,7 +12,7 @@ export default function Start() {
             <p className="text-center text-sm px-4 font-[450]">Routine helps you to store and manage your routines.</p>
             <img src="icons/reset.svg" className="h-0 w-0" />
             <div className="btnWrapper">
-                <button onClick={() => navigate('/applyRoutine', { replace: true })} className="no-highlight select-none rounded-2xl bg-dark text-white w-full mx-auto block p-[1.4em] duration-150 active:scale-[0.98] text-sm dark:">
+                <button onClick={() => navigate('/restoreStartup', { replace: true })} className="no-highlight select-none rounded-2xl bg-dark text-white w-full mx-auto block p-[1.4em] duration-150 active:scale-[0.98] text-sm dark:">
                     Continue
                 </button>
                 <p className="text-center text-xs pt-2 text-black/60 dark:text-darkText/50 font-[450]">Read <Link to='' className="text-link">Terms and Conditions</Link> before continuing.</p>
