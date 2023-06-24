@@ -1,10 +1,10 @@
 const cacheData = {
 	showCacheThenFetch: {
-		name: 'routine-show-cache-then-fetch-v24',
+		name: 'routine-show-cache-then-fetch-v25',
 		valid: 'routine-show-cache-then-fetch',
 	},
 	emojiCache: {
-		name: 'emoji-cache-v2',
+		name: 'emoji-cache-v3',
 		valid: 'emoji-cache',
 	},
 	fontCache: {
