@@ -3,7 +3,7 @@
     "name": "Routine",
     "start_url": "/routine/",
     "display": "standalone",
-    "background_color": "#F2FAFF",
+    "background_color": "#FFFFF",
     "description": "Manages your Routine",
     "theme_color": "#ffffff",
     "icons": [
