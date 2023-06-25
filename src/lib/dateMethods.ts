@@ -17,16 +17,19 @@ export type Routine = {
     index: number,
     passed: string,
     left: string,
+    expired?: boolean,
 }
 
 export type TypedList = {
     routines: Array<Routine>,
     calendar: Array<Routine>,
     holiday: Array<Routine>,
-    all: Routine[]
+    all: Routine[],
+    expired: Routine[],
+    weekly: Routine[],
 }
 
-export type TypedTypes = 'routines' | 'calendar' | 'holiday' | 'all'
+export type TypedTypes = 'routines' | 'calendar' | 'holiday' | 'all' | 'expired' | 'weekly'
 
 function getPassedTimeString(time: number) {
     const passedHour = Math.floor(time / (1000 * 60 * 60))

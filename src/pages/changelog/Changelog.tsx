@@ -18,7 +18,7 @@ function Changelog() {
    return (
       <div className='dark:text-darkText'>
          <BackHeader title="Changelog" />
-         <div className='p-6 pt-0'>
+         <div className='p-6 pt-3'>
             {
                isLoaded ?
                   <div className=''>{showChangelog(changelog)}</div>

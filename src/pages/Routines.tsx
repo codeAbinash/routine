@@ -30,7 +30,7 @@ export function searchRoutine(routines: Routine[], query: string) {
 }
 
 
-function getTypedRoutines(routines: Array<Routine>) {
+function getTypedRoutines(routines: Array<Routine>, oldRoutines: Array<Routine>) {
     // Routines 0,
     // Holiday 1
     // Calendar 2
@@ -39,7 +39,9 @@ function getTypedRoutines(routines: Array<Routine>) {
         routines: [],
         holiday: [],
         calendar: [],
-        all: routines
+        all: routines,
+        weekly: [],
+        expired: oldRoutines,
     };
     let i, len = routines.length
 
@@ -49,15 +51,31 @@ function getTypedRoutines(routines: Array<Routine>) {
             routineList.calendar.push(routines[i])
         else if (routines[i].type === 'holiday')
             routineList.holiday.push(routines[i])
+        else if (routines[i].type === 'weekly') {
+            routineList.weekly.push(routines[i])
+            routineList.routines.push(routines[i])
+        }
         else
             routineList.routines.push(routines[i])
     }
+
     return routineList
+}
+
+function getExpiredRoutines() {
+    const routines = JSON.parse(ls.get('expiredRoutines') || '[]')
+    // Set index
+    return routines.map((routine: Routine, index: number) => {
+        routine.index = index
+        routine.expired = true
+        return routine
+    })
 }
 
 function Routines() {
     const allRoutines = useMemo(() => JSON.parse(ls.get('routines') || '[]'), [])
-    const typedList = useMemo(() => getTypedRoutines(allRoutines), [allRoutines])
+    const expiredRoutines = useMemo(() => getExpiredRoutines(), [])
+    const typedList = useMemo(() => getTypedRoutines(allRoutines, expiredRoutines), [allRoutines, expiredRoutines])
     const [currentSelectedType, setCurrentSelectedType] = useState<TypedTypes>('routines')
     const [screenRoutines, uScreenRoutines] = useState<Routine[] | null>(null)
     const topElement = useRef<HTMLDivElement>(null)
@@ -100,17 +118,19 @@ function Routines() {
                 rightIcon={Emoji.get('👜')}
                 rightIconClick={() => delay(() => navigate('/applyRoutine'))}
             />
-            <section className='p-[1.2rem] pt-2'>
+            <section className='pt-2 pb-20'>
                 {/* <p className='text-[#777]/50 text-center mt-2 mb-5 text-sm font-medium'>All routines</p> */}
                 <div>
-                    <div className='flex flex-wrap gap-3 pb-6'>
-                        <div onClick={df(() => setCurrentSelectedType('routines'))} className={`tap95 ${currentSelectedType === 'routines' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4`}>Routines</div>
-                        <div onClick={df(() => setCurrentSelectedType('calendar'))} className={`tap95 ${currentSelectedType === 'calendar' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4`}>Events</div>
-                        <div onClick={df(() => setCurrentSelectedType('holiday'))} className={`tap95 ${currentSelectedType === 'holiday' ? 'bg-accent shadow-lg shadow-accent/50  text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4`}>Holidays</div>
-                        <div onClick={df(() => setCurrentSelectedType('all'))} className={`tap95 ${currentSelectedType === 'all' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4`}>All</div>
+                    <div className='flex flex-nowrap overflow-auto gap-2 pb-6 px-[1.2rem] scrollbar-hidden'>
+                        <div onClick={df(() => setCurrentSelectedType('routines'), 80)} className={`tap95 ${currentSelectedType === 'routines' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4`}>Routines</div>
+                        <div onClick={df(() => setCurrentSelectedType('weekly'), 80)} className={`tap95 ${currentSelectedType === 'weekly' ? 'bg-accent shadow-lg shadow-accent/50  text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4`}>Weekly</div>
+                        <div onClick={df(() => setCurrentSelectedType('calendar'), 80)} className={`tap95 ${currentSelectedType === 'calendar' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4`}>Events</div>
+                        <div onClick={df(() => setCurrentSelectedType('holiday'), 80)} className={`tap95 ${currentSelectedType === 'holiday' ? 'bg-accent shadow-lg shadow-accent/50  text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4`}>Holidays</div>
+                        <div onClick={df(() => setCurrentSelectedType('all'), 80)} className={`tap95 ${currentSelectedType === 'all' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4 flex-none`}>All Routines</div>
+                        <div onClick={df(() => setCurrentSelectedType('expired'), 80)} className={`tap95 ${currentSelectedType === 'expired' ? 'bg-accent shadow-lg shadow-accent/50 text-white' : 'bg-routine_bg dark:bg-routine_bg_dark text-gray-500 dark:text-gray-300'} rounded-full text-xs font-medium p-2 px-4 flex-none`}>Expired</div>
                     </div>
-                    <div className="routines flex flex-wrap gap-[0.9rem] justify-center">
-                        <AllRoutines allRoutines={allRoutines} screenRoutines={screenRoutines} />
+                    <div className="routines flex flex-wrap gap-[0.9rem] justify-center p-[1.2rem] pt-0">
+                        <AllRoutines allRoutines={allRoutines} screenRoutines={screenRoutines} expiredRoutines={expiredRoutines} />
                     </div>
                 </div>
             </section>
@@ -133,11 +153,12 @@ function Routines() {
 //             return AllRoutines(routines.holiday)
 // }
 
-function AllRoutines({ screenRoutines, allRoutines }: { screenRoutines: Routine[] | null, allRoutines: Routine[] | null }) {
-    // console.log(routines)
+function AllRoutines({ screenRoutines, allRoutines, expiredRoutines }: { screenRoutines: Routine[] | null, allRoutines: Routine[] | null, expiredRoutines : Routine[]}) {
+    console.log(screenRoutines)
     const navigate = useNavigate()
     const [currentRoutineViewIndex, setCurrentRoutineViewIndex] = useState(0)
     const [showRoutineModal, setRoutineModal] = useState(false)
+
 
     if (!screenRoutines || !allRoutines) {
         return <LoadingRoutines />
@@ -149,10 +170,10 @@ function AllRoutines({ screenRoutines, allRoutines }: { screenRoutines: Routine[
                 <img src={icons.app_icon_transparent_256} className="w-[55%]" />
                 <p className='text-center text-[#777]/70 text-base font-medium'>No Routine <TextEmoji emoji='🙄' />
                 </p>
-                <p className='text-center text-[#777]/50 text-xs font-[450] mb-5 '>You can create a new routine or apply a <br /> routine from the 
-                <span className='text-accent active:bg-accent/20'
-                    onClick={() => delay(() => navigate('/applyRoutine'))}
-                > Routine Store <TextEmoji emoji='👜' /></span></p>
+                <p className='text-center text-[#777]/50 text-xs font-[450] mb-5 '>You can create a new routine or apply a <br /> routine from the
+                    <span className='text-accent active:bg-accent/20'
+                        onClick={() => delay(() => navigate('/applyRoutine'))}
+                    > Routine Store <TextEmoji emoji='👜' /></span></p>
             </div>
             {/* <button className='no-highlight block bg-dark shadow-lg shadow-dark/50 text-white py-3 px-7 text-[0.7rem] font-medium rounded-full tap97'
                 onClick={() => delay(() => navigate('/applyRoutine'))}>
@@ -165,6 +186,8 @@ function AllRoutines({ screenRoutines, allRoutines }: { screenRoutines: Routine[
         <RoutineView
             show={showRoutineModal}
             routines={allRoutines}
+            expired={screenRoutines[currentRoutineViewIndex].expired}
+            expiredRoutines={expiredRoutines}
             index={currentRoutineViewIndex}
             cb={[() => { setRoutineModal(false) }, () => { setRoutineModal(false) }]}
         />

@@ -1,9 +1,20 @@
 [
     {
+        "version": "3.6.3",
+        "name": "Performance Improvements",
+        "emoji": ["🔥", "🚀"],
+        "date": "2023-06-26",
+        "description": [
+            "Expired routines will be moved to separate storage area to improve performance.",
+            "Improved initial loading time of the app."    
+        ]
+    },
+    {
         "version": "3.6.2",
         "name": "UI Improvements",
         "emoji": [
-            "🎨", "😯"
+            "🎨",
+            "😯"
         ],
         "date": "2023-06-25",
         "description": [

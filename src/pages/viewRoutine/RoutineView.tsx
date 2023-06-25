@@ -20,7 +20,7 @@ function viewRoutineTyped(routine: Routine) {
    if (routine.type === 'calendar' || routine.type === 'holiday') {
       return <Calendar routine={routine} />
    }
-   if(routine.type === 'once')
+   if (routine.type === 'once')
       return <Once routine={routine} />
    else
       return (
@@ -33,7 +33,7 @@ function viewRoutineTyped(routine: Routine) {
       )
 }
 
-export default function RoutineView({ show, routines, cb, index }: { index: number, show: boolean, routines: Routine[], cb?: Array<Function | any> }) {
+export default function RoutineView({ show, routines, cb, index, expired = false, expiredRoutines }: { index: number, show: boolean, routines: Routine[], cb?: Array<Function | any>, expired?: boolean, expiredRoutines?: Routine[] }) {
    const [isShow, setIsShow] = useState(false)
    const [backDisplay, setBackDisplay] = useState(false)
    const navigate = useNavigate()
@@ -55,7 +55,7 @@ export default function RoutineView({ show, routines, cb, index }: { index: numb
       return () => { document.body.style.overflowY = 'auto' }
    }, [isShow])
 
-   if (!routines[index])
+   if (!routines[index] || !expiredRoutines?.[index])
       return null
 
    return <>
@@ -74,9 +74,20 @@ export default function RoutineView({ show, routines, cb, index }: { index: numb
       <div className={`fixed max-h-[95vh] overflow-auto z-[51] ${isShow ? 'bottom-0' : 'bottom-[-150vh]'} left-0 p-5 rounded-t-[2.5rem] bg-white dark:bg-[#111] w-full transition-all ease-in-out duration-[400ms]`}>
          <div className='bar w-12 h-[0.3rem] bg-[#77777744] rounded-full mx-auto'></div>
          <div className="mb-5">
-            <p className="text-center text-lg font-medium mb-6 mt-5 text-balance line-clamp-2 px-[10%]">{routines[index].name}</p>
-            {viewRoutineTyped(routines[index])}
-            {RoutineDescription(routines[index])}
+            <p className="text-center text-lg font-medium mb-6 mt-5 text-balance line-clamp-2 px-[10%]">{
+               expired ? expiredRoutines![index].name :
+                  routines[index].name
+            }</p>
+            {
+               expired ? <>
+                  {viewRoutineTyped(expiredRoutines[index])}
+                  {RoutineDescription(expiredRoutines[index])}
+               </>
+                  : <>
+                     {viewRoutineTyped(routines[index])}
+                     {RoutineDescription(routines[index])}
+                  </>
+            }
          </div>
 
          <div className="flex gap-3 mt-6 mb-5 text-[0.8rem]">
@@ -85,7 +96,7 @@ export default function RoutineView({ show, routines, cb, index }: { index: numb
                <span className="font-[430]">Edit</span>
             </div>
             <div className="p-2.5 px-[1.3rem] bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2"
-               onClick={() => { deleteRoutine(index, setIsShow, navigate) }}
+               onClick={() => { deleteRoutine(index, setIsShow, navigate, expired) }}
             >
                <img src={icons.del} className="dark:invert h-4 w-4 opacity-70" />
                <span className="font-[430]">Delete</span>
@@ -97,11 +108,11 @@ export default function RoutineView({ show, routines, cb, index }: { index: numb
                onClick={df(() => { cb && cb[1] && cb[1]() }, 80)}
             >OK</button>
          </div>
-      </div>
+      </div >
    </>
 }
 
-function deleteRoutine(index: number, setIsShow: Function, navigate: Function) {
+function deleteRoutine(index: number, setIsShow: Function, navigate: Function, expired: boolean = false) {
    let confirm
    let confirm2
    const routines = JSON.parse(ls.get('routines') || '[]')
@@ -115,12 +126,19 @@ function deleteRoutine(index: number, setIsShow: Function, navigate: Function) {
    }
 
    if (!confirm) return
-   routines.splice(index, 1)
-   console.log(routines)
-   ls.set('routines', JSON.stringify(routines))
+
+   if (expired) {
+      const expiredRoutines = JSON.parse(ls.get('expiredRoutines') || '[]')
+      expiredRoutines.splice(index, 1)
+      ls.set('expiredRoutines', JSON.stringify(expiredRoutines))
+
+   } else {
+      routines.splice(index, 1)
+      ls.set('routines', JSON.stringify(routines))
+   }
+
    setIsShow(false)
    console.log("Navigating to...")
-
    // If in the routines tab then go to home else go to routines tab
    if (window.location.pathname.endsWith('/routines') || window.location.pathname.endsWith('/routines/'))
       navigate('/', { replace: true })

@@ -12,13 +12,21 @@ import icons from "../assets/icons/icons";
 
 function deleteRoutineById(routineID: string) {
 	let routines = JSON.parse(ls.get('routines') || '[]')
+	let expiredRoutines = JSON.parse(ls.get('expiredRoutines') || '[]')
 	const newRoutines: any = []
+	const newExpiredRoutines: any = []
 	routines.forEach((routine: any) => {
 		if (routine.sub !== routineID) {
 			newRoutines.push(routine)
 		}
 	})
+	expiredRoutines.forEach((routine: any) => {
+		if (routine.sub !== routineID) {
+			newExpiredRoutines.push(routine)
+		}
+	})
 	ls.set('routines', JSON.stringify(newRoutines))
+	ls.set('expiredRoutines', JSON.stringify(newExpiredRoutines))
 }
 
 export default function ApplyRoutine() {

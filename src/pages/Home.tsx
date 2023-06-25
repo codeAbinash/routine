@@ -14,6 +14,7 @@ import Emoji from 'emoji-store'
 import delay, { df } from '../lib/delay'
 import BottomModal from '../components/BottomModal'
 import LoadingRoutines from '../components/loading/LoadingRoutines'
+import routines from '../lib/sampleTypes'
 
 
 // Delete the subscription if the subscription is expired
@@ -107,7 +108,7 @@ function Home() {
 		// Disable loading after 1.5s
 		const timer = setTimeout(() => {
 			setShowLoading(false)
-		}, 300)
+		}, 700)
 
 		return () => {
 			clearTimeout(timer)
@@ -199,3 +200,67 @@ function dailyNotification() {
 }
 
 export default Home
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// A function that will remove all the expired routines from ls-routines and 
+// move them to ls-expiredRoutines to load the app faster
+
+function removeExpiredRoutines() {
+	console.log('Removing expired routines...')
+	const allRoutines: Routine[] = JSON.parse(ls.get('routines') || '[]')
+	const expiredRoutines: Routine[] = JSON.parse(ls.get('expiredRoutines') || '[]')
+	const now = new Date()
+
+	let length = allRoutines.length
+
+	const validRoutines: Routine[] = []
+	const invalidRoutines: Routine[] = [...expiredRoutines]
+
+	for (let i = 0; i < length; i++) {
+		let routine = allRoutines[i]
+		if (routine.type === 'calendar' || routine.type === 'holiday') {
+			if (isExpiredCalendarRoutine(routine, now))
+				invalidRoutines.push(routine)
+			else
+				validRoutines.push(routine)
+		} else if (routine.type === 'once') {
+			if (isExpiredOnceRoutine(routine, now))
+				invalidRoutines.push(routine)
+			else
+				validRoutines.push(routine)
+
+		} else {
+			validRoutines.push(routine)
+		}
+	}
+	// Save the valid routines
+	ls.set('routines', JSON.stringify(validRoutines))
+	ls.set('expiredRoutines', JSON.stringify(invalidRoutines))
+}
+
+function isExpiredCalendarRoutine(routine: Routine, now: Date) {
+	let routineDate = new Date(routine.time[0] + 'T00:00')
+	return now.getTime() > routineDate.getTime()
+}
+
+function isExpiredOnceRoutine(routine: Routine, now: Date) {
+	let routineDate = new Date(routine.time[1])
+	return now.getTime() > routineDate.getTime()
+}
+
+
+// After 5sec of loading the app, check if there is any expired routine
+
+setTimeout(removeExpiredRoutines, 5000);
