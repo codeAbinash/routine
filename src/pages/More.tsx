@@ -46,12 +46,14 @@ function searchSettingsInfo(settingsInfo: Setting[], query: string) {
 
 function More() {
     const settingsInfo = [
+        
         {
             name: 'Theme',
             icon: icons.theme,
             callback: () => { },
             rightArrow: false
         },
+        { name: 'blank', icon: '', callback: () => { }, rightArrow: false },
         {
             name: 'Routine Store',
             icon: icons.calendar,
@@ -64,6 +66,14 @@ function More() {
             callback: () => navigate('/manageRoutines'),
             rightArrow: true
         },
+        { name: 'blank', icon: '', callback: () => { }, rightArrow: false },
+        {
+            name : 'Message Friends',
+            icon : icons.chat,
+            callback : () => navigate('/messages'),
+            rightArrow : true
+        },
+        { name: 'blank', icon: '', callback: () => { }, rightArrow: false },
         {
             name: 'Backup your data',
             icon: icons.backup,
@@ -107,6 +117,7 @@ function More() {
             },
             rightArrow: true
         },
+        { name: 'blank', icon: '', callback: () => { }, rightArrow: false },
         {
             name: 'Join Telegram Channel',
             icon: icons.telegram_black,
@@ -190,6 +201,9 @@ function More() {
 
                 <div className="settings w-full flex flex-col gap-2 mt-5">
                     {settingsInfoState.map((setting: Setting, index) => {
+                        if (setting.name == 'blank')
+                            return <div className='h-3' key={index}></div>
+
                         if (setting.name === 'Theme')
                             return <div onClick={() => { }} className="setting flex justify-between items-center px-3 rounded-xl" key={index}>
                                 <div className="nameIconContainer flex gap-4">

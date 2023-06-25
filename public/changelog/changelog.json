@@ -1,30 +1,44 @@
 [
     {
-        "version" : "3.6.0",
-        "name" : "Added Restore option",
-        "emoji" : [
-            "📁", "📂"
+        "version": "3.6.1",
+        "name": "Manifest Update",
+        "emoji": ["📝", "⚙️", "🎨"],
+        "date": "2023-06-25",
+        "description": [
+            "Updated the manifest file of the app.",
+            "Changed some colors.",
+            "Added some space in the more options menu, differentiating the options.",
+            "UI Improvements."
+        ]
+    },
+    {
+        "version": "3.6.0",
+        "name": "Added Restore option",
+        "emoji": [
+            "📂",
+            "📁"
         ],
-        "date" : "2023-06-24",
-        "description" : [
+        "date": "2023-06-24",
+        "description": [
             "Changed the icon of the app.",
             "You can now restore all of your routines data from backup file."
         ]
     },
     {
-        "version" : "3.5.2",
-        "name" : "Added Backup option",
-        "emoji" : [
-            "📁", "📂"
+        "version": "3.5.2",
+        "name": "Added Backup option",
+        "emoji": [
+            "📁",
+            "📂"
         ],
-        "date" : "2023-06-23",
-        "description" : [
+        "date": "2023-06-23",
+        "description": [
             "You can now backup all of your routines data to your device."
         ]
     },
     {
         "version": "3.5.1",
-        "name": "🎨🚀",
+        "name": "Performance",
         "emoji": [
             "🎨",
             "🚀"
@@ -36,7 +50,7 @@
     },
     {
         "version": "3.5.0",
-        "name": "UI & Performance 🔥🎨",
+        "name": "UI & Performance",
         "emoji": [
             "🎨",
             "🔥",
@@ -50,7 +64,7 @@
     },
     {
         "version": "3.1.1",
-        "name": "Performance 🔥",
+        "name": "Performance",
         "emoji": [
             "🔥",
             "🚀"
@@ -62,20 +76,20 @@
     },
     {
         "version": "3.1.0",
-        "name": "UI & Bug Fix 🎨🐛",
+        "name": "UI & Bug Fix",
         "emoji": [
             "🎨",
             "🐛"
         ],
         "date": "2023-06-21",
         "description": [
-            "Bug Fix",
+            "Some bug fixes.",
             "Added popup routine view."
         ]
     },
     {
         "version": "3.0.1",
-        "name": "UI & Performance 🔥🎨",
+        "name": "UI & Performance",
         "emoji": [
             "🎨",
             "🚀",
@@ -83,13 +97,13 @@
         ],
         "date": "2023-06-20",
         "description": [
-            "Bug Fix",
-            "UI Improvements"
+            "Some bug fixes.",
+            "UI Improvements."
         ]
     },
     {
         "version": "3.0.0",
-        "name": "UI & Performance 🔥🎨",
+        "name": "UI & Performance",
         "emoji": [
             "🎨",
             "🔥",
@@ -112,7 +126,7 @@
     },
     {
         "version": "2.2.0",
-        "name": "UI Improvements 🎨",
+        "name": "UI Improvements",
         "emoji": "🎨",
         "date": "2023-06-12",
         "description": [
@@ -121,7 +135,7 @@
     },
     {
         "version": "2.1.1",
-        "name": "UI UX Improvements 🎨",
+        "name": "UI UX Improvements",
         "emoji": "🎨",
         "date": "2023-06-11",
         "description": [
@@ -130,7 +144,7 @@
     },
     {
         "version": "2.1.0",
-        "name": "Deleted expired routines 🗑️",
+        "name": "Deleted expired routines",
         "emoji": "🗑️",
         "date": "2023-06-10",
         "description": [
@@ -139,7 +153,7 @@
     },
     {
         "version": "2.0.2",
-        "name": "UI Improvements 🎨",
+        "name": "UI Improvements",
         "emoji": "🎨",
         "date": "2023-05-31",
         "description": [
@@ -148,7 +162,7 @@
     },
     {
         "version": "2.0.1",
-        "name": "UI UX Improvements 🎨",
+        "name": "UI UX Improvements",
         "emoji": [
             "🎨",
             "🤳🏻"
@@ -160,11 +174,11 @@
     },
     {
         "version": "2.0.0",
-        "name": "UI and More Emojis 😯",
+        "name": "UI and More Emojis",
         "emoji": [
             "🎨",
-            "🚀",
-            "🎉"
+            "😯",
+            "🤩"
         ],
         "date": "2023-05-23",
         "description": [
@@ -174,25 +188,25 @@
     },
     {
         "version": "1.9.4",
-        "name": "UX Improvements 🎨",
+        "name": "UX Improvements",
         "emoji": "🤳🏻",
         "date": "2023-05-14",
         "description": "Changed some text in the home screen."
     },
     {
         "version": "1.9.3",
-        "name": "UI Improvements 🎨",
+        "name": "UI Improvements",
         "emoji": "🎨",
         "date": "2023-05-11",
         "description": [
-            "Added variable fonts",
-            "Changed the more icon in the bottom navigation bar",
-            "Improved performance of the app"
+            "Added variable fonts.",
+            "Changed the more icon in the bottom navigation bar.",
+            "Improved performance of the app."
         ]
     },
     {
         "version": "1.9.2",
-        "name": "UX Improvements 🎨",
+        "name": "UX Improvements",
         "emoji": "🤳🏻",
         "date": "2023-05-04",
         "description": [
@@ -201,7 +215,7 @@
     },
     {
         "version": "1.9.1",
-        "name": "UI Improvements 🎨",
+        "name": "UI Improvements",
         "emoji": "🎨",
         "date": "2023-04-01",
         "description": [
@@ -210,8 +224,8 @@
     },
     {
         "version": "1.9.0",
-        "name": "Added Hashtag #️⃣",
-        "emoji": "📕",
+        "name": "Added Tags",
+        "emoji": "🔖",
         "date": "2023-03-25",
         "description": [
             "Added hashtag to routine subsections in the description."
@@ -219,47 +233,47 @@
     },
     {
         "version": "1.8.2",
-        "name": "UI Improvements 🎨",
+        "name": "UI Improvements",
         "emoji": "🎨",
         "date": "2023-03-24",
         "description": [
             "Added `Our Team` Section in the app.",
-            "Some UI changes"
+            "Some UI changes."
         ]
     },
     {
         "version": "1.8.1",
-        "name": "Bug Fix 🪲",
+        "name": "Bug Fix",
         "emoji": "🪲",
         "date": "2023-03-16",
-        "description": "Fixed Daily routine end time bug"
+        "description": "Fixed Daily routine end time bug."
     },
     {
         "version": "1.8.0",
-        "name": "Added Routine store and manager 🤯",
+        "name": "Added Routine store and manager",
         "emoji": "🤯",
         "date": "2023-03-16",
         "description": [
-            "Added routine manager",
-            "Added Routine store"
+            "Added routine manager.",
+            "Added Routine store."
         ]
     },
     {
         "version": "1.7.2",
-        "name": "UI Improvements 🎨",
+        "name": "UI Improvements",
         "emoji": [
             "🎨"
         ],
         "date": "2023-03-10",
         "description": [
-            "Changed the button of seeing more routines in the home screen",
-            "Made Better Ui for the app",
-            "Added text ellipses to longer title and description in routines"
+            "Changed the button of seeing more routines in the home screen.",
+            "Made Better Ui for the app.",
+            "Added text ellipses to longer title and description in routines."
         ]
     },
     {
         "version": "1.7.1",
-        "name": "Smoother 😯",
+        "name": "Smoother",
         "emoji": [
             "😯",
             "🚀"
@@ -278,7 +292,7 @@
     },
     {
         "version": "1.7.0",
-        "name": "Smooth UI 🎨",
+        "name": "Smooth UI",
         "date": "2023-03-10",
         "emoji": [
             "🎨",
@@ -293,7 +307,7 @@
     },
     {
         "version": "1.6.1",
-        "name": "Bug Fixes 🐛",
+        "name": "Bug Fixes",
         "emoji": [
             "🐛"
         ],
@@ -302,8 +316,8 @@
     },
     {
         "version": "1.6.0",
-        "name": "New UI 🎨",
-        "emoji": "🎨",
+        "name": "New UI",
+        "emoji": ["🎨", "🤩"],
         "date": "2023-03-08",
         "description": [
             "Added a new UI to the app.",
@@ -320,10 +334,10 @@
     },
     {
         "version": "1.5.0",
-        "name": "Dark 😎",
+        "name": "Dark Theme",
         "emoji": [
             "😎",
-            "🎨"
+            "🎨", "🌑"
         ],
         "date": "2023-02-21",
         "description": [
@@ -346,7 +360,7 @@
     },
     {
         "version": "1.0.0",
-        "name": "First Release 🎉",
+        "name": "First Release",
         "emoji": [
             "🎉"
         ],
