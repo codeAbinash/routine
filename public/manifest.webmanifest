@@ -11,24 +11,25 @@
             "src": "icons/icon192.png",
             "sizes": "192x192",
             "type": "image/png",
-            "purpose": "maskable"
+            "purpose": "any"
         },
         {
             "src": "icons/icon512.png",
             "sizes": "512x512",
             "type": "image/png",
-            "purpose": "maskable"
+            "purpose": "any"
         },
         {
             "src": "icons/icon196.png",
             "sizes": "196x196",
             "type": "image/png",
-            "purpose": "maskable"
+            "purpose": "any"
         },
         {
-            "src": "icons/favicon.ico", 
-            "type": "image/png",
-            "purpose": "maskable"
+            "src": "icons/favicon.ico",
+            "type": "image/ico",
+            "sizes" : "256x256",
+            "purpose": "any"
         }
     ],
     "screenshots": [
@@ -36,29 +37,29 @@
             "src": "images/screen/s1.webp",
             "type": "image/webp",
             "sizes": "1080x2300",
-            "platform" : "wide",
-            "label" : "Home screen in Routine Application"
+            "platform": "wide",
+            "label": "Home screen in Routine Application"
         },
         {
             "src": "images/screen/s2.webp",
             "type": "image/webp",
-            "sizes": "1080x2300",
-            "platform" : "wide",
-            "label" : "Home screen in Routine Application"
+            "sizes": "1080x2299",
+            "platform": "wide",
+            "label": "Routines List"
         },
         {
             "src": "images/screen/s3.webp",
             "type": "image/webp",
-            "sizes": "1080x2300",
-            "platform" : "wide",
-            "label" : "Home screen in Routine Application"
+            "sizes": "1080x2301",
+            "platform": "wide",
+            "label": "Weekly Routine View"
         },
         {
-            "src": "images/screen/s3.webp",
+            "src": "images/screen/s4.webp",
             "type": "image/webp",
             "sizes": "1080x2300",
-            "platform" : "wide",
-            "label" : "Home screen in Routine Application"
+            "platform": "wide",
+            "label": "Calendar and Holidays"
         }
     ],
     "shortcuts": [
@@ -66,7 +67,7 @@
             "name": "Home",
             "short_name": "Home",
             "description": "Home",
-            "url": "./?file=index/dataTypes/Arrays",
+            "url": "/routine/",
             "icons": [
                 {
                     "src": "icons/icon96.png",
@@ -75,10 +76,10 @@
             ]
         },
         {
-            "name": "Charts",
+            "name": "Routines",
             "short_name": "Charts",
             "description": "Charts",
-            "url": "./?file=index/dataTypes/Arrays",
+            "url": "/routine/routines/",
             "icons": [
                 {
                     "src": "icons/icon96.png",
@@ -87,10 +88,22 @@
             ]
         },
         {
-            "name": "Settings",
+            "name": "Calendar",
             "short_name": "Settings",
             "description": "Settings",
-            "url": "./?file=index/dataTypes/Arrays",
+            "url": "/routine/calendar/",
+            "icons": [
+                {
+                    "src": "icons/icon96.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name" : "More",
+            "short_name": "More",
+            "description": "More",
+            "url": "/routine/more/",
             "icons": [
                 {
                     "src": "icons/icon96.png",
