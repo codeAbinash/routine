@@ -5,7 +5,7 @@ import TextEmoji from "../components/TextEmoji";
 import ls from '../lib/storage'
 import { useEffect, useMemo, useState } from "react";
 import Header from "../components/Header";
-import Loading from "../components/Loading";
+import Loading from "../components/loading/Loading";
 import BottomModal from "../components/BottomModal";
 import Emoji from "emoji-store";
 
@@ -24,7 +24,10 @@ function deleteRoutineById(routineID: string) {
 function EnterValidRoutineIdUI() {
 	return <>
 		<p className='text-center text-xl font-semibold'>Enter a valid routine ID <TextEmoji emoji="🤨" /></p>
-		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('🤔')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
+		<div className='animate-bounce-slow mt-10 mb-10 grid'>
+			<img src={Emoji.get('🤔')} alt="emoji" className={`mx-auto mt-5 w-24 h-24 place-1-1 opacity-50 blur-lg`} />
+			<img src={Emoji.get('🤔')} alt="emoji" className={`mx-auto mt-5 w-24 h-24 z-10 place-1-1`} />
+		</div>
 		<p className='text-center text-grey text-xs mt-5 font-[450]'>If you cannot find your routine ID, please contact <a className="text-accent" href="mailto:codeAbinash@gmail.com">me</a>.</p>
 	</>
 }
@@ -32,7 +35,10 @@ function EnterValidRoutineIdUI() {
 function RoutineAppliedUI({ routineId }: { routineId: string }) {
 	return <>
 		<p className='text-center text-xl font-semibold'>Routine Applied <TextEmoji emoji="✅" /></p>
-		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('🤩')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
+		<div className='animate-bounce-slow mt-10 mb-10 grid'>
+			<img src={Emoji.get('🤩')} alt="emoji" className={`mx-auto mt-5 w-24 h-24 place-1-1 opacity-50 blur-lg`} />
+			<img src={Emoji.get('🤩')} alt="emoji" className={`mx-auto mt-5 w-24 h-24 z-10 place-1-1`} />
+		</div>
 		<p className='text-center text-grey text-xs mt-5 font-[450]'>
 			Routine id : <span className="text-accent">{routineId}</span>. Go back now?
 		</p>
@@ -42,7 +48,10 @@ function RoutineAppliedUI({ routineId }: { routineId: string }) {
 function AlreadySubscribedUI({ routineId }: { routineId: string }) {
 	return <>
 		<p className='text-center text-xl font-semibold'>Already Subscribed <TextEmoji emoji="😁" /></p>
-		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('😉')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
+		<div className='animate-bounce-slow mt-10 mb-10 grid'>
+			<img src={Emoji.get('😉')} alt="emoji" className={`mx-auto mt-5 w-24 h-24 place-1-1 opacity-50 blur-lg`} />
+			<img src={Emoji.get('😉')} alt="emoji" className={`mx-auto mt-5 w-24 h-24 z-10 place-1-1`} />
+		</div>
 		<p className='text-center text-grey text-xs mt-5 font-[450]'>
 			You are already subscribed to this routine! <br />
 			Routine id : <span className="text-accent">{routineId}</span>
@@ -53,7 +62,10 @@ function AlreadySubscribedUI({ routineId }: { routineId: string }) {
 function SkipUI() {
 	return <>
 		<p className='text-center text-xl font-semibold'>Skip for now ?</p>
-		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('👉🏻')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
+		<div className='animate-bounce-slow mt-10 mb-10 grid'>
+			<img src={Emoji.get('👉🏻')} alt="emoji" className={`mx-auto mt-5 w-24 h-24 place-1-1 opacity-50 blur-lg`} />
+			<img src={Emoji.get('👉🏻')} alt="emoji" className={`mx-auto mt-5 w-24 h-24 z-10 place-1-1`} />
+		</div>
 		<p className='text-center text-grey text-xs mt-5 font-[450] px-[7%]'>
 			You can skip this step for now. You can add routines later from settings.
 		</p>
@@ -63,7 +75,10 @@ function SkipUI() {
 function RoutineNotFoundUI({ routineId }: { routineId: string }) {
 	return <>
 		<p className='text-center text-xl font-semibold'>Routine Not Found <TextEmoji emoji="😢" /></p>
-		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('😢')} alt="emoji" className={`mx-auto mt-5 w-24 h-24`} /></div>
+		<div className='animate-bounce-slow mt-10 mb-10 grid'>
+			<img src={Emoji.get('😢')} alt="emoji" className={`mx-auto mt-5 w-24 h-24  place-1-1 opacity-50 blur-lg`} />
+			<img src={Emoji.get('😢')} alt="emoji" className={`mx-auto mt-5 w-24 h-24  z-10 place-1-1`} />
+		</div>
 		<p className='text-center text-grey text-xs mt-5 font-[450] px-[7%]'>
 			Cannot find routine <span className="text-accent">{routineId}</span> Maybe the routine you are looking
 			for is not available. Please check the routine id again. <br /><br />
@@ -107,7 +122,7 @@ export default function ApplyRoutine() {
 	return (
 		<div className="screen dark:text-white">
 			<BottomModal show={modalShow} btnTxt={modalBtnText} cb={modalCallback}>{modalUi}</BottomModal>
-			<Header title={startedUsing ? <>Routine Store <TextEmoji emoji="👜" /></> : <>Select Routine <TextEmoji emoji="🧐"/></>}
+			<Header title={startedUsing ? <>Routine Store <TextEmoji emoji="👜" /></> : <>Select Routine <TextEmoji emoji="🧐" /></>}
 				notiIcon={false} placeholder="Search Routine" onInput={() => { }}
 			/>
 			<div className="px-5 py-1 flex flex-col gap-4">

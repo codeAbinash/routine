@@ -5,9 +5,10 @@ import TextEmoji from "../components/TextEmoji";
 import ls from '../lib/storage'
 import { useEffect, useMemo, useState } from "react";
 import Header from "../components/Header";
-import Loading from "../components/Loading";
+import Loading from "../components/loading/Loading";
 import { MODAL_BUTTON_TEXT } from "../lib/lib";
 import BottomModal, { BasicModal } from "../components/BottomModal";
+import icons from "../assets/icons/icons";
 
 function deleteRoutineById(routineID: string) {
 	let routines = JSON.parse(ls.get('routines') || '[]')
@@ -87,8 +88,11 @@ function Routines({ deleteRoutine }: any) {
 		<div className="flex flex-col gap-3">
 			{
 				routines.length === 0
-					? <div className="min-h-[50dvh] justify-center items-center flex">
-						<p className="font-medium text-sm text-grey">No Routine</p>
+					? <div className="min-h-[60dvh] justify-center items-center gap-5 flex flex-col">
+						<img src={icons.app_icon_transparent_256} className="w-[55%]" />
+						<p className="text-sm text-secondary text-center">
+							You haven't subscribed <br /> to any routine yet.
+						</p>
 					</div>
 					:
 					routines.map((id: any, index: number) => {

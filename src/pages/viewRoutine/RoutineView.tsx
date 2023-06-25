@@ -55,10 +55,6 @@ export default function RoutineView({ show, routines, cb, index }: { index: numb
       return () => { document.body.style.overflowY = 'auto' }
    }, [isShow])
 
-   useEffect(() => {
-      console.log(index)
-   }, [])
-
    if (!routines[index])
       return null
 

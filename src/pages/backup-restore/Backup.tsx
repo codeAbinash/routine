@@ -4,7 +4,7 @@ import BackHeader from '../../components/BackHeader'
 import icons from '../../assets/icons/icons'
 import ls from '../../lib/storage'
 import TextEmoji from '../../components/TextEmoji'
-import Loading from '../../components/Loading'
+import Loading from '../../components/loading/Loading'
 import Emoji from 'emoji-store'
 import { df } from '../../lib/delay'
 import { Backup } from './file'
@@ -69,13 +69,15 @@ function createBackup() {
 		routines,
 		subscriptions
 	}
-
+	// File name will be routines_backup_2021-09-18_12-00-00.json
+	const fileName = 'routines_backup_' + new Date().toISOString().split('T')[0] + '_' + new Date().toLocaleTimeString().split(' ')[0].split(':').join('-') + '.json'
 	const dataStr = JSON.stringify(backup)
 	const blob = new Blob([dataStr], { type: "text/plain;charset=utf-8" });
 	const url = window.URL.createObjectURL(blob);
 	const a = document.createElement('a');
 	a.href = url;
-	a.download = 'routine_backup.json';
+	
+	a.download = fileName + '.json';
 	a.click();
 	a.remove()
 	window.URL.revokeObjectURL(url);

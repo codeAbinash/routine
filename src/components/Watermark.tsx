@@ -9,7 +9,7 @@ function Watermark({ visible }: any) {
 
     // console.log(isWatermark)
     return (
-        <div className={`opacity-100 pb-10 pt-10 flex justify-center items-center -z-10 text-center`}>
+        <div className={`pb-10 pt-10 flex justify-center items-center -z-10 text-center`}>
             <p className={
                 `font-medium tap97 text-[0.7em] text-dark/50 dark:text-darkText/50`
             }>

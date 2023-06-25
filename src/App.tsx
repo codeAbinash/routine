@@ -6,7 +6,7 @@ import Calendar from './pages/Calendar'
 import Home from './pages/Home'
 import Routines from './pages/Routines'
 // import More from './pages/More'
-import Loading from './components/Loading'
+import Loading from './components/loading/Loading'
 import { loadTheme } from './lib/theme'
 // import ViewRoutine from './pages/ViewRoutine'
 

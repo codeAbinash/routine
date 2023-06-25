@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import BackHeader from '../../components/BackHeader'
-import Loading from '../../components/Loading'
+import Loading from '../../components/loading/Loading'
 import TextEmoji from '../../components/TextEmoji'
 import Watermark from '../../components/Watermark'
 

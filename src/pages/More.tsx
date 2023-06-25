@@ -46,7 +46,7 @@ function searchSettingsInfo(settingsInfo: Setting[], query: string) {
 
 function More() {
     const settingsInfo = [
-        
+
         {
             name: 'Theme',
             icon: icons.theme,
@@ -68,10 +68,10 @@ function More() {
         },
         { name: 'blank', icon: '', callback: () => { }, rightArrow: false },
         {
-            name : 'Message Friends',
-            icon : icons.chat,
-            callback : () => navigate('/messages'),
-            rightArrow : true
+            name: 'Message Friends',
+            icon: icons.chat,
+            callback: () => navigate('/messages'),
+            rightArrow: true
         },
         { name: 'blank', icon: '', callback: () => { }, rightArrow: false },
         {
@@ -252,7 +252,10 @@ export default More
 function ResetEverythingUI() {
     return <>
         <p className='text-center text-xl font-semibold text-balance'>Are you sure you want  to reset everything?</p>
-        <div className='animate-bounce-slow mt-10 mb-10 '><img src={Emoji.get('🤯')} alt="bag" className={`mx-auto mt-5 w-24 h-24`} /></div>
+        <div className='animate-bounce-slow mt-10 mb-10 grid'>
+            <img src={Emoji.get('🤯')} alt="bag" className={`place-1-1 opacity-50 blur-lg mx-auto mt-5 w-24 h-24 `} />
+            <img src={Emoji.get('🤯')} alt="bag" className={`place-1-1 z-10 mx-auto mt-5 w-24 h-24`} />
+        </div>
         <p className='text-center text-grey text-xs mt-5 font-[450] text-balance'>It is advised to keep a backup before resetting everything. This will delete all your routines, subscriptions, and settings. This action cannot be undone. Are you sure?</p>
     </>
 }
@@ -260,7 +263,10 @@ function ResetEverythingUI() {
 function JoinTelegramUi() {
     return <>
         <p className='text-center text-xl font-semibold text-balance'>Join Telegram channel to get latest updates <TextEmoji emoji='🤩' /> </p>
-        <div className='animate-bounce-slow mt-10 mb-10 '><img src={icons.telegram} alt="bag" className={`mx-auto mt-5 w-28 h-28`} /></div>
+        <div className='animate-bounce-slow mt-10 mb-10 grid'>
+            <img src={icons.telegram} alt="bag" className={`mx-auto mt-5  blur-lg w-28 h-28 place-1-1 opacity-50`} />
+            <img src={icons.telegram} alt="bag" className={`mx-auto mt-5 w-28 h-28 place-1-1 z-10`} />
+        </div>
         <p className='text-center text-grey text-xs mt-5 font-[450] text-balance'>
             Join Telegram Channel <a href="https://t.me/routine_application" target='_blank' className='text-accent'>routine_application</a> to get latest updates about this application.
         </p>
@@ -269,7 +275,10 @@ function JoinTelegramUi() {
 function FeedBackUi() {
     return <>
         <p className='text-center text-xl font-semibold text-balance'>Send Feedback <TextEmoji emoji='🤩' /> </p>
-        <div className='animate-bounce-slow mt-10 mb-10 '><img src={icons.chat} alt="bag" className={`mx-auto mt-5 w-24 h-24`} /></div>
+        <div className='animate-bounce-slow mt-10 mb-10 grid'>
+            <img src={icons.chat} alt="bag" className={`mx-auto mt-5 blur-lg  w-24 h-24 place-1-1 opacity-50`} />
+            <img src={icons.chat} alt="bag" className={`mx-auto mt-5 w-24 h-24 place-1-1 z-10`} />
+        </div>
         <p className='text-center text-grey text-xs mt-5 font-[450] text-balance'>
             Your feedback is valuable. Please send your feedback to <a href="mailto:codeAbinash@gmail.com?subject=Feedback of Routine Application" target='_blank' className='text-accent'>
                 codeAbinash@gmail.com</a>

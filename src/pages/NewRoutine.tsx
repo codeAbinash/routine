@@ -41,9 +41,6 @@ function NewRoutine() {
 	function goBack() {
 		navigate(-1)
 	}
-	useEffect(() => {
-		console.log(routine)
-	}, [routine])
 
 	useEffect(() => {
 		topElement.current.scrollIntoView({ behavior: 'smooth' })

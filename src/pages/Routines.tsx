@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import FloatingButton from '../components/FloatingButton'
 import Header from '../components/Header'
-import Loading from '../components/Loading'
+import Loading from '../components/loading/Loading'
 import NavBar from '../components/NavBar'
 import TextEmoji from '../components/TextEmoji'
 import Watermark from '../components/Watermark'
@@ -13,6 +13,8 @@ import delay, { df } from '../lib/delay'
 import { capitalize, debounce, randomString, vibrantColors7 } from '../lib/lib'
 import ls from '../lib/storage'
 import RoutineView from './viewRoutine/RoutineView'
+import LoadingRoutines from '../components/loading/LoadingRoutines'
+import icons from '../assets/icons/icons'
 
 export function searchRoutine(routines: Routine[], query: string) {
     // Return filtered routines 
@@ -68,14 +70,14 @@ function Routines() {
         }, 200);
     }, [])
     useEffect(() => {
-        if (currentSelectedType === 'all' || currentSelectedType === 'holiday' || currentSelectedType === 'routines') {
-            uScreenRoutines(null)
-            setTimeout(() => {
-                uScreenRoutines(typedList[currentSelectedType])
-            }, 200);
-        }
-        else
+        // if (currentSelectedType === 'all' || currentSelectedType === 'holiday' || currentSelectedType === 'routines') {
+        uScreenRoutines(null)
+        setTimeout(() => {
             uScreenRoutines(typedList[currentSelectedType])
+        }, 200);
+        // }
+        // else
+        // uScreenRoutines(typedList[currentSelectedType])
     }, [currentSelectedType])
 
     function searchFunction(e: any) {
@@ -113,7 +115,7 @@ function Routines() {
                 </div>
             </section>
             <FloatingButton />
-            <Watermark />
+            {/* <Watermark /> */}
             <NavBar active='Routines' />
         </div>
     )
@@ -131,7 +133,6 @@ function Routines() {
 //             return AllRoutines(routines.holiday)
 // }
 
-
 function AllRoutines({ screenRoutines, allRoutines }: { screenRoutines: Routine[] | null, allRoutines: Routine[] | null }) {
     // console.log(routines)
     const navigate = useNavigate()
@@ -139,21 +140,24 @@ function AllRoutines({ screenRoutines, allRoutines }: { screenRoutines: Routine[
     const [showRoutineModal, setRoutineModal] = useState(false)
 
     if (!screenRoutines || !allRoutines) {
-        return <div className='min-h-[60vh] flex justify-center items-center'>
-            <Loading />
-        </div>
+        return <LoadingRoutines />
     }
 
     if (screenRoutines.length === 0) return (
-        <div className="flex flex-col gap-10 mt-10 min-h-[50vh] justify-center items-center">
-            <div className='flex flex-col gap-4 px-5'>
-                <p className='text-center text-[#777]/50 text-base font-medium'>No Routine <TextEmoji emoji='😕' /></p>
-                <p className='text-center text-[#777]/50 text-xs font-[450]'>You can create a new routine or apply a <br /> routine from the routine store <TextEmoji emoji='👜' /></p>
+        <div className="flex flex-col gap-10 mt-10 min-h-[55vh] justify-center items-center">
+            <div className='flex flex-col gap-5 px-5 justify-center items-center'>
+                <img src={icons.app_icon_transparent_256} className="w-[55%]" />
+                <p className='text-center text-[#777]/70 text-base font-medium'>No Routine <TextEmoji emoji='🙄' />
+                </p>
+                <p className='text-center text-[#777]/50 text-xs font-[450] mb-5 '>You can create a new routine or apply a <br /> routine from the 
+                <span className='text-accent active:bg-accent/20'
+                    onClick={() => delay(() => navigate('/applyRoutine'))}
+                > Routine Store <TextEmoji emoji='👜' /></span></p>
             </div>
-            <button className='no-highlight block bg-dark shadow-lg shadow-dark/50 text-white py-3 px-7 text-[0.7rem] font-medium rounded-full tap97'
+            {/* <button className='no-highlight block bg-dark shadow-lg shadow-dark/50 text-white py-3 px-7 text-[0.7rem] font-medium rounded-full tap97'
                 onClick={() => delay(() => navigate('/applyRoutine'))}>
                 Routine Store <TextEmoji emoji='👜' />
-            </button>
+            </button> */}
         </div>
     )
 

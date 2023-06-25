@@ -33,6 +33,7 @@ import edit from './src/edit.svg'
 import telegram from './src/telegram.svg'
 import backup_folder from  './src/backup_folder.webp'
 import restore_file from './src/restore_file.webp'
+import app_icon_transparent_256 from './src/app_icon_transparent_256.png'
 
 
 const icons = {
@@ -45,7 +46,7 @@ const icons = {
     right_arrow_next, shield, theme, left_arrow,
     backup, restore, shield_cross, telegram_black,
     spinner, chat, del, edit, telegram, backup_folder,
-    restore_file
+    restore_file, app_icon_transparent_256
 }
 
 

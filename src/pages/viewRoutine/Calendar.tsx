@@ -15,8 +15,9 @@ export default function Calendar({ routine }: { routine: Routine }) {
          </div>
          <div className={`bg-white p-[12%] w-[45%] dark:bg-black calendar-shadow skew-transition duration-500
          active:skew-x-2 active:skew-y-2 active:rotate-2 transition-all shine-effect aspect-square
-         rounded-3xl flex justify-between flex-col`}>
-            <img src={Emoji.get(routine.emoji)} />
+         rounded-3xl justify-between flex-col grid`}>
+            <img src={Emoji.get(routine.emoji)} className=" place-1-1 opacity-50 blur-lg"/>
+            <img src={Emoji.get(routine.emoji)} className=" z-10 place-1-1"/>
          </div>
       </div>
    </div>

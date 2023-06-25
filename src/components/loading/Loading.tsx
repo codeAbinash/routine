@@ -1,4 +1,4 @@
-import icons from "../assets/icons/icons"
+import icons from "../../assets/icons/icons"
 
 function Loading() {
     return (

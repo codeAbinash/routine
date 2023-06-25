@@ -13,6 +13,7 @@ import TextEmoji from '../components/TextEmoji'
 import Emoji from 'emoji-store'
 import delay, { df } from '../lib/delay'
 import BottomModal from '../components/BottomModal'
+import LoadingRoutines from '../components/loading/LoadingRoutines'
 
 
 // Delete the subscription if the subscription is expired
@@ -56,13 +57,13 @@ function deleteRoutineBySub(subscriptionKey: string) {
 }
 
 function Home() {
-	// const [name, updateName] = useState(1)
 	const [screenRoutines, uTodayRoutine] = useState<any>([])
 	const navigate = useNavigate()
-	// const timer1 = useRef<any>(null);
 	const timer2 = useRef<any>(null);
 	const [isRoutineEmpty, setIsRoutineEmpty] = useState(false)
 	let routines = useMemo(() => JSON.parse(ls.get('routines') || '[]'), [])
+	const [showLoading, setShowLoading] = useState(true)
+
 
 	useEffect(() => {
 		// Check if started using
@@ -101,15 +102,34 @@ function Home() {
 		}
 	}, [])
 
+
+	useEffect(() => {
+		// Disable loading after 1.5s
+		const timer = setTimeout(() => {
+			setShowLoading(false)
+		}, 300)
+
+		return () => {
+			clearTimeout(timer)
+		}
+
+	}, [screenRoutines])
+
+
 	return (
 		<div className="home-screen screen-navbar select-none dark:bg-black dark:text-darkText">
 			<Header title={<span>{getCurrentDate()} <TextEmoji emoji={getEmojiOfDayByTime()} /></span>} notiIcon={true} placeholder="Search Routine" />
+
 			<section className='p-[1.2rem] pt-3'>
-				{/* <p className='text-[#777]/50 text-center mt-2 mb-5 text-sm font-medium'>Today's routines</p> */}
-				<div className="routines flex flex-col gap-[0.9rem]">
-					<GetRoutines screenRoutines={screenRoutines} allRoutines={routines} />
-				</div>
-				<NewRoutinesLoader />
+				{
+					showLoading ? <LoadingRoutines /> :
+						<>
+							<div className="routines flex flex-col gap-[0.9rem]">
+								<GetRoutines screenRoutines={screenRoutines} allRoutines={routines} />
+							</div>
+							<NewRoutinesLoader />
+						</>
+				}
 			</section>
 			<FloatingButton />
 			<Watermark />
@@ -124,7 +144,10 @@ function Home() {
 function NoRoutineUi() {
 	return <>
 		<p className='text-center text-xl font-semibold'>You have no Routine <TextEmoji emoji='😕' /> !</p>
-		<div className='animate-bounce-slow mt-10 mb-10'><img src={Emoji.get('👜')} alt="bag" className={`mx-auto mt-5 w-28 h-28`} /></div>
+		<div className='grid animate-bounce-slow mt-10 mb-10'>
+			<img src={Emoji.get('👜')} alt="bag" className={`place-1-1 mx-auto mt-5 w-28 h-28 blur-xl opacity-50`} />
+			<img src={Emoji.get('👜')} alt="bag" className={`place-1-1 mx-auto mt-5 w-28 h-28 z-10`} />
+		</div>
 		<p className='text-center text-grey text-xs mt-5 font-[450]'>Go to Routine <TextEmoji emoji='📃' /> Store <TextEmoji emoji='👜' /> <br />to add new Routines !</p>
 	</>
 }

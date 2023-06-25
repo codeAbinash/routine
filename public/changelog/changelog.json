@@ -1,8 +1,25 @@
 [
     {
+        "version": "3.6.2",
+        "name": "UI Improvements",
+        "emoji": [
+            "🎨", "😯"
+        ],
+        "date": "2023-06-25",
+        "description": [
+            "Added skeleton loading animation to the app.",
+            "Improved performance of the app.",
+            "Updated UI of the app."
+        ]
+    },
+    {
         "version": "3.6.1",
         "name": "Manifest Update",
-        "emoji": ["📝", "⚙️", "🎨"],
+        "emoji": [
+            "📝",
+            "⚙️",
+            "🎨"
+        ],
         "date": "2023-06-25",
         "description": [
             "Updated the manifest file of the app.",
@@ -317,7 +334,10 @@
     {
         "version": "1.6.0",
         "name": "New UI",
-        "emoji": ["🎨", "🤩"],
+        "emoji": [
+            "🎨",
+            "🤩"
+        ],
         "date": "2023-03-08",
         "description": [
             "Added a new UI to the app.",
@@ -337,7 +357,8 @@
         "name": "Dark Theme",
         "emoji": [
             "😎",
-            "🎨", "🌑"
+            "🎨",
+            "🌑"
         ],
         "date": "2023-02-21",
         "description": [

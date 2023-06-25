@@ -8,9 +8,10 @@ import delay from '../lib/delay'
 import ls from '../lib/storage'
 import { useNavigate } from 'react-router-dom'
 import { capitalize } from '../lib/lib'
-import Loading from '../components/Loading'
 import { RoutineDescription } from './Routines'
 import RoutineView from './viewRoutine/RoutineView'
+import Loading from '../components/loading/Loading'
+import icons from '../assets/icons/icons'
 
 
 export default function NewRoutinesLoader() {
@@ -44,7 +45,6 @@ export default function NewRoutinesLoader() {
         }
         setTomorrow(incrementDate(tomorrow))
         const newRoutines = searchByDate(tomorrow, lsRoutines)
-        console.log(newRoutines)
         if (newRoutines.length === 0) {
             console.log(notificationRoutine)
             setRoutines([...routines, noRoutine])
@@ -62,12 +62,9 @@ export function GetRoutines({ screenRoutines, allRoutines }: { screenRoutines: R
         return <Loading />
 
     if (screenRoutines.length === 0)
-        return <div className='h-[40dvh] flex flex-col items-center justify-center'>
-            <p className='text-[#777]/50 text-center my-5 text-lg font-medium flex flex-col gap-4'>
-                <span>No Routine <TextEmoji emoji='😕' /></span>
-                {/* <span>¯⁠\⁠_⁠(⁠ツ⁠)⁠_⁠/⁠¯</span> */}
-                {/* <br /> */}
-            </p>
+        return <div className='h-[50vh] flex flex-col items-center justify-center gap-3'>
+            <p className='text-[#777]/50 text-center text-sm font-medium'>No Routine <TextEmoji emoji='🤔' /></p>
+            <img src={icons.app_icon_transparent_256} className="w-[50%] dark:grayscale dark:opacity-30" />
             <p className='text-xs text-center text-[#777]/50 font-medium'>Go to Routines tab to see all routines <TextEmoji emoji="💫" /></p>
         </div>
 
