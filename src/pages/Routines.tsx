@@ -186,7 +186,7 @@ function AllRoutines({ screenRoutines, allRoutines, expiredRoutines }: { screenR
         <RoutineView
             show={showRoutineModal}
             routines={allRoutines}
-            expired={screenRoutines[currentRoutineViewIndex].expired}
+            expired={screenRoutines[currentRoutineViewIndex]?.expired || false}
             expiredRoutines={expiredRoutines}
             index={currentRoutineViewIndex}
             cb={[() => { setRoutineModal(false) }, () => { setRoutineModal(false) }]}

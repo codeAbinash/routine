@@ -1,5 +1,15 @@
 [
     {
+        "version": "3.7.0",
+        "name": "Share Routines",
+        "emoji": "📤",
+        "date": "2023-06-26",
+        "description": [
+            "You can now share your routines with your friends.",
+            "Added routine restore from text option in the more option menu (\"Restore from text\" option)."
+        ]
+    },
+    {
         "version": "3.6.4",
         "name": "UI Improvements",
         "emoji": [

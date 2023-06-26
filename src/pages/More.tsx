@@ -14,6 +14,7 @@ import Emoji from 'emoji-store'
 import BottomModal from '../components/BottomModal'
 import OptionSelector, { OptionsSelectorOptions } from '../components/OptionSelector'
 import { capitalize } from '../lib/lib'
+import { storeInLs } from './backup-restore/Restore'
 
 const darkModeOptions: OptionsSelectorOptions = [
 	{ name: "Light Theme", value: "light" },
@@ -93,7 +94,12 @@ function More() {
 			callback: () => navigate('/restore'),
 			rightArrow: true
 		},
-
+		{
+			name: "Restore from text",
+			icon: icons.restore,
+			callback: () => restoreFromText(),
+			rightArrow: true
+		},
 		// {
 		//     name: 'Hide or Show Watermark',
 		//     icon: icons.shield_cross,
@@ -228,7 +234,7 @@ function More() {
 								<OptionSelector isOpen={isSelectorOpen} setIsOpen={setIsSelectorOpen} options={darkModeOptions}
 									setOption={setDarkModeSelectedOption} heading={'Select Theme'}
 								>
-									<div onClick={() => setIsSelectorOpen(true)} className='appearance-none bg-inputBg dark:bg-darkInputBg p-3 text-sm px-8 text-center outline-none border-none tap rounded-2xl'>
+									<div onClick={df(() => setIsSelectorOpen(true))} className='appearance-none bg-inputBg dark:bg-darkInputBg p-3 text-sm px-8 text-center outline-none border-none tap rounded-2xl'>
 										<p className='font-[450]'>{capitalize(darkModeSelectedOption)} Theme</p>
 									</div>
 								</OptionSelector>
@@ -298,4 +304,23 @@ function FeedBackUi() {
 				codeAbinash@gmail.com</a>
 		</p>
 	</>
+}
+
+
+
+
+function restoreFromText() {
+	// const confirm = window.confirm('Are you sure you want to restore from text? This may be dangerous and may cause data loss. If wrong data is entered, it may cause data loss. Please make sure you have a backup before restoring from text.')
+	// if (!confirm) return
+	const text = prompt('Enter the text to restore from')
+	// User clicked Cancel
+	if (text === null) return
+	if (!text) return alert('Please enter some text to restore from')
+	let restoreStatus: string = ''
+	try {
+		restoreStatus = storeInLs(JSON.parse(text)).status
+		alert(restoreStatus)
+	} catch (error) {
+		alert('Error while restoring from text')
+	}
 }

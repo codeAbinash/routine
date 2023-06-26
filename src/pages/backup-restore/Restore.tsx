@@ -36,6 +36,32 @@ function Restore() {
   )
 }
 
+function restoredCountStatus(routineCount: number, subscriptionCount: number) {
+  if (routineCount === 0 && subscriptionCount === 0) return 'No data restored, maybe you selected a wrong file?'
+  if (routineCount === 0) return `${subscriptionCount} subscriptions restored`
+  if (subscriptionCount === 0) return `${routineCount} routines restored`
+  return `${routineCount} routines and ${subscriptionCount} subscriptions restored`
+}
+
+export function storeInLs(data: Backup) {
+  const routines = JSON.parse(ls.get('routines') || '[]')
+  const subscriptions = JSON.parse(ls.get('subscriptions') || '{}')
+
+  routines.unshift(...data.routines)
+  // Add subscriptions key values to the existing subscriptions
+  // For each key in data.subscriptions
+
+  for (const key in data.subscriptions)
+    subscriptions[key] = data.subscriptions[key]
+
+  ls.set('routines', JSON.stringify(routines))
+  ls.set('subscriptions', JSON.stringify(subscriptions))
+
+  const restoredRoutineCount = data.routines.length
+  const restoredSubscriptionCount = Object.keys(data.subscriptions).length
+  const status = restoredCountStatus(restoredRoutineCount, restoredSubscriptionCount)
+  return { status, restoredRoutineCount, restoredSubscriptionCount }
+}
 
 function RestoreUi({ startedUsing }: { startedUsing: string | null }) {
 
@@ -57,24 +83,8 @@ function RestoreUi({ startedUsing }: { startedUsing: string | null }) {
     fileInputRef.current?.click()
   }
 
-  function storeInLs(data: Backup) {
-    const routines = JSON.parse(ls.get('routines') || '[]')
-    const subscriptions = JSON.parse(ls.get('subscriptions') || '{}')
-
-    routines.push(...data.routines)
-    // Add subscriptions key values to the existing subscriptions
-    // For each key in data.subscriptions
-    
-    for (const key in data.subscriptions)
-      subscriptions[key] = data.subscriptions[key]
-
-    ls.set('routines', JSON.stringify(routines))
-    ls.set('subscriptions', JSON.stringify(subscriptions))
-  }
-
   function restoreData() {
     const file = fileInputRef.current?.files?.[0]
-
     // Confirm modal
     setModalShow(true)
     setModalBtnText(['Cancel', 'Restore'])
@@ -174,9 +184,6 @@ function RestoreUi({ startedUsing }: { startedUsing: string | null }) {
             }
           </>
     }
-
-
-
   </div>
 }
 

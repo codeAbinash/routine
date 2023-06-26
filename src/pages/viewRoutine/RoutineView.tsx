@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { json, useNavigate } from "react-router-dom"
 import icons from "../../assets/icons/icons"
 import { Routine } from "../../lib/dateMethods"
 import delay, { df } from "../../lib/delay"
@@ -9,6 +9,8 @@ import Weekly from "./Weekly"
 import TextEmoji from "../../components/TextEmoji"
 import Calendar from "./Calendar"
 import Once from "./Once"
+import { Backup } from "../backup-restore/file"
+import details from "../../info"
 
 function viewRoutineTyped(routine: Routine) {
    if (routine.type === 'weekly') {
@@ -91,15 +93,19 @@ export default function RoutineView({ show, routines, cb, index, expired = false
          </div>
 
          <div className="flex gap-3 mt-6 mb-5 text-[0.8rem]">
-            <div className="p-2.5 px-[1.3rem] bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2">
+            <div className="p-2 px-[1rem] bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2">
                <img src={icons.edit} className="dark:invert h-4 w-4 opacity-70" />
                <span className="font-[430]">Edit</span>
             </div>
-            <div className="p-2.5 px-[1.3rem] bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2"
-               onClick={() => { deleteRoutine(index, setIsShow, navigate, expired) }}
-            >
+            <div className="p-2 px-[1rem] bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2"
+               onClick={() => { deleteRoutine(index, setIsShow, navigate, expired) }}>
                <img src={icons.del} className="dark:invert h-4 w-4 opacity-70" />
                <span className="font-[430]">Delete</span>
+            </div>
+            <div className="p-2 px-[1rem] bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2.5"
+               onClick={() => { shareRoutine(routines[index], index) }}>
+               <img src={icons.telegram_dark} className="dark:invert h-4 w-4 opacity-70" />
+               <span className="font-[430]">Share</span>
             </div>
          </div>
 
@@ -110,6 +116,36 @@ export default function RoutineView({ show, routines, cb, index, expired = false
          </div>
       </div >
    </>
+}
+
+async function shareRoutine(routine: Routine, index: number) {
+   const allRoutines = JSON.parse(ls.get('routines') || '[]')
+   routine = allRoutines[index]
+
+   const backup: Backup = {
+      routines: [routine],
+      subscriptions: [],
+   }
+
+   if (navigator.share) {
+      // const title = JSON.stringify(backup)
+      // const text = routine.description || ''
+      const text = JSON.stringify(backup, null, 2)
+      // const url = details.url
+      // const blob: Blob = new Blob([stringified], { type: 'application/json' })
+      try {
+         await navigator.share({
+            // title: title,
+            text: text,
+            // url: url,
+            // files: [
+            //    new File([blob], 'routine.json', { type: blob.type })
+            // ]
+         })
+      } catch (err) {
+         console.log(err)
+      }
+   }
 }
 
 function deleteRoutine(index: number, setIsShow: Function, navigate: Function, expired: boolean = false) {
