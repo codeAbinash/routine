@@ -73,6 +73,8 @@ export function GetRoutines({ screenRoutines, allRoutines }: { screenRoutines: R
             show={showRoutineModal}
             routines={allRoutines}
             index={currentRoutineViewIndex}
+            expiredRoutines={[]}
+            expired={screenRoutines ? screenRoutines[currentRoutineViewIndex]?.expired : false}
             cb={[() => { setRoutineModal(false) }, () => { setRoutineModal(false) }]}
         />
         {
