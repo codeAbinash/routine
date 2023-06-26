@@ -46,7 +46,6 @@ export default function NewRoutinesLoader() {
         setTomorrow(incrementDate(tomorrow))
         const newRoutines = searchByDate(tomorrow, lsRoutines)
         if (newRoutines.length === 0) {
-            console.log(notificationRoutine)
             setRoutines([...routines, noRoutine])
             return
         }

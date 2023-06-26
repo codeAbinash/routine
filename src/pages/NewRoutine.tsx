@@ -11,8 +11,18 @@ import Once from './makeRoutine/Once';
 import Weekly from './makeRoutine/Weekly';
 import TextEmoji from '../components/TextEmoji';
 import BottomModal, { BasicModal } from '../components/BottomModal';
-import { MODAL_BUTTON_TEXT } from '../lib/lib';
+import { MODAL_BUTTON_TEXT, capitalize } from '../lib/lib';
+import OptionSelector from '../components/OptionSelector';
+import { df } from '../lib/delay';
 let emojiList = ['📕', '🧑🏻‍💻', '🏃🏻‍♂️', '🍽️', '🏫', '🧪', '🎂', '📖', '👩🏻‍🔬', '🎶']
+
+const routineOptions = [
+	{ name: 'Once', value: 'once' },
+	{ name: 'Daily', value: 'daily' },
+	{ name: 'Weekly', value: 'weekly' },
+	{ name: 'Calendar', value: 'calendar' },
+	{ name: 'Custom', value: 'custom' },
+]
 
 function NewRoutine() {
 	const e = new Emoji();
@@ -24,7 +34,8 @@ function NewRoutine() {
 	const navigate = useNavigate()
 	const topElement: any = useRef<HTMLDivElement>()
 	const emojiInput = useRef<any>(null)
-
+	const [isSelectorOpen, setIsSelectorOpen] = useState(false)
+	const [routineTypeSelectedOption, setRoutineTypeSelectedOption] = useState()
 	const [modalShow, setModalShow] = useState(false)
 	const [modalBtnText, setModalBtnText] = useState(MODAL_BUTTON_TEXT)
 	const [modalUi, setModalUi] = useState(<BasicModal text="THis is a sample error" />)
@@ -98,15 +109,24 @@ function NewRoutine() {
 									onInput={(e: any) => { setRoutineEmoji(e.target.value) }}
 									ref={emojiInput}
 								/>
-								<select defaultValue={routineType} onInput={(e: any) => setRoutineType(e.target.value)} className='flex-[4] appearance-none p-[1rem] px-7 rounded-2xl trans-outline outline-none focus:outline-accent border-none bg-inputBg dark:bg-darkInputBg text-center'>
-									<option value="once">Routine : Once</option>
-									<option value="daily">Routine : Daily</option>
-									<option value="weekly">Routine : Weekly</option>
-									<option value="monthly">Routine : Monthly</option>
-									<option value="yearly">Routine : Yearly</option>
-									<option value="calendar">Calendar Event</option>
-									<option value="holiday">Holiday</option>
-								</select>
+								<div>
+									{
+										<OptionSelector heading='Routine Type' isOpen={isSelectorOpen} options={routineOptions} setOption={setRoutineType} setIsOpen={setIsSelectorOpen}>
+											<div className='tap99 flex-[4] appearance-none p-[1rem] px-7 rounded-2xl trans-outline outline-none focus:outline-accent border-none bg-inputBg dark:bg-darkInputBg text-center'
+												onClick={df(() => { setIsSelectorOpen(true) })}>Routine : {capitalize(routineType)}</div>
+										</OptionSelector>
+									}
+									{/* 
+									<select defaultValue={routineType} onInput={(e: any) => setRoutineType(e.target.value)}>
+										<option value="once">Routine : Once</option>
+										<option value="daily">Routine : Daily</option>
+										<option value="weekly">Routine : Weekly</option>
+										<option value="monthly">Routine : Monthly</option>
+										<option value="yearly">Routine : Yearly</option>
+										<option value="calendar">Calendar Event</option>
+										<option value="holiday">Holiday</option>
+									</select> */}
+								</div>
 								{/* <img src={e.get('➕')} className='tap bg-inputBg dark:bg-darkInputBg h-[3.5rem] p-[0.8rem] rounded-2xl' /> */}
 							</div></div>
 						<div className="emojis flex gap-3 scrollbar-hidden flex-nowrap overflow-auto justify-between items-center">

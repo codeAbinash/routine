@@ -1,6 +1,6 @@
 const details = {
     name: 'routine',
-    version: '3.6.3'
+    version: '3.6.4'
 }
 export default details
 
@@ -14,4 +14,5 @@ export default details
 // BackHeader 50
 // FloatingButton 50
 // Calendar 50
+// OptionSelector 70
 // Popup 100-101
