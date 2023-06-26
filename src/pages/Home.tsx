@@ -64,6 +64,7 @@ function Home() {
 	const [isRoutineEmpty, setIsRoutineEmpty] = useState(false)
 	let routines = useMemo(() => JSON.parse(ls.get('routines') || '[]'), [])
 	const [showLoading, setShowLoading] = useState(true)
+	const topElement = useRef<HTMLDivElement>(null)
 
 
 	useEffect(() => {
@@ -117,8 +118,15 @@ function Home() {
 	}, [screenRoutines])
 
 
+	useEffect(() => {
+		// Scroll to top
+		topElement.current?.scrollIntoView({ behavior: 'smooth' })
+	}, [])
+
+
 	return (
 		<div className="home-screen screen-navbar select-none dark:bg-black dark:text-darkText">
+			<div className="scrollToTop" ref={topElement}></div>
 			<Header title={<span>{getCurrentDate()} <TextEmoji emoji={getEmojiOfDayByTime()} /></span>} notiIcon={true} placeholder="Search Routine" />
 
 			<section className='p-[1.2rem] pt-3'>

@@ -90,7 +90,7 @@ export function GetRoutines({ screenRoutines, allRoutines }: { screenRoutines: R
 
                 return (
                     <div className={
-                        `routine flex flex-col p-[1.2rem] rounded-[1.6rem] ${isActiveRoutine ? 'bg-accent shadow-accent/40 shadow-lg dark:bg-accent/90' : 'border-[1px] bg-routine_bg dark:bg-routine_bg_dark border-routine_border dark:border-routine_border_dark  '}
+                        `routine flex flex-col p-[1.2rem] rounded-[1.6rem] ${isActiveRoutine ? 'bg-accent shadow-accent/40 shadow-lg dark:bg-accent/90 z-0' : 'z-10 border-[1px] bg-routine_bg dark:bg-routine_bg_dark border-routine_border dark:border-routine_border_dark  '}
 				tap99 ${isCompleted ? 'opacity-60' : ''}
                 ${routine.type === 'holiday' ? 'glow-holiday' : ''}
                 ${routine.type === 'calendar' ? 'glow-calendar' : ''}

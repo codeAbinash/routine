@@ -20,8 +20,25 @@
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root" style="opacity: 0; transition: 400ms opacity;"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
+<script>
+  const root = document.getElementById("root")
+  // If it is in dark mode change the opacity after 800ms else in os
+
+  const isDarkMode = (window.matchMedia("(prefers-color-scheme: dark)").matches)
+
+  if (isDarkMode) {
+    setTimeout(() => {
+      root.style.opacity = "1"
+    }, 800);
+  } else {
+    setTimeout(() => {
+      root.style.opacity = "1"
+    }, 10);
+  }
+  console.log(root)
+</script>
 
 </html>
