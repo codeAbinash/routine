@@ -55,7 +55,7 @@ export default function RoutineView({ show, routines, cb, index, expired = false
       return () => { document.body.style.overflowY = 'auto' }
    }, [isShow])
 
-   if (!routines[index] || !expiredRoutines?.[index])
+   if (!routines[index] || !expiredRoutines)
       return null
 
    return <>
