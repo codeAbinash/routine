@@ -104,13 +104,13 @@ function Routines({ deleteRoutine }: any) {
 					</div>
 					:
 					routines.map((id: any, index: number) => {
-						return <div key={index} className='bg-accent p-5 rounded-3xl text-white tap99' onClick={() => { deleteRoutine(id) }}>
-							<div className="left">
-								{/* <img src={routine.picture} alt="" /> */}
+						return <div key={index} className='bg-accent p-3.5 rounded-3xl text-white tap99 flex gap-[5%]' onClick={() => { deleteRoutine(id) }}>
+							<div className="left w-[22%]">
+								<img src={subscriptions[id].image || images.routine} className="w-full rounded-2xl bg-white/10 aspect-auto" />
 							</div>
-							<div className="right flex flex-col gap-1">
+							<div className="right flex flex-col gap-1 w-[68%]">
 								<p className="font-semibold text-[0.9rem]">{subscriptions[id].fn}</p>
-								<p className="text-[0.73rem] font-medium text-white">{subscriptions[id].description} <br /> #{subscriptions[id].name}</p>
+								<p className="text-[0.73rem] font-medium text-white opacity-70">{subscriptions[id].description} <br /> #{subscriptions[id].name}</p>
 							</div>
 						</div>
 					})

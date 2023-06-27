@@ -68,3 +68,9 @@ export function throttle<T extends (...args: any[]) => void>(
         }
     };
 }
+
+
+
+
+export const blank_callback = [() => { }, () => { }]
+// export blank_callback

@@ -10,17 +10,18 @@ type OptionSelectorArg = {
    options: OptionsSelectorOptions,
    setOption: Function,
    heading: string,
-   description?: string
+   description?: string,
+   callback?: Function
 }
 
-export default function OptionSelector({ children, isOpen, setIsOpen, options, setOption, heading, description }: OptionSelectorArg) {
+export default function OptionSelector({ children, isOpen, setIsOpen, options, setOption, heading, description, callback = () => { } }: OptionSelectorArg) {
    useEffect(() => {
       if (isOpen) document.body.style.overflowY = 'hidden'
       return () => { document.body.style.overflowY = 'auto' }
    }, [isOpen])
 
    return <>
-      <div className={`h-[100vh] w-[100vw] left-0 top-0 fixed justify-center items-center bg-black/20 dark:bg-transparent backdrop-blur-md
+      <div className={`h-[100vh] w-[100vw] left-0 top-0 fixed justify-center items-center bg-black/20 dark:bg-transparent backdrop-blur-sm
          ${isOpen ? 'flex' : 'hidden'} z-[70]`}
          onClick={() => {
             setIsOpen(false)
@@ -31,7 +32,9 @@ export default function OptionSelector({ children, isOpen, setIsOpen, options, s
             <div className={`flex flex-col justify-center items-start tracking-wide`}>
                {
                   options.map((option, index) => {
-                     return <p onClick={() => { setIsOpen(false), setOption(option.value) }} key={index}
+                     return <p onClick={() => {
+                        setIsOpen(false), setOption(option.value), callback()
+                     }} key={index}
                         className="p-4 border-gray-100 dark:border-[#ffffff15] border-t-[1.1px] 
                       active:bg-gray-100 dark:active:bg-gray-800 
                         text-sm w-full font-[450] text-center text-blue-500">{option.name}</p>

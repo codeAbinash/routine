@@ -1,5 +1,14 @@
 [
     {
+        "version": "3.7.1",
+        "name": "UI UX Improvements",
+        "emoji": "🎨",
+        "date": "2023-06-26",
+        "description": [
+            "Added icons in routines subscriptions"
+        ]
+    },
+    {
         "version": "3.7.0",
         "name": "Share Routines",
         "emoji": "📤",

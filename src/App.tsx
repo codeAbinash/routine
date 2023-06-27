@@ -22,7 +22,7 @@ const BuyMeCoffee = React.lazy(() => import('./pages/author/BuyMeCoffee'))
 const LazyBackup = React.lazy(() => import('./pages/backup-restore/Backup'))
 const LazyRestore = React.lazy(() => import('./pages/backup-restore/Restore'))
 const LazyChangelog = React.lazy(() => import('./pages/changelog/Changelog'))
-const LazyTeam = React.lazy(() => import('./pages/author/Team'))
+const LazyContributors = React.lazy(() => import('./pages/author/Contributors'))
 const LazyTest = React.lazy(() => import('./pages/TestPage'))
 const LazyMessages = React.lazy(() => import('./pages/Messages/Messages'))
 const LazyRestoreStartup = React.lazy(() => import('./pages/backup-restore/RestoreStartup'))
@@ -66,7 +66,7 @@ export default function App() {
           <Route path='/backup' element={< LazyBackup />} />
           <Route path='/restore' element={< LazyRestore />} />
           <Route path='/changelog' element={< LazyChangelog />} />
-          <Route path='/author/team' element={< LazyTeam />} />
+          <Route path='/author/team' element={< LazyContributors />} />
           <Route path='/loading' element={< LoadingScreen />} />
           <Route path='/test' element={< LazyTest />} />
           <Route path='messages' element={<LazyMessages />} />

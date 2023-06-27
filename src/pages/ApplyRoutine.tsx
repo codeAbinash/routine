@@ -272,7 +272,6 @@ function Routines({ addRoutine, subscription }: any) {
 		setTimeout(async () => {
 			let fetchedRoutines = await (await fetch(allRoutinesLink)).json()
 			setRoutines(fetchedRoutines)
-			console.log(routines)
 		}, 0);
 	}, [])
 
@@ -283,19 +282,15 @@ function Routines({ addRoutine, subscription }: any) {
 			:
 			routines.map((routine: any, index: number) => {
 				const isSubscribed = !!subscription[routine.id]
-
-				// console.log(routine)
-				return <div key={index} className={`${isSubscribed ? 'bg-accent text-white' : 'bg-inputBg dark:bg-darkInputBg'} p-5 rounded-3xl tap99`} onClick={() => { addRoutine(routine.id) }}>
-					<div className="left">
-						{/* <img src={routine.picture} alt="" /> */}
+				return <div key={index} className={`flex justify-between ${isSubscribed ? 'bg-accent text-white' : 'bg-inputBg dark:bg-darkInputBg'} p-3.5 rounded-3xl tap99`} onClick={() => { addRoutine(routine.id) }}>
+					<div className="left w-[22%]">
+						<img src={routine.image || images.routine} className="w-full rounded-2xl bg-white/10 aspect-auto" />
 					</div>
-					<div className="right flex flex-col gap-1">
+					<div className="right flex flex-col gap-1 w-[73%]">
 						<p className="font-semibold text-[0.9rem]">{routine.name}</p>
-						<p className={`${isSubscribed ? 'text-white' : 'text-grey'} text-[0.73rem] font-medium`}>{routine.description} <br />#{routine.id}</p>
+						<p className={`${isSubscribed ? 'text-white/70' : 'text-grey'} text-[0.73rem] font-medium`}>{routine.description} <br />#{routine.id}</p>
 					</div>
 				</div>
 			})
 	)
 }
-
-

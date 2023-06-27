@@ -23,6 +23,7 @@ const darkModeOptions: OptionsSelectorOptions = [
 ]
 
 function changeTheme(theme: any) {
+	console.log(theme)
 	ls.set('theme', theme)
 	applyTheme(theme)
 }
@@ -154,8 +155,10 @@ function More() {
 				setIsShow(true)
 				setModalButtons(['Cancel', 'Send Feedback'])
 				setModalCallbacks([() => { setIsShow(false) },
-				() =>
+				() => {
+					setIsShow(false)
 					window.open('mailto:codeAbinash@gmail.com?subject=Feedback of Routine Application', '_blank')
+				}
 				])
 			},
 			rightArrow: true
@@ -185,12 +188,7 @@ function More() {
 		// Scroll to top
 		topElement.current?.scrollIntoView({ behavior: 'smooth' })
 	}, [])
-
-	useEffect(() => {
-		changeTheme(darkModeSelectedOption)
-		console.log("Selected", darkModeSelectedOption)
-	}, [darkModeSelectedOption])
-
+	
 	return (
 		<div className='screen dark:text-darkText'>
 			<BottomModal show={isShow} btnTxt={modalButtons} cb={modalCallbacks} >
@@ -232,7 +230,10 @@ function More() {
 									<div className="right"><p className='font-[430] text-sm'>Theme</p></div>
 								</div>
 								<OptionSelector isOpen={isSelectorOpen} setIsOpen={setIsSelectorOpen} options={darkModeOptions}
-									setOption={setDarkModeSelectedOption} heading={'Select Theme'}
+									setOption={(option: string) => {
+										setDarkModeSelectedOption(option)
+										changeTheme(option)
+									}} heading={'Select Theme'}
 								>
 									<div onClick={df(() => setIsSelectorOpen(true))} className='appearance-none bg-inputBg dark:bg-darkInputBg p-3 text-sm px-8 text-center outline-none border-none tap rounded-2xl'>
 										<p className='font-[450]'>{capitalize(darkModeSelectedOption)} Theme</p>
