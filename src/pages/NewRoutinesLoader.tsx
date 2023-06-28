@@ -63,7 +63,7 @@ export function GetRoutines({ screenRoutines, allRoutines }: { screenRoutines: R
     if (screenRoutines.length === 0)
         return <div className='h-[50vh] flex flex-col items-center justify-center gap-3'>
             <p className='text-[#777]/50 text-center text-sm font-medium'>No Routine <TextEmoji emoji='🤔' /></p>
-            <img src={icons.app_icon_transparent_256} className="w-[50%] dark:grayscale dark:opacity-30" />
+            <img src={icons.app_icon_transparent_256} className="w-[50%] dark:grayscale dark:opacity-40" />
             <p className='text-xs text-center text-[#777]/50 font-medium'>Go to Routines tab to see all routines <TextEmoji emoji="💫" /></p>
         </div>
 

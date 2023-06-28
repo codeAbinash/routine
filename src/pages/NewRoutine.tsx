@@ -1,6 +1,6 @@
 import Emoji from 'emoji-store';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import icons from '../assets/icons/icons';
 import BackHeader from '../components/BackHeader';
 import { MS_IN_DAY, day } from '../lib/date';
@@ -26,6 +26,7 @@ const routineOptions = [
 
 function NewRoutine() {
 	const e = new Emoji();
+	const params = useParams()
 	const [routineName, setRoutineName] = useState('')
 	const [routineDescription, setRoutineDescription] = useState('')
 	const [routineEmoji, setRoutineEmoji] = useState('')

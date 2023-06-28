@@ -97,7 +97,7 @@ function Routines({ deleteRoutine }: any) {
 			{
 				routines.length === 0
 					? <div className="min-h-[60dvh] justify-center items-center gap-5 flex flex-col">
-						<img src={icons.app_icon_transparent_256} className="w-[55%]" />
+						<img src={icons.app_icon_transparent_256} className="w-[55%] dark:grayscale dark:opacity-40" />
 						<p className="text-sm text-secondary text-center">
 							You haven't subscribed <br /> to any routine yet.
 						</p>

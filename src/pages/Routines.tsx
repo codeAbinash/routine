@@ -153,7 +153,7 @@ function Routines() {
 //             return AllRoutines(routines.holiday)
 // }
 
-function AllRoutines({ screenRoutines, allRoutines, expiredRoutines }: { screenRoutines: Routine[] | null, allRoutines: Routine[] | null, expiredRoutines : Routine[]}) {
+function AllRoutines({ screenRoutines, allRoutines, expiredRoutines }: { screenRoutines: Routine[] | null, allRoutines: Routine[] | null, expiredRoutines: Routine[] }) {
     // console.log(screenRoutines)
     const navigate = useNavigate()
     const [currentRoutineViewIndex, setCurrentRoutineViewIndex] = useState(0)
@@ -167,7 +167,7 @@ function AllRoutines({ screenRoutines, allRoutines, expiredRoutines }: { screenR
     if (screenRoutines.length === 0) return (
         <div className="flex flex-col gap-10 mt-10 min-h-[55vh] justify-center items-center">
             <div className='flex flex-col gap-5 px-5 justify-center items-center'>
-                <img src={icons.app_icon_transparent_256} className="w-[55%]" />
+                <img src={icons.app_icon_transparent_256} className="w-[55%] dark:grayscale dark:opacity-40" />
                 <p className='text-center text-[#777]/70 text-base font-medium'>No Routine <TextEmoji emoji='🙄' />
                 </p>
                 <p className='text-center text-[#777]/50 text-xs font-[450] mb-5 '>You can create a new routine or apply a <br /> routine from the

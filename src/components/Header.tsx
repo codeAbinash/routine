@@ -7,7 +7,7 @@ import Emoji from 'emoji-store'
 function Header(props: any) {
     const navigate = useNavigate()
     const headerTitle = useRef<HTMLParagraphElement>(null)
-    const inputRef = useRef<HTMLInputElement>(null)
+    // const inputRef = useRef<HTMLInputElement>(null)
     const [isIntersecting, setIsIntersecting] = React.useState(true)
     // { title, notiIcon, placeholder, onSearch }: { title: string, notiIcon: boolean, placeholder: string, onSearch: Function | any }
     const title = props.title || 'Sample Title'
@@ -46,10 +46,6 @@ function Header(props: any) {
                         <img src={icons.search_black_48dp} className='h-[1.65rem] w-[1.65rem] dark:invert opacity-30' />
                     </div>
                     <input type="search" placeholder={placeholder}
-                        onFocus={() => {
-                            setTimeout(() => { inputRef.current?.scrollIntoView({ behavior: 'smooth', block : 'start', inline : 'start' }) }, 100);
-                        }}
-                        ref={inputRef}
                         className='search-full font-[470] bg-transparent placeholder:text-[#000]/30 dark:placeholder:text-[#fff]/30'
                         onInput={oninput}
                     />
