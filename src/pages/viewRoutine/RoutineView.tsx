@@ -183,8 +183,8 @@ function deleteRoutine(index: number, setIsShow: Function, navigate: Function, e
 }
 
 function RoutineDescription(routine: Routine) {
-   if (!routine.description)
-      return
+   // if (!routine.description)
+   //    return
    return <div className="description">
       {/* <p className='text-xs text-grey'>Description </p> */}
       <p className='text-sm p-4 bg-inputBg dark:bg-[#222] font-[430] rounded-xl mt-2 tap99'>{routine.description}
