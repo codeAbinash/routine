@@ -63,12 +63,6 @@ function More() {
 		},
 		{ name: 'blank', icon: '', callback: () => { }, rightArrow: false },
 		{
-			name: 'Quick Note',
-			icon: icons.edit,
-			callback: () => navigate('/notes'),
-			rightArrow: true
-		},
-		{
 			name: 'Routine Store',
 			icon: icons.calendar,
 			callback: () => navigate('/applyRoutine'),
@@ -82,6 +76,11 @@ function More() {
 		},
 		{ name: 'blank', icon: '', callback: () => { }, rightArrow: false },
 		{
+			name: 'Quick Note',
+			icon: icons.edit,
+			callback: () => navigate('/notes'),
+			rightArrow: true
+		}, {
 			name: 'Message Friends',
 			icon: icons.chat,
 			callback: () => navigate('/messages'),

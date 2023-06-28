@@ -7,7 +7,7 @@ import Emoji from 'emoji-store'
 function Header(props: any) {
     const navigate = useNavigate()
     const headerTitle = useRef<HTMLParagraphElement>(null)
-    // const inputRef = useRef<HTMLInputElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
     const [isIntersecting, setIsIntersecting] = React.useState(true)
     // { title, notiIcon, placeholder, onSearch }: { title: string, notiIcon: boolean, placeholder: string, onSearch: Function | any }
     const title = props.title || 'Sample Title'
@@ -23,7 +23,7 @@ function Header(props: any) {
     // onsearch 
     useEffect(() => {
         headerIntersect(headerTitle.current as Element, setIsIntersecting)
-        headerTitle.current?.scrollIntoView()
+        // headerTitle.current?.scrollIntoView()
     }, [])
 
     return (
@@ -47,7 +47,12 @@ function Header(props: any) {
                     </div>
                     <input type="search" placeholder={placeholder}
                         className='search-full font-[470] bg-transparent placeholder:text-[#000]/30 dark:placeholder:text-[#fff]/30'
-                        onInput={oninput}
+                        onFocus={() => {
+                            // inputRef.current?.scrollIntoView({behavior: "smooth", block : "start", inline : 'start'})
+                            // console.log('Ok')
+                            // inputRef.current?.scrollTo(-5,-5)
+                        }}
+                        ref={inputRef}
                     />
                 </div>
             </div>

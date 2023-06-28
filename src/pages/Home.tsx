@@ -260,15 +260,18 @@ function removeExpiredRoutines() {
 
 function isExpiredCalendarRoutine(routine: Routine, now: Date) {
 	let routineDate = new Date(routine.time[0] + 'T00:00')
+	// If more than one month
+	routineDate.setMonth(routineDate.getMonth() + 1)
 	return now.getTime() > routineDate.getTime()
 }
 
 function isExpiredOnceRoutine(routine: Routine, now: Date) {
 	let routineDate = new Date(routine.time[1])
+	// If more than one month
+	routineDate.setMonth(routineDate.getMonth() + 1)
 	return now.getTime() > routineDate.getTime()
 }
 
 
 // After 5sec of loading the app, check if there is any expired routine
-
 setTimeout(removeExpiredRoutines, 5000);
