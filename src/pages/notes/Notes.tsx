@@ -11,11 +11,12 @@ export default function Notes() {
 
    if (notes.length === 0) {
       return <div className="screen">
-         <BackHeader title="Notes" />
-         <div className="min-h-[80vh]">
-            <p>Write Almost anything!</p>
-            <p>Supports markdown!</p>
-            
+         <BackHeader title="Quick Note" />
+         <div className="min-h-[80vh] flex justify-center items-center flex-col">
+            <h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
+               Quick<span className="text-indigo-600">Note</span>
+            </h2>
+            <h3 className='text-md md:text-3xl mt-1'>Coming Soon</h3>
          </div>
       </div>
    }

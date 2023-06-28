@@ -64,7 +64,7 @@ function More() {
 		{ name: 'blank', icon: '', callback: () => { }, rightArrow: false },
 		{
 			name: 'Routine Store',
-			icon: icons.calendar,
+			icon: icons.bag,
 			callback: () => navigate('/applyRoutine'),
 			rightArrow: true
 		},
@@ -77,7 +77,7 @@ function More() {
 		{ name: 'blank', icon: '', callback: () => { }, rightArrow: false },
 		{
 			name: 'Quick Note',
-			icon: icons.edit,
+			icon: icons.edit_square,
 			callback: () => navigate('/notes'),
 			rightArrow: true
 		}, {

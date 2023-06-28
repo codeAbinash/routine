@@ -40,12 +40,13 @@ import restore_file from './src/restore_file.webp'
 import app_icon_transparent_256 from './src/app_icon_transparent_256.png'
 import telegram_dark from './src/telegram_dark.svg'
 import search_black_48dp from './src/search_black_48dp.svg'
-
+import bag from './src/bag.svg'
+import edit_square from './src/edit_square.svg'
 
 const icons = {
     Lock, delete_left_solid, home, home_accent,
-    home_broken, charts, charts_broken,
-    more, more_accent, more_broken, team,
+    home_broken, charts, charts_broken, bag,
+    more, more_accent, more_broken, team, edit_square,
     person, person_broken, left_arrow_solid, left_arrow_long_solid,
     home_black_48dp, routines, routines_accent, calendar, calendar_accent,
     check_solid, xmark_solid, notification, search_black_48dp,
