@@ -92,7 +92,7 @@ function Calendar() {
     <div className='screen dark:text-darkText screen'>
       <div className="scrollToTop" ref={topElement}></div>
       <div className="topArea">
-        <header className={`${isIntersecting ? '' : 'shadow-sm dark:shadow-white/10'} transition p-4 py-3 flex justify-between
+        <header className={`${isIntersecting ? '' : 'shadow-sm dark:shadow-white/10'} transition p-4 py-2.5 flex justify-between
          items-center flex-row fixed top-0 w-full z-50 bg-white/70 dark:bg-black/60 backdrop-blur-md
          `}>
           <div
@@ -101,9 +101,9 @@ function Calendar() {
               handleDateClick(date)
             }}
             className="left">
-            <img src={icons.left_arrow} className='tap opacity-80 dark:invert w-[2.25rem] aspect-square p-2 bg-white/60 dark:bg-black/60 rounded-xl active:bg-inputBg' />
+            <img src={icons.left_arrow} className='tap opacity-80 dark:invert w-[2.3rem] aspect-square p-2.5 pl-2 bg-white/50 rounded-xl active:bg-inputBg' />
           </div>
-          <div className="middle flex justify-center items-center gap-2 bg-white/50 dark:bg-dark/50 px-4 py-1.5 rounded-xl">
+          <div className="middle flex justify-center items-center gap-2">
             <p className='font-medium'>{getMonthYear(date)}</p>
             {
               !isSameMonth(now, date) &&
@@ -122,10 +122,10 @@ function Calendar() {
               handleDateClick(date)
             }}
           >
-            <img src={icons.left_arrow} className='tap opacity-80 dark:invert w-[2.25rem] aspect-square p-2 rounded-xl rotate-180 bg-white/60 dark:bg-black/60 active:bg-inputBg' />
+            <img src={icons.left_arrow} className='tap opacity-80 dark:invert w-[2.3rem] aspect-square p-2.5 pl-2 rounded-xl rotate-180 bg-white/50 active:bg-inputBg' />
           </div>
         </header >
-        <div className="calendar p-7 pt-20 pb-0">
+        <div className="calendar p-5 pt-20 pb-0">
           <div className="calenderDayHeadings flex w-full">
             {
               days.map((day, index) => {

@@ -7,6 +7,7 @@ import Emoji from 'emoji-store'
 function Header(props: any) {
     const navigate = useNavigate()
     const headerTitle = useRef<HTMLParagraphElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
     const [isIntersecting, setIsIntersecting] = React.useState(true)
     // { title, notiIcon, placeholder, onSearch }: { title: string, notiIcon: boolean, placeholder: string, onSearch: Function | any }
     const title = props.title || 'Sample Title'
@@ -22,6 +23,7 @@ function Header(props: any) {
     // onsearch 
     useEffect(() => {
         headerIntersect(headerTitle.current as Element, setIsIntersecting)
+        headerTitle.current?.scrollIntoView()
     }, [])
 
     return (
@@ -39,10 +41,19 @@ function Header(props: any) {
             <div className={`${isIntersecting ? '' : 'shadow-sm dark:shadow-[#77777715]'} mt-[-1px] transition input-div px-5 py-3 sticky top-0 z-50
                 bg-white/70 dark:bg-black/60 backdrop-blur-md
             `}>
-                <input type="search" placeholder={placeholder}
-                    className='search-full dark:bg-[#fff]/10 font-[470] bg-[#0000000f]'
-                    onInput={oninput}
-                />
+                <div className='flex rounded-[var(--border-radius)] dark:bg-[#fff]/10 font-[470] bg-[#0000000f]'>
+                    <div className="search-icon flex justify-center items-center pl-3.5">
+                        <img src={icons.search_black_48dp} className='h-[1.65rem] w-[1.65rem] dark:invert opacity-30' />
+                    </div>
+                    <input type="search" placeholder={placeholder}
+                        onFocus={() => {
+                            setTimeout(() => { inputRef.current?.scrollIntoView({ behavior: 'smooth', block : 'start', inline : 'start' }) }, 100);
+                        }}
+                        ref={inputRef}
+                        className='search-full font-[470] bg-transparent placeholder:text-[#000]/30 dark:placeholder:text-[#fff]/30'
+                        onInput={oninput}
+                    />
+                </div>
             </div>
         </>
     )

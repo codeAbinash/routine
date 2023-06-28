@@ -1,6 +1,6 @@
 @use "index" as m;
 
-$accent : #8866Ff;
+$accent : m.$accent;
 
 .text-center {
     text-align: center;
@@ -98,20 +98,22 @@ button.btn-full-width.grey {
 .search-full {
     // background-color: #f1f1f1;
     // background-color: #333;
-    background-color: var(--input-bg);
+    // background-color: var(--input-bg);
+    // background-color: transparent;
     width: 100%;
-    border-radius: var(--border-radius);
-    padding: 1.05em 0.5em 1.05em 3em;
+    // border-radius: var(--border-radius);
+    // padding: 1.05em 0.5em 1.05em 3em;
+    padding: 1.05em 0.5em 1.05em 0.5em;
     outline: none;
     // outline: 1px solid var(--input-bg);
-    background-image: url('../icons/src/search_black_48dp.svg');
-    background-repeat: no-repeat;
-    background-position: 1em center;
-    // color: #777777;
-    // font-weight: 500 ;
-    background-size: 1.55em;
+    // background-image: url('../icons/src/search_black_48dp.svg');
+    // background-repeat: no-repeat;
+    // background-position: 1em center;
+    // // color: #777777;
+    // // font-weight: 500 ;
+    // background-size: 1.55em;
     font-size: 0.85em;
-    font-weight: 500;
+    // font-weight: 470;
 
     // font-weight: normal;
     &::-webkit-search-cancel-button {
@@ -119,7 +121,7 @@ button.btn-full-width.grey {
         height: 2em;
         width: 2em;
         background-size: 1.6em;
-        // opacity: 0.9;
+        opacity: 0.5;
         // outline: 1px solid red;
         background-image: url('../icons/src/clear_black_48dp.svg');
         background-repeat: no-repeat;

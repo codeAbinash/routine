@@ -8,7 +8,7 @@ export const MODAL_BUTTON_TEXT = ['Cancel', 'Ok']
 export const vibrantColors7 = [
     '#FF9800', // Orange
     '#FF4081', // Pink
-    '#8866Ff',  // 
+    '#8866FF',  // 
     '#00E676', // Green
     '#03A9F4', // Blue
     '#78caf9', // Purple
