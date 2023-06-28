@@ -1,6 +1,6 @@
 const details = {
     name: 'routine',
-    version: '3.7.1',
+    version: '3.7.2',
     url : 'https://codeAbinash.github.io/routine/'
 }
 export default details

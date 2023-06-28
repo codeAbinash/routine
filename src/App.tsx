@@ -26,6 +26,7 @@ const LazyContributors = React.lazy(() => import('./pages/author/Contributors'))
 const LazyTest = React.lazy(() => import('./pages/TestPage'))
 const LazyMessages = React.lazy(() => import('./pages/Messages/Messages'))
 const LazyRestoreStartup = React.lazy(() => import('./pages/backup-restore/RestoreStartup'))
+const LazyNotes = React.lazy(() => import('./pages/notes/Notes'))
 
 
 // const LazyMore = React.lazy(() => import('./pages/More'))
@@ -71,6 +72,7 @@ export default function App() {
           <Route path='/test' element={< LazyTest />} />
           <Route path='messages' element={<LazyMessages />} />
           <Route path='/restoreStartup' element={<LazyRestoreStartup />} />
+          <Route path='/notes' element={<LazyNotes />} />
         </Routes>
       </React.Suspense>
     </Router>

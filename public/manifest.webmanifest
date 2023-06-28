@@ -3,9 +3,9 @@
     "name": "Routine",
     "start_url": "/routine/",
     "display": "standalone",
-    "background_color": "#FFFFF",
+    "background_color": "#FFFFFF",
     "description": "Manages your Routine",
-    "theme_color": "#ffffff",
+    "theme_color": "#FFFFFF",
     "icons": [
         {
             "src": "icons/icon192.png",

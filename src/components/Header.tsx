@@ -36,10 +36,11 @@ function Header(props: any) {
                     </div>
                 </div>
             </header>
-            <div className={`${isIntersecting ? '' : 'shadow-sm dark:shadow-white/10'} mt-[-1px] transition input-div px-5 py-2 pb-3 sticky top-0 z-50
-                bg-white dark:bg-black
+            <div className={`${isIntersecting ? '' : 'shadow-sm dark:shadow-[#77777715]'} mt-[-1px] transition input-div px-5 py-3 sticky top-0 z-50
+                bg-white/70 dark:bg-black/60 backdrop-blur-md
             `}>
-                <input type="search" placeholder={placeholder} className='search-full dark:bg-darkInputBg font-[470]'
+                <input type="search" placeholder={placeholder}
+                    className='search-full dark:bg-[#fff]/10 font-[470] bg-[#0000000f]'
                     onInput={oninput}
                 />
             </div>

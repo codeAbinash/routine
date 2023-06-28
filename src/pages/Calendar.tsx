@@ -92,8 +92,8 @@ function Calendar() {
     <div className='screen dark:text-darkText screen'>
       <div className="scrollToTop" ref={topElement}></div>
       <div className="topArea">
-        <header className={`${isIntersecting ? '' : 'shadow-sm dark:shadow-white/10'} transition p-4 pt-2 pb-2 flex justify-between
-         items-center flex-row fixed top-0 w-full z-50 bg-white dark:bg-black
+        <header className={`${isIntersecting ? '' : 'shadow-sm dark:shadow-white/10'} transition p-4 py-3 flex justify-between
+         items-center flex-row fixed top-0 w-full z-50 bg-white/70 dark:bg-black/60 backdrop-blur-md
          `}>
           <div
             onClick={() => {
@@ -101,9 +101,9 @@ function Calendar() {
               handleDateClick(date)
             }}
             className="left">
-            <img src={icons.left_arrow} className='tap opacity-80 dark:invert w-[2.25rem] aspect-square p-2 rounded-xl active:bg-inputBg' />
+            <img src={icons.left_arrow} className='tap opacity-80 dark:invert w-[2.25rem] aspect-square p-2 bg-white/60 dark:bg-black/60 rounded-xl active:bg-inputBg' />
           </div>
-          <div className="middle flex justify-center items-center gap-2">
+          <div className="middle flex justify-center items-center gap-2 bg-white/50 dark:bg-dark/50 px-4 py-1.5 rounded-xl">
             <p className='font-medium'>{getMonthYear(date)}</p>
             {
               !isSameMonth(now, date) &&
@@ -122,17 +122,17 @@ function Calendar() {
               handleDateClick(date)
             }}
           >
-            <img src={icons.left_arrow} className='tap opacity-80 dark:invert w-[2.25rem] aspect-square p-2 rounded-xl rotate-180 active:bg-inputBg' />
+            <img src={icons.left_arrow} className='tap opacity-80 dark:invert w-[2.25rem] aspect-square p-2 rounded-xl rotate-180 bg-white/60 dark:bg-black/60 active:bg-inputBg' />
           </div>
         </header >
-        <div className="calendar p-5 pt-20 pb-0">
+        <div className="calendar p-7 pt-20 pb-0">
           <div className="calenderDayHeadings flex w-full">
             {
               days.map((day, index) => {
                 let isWeekEnd = index % 6 === 0
                 return (
                   <div className="day w-[calc(100%/7)]" key={index}>
-                    <p className={`text-center text-[0.7rem] text-grey font-medium ${isWeekEnd ? 'opacity-60' : ''}`}>{day}</p>
+                    <p className={`text-center text-[0.65rem] text-grey font-medium ${isWeekEnd ? 'opacity-60' : ''}`}>{day}</p>
                   </div>
                 )
               })
@@ -163,7 +163,7 @@ function Calendar() {
                                 }}
                               >
                                 <p className={
-                                  `text-center text-xs font-medium p-2 pb-2.5 aspect-square ${isWeekEnd ? 'opacity-60' : ''}  
+                                  `text-center text-[0.7rem] font-medium p-2 pb-2.5 aspect-square ${isWeekEnd ? 'opacity-60' : ''}  
                                   ${isSameDate ? 'text-white' : ''}`
                                 }>{day}</p>
 

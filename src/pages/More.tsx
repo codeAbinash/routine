@@ -55,7 +55,6 @@ function searchSettingsInfo(settingsInfo: Setting[], query: string) {
 
 function More() {
 	const settingsInfo = [
-
 		{
 			name: 'Theme',
 			icon: icons.theme,
@@ -63,6 +62,12 @@ function More() {
 			rightArrow: false
 		},
 		{ name: 'blank', icon: '', callback: () => { }, rightArrow: false },
+		{
+			name: 'Quick Note',
+			icon: icons.edit,
+			callback: () => navigate('/notes'),
+			rightArrow: true
+		},
 		{
 			name: 'Routine Store',
 			icon: icons.calendar,
@@ -188,7 +193,7 @@ function More() {
 		// Scroll to top
 		topElement.current?.scrollIntoView({ behavior: 'smooth' })
 	}, [])
-	
+
 	return (
 		<div className='screen dark:text-darkText'>
 			<BottomModal show={isShow} btnTxt={modalButtons} cb={modalCallbacks} >

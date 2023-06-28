@@ -1,5 +1,14 @@
 [
     {
+        "version": "3.7.2",
+        "name": "UX Improvements",
+        "emoji": "😍",
+        "date": "2023-06-28",
+        "description": [
+            "Added Glass blur UI everywhere possible."
+        ]
+    },
+    {
         "version": "3.7.1",
         "name": "UI UX Improvements",
         "emoji": "🎨",
