@@ -74,3 +74,9 @@ export function throttle<T extends (...args: any[]) => void>(
 
 export const blank_callback = [() => { }, () => { }]
 // export blank_callback
+
+export function parseEmoji(emoji: string) {
+    if (!emoji) return ['']
+    let emojis = [...new Intl.Segmenter().segment(emoji)].map(x => x.segment)
+    return emojis
+}

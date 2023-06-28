@@ -11,7 +11,7 @@ import Once from './makeRoutine/Once';
 import Weekly from './makeRoutine/Weekly';
 import TextEmoji from '../components/TextEmoji';
 import BottomModal, { BasicModal } from '../components/BottomModal';
-import { MODAL_BUTTON_TEXT, capitalize } from '../lib/lib';
+import { MODAL_BUTTON_TEXT, capitalize, parseEmoji } from '../lib/lib';
 import OptionSelector from '../components/OptionSelector';
 import { df } from '../lib/delay';
 let emojiList = ['📕', '🧑🏻‍💻', '🏃🏻‍♂️', '🍽️', '🏫', '🧪', '🎂', '📖', '👩🏻‍🔬', '🎶']
@@ -23,6 +23,7 @@ const routineOptions = [
 	{ name: 'Calendar', value: 'calendar' },
 	{ name: 'Custom', value: 'custom' },
 ]
+
 
 function NewRoutine() {
 	const e = new Emoji();
@@ -78,7 +79,7 @@ function NewRoutine() {
 						<div className="">
 							<p className='text-xs text-secondary pl-1 pb-1'>Routine name</p>
 							<div className="inputText flex flex-row gap-3">
-								<img src={Emoji.get(parseEmoji(routineEmoji)[0])} className='tap h-[3.5rem] p-[0.8rem] bg-inputBg dark:bg-darkInputBg rounded-2xl' />
+								<img src={Emoji.get(parseEmoji(routineEmoji)[0] || '🧑🏻')} className='tap h-[3.5rem] p-[0.8rem] bg-inputBg dark:bg-darkInputBg rounded-2xl' />
 								<input
 									value={routineName}
 									onInput={(e: any) => { setRoutineName(e.target.value) }}
@@ -107,7 +108,9 @@ function NewRoutine() {
 									value={routineEmoji}
 									placeholder='Emoji'
 									className='name input-text bg-inputBg dark:bg-darkInputBg flex-1'
-									onInput={(e: any) => { setRoutineEmoji(e.target.value) }}
+									onInput={(e: any) => {
+										setRoutineEmoji(parseEmoji(e.target.value)[0])
+									}}
 									ref={emojiInput}
 								/>
 								<div>
@@ -302,16 +305,6 @@ function isStartTimeGreater(start: string, end: string) {
 	if (startHour > endHour || (startHour === endHour && startMinute > endMinute))
 		return true
 	return false
-}
-
-
-
-
-
-function parseEmoji(emoji: string) {
-	if (!emoji) return ['🧑🏻']
-	let emojis = [...new Intl.Segmenter().segment(emoji)].map(x => x.segment)
-	return emojis
 }
 
 
