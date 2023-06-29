@@ -52,6 +52,7 @@ function Header(props: any) {
                             // console.log('Ok')
                             // inputRef.current?.scrollTo(-5,-5)
                         }}
+                        onInput={oninput}
                         ref={inputRef}
                     />
                 </div>

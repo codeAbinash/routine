@@ -22,7 +22,7 @@ function NavBar({ active }: { active: 'Home' | 'Routines' | 'Messages' | 'Calend
 				const activeBar = tabs[index]
 				return (
 					<div
-						className={`select-none tap tab flex-center flex-col gap-1 px-3 ${active == activeBar ? "" : "opacity-30 grayscale brightness-[0] dark:brightness-[3]"}`}
+						className={`select-none tap tab flex-center flex-col gap-1 px-3 ${active == activeBar ? "" : "opacity-[35%] grayscale brightness-[0] dark:brightness-[3]"}`}
 						key={index} onClick={df(() => { if (active === activeBar) return; navigate(links[index], { replace: true }) })}>
 						<img src={activeTabIcons[index]} className='h-[22px]' />
 						<p className={`title text-[0.7rem] text-accent ${activeBar == active ? 'font-[500]' : 'font-[500]'}`}>{activeBar}</p>

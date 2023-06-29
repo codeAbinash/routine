@@ -101,4 +101,11 @@ export function getEmojiByDay(date: Date) {
     return '🤔'
 }
 
+export function isSameDate(d1: Date, d2: Date) {
+    const year = d1.getFullYear() === d2.getFullYear()
+    const month = d1.getMonth() === d2.getMonth()
+    const date = d1.getDate() === d2.getDate()
+    return year && month && date
+}
+
 export default currentDate

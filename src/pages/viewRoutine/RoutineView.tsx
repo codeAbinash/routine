@@ -110,7 +110,7 @@ export default function RoutineView({ show, routines, cb, index, expired = false
          </div>
 
          <div className="mt-7">
-            <button className="no-highlight text-sm tap99 w-full bg-accent text-white font-medium p-[1.1rem] rounded-[0.85rem]"
+            <button className="no-highlight text-sm tap99 w-full bg-accent text-white font-medium p-4 rounded-[0.85rem]"
                onClick={df(() => { cb && cb[1] && cb[1]() }, 80)}
             >OK</button>
          </div>

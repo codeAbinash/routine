@@ -9,7 +9,7 @@ export type Routine = {
     } | string | any,
     startTime: Date,
     endTime: Date,
-    status: string,
+    status: string | null,
     percentage: number,
     description: string,
     emoji: string,
@@ -60,6 +60,8 @@ export function searchActiveRoutine(routines: Array<Routine | any>) {
             const currentMS = date.getTime() - routine.startTime.getTime()
             const percentage = Math.floor(currentMS * 100 / totalMS)
             routine.percentage = percentage
+        }else {
+            routine.status = null
         }
     })
 
