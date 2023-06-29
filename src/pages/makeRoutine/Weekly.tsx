@@ -21,7 +21,6 @@ function getActiveRoutinesArr(routineTime: Routine['time']) {
 	let isAllEmpty = true
 	const isActiveRoutine = []
 	const ifAllEmptyRoutine = [false, true, false, true, false, true, false]
-	console.log('Get Array...')
 	for (let i = 0; i <= 6; i++) {
 		if (routineTime[i]) isAllEmpty = false
 		isActiveRoutine.push(routineTime[i] ? true : false)

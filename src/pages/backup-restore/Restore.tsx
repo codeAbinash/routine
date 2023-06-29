@@ -11,8 +11,6 @@ import Emoji from 'emoji-store'
 import { useNavigate } from 'react-router-dom'
 function Restore() {
   const startedUsing = ls.get('startedUsing')
-  console.log(startedUsing)
-
   return (
     <div className='restore screen dark:text-darkText'>
       {

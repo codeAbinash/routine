@@ -49,7 +49,6 @@ function Header(props: any) {
                         className='search-full font-[470] bg-transparent placeholder:text-[#000]/30 dark:placeholder:text-[#fff]/30'
                         onFocus={() => {
                             // inputRef.current?.scrollIntoView({behavior: "smooth", block : "start", inline : 'start'})
-                            // console.log('Ok')
                             // inputRef.current?.scrollTo(-5,-5)
                         }}
                         onInput={oninput}

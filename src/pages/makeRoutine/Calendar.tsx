@@ -4,10 +4,8 @@ import { Routine } from '../../lib/dateMethods'
 
 function Calendar({ updateRoutine, type, routine }: { updateRoutine: Function, type: string, routine: Routine }) {
    const [startTime, setStartTime] = React.useState(routine.time[0])
-   console.log(startTime)
    useEffect(() => {
       const routine = { time: [startTime] }
-      console.log(routine)
       updateRoutine(routine)
    }, [startTime])
 

@@ -1,6 +1,6 @@
 const cacheData = {
 	showCacheThenFetch: {
-		name: 'routine-show-cache-then-fetch-v26',
+		name: 'routine-show-cache-then-fetch-v27',
 		valid: 'routine-show-cache-then-fetch',
 	},
 	emojiCache: {
@@ -55,7 +55,6 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
 	const url = event.request.url
 	// If the request includes the start link then clear the cache
-	// console.log(url);
 
 	if (url.startsWith('https://dataabinash.github.io/emoji')) {
 		// Never load emojis again

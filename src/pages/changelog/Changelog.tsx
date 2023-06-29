@@ -37,7 +37,6 @@ function showChangelog(data: any) {
    return (
       <div className='flex flex-col gap-8 mt-2'>
          {data.map((log: any, index: number) => {
-            console.log(log.emoji)
             return <div key={index}>
                <>
                   {headingVersionName(log.version, log.emoji)}

@@ -33,7 +33,6 @@ export default function EditRoutine() {
    const [subscription, setSubscription] = useState(routine?.sub || "LOCAL")
 
    const navigate = useNavigate()
-   console.log(expired, index)
    return <div className="min-h-full text-dark dark:text-darkText screen">
       <BackHeader title="Edit Routine" backCb={handleBackClick} />
       <BottomModal show={modalShow} btnTxt={modalBtnText} cb={modalCallback} >{modalUi}</BottomModal>
@@ -278,6 +277,5 @@ function filterTimeArray(timeObj: any) {
 function getAllRoutines() {
    const allRoutines = JSON.parse(ls.get('routines') || '[]')
    const allExpiredRoutines = JSON.parse(ls.get('expiredRoutines') || '[]')
-   console.log(allRoutines, allExpiredRoutines)
    return { allRoutines, allExpiredRoutines }
 }

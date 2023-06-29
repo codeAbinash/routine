@@ -34,7 +34,7 @@ function getTypedRoutines(routines: Array<Routine>, oldRoutines: Array<Routine>)
     // Routines 0,
     // Holiday 1
     // Calendar 2
-    console.log("Typed List")
+    // console.log("Typed List")
     const routineList: TypedList = {
         routines: [],
         holiday: [],

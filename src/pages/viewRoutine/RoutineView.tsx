@@ -189,7 +189,6 @@ function deleteRoutine(index: number, setIsShow: Function, navigate: Function, e
    }
 
    setIsShow(false)
-   console.log("Navigating to...")
    // If in the routines tab then go to home else go to routines tab
    if (window.location.pathname.endsWith('/routines') || window.location.pathname.endsWith('/routines/'))
       navigate('/', { replace: true })

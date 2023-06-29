@@ -7,7 +7,6 @@ function Watermark({ visible }: any) {
     // const lsw = ls.get('watermark')
     // const isWatermark = lsw === 'true' || !lsw
 
-    // console.log(isWatermark)
     return (
         <div className={`pb-10 pt-10 flex justify-center items-center -z-10 text-center`}>
             <p className={
