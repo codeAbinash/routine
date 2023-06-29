@@ -13,6 +13,7 @@ import { loadTheme } from './lib/theme'
 const LazyAbout = React.lazy(() => import('./pages/About'))
 // const LazyStart = React.lazy(() => import('./pages/Start'))
 const LazyMore = React.lazy(() => import('./pages/More'))
+const EditRoutine = React.lazy(() => import('./pages/Edit/EditRoutine'))
 const LazyApplyRoutine = React.lazy(() => import('./pages/ApplyRoutine'))
 const LazyManageRoutine = React.lazy(() => import('./pages/ManageRoutine'))
 const LazyNewRoutine = React.lazy(() => import('./pages/NewRoutine'))
@@ -61,6 +62,7 @@ export default function App() {
           <Route path='/applyRoutine' element={< LazyApplyRoutine />} />
           <Route path='/manageRoutines' element={< LazyManageRoutine />} />
           <Route path='/more' element={<LazyMore />} />
+          <Route path='/editRoutine' element={< EditRoutine />} />
           <Route path='/calendar' element={< Calendar />} />
           <Route path='/notifications' element={< LazyNotifications />} />
           <Route path='/author/buyMeCoffee' element={< BuyMeCoffee />} />

@@ -14,7 +14,7 @@ function Once({ routine }: { routine: Routine }) {
             </div>
             <div>
                 <p>
-                    To {startTime.toLocaleString('default', { hour: "2-digit", minute: "2-digit", day: "2-digit", month: 'long', year: "numeric" })}
+                    To {endTime.toLocaleString('default', { hour: "2-digit", minute: "2-digit", day: "2-digit", month: 'long', year: "numeric" })}
                 </p>
             </div>
         </div>

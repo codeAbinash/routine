@@ -1,7 +1,7 @@
 import BackHeader from "../../components/BackHeader";
 import { useEffect, useState } from "react";
 import icons from "../../assets/icons/icons";
-import { blank_callback } from "../../lib/lib";
+import { BLANK_CALLBACK_ARR_2 } from "../../lib/lib";
 import BottomModal from "../../components/BottomModal";
 
 
@@ -11,7 +11,7 @@ export default function Contributors() {
    const [contributors, uContributors] = useState<any>([])
    let [ModalUI, setModalUi] = useState(<></>)
    let [modalButtons, setModalButtons] = useState(['Close', 'Github Profile'])
-   let [modalCallbacks, setModalCallbacks] = useState(blank_callback)
+   let [modalCallbacks, setModalCallbacks] = useState(BLANK_CALLBACK_ARR_2)
    const [isShow, uIsShow] = useState(false)
 
    useEffect(() => {

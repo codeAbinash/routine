@@ -1,5 +1,16 @@
 [
     {
+        "version": "3.8.0",
+        "name": "Routine Edit",
+        "emoji": "📝",
+        "date": "2023-06-29",
+        "description": [
+            "You can now edit your routines.",
+            "Improved UI",
+            "Maybe added some bugs too. 🤔"
+        ]
+    },
+    {
         "version": "3.7.2",
         "name": "UX Improvements",
         "emoji": "😍",

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { json, useNavigate } from "react-router-dom"
 import icons from "../../assets/icons/icons"
 import { Routine } from "../../lib/dateMethods"
@@ -11,6 +11,7 @@ import Calendar from "./Calendar"
 import Once from "./Once"
 import { Backup } from "../backup-restore/file"
 import details from "../../info"
+import { useDark } from "../../lib/lib"
 
 function viewRoutineTyped(routine: Routine) {
    if (routine.type === 'weekly') {
@@ -39,6 +40,7 @@ export default function RoutineView({ show, routines, cb, index, expired = false
    const [isShow, setIsShow] = useState(false)
    const [backDisplay, setBackDisplay] = useState(false)
    const navigate = useNavigate()
+   const dark = useMemo(useDark, [])
 
    useEffect(() => {
       let t1: any;
@@ -63,7 +65,7 @@ export default function RoutineView({ show, routines, cb, index, expired = false
    return <>
       <div
          className={`duration-[300ms] h-[100dvh] w-full ${backDisplay ? 'flex' : 'hidden'}
-          fixed bg-transparent top-0 transition-all ease-linear left-0 z-[50] modal-bg-linear-grad
+          fixed bg-transparent top-0 transition-all ease-linear left-0 z-[50] ${dark ? '' : 'modal-bg-linear-grad'}
           ${isShow ? 'opacity-100' : 'opacity-0'}`}>
       </div>
       <div
@@ -93,7 +95,9 @@ export default function RoutineView({ show, routines, cb, index, expired = false
          </div>
 
          <div className="flex gap-3 mt-6 mb-5 text-[0.8rem]">
-            <div className="p-2 px-[1rem] bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2">
+            <div className="p-2 px-[1rem] bg-inputBg tap95 dark:bg-[#222] rounded-full flex justify-center items-center gap-2"
+               onClick={() => editRoutine(expired, index, navigate)}
+            >
                <img src={icons.edit} className="dark:invert h-4 w-4 opacity-70" />
                <span className="font-[430]">Edit</span>
             </div>
@@ -146,6 +150,17 @@ async function shareRoutine(routine: Routine, index: number) {
          console.log(err)
       }
    }
+}
+
+function editRoutine(expired: boolean, index: number, navigate: any) {
+   // Check if it is the routine from subscription
+   const routines = JSON.parse(ls.get('routines') || '[]')
+   if (routines[index].sub !== 'LOCAL') {
+      const subscription = JSON.parse(ls.get('subscriptions') || '{}')[routines[index].sub]
+      const confirm = window.confirm(`Warning! This routine belongs to your subscription of ${subscription.name}. If you edit this routine, this will be restored in the next update of that subscription. Are you sure?`)
+      if (!confirm) return
+   }
+   navigate('/editRoutine', { state: { expired: expired, index: index } })
 }
 
 function deleteRoutine(index: number, setIsShow: Function, navigate: Function, expired: boolean = false) {

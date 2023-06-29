@@ -1,3 +1,5 @@
+import { Routine } from "./dateMethods";
+
 export function capitalize(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
@@ -72,11 +74,33 @@ export function throttle<T extends (...args: any[]) => void>(
 
 
 
-export const blank_callback = [() => { }, () => { }]
+export const BLANK_CALLBACK_ARR_2 = [() => { }, () => { }]
 // export blank_callback
 
 export function parseEmoji(emoji: string) {
     if (!emoji) return ['']
     let emojis = [...new Intl.Segmenter().segment(emoji)].map(x => x.segment)
     return emojis
+}
+
+
+
+export function searchRoutine(routines: Routine[], query: string) {
+    // Return filtered routines 
+    if (!query) return routines
+    return routines.filter((routine: Routine) => {
+        return routine.name.toLowerCase().includes(query)
+            || routine.description?.toLowerCase().includes(query)
+        // || routine.sub?.toLowerCase().includes(query)
+        // || routine.type.toLowerCase().includes(query)
+        // || routine.emoji.toLowerCase().includes(query)
+    })
+    // return typedList
+}
+
+
+export function useDark() {
+    // If the HTML tag has the .dark class...
+    console.log('Checking if dark mode')
+    return document.documentElement.classList.contains('dark')
 }

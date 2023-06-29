@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { capitalize } from '../../lib/lib'
+import { Routine } from '../../lib/dateMethods'
 
-function Calendar({ updateRoutine, type }: { updateRoutine: Function, type : string }) {
-   const [startTime, setStartTime] = React.useState('')
+function Calendar({ updateRoutine, type, routine }: { updateRoutine: Function, type: string, routine: Routine }) {
+   const [startTime, setStartTime] = React.useState(routine.time[0])
+   console.log(startTime)
    useEffect(() => {
       const routine = { time: [startTime] }
       console.log(routine)
@@ -21,6 +23,7 @@ function Calendar({ updateRoutine, type }: { updateRoutine: Function, type : str
                <input
                   type="date" onInput={(e: any) => setStartTime(e.target.value)}
                   className="input-time-small input-text bg-inputBg dark:bg-darkInputBg tap- rounded-xl"
+                  value={startTime}
                />
                {/* <input
                   type="time" onInput={(e: any) => setEndTime(e.target.value)}

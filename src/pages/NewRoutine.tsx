@@ -1,6 +1,6 @@
 import Emoji from 'emoji-store';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import icons from '../assets/icons/icons';
 import BackHeader from '../components/BackHeader';
 import { MS_IN_DAY, day } from '../lib/date';
@@ -14,25 +14,27 @@ import BottomModal, { BasicModal } from '../components/BottomModal';
 import { MODAL_BUTTON_TEXT, capitalize, parseEmoji } from '../lib/lib';
 import OptionSelector from '../components/OptionSelector';
 import { df } from '../lib/delay';
-let emojiList = ['📕', '🧑🏻‍💻', '🏃🏻‍♂️', '🍽️', '🏫', '🧪', '🎂', '📖', '👩🏻‍🔬', '🎶']
+import { Routine } from '../lib/dateMethods';
+export const emojiList = ['📕', '🧑🏻‍💻', '🏃🏻‍♂️', '🍽️', '🏫', '🧪', '🎂', '📖', '👩🏻‍🔬', '🎶']
 
-const routineOptions = [
+export const routineOptions = [
 	{ name: 'Once', value: 'once' },
 	{ name: 'Daily', value: 'daily' },
 	{ name: 'Weekly', value: 'weekly' },
-	{ name: 'Calendar', value: 'calendar' },
-	{ name: 'Custom', value: 'custom' },
+	{ name: 'Monthly', value: 'monthly' },
+	{ name: 'Yearly', value: 'yearly' },
+	{ name: 'Calendar Event', value: 'calendar' },
+	{ name: 'Holiday', value: 'holiday' }
 ]
 
 
 function NewRoutine() {
 	const e = new Emoji();
-	const params = useParams()
 	const [routineName, setRoutineName] = useState('')
 	const [routineDescription, setRoutineDescription] = useState('')
 	const [routineEmoji, setRoutineEmoji] = useState('')
 	const [routineType, setRoutineType] = useState('weekly')
-	const [routine, setRoutine] = useState<any>({})
+	const [routine, setRoutine] = useState<any>(getBlankRoutine(routineType))
 	const navigate = useNavigate()
 	const topElement: any = useRef<HTMLDivElement>()
 	const emojiInput = useRef<any>(null)
@@ -49,7 +51,35 @@ function NewRoutine() {
 		setModalCallback(BLANK_MODAL_CB)
 		setModalShow(true)
 	}
-
+	function getBlankRoutine(type: string) {
+		if (type === 'once' || type === 'daily')
+			return {
+				name : routineName,
+				description: routineDescription,
+				emoji: routineEmoji,
+				type: 'once',
+				time: ['', ''],
+				sub: ''
+			}
+		if (type === 'weekly')
+			return {
+				name : routineName,
+				description: routineDescription,
+				emoji: routineEmoji,
+				type: 'weekly',
+				time: {},
+				sub: '',
+			}
+		if (type === 'calendar' || type === 'holiday')
+			return {
+				name : routineName,
+				description: routineDescription,
+				emoji: routineEmoji,
+				type: 'calendar',
+				time: [],
+				sub: '',
+			}
+	}
 
 	function goBack() {
 		navigate(-1)
@@ -68,15 +98,15 @@ function NewRoutine() {
 			<div className='topElement' ref={topElement}></div>
 			<BackHeader title="New Routine" backCb={() => {
 				setModalUi(<BasicModal text="Discard this routine?" desc="Are you sure you want to discard this routine?" />)
-				setModalCallback([() => setModalShow(false), () => goBack()])
-				setModalBtnText(['No', 'Discard'])
+				setModalCallback([() => setModalShow(false), () => { goBack() },])
+				setModalBtnText(['Don\'t', 'Discard',])
 				setModalShow(true)
 			}} />
 
 			<section className='basic-details w-full p-4 pt-2'>
 				<div className='min-h-[calc(100vh-100px)] flex flex-col justify-between items-center w-full'>
 					<div className="top flex flex-col gap-3 w-full">
-						<div className="">
+						<div className="routine-name-and-display-emoji">
 							<p className='text-xs text-secondary pl-1 pb-1'>Routine name</p>
 							<div className="inputText flex flex-row gap-3">
 								<img src={Emoji.get(parseEmoji(routineEmoji)[0] || '🧑🏻')} className='tap h-[3.5rem] p-[0.8rem] bg-inputBg dark:bg-darkInputBg rounded-2xl' />
@@ -89,7 +119,7 @@ function NewRoutine() {
 								/>
 							</div>
 						</div>
-						<div className="inputText">
+						<div className="routine-description inputText">
 							<div className="">
 								<p className='text-xs text-secondary pl-1 pb-1'>Routine description</p>
 								<input
@@ -101,7 +131,7 @@ function NewRoutine() {
 								/>
 							</div>
 						</div>
-						<div className="">
+						<div className="emoji-and-type">
 							<p className='text-xs text-secondary pl-1 pb-1'>Routine emoji and repetition</p>
 							<div className="inputSelect flex justify-between items-center gap-3">
 								<input type="text"
@@ -132,7 +162,8 @@ function NewRoutine() {
 									</select> */}
 								</div>
 								{/* <img src={e.get('➕')} className='tap bg-inputBg dark:bg-darkInputBg h-[3.5rem] p-[0.8rem] rounded-2xl' /> */}
-							</div></div>
+							</div>
+						</div>
 						<div className="emojis flex gap-3 scrollbar-hidden flex-nowrap overflow-auto justify-between items-center">
 							{emojiList.map((emoji, index) =>
 								<img src={e.get(emoji)}
@@ -146,7 +177,7 @@ function NewRoutine() {
 								}}
 							>+</p>
 						</div>
-						{RoutineMaker(routineType)}
+						{RoutineMaker(routineType, routine)}
 					</div>
 					<div className="btn w-full">
 						<button className="btn-full no-highlight tap99 w-full text-sm" onClick={addRoutine}>Add this Routine</button>
@@ -176,14 +207,15 @@ function NewRoutine() {
 			let endDate = new Date(routine.time[1])
 			// If start time is greater than end time then return error
 			if (startDate > endDate) {
-				setModalUi(<BasicModal text="Start time should be less than end time" desc="Make sure that the start time is less than end time" />)
+				setModalUi(<BasicModal text="Start time is greater than end time" desc="Make sure that the start time is less than end time" />)
 				setBlankAndShowModal()
 				return
 			}
 			// If start and end time are same then remove the end time
 			else if (startDate.getTime() === endDate.getTime())
 				routine.time[1] = ''
-		} else if (routineType === 'daily') {
+		}
+		else if (routineType === 'daily') {
 			if (!routine.time[0]) {
 				<BasicModal text="Routine time is required" desc="Please provide a time for your routine" />
 				setBlankAndShowModal()
@@ -202,7 +234,7 @@ function NewRoutine() {
 				return
 			}
 			if (timeObj && Object.keys(timeObj).length === 0) {
-				setModalUi(<BasicModal text="At least one time should be selected" desc="Select the day clicking on the boxes written days on it." />)
+				setModalUi(<BasicModal text="At least one time should be selected" desc="Please Select the day clicking on the boxes written days on it." />)
 				setBlankAndShowModal()
 				return
 			}
@@ -275,6 +307,7 @@ function NewRoutine() {
 			...routine
 		}
 		console.log(newRoutine)
+		// return
 		// Save routine to local storage
 		let routines = JSON.parse(ls.get('routines') || '[]')
 		routines.unshift(newRoutine)
@@ -282,18 +315,18 @@ function NewRoutine() {
 		navigate(-1)
 	}
 
-	function RoutineMaker(type: string) {
-		if (type === 'once') return <Once updateRoutine={setRoutine} />
-		if (type === 'weekly') return <Weekly updateRoutine={setRoutine} routine={routine} />
-		else if (type === 'daily') return <Daily updateRoutine={setRoutine} />
-		else if (type === 'calendar' || type === 'holiday') return <Calendar type={type} updateRoutine={setRoutine} />
+	function RoutineMaker(type: string, routine: Routine) {
+		if (type === 'once') return <Once updateRoutine={setRoutine} routine={routine} />
+		if (type === 'weekly') return <Weekly updateRoutine={setRoutine} routine={routine} edit={false}/>
+		else if (type === 'daily') return <Daily updateRoutine={setRoutine} routine={routine} />
+		else if (type === 'calendar' || type === 'holiday') return <Calendar type={type} updateRoutine={setRoutine} routine={routine} />
 		else return <div className="mt-16 text-center">
 			<p>This screen is under development</p>
 		</div>
 	}
 }
 
-function isStartTimeGreater(start: string, end: string) {
+export function isStartTimeGreater(start: string, end: string) {
 	let startTime = start.split(':')
 	let endTime = end.split(':')
 

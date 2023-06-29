@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { getISODate } from '../../lib/date'
+import { Routine } from '../../lib/dateMethods'
 
 const tomorrow = new Date()
 tomorrow.setDate(tomorrow.getDate() + 1)
 
-function Once({ updateRoutine }: { updateRoutine: any }) {
-    const [startTime, setStartTime] = useState(getISODate(tomorrow))
-    const [endTime, setEndTime] = useState<any>()
+function Once({ updateRoutine, routine }: { updateRoutine: Function, routine: Routine }) {
+    const [startTime, setStartTime] = useState(routine?.time[0] || getISODate(tomorrow))
+    const [endTime, setEndTime] = useState<any>(routine?.time[1] || getISODate(tomorrow))
     const startTimeInput = useRef<any>()
     const endTimeInput = useRef<any>()
 

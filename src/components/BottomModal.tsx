@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import delay, { df } from '../lib/delay'
 import Emoji from 'emoji-store'
+import { useDark } from '../lib/lib'
 
 export default function BottomModal({ show, children, btnTxt, cb }: { show: boolean, children: any, btnTxt?: Array<any>, cb?: Array<Function | any> }) {
    const [isShow, setIsShow] = useState(false)
    const [backDisplay, setBackDisplay] = useState(false)
+   const dark = useMemo(useDark, [])
 
    useEffect(() => {
       let t1: any;
@@ -33,7 +35,7 @@ export default function BottomModal({ show, children, btnTxt, cb }: { show: bool
    return <>
       <div
          className={`duration-[300ms] h-[100dvh] w-full ${backDisplay ? 'flex' : 'hidden'}
-          fixed bg-transparent top-0 transition-all ease-linear left-0 z-[100] modal-bg-linear-grad
+          fixed bg-transparent top-0 transition-all ease-linear left-0 z-[100] ${dark ? '' : 'modal-bg-linear-grad'}
           ${isShow ? 'opacity-100' : 'opacity-0'}`}>
       </div>
       <div
@@ -71,7 +73,7 @@ export function BasicModal({ text, desc, emoji }: { text: any, desc?: any, emoji
       <div className='grid animate-bounce-slow mt-10 mb-10'>
          <img src={Emoji.get(emoji || '🤔')} alt="emoji" className={`place-1-1 blur-lg opacity-50 mx-auto mt-5 w-24 h-24`} />
          <img src={Emoji.get(emoji || '🤔')} alt="emoji" className={`place-1-1 mx-auto mt-5 w-24 h-24 z-10`} />
-         </div>
+      </div>
       <p className='text-center text-grey text-xs mt-5 font-[450] px-[5%] text-balance'>
          {desc}
       </p>

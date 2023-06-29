@@ -16,9 +16,38 @@ function getAITime(isActiveRoutine: any, timeArr: any) {
 	return generatedTime
 }
 
-function Weekly({ routine, updateRoutine }: { updateRoutine: Function, routine: Routine }) {
+function getActiveRoutinesArr(routineTime: Routine['time']) {
+	if (!routineTime) return [false, true, false, true, false, true, false]
+	let isAllEmpty = true
+	const isActiveRoutine = []
+	const ifAllEmptyRoutine = [false, true, false, true, false, true, false]
+	console.log('Get Array...')
+	for (let i = 0; i <= 6; i++) {
+		if (routineTime[i]) isAllEmpty = false
+		isActiveRoutine.push(routineTime[i] ? true : false)
+	}
+	if (isAllEmpty) return ifAllEmptyRoutine
+	return isActiveRoutine
+}
+
+function getTimeArray(routineTime: Routine['time']) {
+	const timeArr = []
+	for (let i = 0; i <= 6; i++)
+		timeArr.push(routineTime[i] ? routineTime[i] : [null, null])
+	return timeArr
+}
+
+function Weekly({ routine, updateRoutine, edit = false }: { updateRoutine: Function, routine: Routine, edit: boolean }) {
 	const [isActiveRoutine, setIsActiveRoutine] = useState([false, true, false, true, false, true, false])
+	// const [timeArr, setTimeArr] = useState([[null, null], [null, null], [null, null], [null, null], [null, null], [null, null], [null, null]])
+	// const [isActiveRoutine, setIsActiveRoutine] = useState(getActiveRoutinesArr(routine.time))
 	const [timeArr, setTimeArr] = useState([[null, null], [null, null], [null, null], [null, null], [null, null], [null, null], [null, null]])
+	useEffect(() => {
+		if (edit) {
+			setIsActiveRoutine(getActiveRoutinesArr(routine.time))
+			setTimeArr(getTimeArray(routine.time))
+		}
+	}, [])
 
 	const times: any = {}
 
