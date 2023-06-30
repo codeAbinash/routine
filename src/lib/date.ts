@@ -9,6 +9,32 @@ export const day = [
     'Friday',
     'Saturday',
 ]
+export const emojiList = ['📕', '🧑🏻‍💻', '🏃🏻‍♂️', '🍽️', '🏫', '🧪', '🎂', '📖', '👩🏻‍🔬', '🎶']
+export const weekArr = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+
+export const routineOptions = [
+    { name: 'Once', value: 'once' },
+    { name: 'Daily', value: 'daily' },
+    { name: 'Weekly', value: 'weekly' },
+    { name: 'Monthly', value: 'monthly' },
+    { name: 'Yearly', value: 'yearly' },
+    { name: 'Calendar Event', value: 'calendar' },
+    { name: 'Holiday', value: 'holiday' }
+]
+
+export function isStartTimeGreater(start: string, end: string) {
+    let startTime = start.split(':')
+    let endTime = end.split(':')
+
+    let startHour = parseInt(startTime[0])
+    let startMinute = parseInt(startTime[1])
+    let endHour = parseInt(endTime[0])
+    let endMinute = parseInt(endTime[1])
+
+    if (startHour > endHour || (startHour === endHour && startMinute > endMinute))
+        return true
+    return false
+}
 
 export const MS_IN_DAY = 86400000
 

@@ -9,7 +9,7 @@ import Weekly from "./Weekly"
 import TextEmoji from "../../components/TextEmoji"
 import Calendar from "./Calendar"
 import Once from "./Once"
-import { Backup } from "../backup-restore/file"
+import { BackupType } from "../backup-restore/file"
 import details from "../../info"
 import { useDark } from "../../lib/lib"
 
@@ -126,7 +126,7 @@ async function shareRoutine(routine: Routine, index: number) {
    const allRoutines = JSON.parse(ls.get('routines') || '[]')
    routine = allRoutines[index]
 
-   const backup: Backup = {
+   const backup: BackupType = {
       routines: [routine],
       subscriptions: [],
    }

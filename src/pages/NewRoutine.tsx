@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import icons from '../assets/icons/icons';
 import BackHeader from '../components/BackHeader';
-import { MS_IN_DAY, day } from '../lib/date';
+import { MS_IN_DAY, day, emojiList, isStartTimeGreater, routineOptions } from '../lib/date';
 import ls from '../lib/storage';
 import Daily from './makeRoutine/Daily';
 import Calendar from './makeRoutine/Calendar';
@@ -15,17 +15,6 @@ import { MODAL_BUTTON_TEXT, capitalize, parseEmoji } from '../lib/lib';
 import OptionSelector from '../components/OptionSelector';
 import { df } from '../lib/delay';
 import { Routine } from '../lib/dateMethods';
-export const emojiList = ['📕', '🧑🏻‍💻', '🏃🏻‍♂️', '🍽️', '🏫', '🧪', '🎂', '📖', '👩🏻‍🔬', '🎶']
-
-export const routineOptions = [
-	{ name: 'Once', value: 'once' },
-	{ name: 'Daily', value: 'daily' },
-	{ name: 'Weekly', value: 'weekly' },
-	{ name: 'Monthly', value: 'monthly' },
-	{ name: 'Yearly', value: 'yearly' },
-	{ name: 'Calendar Event', value: 'calendar' },
-	{ name: 'Holiday', value: 'holiday' }
-]
 
 
 function NewRoutine() {
@@ -165,7 +154,7 @@ function NewRoutine() {
 							</div>
 						</div>
 						<div className="emojis flex gap-3 scrollbar-hidden flex-nowrap overflow-auto justify-between items-center">
-							{emojiList.map((emoji, index) =>
+							{emojiList.map((emoji:string, index:number) =>
 								<img src={e.get(emoji)}
 									onClick={() => setRoutineEmoji(emoji)}
 									className='tap bg-inputBg dark:bg-darkInputBg h-[3.2rem] p-[0.8rem] rounded-2xl' key={index}
@@ -325,21 +314,6 @@ function NewRoutine() {
 		</div>
 	}
 }
-
-export function isStartTimeGreater(start: string, end: string) {
-	let startTime = start.split(':')
-	let endTime = end.split(':')
-
-	let startHour = parseInt(startTime[0])
-	let startMinute = parseInt(startTime[1])
-	let endHour = parseInt(endTime[0])
-	let endMinute = parseInt(endTime[1])
-
-	if (startHour > endHour || (startHour === endHour && startMinute > endMinute))
-		return true
-	return false
-}
-
 
 
 export default NewRoutine

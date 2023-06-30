@@ -4,7 +4,7 @@ import images from '../../assets/images/images'
 import ls from '../../lib/storage'
 import icons from '../../assets/icons/icons'
 import TextEmoji from '../../components/TextEmoji'
-import { Backup } from './file'
+import { BackupType } from './file'
 import BottomModal, { BasicModal } from '../../components/BottomModal'
 import { MODAL_BUTTON_TEXT } from '../../lib/lib'
 import Emoji from 'emoji-store'
@@ -41,7 +41,7 @@ function restoredCountStatus(routineCount: number, subscriptionCount: number) {
   return `${routineCount} routines and ${subscriptionCount} subscriptions restored`
 }
 
-export function storeInLs(data: Backup) {
+export function storeInLs(data: BackupType) {
   const routines = JSON.parse(ls.get('routines') || '[]')
   const subscriptions = JSON.parse(ls.get('subscriptions') || '{}')
 

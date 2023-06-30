@@ -7,7 +7,7 @@ import TextEmoji from '../../components/TextEmoji'
 import Loading from '../../components/loading/Loading'
 import Emoji from 'emoji-store'
 import { df } from '../../lib/delay'
-import { Backup } from './file'
+import { BackupType } from './file'
 
 function Backup() {
 	return (
@@ -65,7 +65,7 @@ function createBackup() {
 	const routines = JSON.parse(ls.get('routines') || '[]')
 	const subscriptions = JSON.parse(ls.get('subscriptions') || '[]')
 
-	const backup: Backup = {
+	const backup: BackupType = {
 		routines,
 		subscriptions
 	}

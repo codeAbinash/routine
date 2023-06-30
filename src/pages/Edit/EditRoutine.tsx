@@ -7,13 +7,12 @@ import Emoji from "emoji-store";
 import ls from "../../lib/storage";
 import OptionSelector from "../../components/OptionSelector";
 import { df } from "../../lib/delay";
-import { emojiList, isStartTimeGreater, routineOptions } from "../NewRoutine";
 import Once from "../makeRoutine/Once";
 import Weekly from "../makeRoutine/Weekly";
 import Daily from "../makeRoutine/Daily";
 import Calendar from "../makeRoutine/Calendar";
 import { Routine } from "../../lib/dateMethods";
-import { MS_IN_DAY, day } from "../../lib/date";
+import { MS_IN_DAY, day, emojiList, isStartTimeGreater } from "../../lib/date";
 
 export default function EditRoutine() {
    const { expired, index } = useLocation().state
@@ -85,7 +84,7 @@ export default function EditRoutine() {
                </div>
             </div>
             <div className="emojis flex gap-3 scrollbar-hidden flex-nowrap overflow-auto justify-between items-center">
-               {emojiList.map((emoji, index) =>
+               {emojiList.map((emoji:string, index:number) =>
                   <img src={Emoji.get(emoji)}
                      onClick={() => setRoutineEmoji(emoji)}
                      className='tap bg-inputBg dark:bg-darkInputBg h-[3.2rem] p-[0.8rem] rounded-2xl' key={index}
