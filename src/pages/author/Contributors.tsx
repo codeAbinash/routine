@@ -36,9 +36,9 @@ export default function Contributors() {
    function showUserModal({ user }: { user: any }) {
       setModalUi(<div className="p-4 pt-0 gap-3 flex flex-col justify-center items-center text-center">
          <div className="pic flex-none">
-            <img src={user.pic || icons.spinner} className="w-32 aspect-square rounded-full object-cover" />
+            <img src={user.pic || icons.spinner} className="w-32 aspect-square rounded-full object-cover shadow-lg shadow-black/30" />
          </div>
-         <div className="content">
+         <div className="content mt-5">
             <div className="name font-medium text-lg">
                <p>{user.name}</p>
             </div>
