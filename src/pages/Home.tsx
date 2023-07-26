@@ -49,7 +49,7 @@ const timer = setTimeout(() => {
 const timer1 = setTimeout(() => {
 	backgroundRoutineUpdate()
 	console.log('Check for update...')
-}, 8000);
+}, 2000);
 
 function deleteRoutineBySub(subscriptionKey: string) {
 	const routines = JSON.parse(ls.get('routines') || '[]')

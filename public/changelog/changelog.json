@@ -1,5 +1,14 @@
 [
     {
+        "version" : "3.8.1",
+        "name" : "Stability Improvements",
+        "emoji" : "🔥",
+        "date" : "2023-07-26",
+        "description" : [
+            "Improved stability of the app."
+        ]
+    },
+    {
         "version": "3.8.0",
         "name": "Routine Edit",
         "emoji": "📝",
