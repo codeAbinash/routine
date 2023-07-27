@@ -149,7 +149,7 @@ function GetDisplayTime(routine: Routine) {
         return <>{capitalize(routine.type)} <br /> <span className='text-lg'><TextEmoji emoji="🎉"></TextEmoji></span></>
     }
     else if (routine.type === 'holiday') {
-        return <>{capitalize(routine.type)} <br /> <span className='text-lg'><TextEmoji emoji="🥳"></TextEmoji></span></>
+        return <>{capitalize(routine.type)} <br /> <span className='text-lg'><TextEmoji emoji="🌟"></TextEmoji></span></>
     }
     else {
         // const hour = 
