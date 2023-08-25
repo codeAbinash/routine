@@ -20,13 +20,11 @@ export default function Contributors() {
       setTimeout(async () => {
          // fetch data from github
          const data = await fetch(fetchLink).then(res => res.json())
-         console.log(data)
          uContributors(data)
          const userDetailsFetchLink = 'https://api.github.com/users/'
          const userData = await Promise.all(data.map(async (user: any) => {
             const d: any = await fetch(userDetailsFetchLink + user.github).then(res => res.json())
             const pic = d.avatar_url
-            console.log(d)
             return { ...user, pic: pic }
          }))
          uContributors(userData)

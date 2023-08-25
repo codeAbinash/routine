@@ -27,7 +27,6 @@ function willShowDot(routines: Array<Routine>) {
 }
 
 function ActiveDots({ isSameDate, date, routines }: { isSameDate: boolean, date: Date, routines: Array<Routine> }) {
-  // console.log(date.getDate())
   const routinesF = useMemo(() => searchByDate(date, routines), [date])
   const dotStatus = useMemo(() => willShowDot(routinesF), [routinesF])
   return <>
@@ -236,7 +235,6 @@ function getCalendarArray(date: Date) {
 }
 
 function checkIfSameDate(date1: Date, date2: Date) {
-  // console.log(date1, date2)
   return date1.getDate() === date2.getDate() && date1.getMonth() === date2.getMonth() && date1.getFullYear() === date2.getFullYear()
 }
 

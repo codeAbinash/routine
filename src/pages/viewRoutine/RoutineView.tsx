@@ -1,17 +1,15 @@
 import { useEffect, useMemo, useState } from "react"
-import { json, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import icons from "../../assets/icons/icons"
 import { Routine } from "../../lib/dateMethods"
-import delay, { df } from "../../lib/delay"
-import ls from "../../lib/storage"
-import Daily from "./Daily"
-import Weekly from "./Weekly"
-import TextEmoji from "../../components/TextEmoji"
-import Calendar from "./Calendar"
-import Once from "./Once"
-import { BackupType } from "../backup-restore/file"
-import details from "../../info"
+import { df } from "../../lib/delay"
 import { useDark } from "../../lib/lib"
+import ls from "../../lib/storage"
+import { BackupType } from "../backup-restore/file"
+import Calendar from "./Calendar"
+import Daily from "./Daily"
+import Once from "./Once"
+import Weekly from "./Weekly"
 
 function viewRoutineTyped(routine: Routine) {
    if (routine.type === 'weekly') {
@@ -147,7 +145,7 @@ async function shareRoutine(routine: Routine, index: number) {
             // ]
          })
       } catch (err) {
-         console.log(err)
+         console.warn(err)
       }
    }
 }

@@ -153,7 +153,6 @@ export default function ApplyRoutine() {
 
 
 	function addRoutine(id: string) {
-		// console.log('Add Routine ' + id)
 		if (!id || id === '') {
 			setModalUi(EnterValidRoutineIdUI)
 			setBlankAndShowModal()
@@ -204,8 +203,6 @@ export default function ApplyRoutine() {
 
 			Promise.allSettled([subscriptionDetailsFetch, routineFetch]).then(() => {
 				if (fetchedRoutines && fetchedSubscriptions) {
-					console.log(fetchedRoutines, fetchedSubscriptions)
-
 					subscriptions[id] = fetchedSubscriptions
 					ls.set('subscriptions', JSON.stringify(subscriptions))
 					// Add or update routines to the routine array

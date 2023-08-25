@@ -43,7 +43,7 @@ function NewRoutine() {
 	function getBlankRoutine(type: string) {
 		if (type === 'once' || type === 'daily')
 			return {
-				name : routineName,
+				name: routineName,
 				description: routineDescription,
 				emoji: routineEmoji,
 				type: 'once',
@@ -52,7 +52,7 @@ function NewRoutine() {
 			}
 		if (type === 'weekly')
 			return {
-				name : routineName,
+				name: routineName,
 				description: routineDescription,
 				emoji: routineEmoji,
 				type: 'weekly',
@@ -61,7 +61,7 @@ function NewRoutine() {
 			}
 		if (type === 'calendar' || type === 'holiday')
 			return {
-				name : routineName,
+				name: routineName,
 				description: routineDescription,
 				emoji: routineEmoji,
 				type: 'calendar',
@@ -154,7 +154,7 @@ function NewRoutine() {
 							</div>
 						</div>
 						<div className="emojis flex gap-3 scrollbar-hidden flex-nowrap overflow-auto justify-between items-center">
-							{emojiList.map((emoji:string, index:number) =>
+							{emojiList.map((emoji: string, index: number) =>
 								<img src={e.get(emoji)}
 									onClick={() => setRoutineEmoji(emoji)}
 									className='tap bg-inputBg dark:bg-darkInputBg h-[3.2rem] p-[0.8rem] rounded-2xl' key={index}
@@ -295,7 +295,6 @@ function NewRoutine() {
 			sub: 'LOCAL',
 			...routine
 		}
-		console.log(newRoutine)
 		// return
 		// Save routine to local storage
 		let routines = JSON.parse(ls.get('routines') || '[]')
@@ -306,7 +305,7 @@ function NewRoutine() {
 
 	function RoutineMaker(type: string, routine: Routine) {
 		if (type === 'once') return <Once updateRoutine={setRoutine} routine={routine} />
-		if (type === 'weekly') return <Weekly updateRoutine={setRoutine} routine={routine} edit={false}/>
+		if (type === 'weekly') return <Weekly updateRoutine={setRoutine} routine={routine} edit={false} />
 		else if (type === 'daily') return <Daily updateRoutine={setRoutine} routine={routine} />
 		else if (type === 'calendar' || type === 'holiday') return <Calendar type={type} updateRoutine={setRoutine} routine={routine} />
 		else return <div className="mt-16 text-center">

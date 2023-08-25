@@ -4,11 +4,9 @@ let reqCount = 0
 
 const ls = {
     get: (item: string) => {
-        // console.log(reqCount++ + ". LocalStorage Getting... " + item)
         return localStorage.getItem(details.name + item)
     },
     set: (item: string, data: string) => {
-        // console.log(reqCount++ + ". LocalStorage Setting... " + item)
         return localStorage.setItem(details.name + item, data)
     },
     clear: () => {

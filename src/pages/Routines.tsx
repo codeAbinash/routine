@@ -34,7 +34,6 @@ function getTypedRoutines(routines: Array<Routine>, oldRoutines: Array<Routine>)
     // Routines 0,
     // Holiday 1
     // Calendar 2
-    // console.log("Typed List")
     const routineList: TypedList = {
         routines: [],
         holiday: [],
@@ -154,7 +153,6 @@ function Routines() {
 // }
 
 function AllRoutines({ screenRoutines, allRoutines, expiredRoutines }: { screenRoutines: Routine[] | null, allRoutines: Routine[] | null, expiredRoutines: Routine[] }) {
-    // console.log(screenRoutines)
     const navigate = useNavigate()
     const [currentRoutineViewIndex, setCurrentRoutineViewIndex] = useState(0)
     const [showRoutineModal, setRoutineModal] = useState(false)

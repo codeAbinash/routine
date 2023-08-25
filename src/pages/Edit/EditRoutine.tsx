@@ -84,7 +84,7 @@ export default function EditRoutine() {
                </div>
             </div>
             <div className="emojis flex gap-3 scrollbar-hidden flex-nowrap overflow-auto justify-between items-center">
-               {emojiList.map((emoji:string, index:number) =>
+               {emojiList.map((emoji: string, index: number) =>
                   <img src={Emoji.get(emoji)}
                      onClick={() => setRoutineEmoji(emoji)}
                      className='tap bg-inputBg dark:bg-darkInputBg h-[3.2rem] p-[0.8rem] rounded-2xl' key={index}
@@ -197,8 +197,6 @@ export default function EditRoutine() {
          ...routine
       }
 
-
-      // console.log(newRoutine)
 
       // Ask to saveRoutine
       setModalUi(<BasicModal text="Save Edited Routine?"

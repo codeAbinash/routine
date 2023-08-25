@@ -33,7 +33,6 @@ function Changelog() {
 }
 
 function showChangelog(data: any) {
-   // console.log(data)
    return (
       <div className='flex flex-col gap-8 mt-2'>
          {data.map((log: any, index: number) => {

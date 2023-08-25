@@ -51,7 +51,6 @@ function Weekly({ routine, updateRoutine, edit = false }: { updateRoutine: Funct
 	const times: any = {}
 
 	function updateRoutineFromData() {
-		console.log(routine)
 		// get generated AI times
 		const [startTime, endTime] = getAITime(isActiveRoutine, timeArr)
 		// If the routine is active set the time

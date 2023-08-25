@@ -11,7 +11,6 @@ async function registerSW() {
         console.log('Service worker is not available for this device')
 }
 registerSW()
-console.log('Static Code')
 
 
 function absorbEvent_(event) {
@@ -23,7 +22,6 @@ function absorbEvent_(event) {
     return false;
 }
 
-window.addEventListener('load', ()=>{
-    console.log('Loaded')
+window.addEventListener('load', () => {
     document.body.addEventListener('contextmenu', absorbEvent_)
 })

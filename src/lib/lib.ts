@@ -101,6 +101,5 @@ export function searchRoutine(routines: Routine[], query: string) {
 
 export function useDark() {
     // If the HTML tag has the .dark class...
-    // console.log('Checking if dark mode')
     return document.documentElement.classList.contains('dark')
 }

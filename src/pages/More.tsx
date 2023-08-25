@@ -23,7 +23,6 @@ const darkModeOptions: OptionsSelectorOptions = [
 ]
 
 function changeTheme(theme: any) {
-	console.log(theme)
 	ls.set('theme', theme)
 	applyTheme(theme)
 }
@@ -203,7 +202,6 @@ function More() {
 			<Header title={<span>More options <TextEmoji emoji="😯" /></span>} notiIcon={true} placeholder="Search more options" oninput={(e: any) => {
 				const query = e.target.value
 				updateSettingsInfo(searchSettingsInfo(settingsInfo, query))
-				console.log(query)
 			}} />
 
 			<section className='p-[1.2rem] pt-2'>

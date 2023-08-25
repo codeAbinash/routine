@@ -60,7 +60,7 @@ export function searchActiveRoutine(routines: Array<Routine | any>) {
             const currentMS = date.getTime() - routine.startTime.getTime()
             const percentage = Math.floor(currentMS * 100 / totalMS)
             routine.percentage = percentage
-        }else {
+        } else {
             routine.status = null
         }
     })
@@ -89,7 +89,6 @@ export function searchActiveRoutine(routines: Array<Routine | any>) {
 }
 let n = 0
 export function searchByDate(date: Date, routines: Array<Routine>): Array<Routine> {
-    // console.log("Searching by Date...", n++)
     const dayRoutines = []
     for (const id in routines) {
         const routine = routines[id]
