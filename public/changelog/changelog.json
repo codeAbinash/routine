@@ -1,465 +1,332 @@
 [
-    {
-        "version" : "3.8.1",
-        "name" : "Stability Improvements",
-        "emoji" : "🔥",
-        "date" : "2023-07-26",
-        "description" : [
-            "Improved stability of the app."
-        ]
-    },
-    {
-        "version": "3.8.0",
-        "name": "Routine Edit",
-        "emoji": "📝",
-        "date": "2023-06-29",
-        "description": [
-            "You can now edit your routines.",
-            "Improved UI",
-            "Maybe added some bugs too. 🤔"
-        ]
-    },
-    {
-        "version": "3.7.2",
-        "name": "UX Improvements",
-        "emoji": "😍",
-        "date": "2023-06-28",
-        "description": [
-            "Added Glass blur UI everywhere possible."
-        ]
-    },
-    {
-        "version": "3.7.1",
-        "name": "UI UX Improvements",
-        "emoji": "🎨",
-        "date": "2023-06-26",
-        "description": [
-            "Added icons in routines subscriptions"
-        ]
-    },
-    {
-        "version": "3.7.0",
-        "name": "Share Routines",
-        "emoji": "📤",
-        "date": "2023-06-26",
-        "description": [
-            "You can now share your routines with your friends.",
-            "Added routine restore from text option in the more option menu (\"Restore from text\" option)."
-        ]
-    },
-    {
-        "version": "3.6.4",
-        "name": "UI Improvements",
-        "emoji": [
-            "🎨",
-            "🤩"
-        ],
-        "date": "2023-06-26",
-        "description": [
-            "Added stylish options selector (in dark mode and routines type)."
-        ]
-    },
-    {
-        "version": "3.6.3",
-        "name": "Performance Improvements",
-        "emoji": [
-            "🔥",
-            "🚀"
-        ],
-        "date": "2023-06-26",
-        "description": [
-            "Expired routines will be moved to separate storage area to improve performance.",
-            "Improved initial loading time of the app."
-        ]
-    },
-    {
-        "version": "3.6.2",
-        "name": "UI Improvements",
-        "emoji": [
-            "🎨",
-            "😯"
-        ],
-        "date": "2023-06-25",
-        "description": [
-            "Added skeleton loading animation to the app.",
-            "Improved performance of the app.",
-            "Updated UI of the app."
-        ]
-    },
-    {
-        "version": "3.6.1",
-        "name": "Manifest Update",
-        "emoji": [
-            "📝",
-            "⚙️",
-            "🎨"
-        ],
-        "date": "2023-06-25",
-        "description": [
-            "Updated the manifest file of the app.",
-            "Changed some colors.",
-            "Added some space in the more options menu, differentiating the options.",
-            "UI Improvements."
-        ]
-    },
-    {
-        "version": "3.6.0",
-        "name": "Added Restore option",
-        "emoji": [
-            "📂",
-            "📁"
-        ],
-        "date": "2023-06-24",
-        "description": [
-            "Changed the icon of the app.",
-            "You can now restore all of your routines data from backup file."
-        ]
-    },
-    {
-        "version": "3.5.2",
-        "name": "Added Backup option",
-        "emoji": [
-            "📁",
-            "📂"
-        ],
-        "date": "2023-06-23",
-        "description": [
-            "You can now backup all of your routines data to your device."
-        ]
-    },
-    {
-        "version": "3.5.1",
-        "name": "Performance",
-        "emoji": [
-            "🎨",
-            "🚀"
-        ],
-        "date": "2023-06-23",
-        "description": [
-            "Improved overall performance."
-        ]
-    },
-    {
-        "version": "3.5.0",
-        "name": "UI & Performance",
-        "emoji": [
-            "🎨",
-            "🔥",
-            "🚀"
-        ],
-        "date": "2023-06-23",
-        "description": [
-            "Added All routines popup view.",
-            "Improved performance of the app."
-        ]
-    },
-    {
-        "version": "3.1.1",
-        "name": "Performance",
-        "emoji": [
-            "🔥",
-            "🚀"
-        ],
-        "date": "2023-06-22",
-        "description": [
-            "Performance improvements of the Routine popup view."
-        ]
-    },
-    {
-        "version": "3.1.0",
-        "name": "UI & Bug Fix",
-        "emoji": [
-            "🎨",
-            "🐛"
-        ],
-        "date": "2023-06-21",
-        "description": [
-            "Some bug fixes.",
-            "Added popup routine view."
-        ]
-    },
-    {
-        "version": "3.0.1",
-        "name": "UI & Performance",
-        "emoji": [
-            "🎨",
-            "🚀",
-            "🐛"
-        ],
-        "date": "2023-06-20",
-        "description": [
-            "Some bug fixes.",
-            "UI Improvements."
-        ]
-    },
-    {
-        "version": "3.0.0",
-        "name": "UI & Performance",
-        "emoji": [
-            "🎨",
-            "🔥",
-            "🚀",
-            "🤩"
-        ],
-        "date": "2023-06-19",
-        "description": [
-            "Performance improvements in the main core.",
-            "Newly added routines shows on the top of the list.",
-            "New UI of Routines list.",
-            "Shows Routines days with colors in weekly routines.",
-            "Added more colors for each day in a week.",
-            "Added dots in the calendar for holidays or events.",
-            "Added support for Holiday type and Event type routines.",
-            "Added more Routines in routines store.",
-            "Added send feedback option.",
-            "Fixed Search Routine Bug."
-        ]
-    },
-    {
-        "version": "2.2.0",
-        "name": "UI Improvements",
-        "emoji": "🎨",
-        "date": "2023-06-12",
-        "description": [
-            "Added stylish modal alert to the app."
-        ]
-    },
-    {
-        "version": "2.1.1",
-        "name": "UI UX Improvements",
-        "emoji": "🎨",
-        "date": "2023-06-11",
-        "description": [
-            "Added popup alert if there is no routine."
-        ]
-    },
-    {
-        "version": "2.1.0",
-        "name": "Deleted expired routines",
-        "emoji": "🗑️",
-        "date": "2023-06-10",
-        "description": [
-            "Now expired routines will be deleted automatically."
-        ]
-    },
-    {
-        "version": "2.0.2",
-        "name": "UI Improvements",
-        "emoji": "🎨",
-        "date": "2023-05-31",
-        "description": [
-            "Added stylish loading spinner to the app."
-        ]
-    },
-    {
-        "version": "2.0.1",
-        "name": "UI UX Improvements",
-        "emoji": [
-            "🎨",
-            "🤳🏻"
-        ],
-        "date": "2023-05-23",
-        "description": [
-            "Now shows the link to go to routine store in the home screen if there is no routine in the list."
-        ]
-    },
-    {
-        "version": "2.0.0",
-        "name": "UI and More Emojis",
-        "emoji": [
-            "🎨",
-            "😯",
-            "🤩"
-        ],
-        "date": "2023-05-23",
-        "description": [
-            "Added more emojis to the app.",
-            "Changed the style of the button 'Show More' in home screen."
-        ]
-    },
-    {
-        "version": "1.9.4",
-        "name": "UX Improvements",
-        "emoji": "🤳🏻",
-        "date": "2023-05-14",
-        "description": "Changed some text in the home screen."
-    },
-    {
-        "version": "1.9.3",
-        "name": "UI Improvements",
-        "emoji": "🎨",
-        "date": "2023-05-11",
-        "description": [
-            "Added variable fonts.",
-            "Changed the more icon in the bottom navigation bar.",
-            "Improved performance of the app."
-        ]
-    },
-    {
-        "version": "1.9.2",
-        "name": "UX Improvements",
-        "emoji": "🤳🏻",
-        "date": "2023-05-04",
-        "description": [
-            "Added No Routines Text if there is no routine in the list."
-        ]
-    },
-    {
-        "version": "1.9.1",
-        "name": "UI Improvements",
-        "emoji": "🎨",
-        "date": "2023-04-01",
-        "description": [
-            "Added a thin border to the routines from the list."
-        ]
-    },
-    {
-        "version": "1.9.0",
-        "name": "Added Tags",
-        "emoji": "🔖",
-        "date": "2023-03-25",
-        "description": [
-            "Added hashtag to routine subsections in the description."
-        ]
-    },
-    {
-        "version": "1.8.2",
-        "name": "UI Improvements",
-        "emoji": "🎨",
-        "date": "2023-03-24",
-        "description": [
-            "Added `Our Team` Section in the app.",
-            "Some UI changes."
-        ]
-    },
-    {
-        "version": "1.8.1",
-        "name": "Bug Fix",
-        "emoji": "🪲",
-        "date": "2023-03-16",
-        "description": "Fixed Daily routine end time bug."
-    },
-    {
-        "version": "1.8.0",
-        "name": "Added Routine store and manager",
-        "emoji": "🤯",
-        "date": "2023-03-16",
-        "description": [
-            "Added routine manager.",
-            "Added Routine store."
-        ]
-    },
-    {
-        "version": "1.7.2",
-        "name": "UI Improvements",
-        "emoji": [
-            "🎨"
-        ],
-        "date": "2023-03-10",
-        "description": [
-            "Changed the button of seeing more routines in the home screen.",
-            "Made Better Ui for the app.",
-            "Added text ellipses to longer title and description in routines."
-        ]
-    },
-    {
-        "version": "1.7.1",
-        "name": "Smoother",
-        "emoji": [
-            "😯",
-            "🚀"
-        ],
-        "date": "2023-03-10",
-        "description": [
-            "Fixed scroll to top in new routine screen when you open it.",
-            "Added 'Made by' watermark to the app.",
-            [
-                "you can disable it from settings."
-            ],
-            "Fixed header shadow now showing in the calendar screen in dark mode.",
-            "Removed app link changed notes from the loading screen",
-            "Performance improvements."
-        ]
-    },
-    {
-        "version": "1.7.0",
-        "name": "Smooth UI",
-        "date": "2023-03-10",
-        "emoji": [
-            "🎨",
-            "🚀"
-        ],
-        "description": [
-            "Added header shadow to headers when scrolled with the help of IntersectionObserver.",
-            "Added smooth scroll to the app.",
-            "Added a back button in header in 'New Routine' screen.",
-            "Now confirm dialog is shown when you try to discard a routine from 'New Routine' screen."
-        ]
-    },
-    {
-        "version": "1.6.1",
-        "name": "Bug Fixes",
-        "emoji": [
-            "🐛"
-        ],
-        "date": "2023-03-09",
-        "description": "Fixed changelog not showing up bug."
-    },
-    {
-        "version": "1.6.0",
-        "name": "New UI",
-        "emoji": [
-            "🎨",
-            "🤩"
-        ],
-        "date": "2023-03-08",
-        "description": [
-            "Added a new UI to the app.",
-            "Added a new icon to the app.",
-            "Changed main color of the app.",
-            "Added changelog screen to the app.",
-            "Search bar is sticky now.",
-            [
-                "You can see it by clicking on 'See full changelog' from More options."
-            ],
-            "Added loading screen to the app.",
-            "Fixed 'System Default' dark mode bug."
-        ]
-    },
-    {
-        "version": "1.5.0",
-        "name": "Dark Theme",
-        "emoji": [
-            "😎",
-            "🎨",
-            "🌑"
-        ],
-        "date": "2023-02-21",
-        "description": [
-            "Added a dark theme to the app."
-        ]
-    },
-    {
-        "version": "1.0.0 - 1.5.0",
-        "name": "A lot of changes",
-        "emoji": [
-            "🎉",
-            "🎨",
-            "🚀",
-            "🐛"
-        ],
-        "date": "2023-02-15 - 2023-02-21",
-        "description": [
-            "A lot of changes were made to the app."
-        ]
-    },
-    {
-        "version": "1.0.0",
-        "name": "First Release",
-        "emoji": [
-            "🎉"
-        ],
-        "date": "2023-02-15",
-        "description": "First release of the app."
-    }
+   {
+      "version": "3.8.1",
+      "name": "Stability Improvements",
+      "emoji": "🔥",
+      "date": "2023-07-26",
+      "description": ["Improved stability of the app."]
+   },
+   {
+      "version": "3.8.0",
+      "name": "Routine Edit",
+      "emoji": "📝",
+      "date": "2023-06-29",
+      "description": ["You can now edit your routines.", "Improved UI", "Maybe added some bugs too. 🤔"]
+   },
+   {
+      "version": "3.7.2",
+      "name": "UX Improvements",
+      "emoji": "😍",
+      "date": "2023-06-28",
+      "description": ["Added Glass blur UI everywhere possible."]
+   },
+   {
+      "version": "3.7.1",
+      "name": "UI UX Improvements",
+      "emoji": "🎨",
+      "date": "2023-06-26",
+      "description": ["Added icons in routines subscriptions"]
+   },
+   {
+      "version": "3.7.0",
+      "name": "Share Routines",
+      "emoji": "📤",
+      "date": "2023-06-26",
+      "description": [
+         "You can now share your routines with your friends.",
+         "Added routine restore from text option in the more option menu (\"Restore from text\" option)."
+      ]
+   },
+   {
+      "version": "3.6.4",
+      "name": "UI Improvements",
+      "emoji": ["🎨", "🤩"],
+      "date": "2023-06-26",
+      "description": ["Added stylish options selector (in dark mode and routines type)."]
+   },
+   {
+      "version": "3.6.3",
+      "name": "Performance Improvements",
+      "emoji": ["🔥", "🚀"],
+      "date": "2023-06-26",
+      "description": [
+         "Expired routines will be moved to separate storage area to improve performance.",
+         "Improved initial loading time of the app."
+      ]
+   },
+   {
+      "version": "3.6.2",
+      "name": "UI Improvements",
+      "emoji": ["🎨", "😯"],
+      "date": "2023-06-25",
+      "description": [
+         "Added skeleton loading animation to the app.",
+         "Improved performance of the app.",
+         "Updated UI of the app."
+      ]
+   },
+   {
+      "version": "3.6.1",
+      "name": "Manifest Update",
+      "emoji": ["📝", "⚙️", "🎨"],
+      "date": "2023-06-25",
+      "description": [
+         "Updated the manifest file of the app.",
+         "Changed some colors.",
+         "Added some space in the more options menu, differentiating the options.",
+         "UI Improvements."
+      ]
+   },
+   {
+      "version": "3.6.0",
+      "name": "Added Restore option",
+      "emoji": ["📂", "📁"],
+      "date": "2023-06-24",
+      "description": ["Changed the icon of the app.", "You can now restore all of your routines data from backup file."]
+   },
+   {
+      "version": "3.5.2",
+      "name": "Added Backup option",
+      "emoji": ["📁", "📂"],
+      "date": "2023-06-23",
+      "description": ["You can now backup all of your routines data to your device."]
+   },
+   {
+      "version": "3.5.1",
+      "name": "Performance",
+      "emoji": ["🎨", "🚀"],
+      "date": "2023-06-23",
+      "description": ["Improved overall performance."]
+   },
+   {
+      "version": "3.5.0",
+      "name": "UI & Performance",
+      "emoji": ["🎨", "🔥", "🚀"],
+      "date": "2023-06-23",
+      "description": ["Added All routines popup view.", "Improved performance of the app."]
+   },
+   {
+      "version": "3.1.1",
+      "name": "Performance",
+      "emoji": ["🔥", "🚀"],
+      "date": "2023-06-22",
+      "description": ["Performance improvements of the Routine popup view."]
+   },
+   {
+      "version": "3.1.0",
+      "name": "UI & Bug Fix",
+      "emoji": ["🎨", "🐛"],
+      "date": "2023-06-21",
+      "description": ["Some bug fixes.", "Added popup routine view."]
+   },
+   {
+      "version": "3.0.1",
+      "name": "UI & Performance",
+      "emoji": ["🎨", "🚀", "🐛"],
+      "date": "2023-06-20",
+      "description": ["Some bug fixes.", "UI Improvements."]
+   },
+   {
+      "version": "3.0.0",
+      "name": "UI & Performance",
+      "emoji": ["🎨", "🔥", "🚀", "🤩"],
+      "date": "2023-06-19",
+      "description": [
+         "Performance improvements in the main core.",
+         "Newly added routines shows on the top of the list.",
+         "New UI of Routines list.",
+         "Shows Routines days with colors in weekly routines.",
+         "Added more colors for each day in a week.",
+         "Added dots in the calendar for holidays or events.",
+         "Added support for Holiday type and Event type routines.",
+         "Added more Routines in routines store.",
+         "Added send feedback option.",
+         "Fixed Search Routine Bug."
+      ]
+   },
+   {
+      "version": "2.2.0",
+      "name": "UI Improvements",
+      "emoji": "🎨",
+      "date": "2023-06-12",
+      "description": ["Added stylish modal alert to the app."]
+   },
+   {
+      "version": "2.1.1",
+      "name": "UI UX Improvements",
+      "emoji": "🎨",
+      "date": "2023-06-11",
+      "description": ["Added popup alert if there is no routine."]
+   },
+   {
+      "version": "2.1.0",
+      "name": "Deleted expired routines",
+      "emoji": "🗑️",
+      "date": "2023-06-10",
+      "description": ["Now expired routines will be deleted automatically."]
+   },
+   {
+      "version": "2.0.2",
+      "name": "UI Improvements",
+      "emoji": "🎨",
+      "date": "2023-05-31",
+      "description": ["Added stylish loading spinner to the app."]
+   },
+   {
+      "version": "2.0.1",
+      "name": "UI UX Improvements",
+      "emoji": ["🎨", "🤳🏻"],
+      "date": "2023-05-23",
+      "description": [
+         "Now shows the link to go to routine store in the home screen if there is no routine in the list."
+      ]
+   },
+   {
+      "version": "2.0.0",
+      "name": "UI and More Emojis",
+      "emoji": ["🎨", "😯", "🤩"],
+      "date": "2023-05-23",
+      "description": ["Added more emojis to the app.", "Changed the style of the button 'Show More' in home screen."]
+   },
+   {
+      "version": "1.9.4",
+      "name": "UX Improvements",
+      "emoji": "🤳🏻",
+      "date": "2023-05-14",
+      "description": "Changed some text in the home screen."
+   },
+   {
+      "version": "1.9.3",
+      "name": "UI Improvements",
+      "emoji": "🎨",
+      "date": "2023-05-11",
+      "description": [
+         "Added variable fonts.",
+         "Changed the more icon in the bottom navigation bar.",
+         "Improved performance of the app."
+      ]
+   },
+   {
+      "version": "1.9.2",
+      "name": "UX Improvements",
+      "emoji": "🤳🏻",
+      "date": "2023-05-04",
+      "description": ["Added No Routines Text if there is no routine in the list."]
+   },
+   {
+      "version": "1.9.1",
+      "name": "UI Improvements",
+      "emoji": "🎨",
+      "date": "2023-04-01",
+      "description": ["Added a thin border to the routines from the list."]
+   },
+   {
+      "version": "1.9.0",
+      "name": "Added Tags",
+      "emoji": "🔖",
+      "date": "2023-03-25",
+      "description": ["Added hashtag to routine subsections in the description."]
+   },
+   {
+      "version": "1.8.2",
+      "name": "UI Improvements",
+      "emoji": "🎨",
+      "date": "2023-03-24",
+      "description": ["Added `Our Team` Section in the app.", "Some UI changes."]
+   },
+   {
+      "version": "1.8.1",
+      "name": "Bug Fix",
+      "emoji": "🪲",
+      "date": "2023-03-16",
+      "description": "Fixed Daily routine end time bug."
+   },
+   {
+      "version": "1.8.0",
+      "name": "Added Routine store and manager",
+      "emoji": "🤯",
+      "date": "2023-03-16",
+      "description": ["Added routine manager.", "Added Routine store."]
+   },
+   {
+      "version": "1.7.2",
+      "name": "UI Improvements",
+      "emoji": ["🎨"],
+      "date": "2023-03-10",
+      "description": [
+         "Changed the button of seeing more routines in the home screen.",
+         "Made Better Ui for the app.",
+         "Added text ellipses to longer title and description in routines."
+      ]
+   },
+   {
+      "version": "1.7.1",
+      "name": "Smoother",
+      "emoji": ["😯", "🚀"],
+      "date": "2023-03-10",
+      "description": [
+         "Fixed scroll to top in new routine screen when you open it.",
+         "Added 'Made by' watermark to the app.",
+         ["you can disable it from settings."],
+         "Fixed header shadow now showing in the calendar screen in dark mode.",
+         "Removed app link changed notes from the loading screen",
+         "Performance improvements."
+      ]
+   },
+   {
+      "version": "1.7.0",
+      "name": "Smooth UI",
+      "date": "2023-03-10",
+      "emoji": ["🎨", "🚀"],
+      "description": [
+         "Added header shadow to headers when scrolled with the help of IntersectionObserver.",
+         "Added smooth scroll to the app.",
+         "Added a back button in header in 'New Routine' screen.",
+         "Now confirm dialog is shown when you try to discard a routine from 'New Routine' screen."
+      ]
+   },
+   {
+      "version": "1.6.1",
+      "name": "Bug Fixes",
+      "emoji": ["🐛"],
+      "date": "2023-03-09",
+      "description": "Fixed changelog not showing up bug."
+   },
+   {
+      "version": "1.6.0",
+      "name": "New UI",
+      "emoji": ["🎨", "🤩"],
+      "date": "2023-03-08",
+      "description": [
+         "Added a new UI to the app.",
+         "Added a new icon to the app.",
+         "Changed main color of the app.",
+         "Added changelog screen to the app.",
+         "Search bar is sticky now.",
+         ["You can see it by clicking on 'See full changelog' from More options."],
+         "Added loading screen to the app.",
+         "Fixed 'System Default' dark mode bug."
+      ]
+   },
+   {
+      "version": "1.5.0",
+      "name": "Dark Theme",
+      "emoji": ["😎", "🎨", "🌑"],
+      "date": "2023-02-21",
+      "description": ["Added a dark theme to the app."]
+   },
+   {
+      "version": "1.0.0 - 1.5.0",
+      "name": "A lot of changes",
+      "emoji": ["🎉", "🎨", "🚀", "🐛"],
+      "date": "2023-02-15 - 2023-02-21",
+      "description": ["A lot of changes were made to the app."]
+   },
+   {
+      "version": "1.0.0",
+      "name": "First Release",
+      "emoji": ["🎉"],
+      "date": "2023-02-15",
+      "description": "First release of the app."
+   }
 ]

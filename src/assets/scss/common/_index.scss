@@ -1,71 +1,66 @@
-@use "sass:map";
-@use "sass:math";
+@use 'sass:map';
+@use 'sass:math';
 // Colors
-$accent : #8866FF;
-$accent-text : mix(#23cd8d, #000, 90%);
-$bg : var(--bg);
-$text : var(--text);
-$grey : #7f7f7f;
-$input-bg : var(--input-bg);
-$selected-text : $text;
+$accent: #8866ff;
+$accent-text: mix(#23cd8d, #000, 90%);
+$bg: var(--bg);
+$text: var(--text);
+$grey: #7f7f7f;
+$input-bg: var(--input-bg);
+$selected-text: $text;
 
 :root {
-    --input-bg: #f2f2f4;
-    --dark: #37364b;
-    --placeholder-color: #777;
-    --text: var(--dark);
-    --text-secondary: #666;
-    --accent: $accent;
-    // --accent-cc: #fb5369cc;
-    --bg: #fff;
-    --bg-slider: #ccc;
-    // --bg-backdrop : ;
-    --input-bg-backdrop : #eeeef0aa;
-    --border-radius: 14px;
+   --input-bg: #f2f2f4;
+   --dark: #37364b;
+   --placeholder-color: #777;
+   --text: var(--dark);
+   --text-secondary: #666;
+   --accent: $accent;
+   // --accent-cc: #fb5369cc;
+   --bg: #fff;
+   --bg-slider: #ccc;
+   // --bg-backdrop : ;
+   --input-bg-backdrop: #eeeef0aa;
+   --border-radius: 14px;
 }
 
+// Hover effect and
+$colors: (
+   'accent': $accent,
+   'bg': $bg,
+   'text': $text,
+);
 
-
-// Hover effect and 
-$colors : ("accent" : $accent, "bg" : $bg, "text" : $text );
-
-@function color($color : "accent", $mix : 100%, $opacity : 100, $mix-color : white) {
-    @return mix(rgba(map.get($colors, $color), math.div($opacity , 100)), $mix-color, $mix)
+@function color($color: 'accent', $mix: 100%, $opacity: 100, $mix-color: white) {
+   @return mix(rgba(map.get($colors, $color), math.div($opacity, 100)), $mix-color, $mix);
 }
 
+@mixin press($dur: 200, $scale: 90) {
+   transition: all #{$dur}ms;
 
-
-@mixin press($dur : 200, $scale : 90) {
-    transition:all #{$dur}ms;
-
-    &:active {
-        scale: math.div($scale, 100);
-    }
+   &:active {
+      scale: math.div($scale, 100);
+   }
 }
-
-
 
 // Layout
-@mixin flex($jc : center, $dir : column) {
-    display: flex;
-    justify-content: $jc;
-    align-items: center;
-    flex-direction: $dir;
+@mixin flex($jc: center, $dir: column) {
+   display: flex;
+   justify-content: $jc;
+   align-items: center;
+   flex-direction: $dir;
 }
 
 @mixin userSelectNone() {
-    -webkit-user-select: none;
-    /* Safari */
-    -moz-user-select: none;
-    /* Firefox */
-    -ms-user-select: none;
-    /* IE10+/Edge */
-    user-select: none;
-    /* Standard */
+   -webkit-user-select: none;
+   /* Safari */
+   -moz-user-select: none;
+   /* Firefox */
+   -ms-user-select: none;
+   /* IE10+/Edge */
+   user-select: none;
+   /* Standard */
 }
 
-
-
-
 // Variables
-$bdrs : 12px;
+$bdrs: 12px;

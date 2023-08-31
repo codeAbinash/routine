@@ -1,26 +1,27 @@
-import React, { useEffect } from 'react'
-import { capitalize } from '../../lib/lib'
-import { Routine } from '../../lib/dateMethods'
+import React, { useEffect } from 'react';
+import { capitalize } from '../../lib/lib';
+import { Routine } from '../../lib/dateMethods';
 
-function Calendar({ updateRoutine, type, routine }: { updateRoutine: Function, type: string, routine: Routine }) {
-   const [startTime, setStartTime] = React.useState(routine.time[0])
+function Calendar({ updateRoutine, type, routine }: { updateRoutine: Function; type: string; routine: Routine }) {
+   const [startTime, setStartTime] = React.useState(routine.time[0]);
    useEffect(() => {
-      const routine = { time: [startTime] }
-      updateRoutine(routine)
-   }, [startTime])
+      const routine = { time: [startTime] };
+      updateRoutine(routine);
+   }, [startTime]);
 
    return (
-      <div className="dailyMakeRoutine">
+      <div className='dailyMakeRoutine'>
          {/* <p className="text-xs text-secondary pl-1 pb-1 mt-2">Select Routine Times</p> */}
-         <div className="flex flex-col gap-1">
-            <div className="top flex items-center gap-3">
-               <p className='w-[50%] text-xs text-secondary pl-1 pb-1 mt-2'>{capitalize(type)} Date</p>
+         <div className='flex flex-col gap-1'>
+            <div className='top flex items-center gap-3'>
+               <p className='text-secondary mt-2 w-[50%] pb-1 pl-1 text-xs'>{capitalize(type)} Date</p>
                {/* <p className='w-[50%] text-xs text-secondary pl-1 p  b-1 mt-2'>End Time</p> */}
             </div>
-            <div className="bottom items-center flex gap-3">
+            <div className='bottom flex items-center gap-3'>
                <input
-                  type="date" onInput={(e: any) => setStartTime(e.target.value)}
-                  className="input-time-small input-text bg-inputBg dark:bg-darkInputBg tap- rounded-xl"
+                  type='date'
+                  onInput={(e: any) => setStartTime(e.target.value)}
+                  className='input-time-small input-text tap- rounded-xl bg-inputBg dark:bg-darkInputBg'
                   value={startTime}
                />
                {/* <input
@@ -30,7 +31,7 @@ function Calendar({ updateRoutine, type, routine }: { updateRoutine: Function, t
             </div>
          </div>
       </div>
-   )
+   );
 }
 
-export default Calendar
+export default Calendar;

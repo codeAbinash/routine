@@ -1,44 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <link rel="icon" type="image/svg+xml" href="/icons/favicon.ico" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/icons/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+      <meta name="description" content="Manages your routines with Routine Application" />
+      <meta name="keywords" content="Routine, Tasks, Manage Tasks, Daily Routine" />
+      <meta name="author" content="Abinash karmakar" />
 
-  <meta name="description" content="Manages your routines with Routine Application" />
-  <meta name="keywords" content="Routine, Tasks, Manage Tasks, Daily Routine" />
-  <meta name="author" content="Abinash karmakar" />
+      <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+      <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+      <link rel="manifest" href="/manifest.webmanifest" />
+      <link rel="apple-touch-icon" href="/icons/favicon.ico" />
+      <link rel="icon" type="image/x-icon" href="/icons/favicon.ico" />
+      <script src="/static.js"></script>
+      <title>Routine</title>
+   </head>
 
-  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
-  <link rel="manifest" href="/manifest.webmanifest">
-  <link rel="apple-touch-icon" href="/icons/favicon.ico">
-  <link rel="icon" type="image/x-icon" href="/icons/favicon.ico">
-  <script src="/static.js"></script>
-  <title>Routine</title>
-</head>
+   <body>
+      <div id="root" style="opacity: 0; transition: 400ms opacity"></div>
+      <script type="module" src="/src/main.tsx"></script>
+   </body>
+   <script>
+      const root = document.getElementById('root');
+      // If it is in dark mode change the opacity after 800ms else in os
 
-<body>
-  <div id="root" style="opacity: 0; transition: 400ms opacity;"></div>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
-<script>
-  const root = document.getElementById("root")
-  // If it is in dark mode change the opacity after 800ms else in os
+      const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-  const isDarkMode = (window.matchMedia("(prefers-color-scheme: dark)").matches)
-
-  if (isDarkMode) {
-    setTimeout(() => {
-      root.style.opacity = "1"
-    }, 800);
-  } else {
-    setTimeout(() => {
-      root.style.opacity = "1"
-    }, 10);
-  }
-  
-</script>
-
+      if (isDarkMode) {
+         setTimeout(() => {
+            root.style.opacity = '1';
+         }, 800);
+      } else {
+         setTimeout(() => {
+            root.style.opacity = '1';
+         }, 10);
+      }
+   </script>
 </html>

@@ -1,115 +1,115 @@
 {
-    "short_name": "Routine",
-    "name": "Routine",
-    "start_url": "/routine/",
-    "display": "standalone",
-    "background_color": "#FFFFFF",
-    "description": "Manages your Routine",
-    "theme_color": "#FFFFFF",
-    "icons": [
-        {
-            "src": "icons/icon192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any"
-        },
-        {
-            "src": "icons/icon512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any"
-        },
-        {
-            "src": "icons/icon196.png",
-            "sizes": "196x196",
-            "type": "image/png",
-            "purpose": "any"
-        },
-        {
-            "src": "icons/favicon.ico",
-            "type": "image/ico",
-            "sizes" : "256x256",
-            "purpose": "any"
-        }
-    ],
-    "screenshots": [
-        {
-            "src": "images/screen/s1.webp",
-            "type": "image/webp",
-            "sizes": "1080x2300",
-            "platform": "wide",
-            "label": "Home screen in Routine Application"
-        },
-        {
-            "src": "images/screen/s2.webp",
-            "type": "image/webp",
-            "sizes": "1080x2299",
-            "platform": "wide",
-            "label": "Routines List"
-        },
-        {
-            "src": "images/screen/s3.webp",
-            "type": "image/webp",
-            "sizes": "1080x2301",
-            "platform": "wide",
-            "label": "Weekly Routine View"
-        },
-        {
-            "src": "images/screen/s4.webp",
-            "type": "image/webp",
-            "sizes": "1080x2300",
-            "platform": "wide",
-            "label": "Calendar and Holidays"
-        }
-    ],
-    "shortcuts": [
-        {
-            "name": "Home",
-            "short_name": "Home",
-            "description": "Home",
-            "url": "/routine/",
-            "icons": [
-                {
-                    "src": "icons/icon96.png",
-                    "sizes": "96x96"
-                }
-            ]
-        },
-        {
-            "name": "Routines",
-            "short_name": "Charts",
-            "description": "Charts",
-            "url": "/routine/routines/",
-            "icons": [
-                {
-                    "src": "icons/icon96.png",
-                    "sizes": "96x96"
-                }
-            ]
-        },
-        {
-            "name": "Calendar",
-            "short_name": "Settings",
-            "description": "Settings",
-            "url": "/routine/calendar/",
-            "icons": [
-                {
-                    "src": "icons/icon96.png",
-                    "sizes": "96x96"
-                }
-            ]
-        },
-        {
-            "name" : "More",
-            "short_name": "More",
-            "description": "More",
-            "url": "/routine/more/",
-            "icons": [
-                {
-                    "src": "icons/icon96.png",
-                    "sizes": "96x96"
-                }
-            ]
-        }
-    ]
+   "short_name": "Routine",
+   "name": "Routine",
+   "start_url": "/routine/",
+   "display": "standalone",
+   "background_color": "#FFFFFF",
+   "description": "Manages your Routine",
+   "theme_color": "#FFFFFF",
+   "icons": [
+      {
+         "src": "icons/icon192.png",
+         "sizes": "192x192",
+         "type": "image/png",
+         "purpose": "any"
+      },
+      {
+         "src": "icons/icon512.png",
+         "sizes": "512x512",
+         "type": "image/png",
+         "purpose": "any"
+      },
+      {
+         "src": "icons/icon196.png",
+         "sizes": "196x196",
+         "type": "image/png",
+         "purpose": "any"
+      },
+      {
+         "src": "icons/favicon.ico",
+         "type": "image/ico",
+         "sizes": "256x256",
+         "purpose": "any"
+      }
+   ],
+   "screenshots": [
+      {
+         "src": "images/screen/s1.webp",
+         "type": "image/webp",
+         "sizes": "1080x2300",
+         "platform": "wide",
+         "label": "Home screen in Routine Application"
+      },
+      {
+         "src": "images/screen/s2.webp",
+         "type": "image/webp",
+         "sizes": "1080x2299",
+         "platform": "wide",
+         "label": "Routines List"
+      },
+      {
+         "src": "images/screen/s3.webp",
+         "type": "image/webp",
+         "sizes": "1080x2301",
+         "platform": "wide",
+         "label": "Weekly Routine View"
+      },
+      {
+         "src": "images/screen/s4.webp",
+         "type": "image/webp",
+         "sizes": "1080x2300",
+         "platform": "wide",
+         "label": "Calendar and Holidays"
+      }
+   ],
+   "shortcuts": [
+      {
+         "name": "Home",
+         "short_name": "Home",
+         "description": "Home",
+         "url": "/routine/",
+         "icons": [
+            {
+               "src": "icons/icon96.png",
+               "sizes": "96x96"
+            }
+         ]
+      },
+      {
+         "name": "Routines",
+         "short_name": "Charts",
+         "description": "Charts",
+         "url": "/routine/routines/",
+         "icons": [
+            {
+               "src": "icons/icon96.png",
+               "sizes": "96x96"
+            }
+         ]
+      },
+      {
+         "name": "Calendar",
+         "short_name": "Settings",
+         "description": "Settings",
+         "url": "/routine/calendar/",
+         "icons": [
+            {
+               "src": "icons/icon96.png",
+               "sizes": "96x96"
+            }
+         ]
+      },
+      {
+         "name": "More",
+         "short_name": "More",
+         "description": "More",
+         "url": "/routine/more/",
+         "icons": [
+            {
+               "src": "icons/icon96.png",
+               "sizes": "96x96"
+            }
+         ]
+      }
+   ]
 }

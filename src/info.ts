@@ -1,11 +1,9 @@
 const details = {
-    name: 'routine',
-    version: '3.8.1',
-    url : 'https://codeAbinash.github.io/routine/'
-}
-export default details
-
-
+   name: 'routine',
+   version: '3.8.1',
+   url: 'https://codeAbinash.github.io/routine/',
+};
+export default details;
 
 // Z indexed
 // Active Routine 0
