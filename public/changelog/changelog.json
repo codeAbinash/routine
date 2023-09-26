@@ -1,5 +1,12 @@
 [
    {
+      "version": "3.9.0",
+      "name": "Added More Emojis",
+      "emoji": ["🎨", "🤩"],
+      "date": "2023-09-26",
+      "description": ["Added more emojis to the app.", "Corrected spelling mistake"]
+   },
+   {
       "version": "3.8.1",
       "name": "Stability Improvements",
       "emoji": "🔥",

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import delay from '../lib/delay';
 
 export type OptionsSelectorOptions = { name: string; value: string }[];
 
