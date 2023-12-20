@@ -28,6 +28,8 @@ const LazyTest = React.lazy(() => import('./pages/TestPage'));
 const LazyMessages = React.lazy(() => import('./pages/Messages/Messages'));
 const LazyRestoreStartup = React.lazy(() => import('./pages/backup-restore/RestoreStartup'));
 const LazyNotes = React.lazy(() => import('./pages/notes/Notes'));
+const LazyNotesAdd = React.lazy(() => import('./pages/notes/AddNotes'));
+const LazyNotesEdit = React.lazy(() => import('./pages/notes/EditNotes'));
 
 // const LazyMore = React.lazy(() => import('./pages/More'))
 
@@ -68,6 +70,8 @@ export default function App() {
                <Route path='messages' element={<LazyMessages />} />
                <Route path='/restoreStartup' element={<LazyRestoreStartup />} />
                <Route path='/notes' element={<LazyNotes />} />
+               <Route path='/notes/add' element={<LazyNotesAdd />} />
+               <Route path='/notes/edit' element={<LazyNotesEdit />} />
             </Routes>
          </React.Suspense>
       </Router>

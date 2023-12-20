@@ -16,6 +16,7 @@ function Header(props: any) {
    const oninput = props.oninput || function (e: any) {};
    const onSearch = props.onSearch || function (e: any) {};
    const rightIcon = props.rightIcon || Emoji.get('🔔');
+   const search = props.search || '';
 
    const rightIconClick =
       props.rightIconClick ||
@@ -64,6 +65,10 @@ function Header(props: any) {
                   }}
                   onInput={oninput}
                   ref={inputRef}
+                  value={search}
+                  onChange={(e) => {
+                     onSearch(e);
+                  }}
                />
             </div>
          </div>
