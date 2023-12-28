@@ -1,5 +1,5 @@
 import { useLoaderData, useLocation, useSubmit } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Check, ChevronLeft, Pencil, Trash2 } from 'lucide-react';
 
@@ -12,7 +12,7 @@ export default function Edit() {
    const [notes, setNotes] = useState([]) as any;
    const [delAlarm, setDelAlarm] = useState(false);
    const [delAlert, setDelAlert] = useState(false);
-
+   const inputRef = useRef<HTMLTextAreaElement>(null);
    console.log(state);
 
    useEffect(() => {
@@ -22,31 +22,37 @@ export default function Edit() {
       }
    }, []);
 
-   function editNote() {
-      if (title === '' || content === '') {
-         alert('Please fill all the fields');
-         return;
-      }
-
-      const note = {
-         title,
-         content,
-         id: Date.now(),
-      };
-
-      setId(note.id);
-      const temp = notes.filter((note: any) => note.id !== id);
-      const newNotes = [...temp, note];
-      setNotes(newNotes);
-      localStorage.setItem('notes', JSON.stringify(newNotes));
-      window.history.back();
-   }
-
    function delNote() {
       const temp = notes.filter((note: any) => note.id !== id);
       setNotes(temp);
       localStorage.setItem('notes', JSON.stringify(temp));
    }
+
+   useEffect(() => {
+      if (isEdited) {
+         if (title === '' && content === '') {
+            setNotes((prevNotes: any) => {
+               const newNotes = prevNotes.filter((n: any) => n.id !== id);
+               localStorage.setItem('notes', JSON.stringify(newNotes));
+               return newNotes;
+            });
+         } else if (title !== '' || content !== '') {
+            const note = {
+               title,
+               content,
+               id,
+            };
+            if (title === '') note.title = 'Untitled';
+
+            setNotes((prevNotes: any) => {
+               const newNotes = prevNotes.filter((n: any) => n.id !== note.id);
+               newNotes.push(note);
+               localStorage.setItem('notes', JSON.stringify(newNotes));
+               return newNotes;
+            });
+         }
+      }
+   }, [title, content]);
 
    return (
       <div className='bg-white text-black dark:bg-black dark:text-white'>
@@ -58,9 +64,22 @@ export default function Edit() {
 
                <div className='flex gap-5 pr-5'>
                   {isEdited ? (
-                     <Check onClick={() => editNote()} size={28} strokeWidth={2.2} className='text-blue-700' />
+                     <Check
+                        onClick={() => window.history.back()}
+                        size={28}
+                        strokeWidth={2.2}
+                        className='text-blue-700'
+                     />
                   ) : (
-                     <Pencil onClick={() => {}} />
+                     <Pencil
+                        onClick={() => {
+                           const textarea = inputRef.current;
+                           if (textarea) {
+                              textarea.focus();
+                              textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+                           }
+                        }}
+                     />
                   )}
                   <Trash2 className='text-red-600' onClick={() => setDelAlert(true)} />
                </div>
@@ -87,6 +106,7 @@ export default function Edit() {
                      setContent(e.target.value);
                      setIsEdited(true);
                   }}
+                  ref={inputRef}
                />
             </div>
          </div>
