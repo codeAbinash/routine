@@ -1,12 +1,13 @@
 import { ChevronLeft } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Add() {
    const [title, setTitle] = useState('');
    const [content, setContent] = useState('');
-   const [id, setId] = useState(0);
+   const [id, setId] = useState(Date.now());
    const [notes, setNotes] = useState([]) as any;
+   const inputRef = useRef<HTMLTextAreaElement>(null);
 
    useEffect(() => {
       const notes = localStorage.getItem('notes');
@@ -15,23 +16,32 @@ export default function Add() {
       }
    }, []);
 
-   function AddNotes() {
+   useEffect(() => {
       if (title === '' && content === '') {
-         alert('Please add title or content');
-         return;
+         setNotes((prevNotes: any) => {
+            const newNotes = prevNotes.filter((n: any) => n.id !== id);
+            localStorage.setItem('notes', JSON.stringify(newNotes));
+            return newNotes;
+         });
+      } else if (title !== '' || content !== '') {
+         const note = {
+            title,
+            content,
+            id,
+         };
+         if (title === '') note.title = 'Untitled';
+         setNotes((prevNotes: any) => {
+            const newNotes = prevNotes.filter((n: any) => n.id !== note.id);
+            newNotes.push(note);
+            localStorage.setItem('notes', JSON.stringify(newNotes));
+            return newNotes;
+         });
       }
+   }, [title, content]);
 
-      const note = {
-         title: title || 'Untitled',
-         content,
-         id: Date.now(),
-      };
-
-      const newNotes = [...notes, note];
-      setNotes(newNotes);
-      localStorage.setItem('notes', JSON.stringify(newNotes));
-      window.history.back();
-   }
+   useEffect(() => {
+      inputRef.current?.focus();
+   }, []);
 
    return (
       <div className='h-[100dvh] bg-white px-2 py-5 text-black dark:bg-black dark:text-white'>
@@ -40,7 +50,7 @@ export default function Add() {
                <ChevronLeft size={38} />
             </Link>
 
-            <div className='pr-5 text-2xl font-medium' onClick={() => AddNotes()}>
+            <div className='pr-5 text-2xl font-medium' onClick={() => window.history.back()}>
                Save
             </div>
          </div>
@@ -60,6 +70,7 @@ export default function Add() {
                className='text-align-top h-[50dvh] w-full bg-transparent px-4 text-lg outline-none '
                value={content}
                onChange={(e) => setContent(e.target.value)}
+               ref={inputRef}
             />
          </div>
       </div>
