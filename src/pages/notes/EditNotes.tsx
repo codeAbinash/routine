@@ -2,6 +2,7 @@ import { useLoaderData, useLocation, useSubmit } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Check, ChevronLeft, Pencil, Trash2 } from 'lucide-react';
+import ls from '../../lib/storage';
 
 export default function Edit() {
    const { state } = useLocation();
@@ -16,7 +17,7 @@ export default function Edit() {
    console.log(state);
 
    useEffect(() => {
-      const notes = localStorage.getItem('notes');
+      const notes = ls.get('notes');
       if (notes) {
          setNotes(JSON.parse(notes));
       }
@@ -25,7 +26,7 @@ export default function Edit() {
    function delNote() {
       const temp = notes.filter((note: any) => note.id !== id);
       setNotes(temp);
-      localStorage.setItem('notes', JSON.stringify(temp));
+      ls.set('notes', JSON.stringify(temp));
    }
 
    useEffect(() => {
@@ -33,7 +34,7 @@ export default function Edit() {
          if (title === '' && content === '') {
             setNotes((prevNotes: any) => {
                const newNotes = prevNotes.filter((n: any) => n.id !== id);
-               localStorage.setItem('notes', JSON.stringify(newNotes));
+               ls.set('notes', JSON.stringify(newNotes));
                return newNotes;
             });
          } else if (title !== '' || content !== '') {
@@ -47,7 +48,8 @@ export default function Edit() {
             setNotes((prevNotes: any) => {
                const newNotes = prevNotes.filter((n: any) => n.id !== note.id);
                newNotes.push(note);
-               localStorage.setItem('notes', JSON.stringify(newNotes));
+               ls.set('notes', JSON.stringify(newNotes));
+
                return newNotes;
             });
          }

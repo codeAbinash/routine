@@ -18,12 +18,12 @@ function Restore() {
             className={`${startedUsing ? 'min-h-[85vh]' : 'min-h-[100vh]'} flex flex-col items-center
        justify-between gap-5 p-5`}
          >
-            <p className='text-balance whitespace-pre text-center text-xl font-semibold'>
+            <p className='whitespace-pre text-balance text-center text-xl font-semibold'>
                Restore Your <br /> Backed up data <TextEmoji emoji='📂' />{' '}
             </p>
             <div>
                <img src={icons.restore_file} className='mx-auto w-[45%] drop-shadow-2xl' />
-               <p className='text-balance text-secondary mt-5 px-[5%] text-center text-xs'>
+               <p className='text-secondary mt-5 text-balance px-[5%] text-center text-xs'>
                   Select a backup file that is previously backed up from this application. This will restore all your
                   data from that backup file.
                </p>
@@ -36,16 +36,20 @@ function Restore() {
    );
 }
 
-function restoredCountStatus(routineCount: number, subscriptionCount: number) {
-   if (routineCount === 0 && subscriptionCount === 0) return 'No data restored, maybe you selected a wrong file?';
-   if (routineCount === 0) return `${subscriptionCount} subscriptions restored`;
-   if (subscriptionCount === 0) return `${routineCount} routines restored`;
-   return `${routineCount} routines and ${subscriptionCount} subscriptions restored`;
+function restoredCountStatus(routineCount: number, subscriptionCount: number, notesCount: number) {
+   if (routineCount === 0 && subscriptionCount === 0 && notesCount === 0)
+      return 'No data restored, maybe you selected a wrong file?';
+   if (routineCount === 0 && notesCount === 0) return `${subscriptionCount} subscriptions restored`;
+   if (subscriptionCount === 0 && notesCount === 0) return `${routineCount} routines restored`;
+   if (routineCount === 0 && subscriptionCount === 0) return `${notesCount} notes restored`;
+
+   return `${routineCount} routines, ${notesCount} notes  and ${subscriptionCount} subscriptions restored`;
 }
 
 export function storeInLs(data: BackupType) {
    const routines = JSON.parse(ls.get('routines') || '[]');
    const subscriptions = JSON.parse(ls.get('subscriptions') || '{}');
+   const notes = JSON.parse(ls.get('notes') || '[]');
 
    routines.unshift(...data.routines);
    // Add subscriptions key values to the existing subscriptions
@@ -53,13 +57,18 @@ export function storeInLs(data: BackupType) {
 
    for (const key in data.subscriptions) subscriptions[key] = data.subscriptions[key];
 
+   // Add notes
+   notes.unshift(...data.notes);
+
    ls.set('routines', JSON.stringify(routines));
    ls.set('subscriptions', JSON.stringify(subscriptions));
+   ls.set('notes', JSON.stringify(notes));
 
    const restoredRoutineCount = data.routines.length;
    const restoredSubscriptionCount = Object.keys(data.subscriptions).length;
-   const status = restoredCountStatus(restoredRoutineCount, restoredSubscriptionCount);
-   return { status, restoredRoutineCount, restoredSubscriptionCount };
+   const restoredNotesCount = data.notes.length;
+   const status = restoredCountStatus(restoredRoutineCount, restoredSubscriptionCount, restoredNotesCount);
+   return { status, restoredRoutineCount, restoredSubscriptionCount, restoredNotesCount };
 }
 
 function RestoreUi({ startedUsing }: { startedUsing: string | null }) {

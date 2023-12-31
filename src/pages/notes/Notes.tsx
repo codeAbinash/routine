@@ -1,9 +1,11 @@
-import { Camera, Search, Settings, Plus, Divide, X } from 'lucide-react';
+import { Camera, Search, Settings, Plus, Divide, X, MoreVertical } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import FloatingButton from '../../components/FloatingButton';
 import Watermark from '../../components/Watermark';
+import More from '../More';
+import ls from '../../lib/storage';
 
 export default function Home() {
    const [notes, setNotes] = useState([]) as any;
@@ -13,7 +15,7 @@ export default function Home() {
    const [searchedNotes, setSearchedNotes] = useState([]) as any;
 
    useEffect(() => {
-      const notes = localStorage.getItem('notes');
+      const notes = ls.get('notes');
       if (notes) {
          setNotes(JSON.parse(notes).reverse());
       }
@@ -28,7 +30,6 @@ export default function Home() {
 
    return (
       <div className='home-screen screen-navbar select-none dark:bg-black dark:text-darkText'>
-         <div className='scrollToTop'></div>
          <Header
             title={<span>Notes</span>}
             placeholder='Search Notes'
