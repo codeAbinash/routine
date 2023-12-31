@@ -14,11 +14,11 @@ function Backup() {
       <div className='backup screen dark:text-darkText'>
          <BackHeader title='Backup your data' />
          <div className='flex min-h-[80dvh] flex-col items-center justify-center gap-7 p-5'>
-            <p className='text-balance whitespace-pre text-center text-xl font-semibold'>
+            <p className='whitespace-pre text-balance text-center text-xl font-semibold'>
                Backup your data <TextEmoji emoji='📂' />{' '}
             </p>
             <img src={icons.backup_folder} className='mx-auto w-[45%] drop-shadow-2xl' />
-            <p className='text-balance text-secondary text-center text-xs'>
+            <p className='text-secondary text-balance text-center text-xs'>
                You can backup your data by downloading a file. This file can be used to restore your data on another
                device. Or you can use it to restore your data if you reinstall the app.
             </p>
@@ -47,14 +47,14 @@ function BackupUi() {
             {isBackingUp ? (
                <div className='flex items-center justify-center font-medium text-accent'>
                   <img src={icons.spinner} className='h-10 w-10' />
-                  <p className='text-balance text-md whitespace-pre pr-5 text-center'>
+                  <p className='text-md whitespace-pre text-balance pr-5 text-center'>
                      {' '}
                      Preparing Backup <TextEmoji emoji='📂' />
                   </p>
                </div>
             ) : isBackedUp ? (
                <div className='flex items-center justify-center gap-2'>
-                  <p className='text-balance text-md whitespace-pre pr-5 text-center font-medium'>
+                  <p className='text-md whitespace-pre text-balance pr-5 text-center font-medium'>
                      Backup Complete <TextEmoji emoji='📂' />{' '}
                      <span className='text-sm'>
                         <TextEmoji emoji='✅' />
@@ -72,7 +72,7 @@ function BackupUi() {
                </button>
             )}
          </div>
-         <p className='text-balance mt-5 text-center text-xs text-grey'>
+         <p className='mt-5 text-balance text-center text-xs text-grey'>
             This will download a backup file containing all your data.{' '}
          </p>
       </>
@@ -82,10 +82,15 @@ function BackupUi() {
 function createBackup() {
    const routines = JSON.parse(ls.get('routines') || '[]');
    const subscriptions = JSON.parse(ls.get('subscriptions') || '[]');
+   // const notes = JSON.parse(localStorage.getItem('notes') || '[]');
+   const notes = JSON.parse(ls.get('notes') || '[]');
+
+   console.log(notes);
 
    const backup: BackupType = {
       routines,
       subscriptions,
+      notes,
    };
    // File name will be routines_backup_2021-09-18_12-00-00.json
    const fileName =

@@ -1,6 +1,7 @@
 import { ChevronLeft } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ls from '../../lib/storage';
 
 export default function Add() {
    const [title, setTitle] = useState('');
@@ -10,7 +11,7 @@ export default function Add() {
    const inputRef = useRef<HTMLTextAreaElement>(null);
 
    useEffect(() => {
-      const notes = localStorage.getItem('notes');
+      const notes = ls.get('notes');
       if (notes) {
          setNotes(JSON.parse(notes));
       }
@@ -20,7 +21,7 @@ export default function Add() {
       if (title === '' && content === '') {
          setNotes((prevNotes: any) => {
             const newNotes = prevNotes.filter((n: any) => n.id !== id);
-            localStorage.setItem('notes', JSON.stringify(newNotes));
+            ls.set('notes', JSON.stringify(newNotes));
             return newNotes;
          });
       } else if (title !== '' || content !== '') {
@@ -33,7 +34,7 @@ export default function Add() {
          setNotes((prevNotes: any) => {
             const newNotes = prevNotes.filter((n: any) => n.id !== note.id);
             newNotes.push(note);
-            localStorage.setItem('notes', JSON.stringify(newNotes));
+            ls.set('notes', JSON.stringify(newNotes));
             return newNotes;
          });
       }
