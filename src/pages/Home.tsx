@@ -189,7 +189,7 @@ function backgroundRoutineUpdate() {
    const subscriptions = JSON.parse(ls.get('subscriptions') || '{ }');
    for (let key in subscriptions) {
       let sub = subscriptions[key];
-      fetch(`https://dataabinash.github.io/routine/${key}/info.json`)
+      fetch(`https://routine-data.vercel.app/${key}/info.json`)
          .then((res) => res.json())
          .then((data: any) => {
             if (data.vcode === sub.vcode) return;
@@ -200,7 +200,7 @@ function backgroundRoutineUpdate() {
 
 function updateRoutines(subscriptionKey: string, subData: any, subscriptions: any) {
    let status = false;
-   fetch(`https://dataabinash.github.io/routine/${subscriptionKey}/routine.json`)
+   fetch(`https://routine-data.vercel.app/${subscriptionKey}/routine.json`)
       .then((res) => res.json())
       .then((data: any) => {
          // Delete all routines having the 'sub' property in the routine

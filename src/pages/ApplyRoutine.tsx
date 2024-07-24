@@ -252,13 +252,13 @@ export default function ApplyRoutine() {
          let fetchedRoutines: any = null;
          let fetchedSubscriptions: any = null;
 
-         const subscriptionDetailsFetch = fetch(`https://dataabinash.github.io/routine/${id}/info.json`)
+         const subscriptionDetailsFetch = fetch(`https://routine-data.vercel.app/${id}/info.json`)
             .then((res) => res.json())
             .then((data) => {
                fetchedSubscriptions = data;
             });
 
-         const routineFetch = fetch(`https://dataabinash.github.io/routine/${id}/routine.json`)
+         const routineFetch = fetch(`https://routine-data.vercel.app/${id}/routine.json`)
             .then((res) => res.json())
             .then((data) => {
                fetchedRoutines = data;
@@ -329,7 +329,7 @@ export default function ApplyRoutine() {
 // }
 
 function Routines({ addRoutine, subscription }: any) {
-   const allRoutinesLink = 'https://dataAbinash.github.io/routine/allRoutines.json';
+   const allRoutinesLink = 'https://routine-data.vercel.app/allRoutines.json';
    const [routines, setRoutines] = useState<any>(null);
    useEffect(() => {
       setTimeout(async () => {

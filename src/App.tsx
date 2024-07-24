@@ -46,7 +46,7 @@ export default function App() {
       loadTheme();
    }, []);
    return (
-      <Router basename='/routine'>
+      <Router>
          <React.Suspense fallback={<LoadingScreen />}>
             <Routes>
                <Route path='/' element={<Home />} />

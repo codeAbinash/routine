@@ -13,7 +13,7 @@ export default function Contributors() {
 
    useEffect(() => {
       // Load contributors data from github
-      const fetchLink = 'https://dataAbinash.github.io/routine/contributors/contributors.json';
+      const fetchLink = 'https://routine-data.vercel.app/contributors/contributors.json';
       setTimeout(async () => {
          // fetch data from github
          const data = await fetch(fetchLink).then((res) => res.json());
