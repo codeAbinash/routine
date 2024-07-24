@@ -1,7 +1,7 @@
 {
    "short_name": "Routine",
    "name": "Routine",
-   "start_url": "/routine/",
+   "start_url": ".",
    "display": "standalone",
    "background_color": "#FFFFFF",
    "description": "Manages your Routine",
