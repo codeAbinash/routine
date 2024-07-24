@@ -67,7 +67,7 @@
          "name": "Home",
          "short_name": "Home",
          "description": "Home",
-         "url": "/routine/",
+         "url": "/",
          "icons": [
             {
                "src": "icons/icon96.png",
@@ -79,7 +79,7 @@
          "name": "Routines",
          "short_name": "Charts",
          "description": "Charts",
-         "url": "/routine/routines/",
+         "url": "/routines/",
          "icons": [
             {
                "src": "icons/icon96.png",
@@ -91,7 +91,7 @@
          "name": "Calendar",
          "short_name": "Settings",
          "description": "Settings",
-         "url": "/routine/calendar/",
+         "url": "/calendar/",
          "icons": [
             {
                "src": "icons/icon96.png",
@@ -103,7 +103,7 @@
          "name": "More",
          "short_name": "More",
          "description": "More",
-         "url": "/routine/more/",
+         "url": "/more/",
          "icons": [
             {
                "src": "icons/icon96.png",
