@@ -167,6 +167,7 @@ async function shareRoutine(routine: Routine, index: number) {
    const backup: BackupType = {
       routines: [routine],
       subscriptions: [],
+      notes: [],
    };
 
    if (navigator.share) {
